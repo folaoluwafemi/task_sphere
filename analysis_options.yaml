@@ -1,0 +1,11 @@
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    always_use_package_imports: true
+    use_late_for_private_fields_and_variables: true
+    unnecessary_late: true
+    require_trailing_commas: true
+    prefer_const_constructors: true
+    avoid_slow_async_io: true
+    valid_regexps: true
