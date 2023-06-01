@@ -1,9 +1,9 @@
 part of 'vanilla_widgets.dart';
 
-class VanillaListener<Notifier extends VanillaNotifier<T>,
-    T extends VanillaState> extends StatefulWidget {
-  final VanillaListenerCallback<T> listener;
-  final VanillaSelectorCallback<T>? listenWhen;
+class VanillaListener<Notifier extends VanillaNotifier<S>, S>
+    extends StatefulWidget {
+  final VanillaListenerCallback<S> listener;
+  final VanillaSelectorCallback<S>? listenWhen;
   final Widget child;
 
   const VanillaListener({
@@ -14,13 +14,13 @@ class VanillaListener<Notifier extends VanillaNotifier<T>,
   }) : super(key: key);
 
   @override
-  State<VanillaListener<Notifier, T>> createState() =>
-      _VanillaListenerState<Notifier, T>();
+  State<VanillaListener<Notifier, S>> createState() =>
+      _VanillaListenerState<Notifier, S>();
 }
 
-class _VanillaListenerState<Notifier extends VanillaNotifier<T>,
-    T extends VanillaState> extends State<VanillaListener<Notifier, T>> {
-  T? previousState;
+class _VanillaListenerState<Notifier extends VanillaNotifier<S>, S>
+    extends State<VanillaListener<Notifier, S>> {
+  S? previousState;
 
   @override
   void didChangeDependencies() {
@@ -36,7 +36,7 @@ class _VanillaListenerState<Notifier extends VanillaNotifier<T>,
   ///
   /// If [listenWhen] is provided, it is used to check if listener should be called.
   void listener() {
-    final T currentState = context.read<Notifier>().state;
+    final S currentState = context.read<Notifier>().state;
     if (widget.listenWhen != null) {
       final bool shouldNotify = widget.listenWhen!(previousState, currentState);
       if (shouldNotify) {

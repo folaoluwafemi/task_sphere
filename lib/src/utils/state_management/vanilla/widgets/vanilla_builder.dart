@@ -1,9 +1,9 @@
 part of 'vanilla_widgets.dart';
 
-class VanillaBuilder<Notifier extends VanillaNotifier<T>,
-    T extends VanillaState> extends StatefulWidget {
-  final VanillaWidgetBuilder<T> builder;
-  final VanillaSelectorCallback<T>? buildWhen;
+class VanillaBuilder<Notifier extends VanillaNotifier<S>, S>
+    extends StatefulWidget {
+  final VanillaWidgetBuilder<S> builder;
+  final VanillaSelectorCallback<S>? buildWhen;
 
   const VanillaBuilder({
     Key? key,
@@ -12,12 +12,12 @@ class VanillaBuilder<Notifier extends VanillaNotifier<T>,
   }) : super(key: key);
 
   @override
-  State<VanillaBuilder<Notifier, T>> createState() =>
-      _VanillaBuilderState<Notifier, T>();
+  State<VanillaBuilder<Notifier, S>> createState() =>
+      _VanillaBuilderState<Notifier, S>();
 }
 
-class _VanillaBuilderState<Notifier extends VanillaNotifier<T>,
-    T extends VanillaState> extends State<VanillaBuilder<Notifier, T>> {
+class _VanillaBuilderState<Notifier extends VanillaNotifier<T>, T>
+    extends State<VanillaBuilder<Notifier, T>> {
   T? previousState;
 
   @override

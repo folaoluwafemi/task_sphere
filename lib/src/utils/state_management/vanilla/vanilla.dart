@@ -7,7 +7,9 @@ import 'package:task_sphere/src/utils/state_management/state_management_utils.da
 
 part 'ioc/vanilla_holder.dart';
 
-abstract class VanillaNotifier<State extends VanillaState>
+part 'utils/extension.dart';
+
+abstract class VanillaNotifier<State>
     extends ValueNotifier<State> {
   VanillaNotifier(super.value) {
     _streamController.addStream(Stream.value(value));

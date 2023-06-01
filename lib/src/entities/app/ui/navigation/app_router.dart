@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:task_sphere/src/entities/entities_barrel.dart';
 
 part 'domain/data/app_route.dart';
 
@@ -23,5 +24,11 @@ final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
 final GoRouter _router = GoRouter(
   navigatorKey: _navigatorKey,
   redirect: _NavigationRedirectsManager.baseRedirect,
-  routes: [],
+  routes: [
+    GoRoute(
+      path: AppRoute.splash.path,
+      name: AppRoute.splash.name,
+      builder: (context, state) => const SplashScreen(),
+    ),
+  ],
 );
