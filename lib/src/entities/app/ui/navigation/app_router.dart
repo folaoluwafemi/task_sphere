@@ -6,6 +6,13 @@ part 'domain/data/app_route.dart';
 part 'domain/logic/redirects_manager.dart';
 
 abstract final class AppRouter {
+  static final RouterConfig<Object> routerConfig = RouterConfig(
+    routerDelegate: router.routerDelegate,
+    backButtonDispatcher: router.backButtonDispatcher,
+    routeInformationParser: router.routeInformationParser,
+    routeInformationProvider: router.routeInformationProvider,
+  );
+
   static GoRouter get router => _router;
 
   static GlobalKey<NavigatorState> get navigatorKey => _navigatorKey;
