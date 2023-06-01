@@ -1,7 +1,11 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
-import 'package:task_sphere/src/utils/state_management/state_managment_utils.dart';
+import 'package:flutter/widgets.dart';
+import 'package:nested/nested.dart';
+import 'package:task_sphere/src/utils/state_management/state_management_utils.dart'
+    show VanillaState;
+
+part 'ioc/vanilla_holder.dart';
 
 abstract class VanillaNotifier<State extends VanillaState>
     extends ValueNotifier<State> {
@@ -17,6 +21,14 @@ abstract class VanillaNotifier<State extends VanillaState>
   Stream<State> get stream => _streamController.stream;
 
   final StreamController<State> _streamController = StreamController<State>();
+
+  bool get isDisposed => _streamController.isClosed;
+
+  State get state => value;
+
+  set state(State state) {
+    value = state;
+  }
 
   @override
   void dispose() {

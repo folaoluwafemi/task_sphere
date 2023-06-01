@@ -1,14 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 mixin VanillaUtilsMixin<State extends VanillaStateWithStatus>
-    on ValueNotifier<State> {
-  State get state => value;
-
-  set state(State state) {
-    value = state;
-  }
-
+    on VanillaNotifier<State> {
   void emitOnError(Failure error) {
     state = state.copyWith(error: error, loading: false, success: false);
   }
