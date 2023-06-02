@@ -2,17 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/widgets.dart';
 import 'package:nested/nested.dart';
-import 'package:task_sphere/src/utils/state_management/state_management_utils.dart'
-    show VanillaState;
+import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 part 'ioc/vanilla_holder.dart';
 
 part 'utils/extension.dart';
 
-abstract class VanillaNotifier<State>
-    extends ValueNotifier<State> {
+abstract class VanillaNotifier<State> extends ValueNotifier<State> {
   VanillaNotifier(super.value) {
-    _streamController.addStream(Stream.value(value));
     addListener(_streamListener);
   }
 
@@ -29,6 +26,7 @@ abstract class VanillaNotifier<State>
   State get state => value;
 
   set state(State state) {
+    if (value == state) return;
     value = state;
   }
 

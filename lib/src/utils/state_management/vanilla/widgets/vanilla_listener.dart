@@ -36,7 +36,11 @@ class _VanillaListenerState<Notifier extends VanillaNotifier<S>, S>
   ///
   /// If [listenWhen] is provided, it is used to check if listener should be called.
   void listener() {
+    if(!mounted) return;
     final S currentState = context.read<Notifier>().state;
+
+    if (currentState == previousState) return;
+
     if (widget.listenWhen != null) {
       final bool shouldNotify = widget.listenWhen!(previousState, currentState);
       if (shouldNotify) {
@@ -51,9 +55,10 @@ class _VanillaListenerState<Notifier extends VanillaNotifier<S>, S>
   }
 
   @override
-  void dispose() {
+  void didUpdateWidget(covariant VanillaListener<Notifier, S> oldWidget) {
+    super.didUpdateWidget(oldWidget);
     context.read<Notifier>().removeListener(listener);
-    super.dispose();
+    startListening();
   }
 
   @override

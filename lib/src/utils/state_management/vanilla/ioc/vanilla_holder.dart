@@ -5,22 +5,41 @@ class VanillaNotifierHolder<Notifier extends VanillaNotifier>
   final Notifier notifier;
 
   const VanillaNotifierHolder({
-    required super.child,
     required this.notifier,
+    super.child,
     Key? key,
   }) : super(key: key);
 
   static T read<T extends VanillaNotifier>(BuildContext context) {
     try {
-      return context
-          .findAncestorWidgetOfExactType<VanillaNotifierHolder<T>>()!
-          .notifier;
-    } catch (e) {
-      throw Exception(
-        'Cannot find VanillaNotifierHolder<$T> in the widget tree',
+      return _elementOfType<T>(context)!.notifier;
+    } catch (e, s) {
+      throw Failure(
+        message: 'Cannot find VanillaNotifierHolder<$T> in the widget tree',
+        stackTrace: s,
       );
     }
   }
+
+  static VanillaNotifierElement<Notifier>?
+      _elementOfType<Notifier extends VanillaNotifier>(
+    BuildContext context,
+  ) {
+    VanillaNotifierElement<Notifier>? element;
+
+    context.visitAncestorElements((ancestor) {
+      if (ancestor is VanillaNotifierElement<Notifier>) {
+        element = ancestor;
+        return false;
+      }
+      return true;
+    });
+    return element;
+  }
+
+  @override
+  SingleChildStatefulElement createElement() =>
+      VanillaNotifierElement<Notifier>(this, notifier);
 
   @override
   State<VanillaNotifierHolder<Notifier>> createState() =>
@@ -31,4 +50,11 @@ class VanillaHolderState<Notifier extends VanillaNotifier>
     extends SingleChildState<VanillaNotifierHolder<Notifier>> {
   @override
   Widget buildWithChild(BuildContext context, Widget? child) => child!;
+}
+
+class VanillaNotifierElement<Notifier extends ValueNotifier>
+    extends SingleChildStatefulElement {
+  final Notifier notifier;
+
+  VanillaNotifierElement(super.widget, this.notifier);
 }
