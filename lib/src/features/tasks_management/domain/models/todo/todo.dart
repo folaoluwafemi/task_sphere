@@ -4,6 +4,8 @@ part 'components/priority.dart';
 
 part 'components/status.dart';
 
+part 'components/todo_descriptors.dart';
+
 class Todo {
   final String id;
   final String content;

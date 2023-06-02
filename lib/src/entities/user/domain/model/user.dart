@@ -1,6 +1,7 @@
-class User {
-  final String id;
-  final String firstname;
-  final String lastname;
-  final String email;
+import 'package:appwrite/models.dart';
+
+extension UserExtension on User {
+  String get firstname => name.split(' ').first;
+
+  String get lastname => name.split(' ').last;
 }
