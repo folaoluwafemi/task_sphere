@@ -26,3 +26,7 @@ Todo
 - create todo in a task
 - update task todo's priority and or status
 - delete a todo
+
+# Logic
+
+Steps to logic
