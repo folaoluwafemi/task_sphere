@@ -1,6 +1,10 @@
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 abstract final class UtilFunctions {
+  static String generateId() {
+    return DateTime.now().millisecondsSinceEpoch.toString();
+  }
+
   static DateTime parseDateTime(
     dynamic data, {
     bool mustReturnDate = false,

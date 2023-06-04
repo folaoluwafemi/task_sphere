@@ -8,7 +8,17 @@ abstract final class UserManager {
 
   static User? get user => _notifier.readData;
 
-  static User get requireUser => user!;
+  static User get requireUser {
+    if (user != null) return user!;
+
+    final User? currentUser = FirebaseAuth.instance.currentUser;
+
+    if (currentUser == null) {
+      throw Failure(message: ErrorMessages.userNotLoggedIn);
+    }
+
+    return currentUser;
+  }
 
   static void updateUser(User user) => _notifier.createData(user);
 

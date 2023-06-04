@@ -16,6 +16,13 @@ class Task {
     required this.createdAt,
   });
 
+  Task.create({
+    required this.title,
+    required this.description,
+    required this.todos,
+    required this.createdAt,
+  }) : id = UtilFunctions.generateId();
+
   DateTime get updatedAt => todos.reduce((value, element) {
         return value.updatedAt.isAfter(element.updatedAt) ? value : element;
       }).updatedAt;
