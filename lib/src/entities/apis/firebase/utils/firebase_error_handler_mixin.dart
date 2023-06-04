@@ -6,7 +6,7 @@ import 'package:task_sphere/src/entities/entities_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 mixin FirebaseErrorHandlerMixin {
-  FutureOr<T> errorHandler<T>(FutureOr<T> computation) async {
+  Future<T> handleError<T>(Future<T> computation) async {
     try {
       return await computation;
     } on FirebaseAuthException catch (e, stackTrace) {
