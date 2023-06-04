@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "631427098185",
+    "project_id": "tasksphere-35f5d",
+    "storage_bucket": "tasksphere-35f5d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:631427098185:android:df6b3fdcd86536da454198",
+        "android_client_info": {
+          "package_name": "com.dartgod.task_sphere"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "631427098185-fm0rsm9ja2d1lr58kpajdov3a4fg79r8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBq9urFzNsC877-ek3NTpXIz_vGmeL2clU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "631427098185-fm0rsm9ja2d1lr58kpajdov3a4fg79r8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

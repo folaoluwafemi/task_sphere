@@ -1,7 +1,7 @@
-import 'package:appwrite/models.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
-part 'private.dart';
+part '../../../../features/_auth/domain/logic/credentials_manager/private.dart';
 
 abstract final class SessionManager {
   static final _SessionVanilla _vanilla = _SessionVanilla(null);
