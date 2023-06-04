@@ -46,6 +46,9 @@ class AuthRepository implements AuthRepoInterface {
       email: email,
       password: password,
     );
+
     UserManager.updateUser(user);
+
+    return user;
   }
 }

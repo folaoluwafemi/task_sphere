@@ -13,7 +13,6 @@ class Todo {
   final Status status;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final DateTime? deadline;
 
   const Todo({
     required this.id,
@@ -22,7 +21,6 @@ class Todo {
     required this.status,
     required this.createdAt,
     required this.updatedAt,
-    this.deadline,
   });
 
   @override
@@ -35,8 +33,7 @@ class Todo {
           priority == other.priority &&
           status == other.status &&
           createdAt == other.createdAt &&
-          updatedAt == other.updatedAt &&
-          deadline == other.deadline);
+          updatedAt == other.updatedAt);
 
   @override
   int get hashCode =>
@@ -45,8 +42,7 @@ class Todo {
       priority.hashCode ^
       status.hashCode ^
       createdAt.hashCode ^
-      updatedAt.hashCode ^
-      deadline.hashCode;
+      updatedAt.hashCode;
 
   Todo copyWith({
     String? id,
@@ -64,7 +60,6 @@ class Todo {
       status: status ?? this.status,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
-      deadline: deadline ?? this.deadline,
     );
   }
 
@@ -78,7 +73,6 @@ class Todo {
       status: $status
       createdAt: $createdAt
       updatedAt: $updatedAt
-      deadline: $deadline
     }''';
   }
 
@@ -90,7 +84,6 @@ class Todo {
       'status': status.index,
       'createdAt': createdAt.toIso8601String(),
       'updatedAt': updatedAt.toIso8601String(),
-      'deadline': deadline?.toIso8601String(),
     };
   }
 
@@ -102,7 +95,6 @@ class Todo {
       status: Status.values[map['status'] as int],
       createdAt: UtilFunctions.parseDateTime(map['createdAt']),
       updatedAt: UtilFunctions.parseDateTime(map['updatedAt'] as DateTime),
-      deadline: UtilFunctions.parseDateTime(map['deadline'] as DateTime),
     );
   }
 }
