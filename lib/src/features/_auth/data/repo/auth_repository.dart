@@ -49,6 +49,8 @@ class AuthRepository implements AuthRepoInterface {
 
     UserManager.updateUser(user);
 
+    await FirebaseAnalysisSource().createUserAnalyticsBucket(user.uid);
+
     return user;
   }
 }
