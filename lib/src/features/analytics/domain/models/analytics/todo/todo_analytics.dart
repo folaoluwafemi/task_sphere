@@ -17,11 +17,11 @@ final class TodoAnalytics extends Analytics {
   TodoAnalytics.create({
     required this.updateData,
     required super.action,
-    required super.timestamp,
   }) : super(
           id: UtilFunctions.generateId(),
           type: AnalyticsDataType.todo,
           data: updateData,
+          timestamp: DateTime.now(),
         );
 
   @override

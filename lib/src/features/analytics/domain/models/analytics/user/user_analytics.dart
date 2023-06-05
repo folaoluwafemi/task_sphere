@@ -17,11 +17,11 @@ final class UserAnalytics extends Analytics {
   UserAnalytics.create({
     required this.userId,
     required super.action,
-    required super.timestamp,
   }) : super(
           id: UtilFunctions.generateId(),
           type: AnalyticsDataType.user,
           data: userId,
+          timestamp: DateTime.now(),
         );
 
   static UserAnalytics fromMap(Map<String, dynamic> map) {

@@ -1,7 +1,7 @@
 part of 'analysis_source_interface.dart';
 
 class FirebaseAnalysisSource
-    with FirebaseErrorHandlerMixin
+    with FirebaseErrorHandlerMixin, FirebaseSerializerUtils
     implements AnalysisSourceInterface {
   final CollectionReference _analysisCollection;
 
@@ -18,13 +18,11 @@ class FirebaseAnalysisSource
       );
 
   Future<void> _createUserAnalyticsBucket(String userId) async {
-    final Analytics analysis = Analytics(
-      type: AnalyticsDataType.task,
+    final Analytics analysis = UserAnalytics.create(
+      action: AnalyticsAction.create,
+      userId: userId,
     );
-    FirebaseFirestore.instance
-        .collection(Keys.users)
-        .doc(UserManager.requireUser.uid)
-        .collection(Keys.analysis).doc();
+    await _analysisCollection.doc(analysis.id).set([analysis.toMap()]);
   }
 
   @override
@@ -33,8 +31,9 @@ class FirebaseAnalysisSource
       );
 
   Future<Analysis> _fetchAnalysis(Analysis analysis) async {
-    // TODO: implement fetchAnalysis
-    throw UnimplementedError();
+    final QuerySnapshot snapshot = await _analysisCollection.get();
+
+    return listFromQuerySnapshot<Analytics>(snapshot, Analytics.fromMap);
   }
 
   @override
@@ -43,7 +42,15 @@ class FirebaseAnalysisSource
       );
 
   Future<void> _uploadAnalysis(Analysis analysis) async {
-    // TODO: implement uploadAnalysis
-    throw UnimplementedError();
+    final WriteBatch batch = FirebaseFirestore.instance.batch();
+
+    for (final Analytics analytics in analysis) {
+      batch.set(
+        _analysisCollection.doc(analytics.id),
+        analytics.toMap(),
+      );
+    }
+
+    await batch.commit();
   }
 }

@@ -17,11 +17,11 @@ final class TaskAnalytics extends Analytics {
   TaskAnalytics.create({
     required this.taskId,
     required super.action,
-    required super.timestamp,
   }) : super(
           id: UtilFunctions.generateId(),
           type: AnalyticsDataType.task,
           data: taskId,
+          timestamp: DateTime.now(),
         );
 
   @override
