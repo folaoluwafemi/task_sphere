@@ -1,6 +1,7 @@
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 enum AnalyticsDataType {
+  user('user'),
   task('task'),
   todo('todo');
 
@@ -13,6 +14,7 @@ enum AnalyticsDataType {
     return switch (name) {
       'task' => task,
       'todo' => todo,
+      'user' => user,
       _ => throw UnsupportedError(
           'only Analytics for Task and Todo is supported',
         ),

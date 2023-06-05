@@ -4,12 +4,22 @@ import 'package:task_sphere/src/utils/utils_barrel.dart';
 final class TodoAnalytics extends Analytics {
   final TodoAnalyticsData? updateData;
 
-  TodoAnalytics({
+  const TodoAnalytics({
     required super.id,
     required this.updateData,
     required super.action,
     required super.timestamp,
   }) : super(
+          type: AnalyticsDataType.todo,
+          data: updateData,
+        );
+
+  TodoAnalytics.create({
+    required this.updateData,
+    required super.action,
+    required super.timestamp,
+  }) : super(
+          id: UtilFunctions.generateId(),
           type: AnalyticsDataType.todo,
           data: updateData,
         );

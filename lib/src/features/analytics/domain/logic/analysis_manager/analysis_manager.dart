@@ -4,11 +4,11 @@ import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 class AnalysisManager extends VanillaNotifier<Analysis>
     with BasicErrorHandlerMixin {
-  final AnalyticsSourceInterface _analyticsSource;
+  final AnalysisSourceInterface _analyticsSource;
   final AnalyticsLocalBufferInterface _analyticsLocalBuffer;
 
   AnalysisManager({
-    required AnalyticsSourceInterface analyticsSource,
+    required AnalysisSourceInterface analyticsSource,
     required AnalyticsLocalBufferInterface analyticsLocalBuffer,
   })  : _analyticsSource = analyticsSource,
         _analyticsLocalBuffer = analyticsLocalBuffer,

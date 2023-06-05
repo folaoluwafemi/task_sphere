@@ -20,6 +20,7 @@ abstract base class Analytics {
     return switch (type) {
       AnalyticsDataType.task => TaskAnalytics.fromMap(map),
       AnalyticsDataType.todo => TodoAnalytics.fromMap(map),
+      AnalyticsDataType.user => UserAnalytics.fromMap(map),
     };
   }
 

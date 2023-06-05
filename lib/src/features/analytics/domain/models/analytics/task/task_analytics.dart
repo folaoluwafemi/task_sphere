@@ -4,12 +4,22 @@ import 'package:task_sphere/src/utils/functions/util_functions.dart';
 final class TaskAnalytics extends Analytics {
   final String taskId;
 
-  TaskAnalytics({
+  const TaskAnalytics({
     required super.id,
     required this.taskId,
     required super.action,
     required super.timestamp,
   }) : super(
+          type: AnalyticsDataType.task,
+          data: taskId,
+        );
+
+  TaskAnalytics.create({
+    required this.taskId,
+    required super.action,
+    required super.timestamp,
+  }) : super(
+          id: UtilFunctions.generateId(),
           type: AnalyticsDataType.task,
           data: taskId,
         );
