@@ -1,6 +1,5 @@
 enum StorageKeys {
-  user,
-  authCredentials,
+  analysis,
   ;
 
   String get box => '$name-box';
