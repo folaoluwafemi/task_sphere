@@ -1,16 +1,65 @@
-# task_sphere
+# TaskSphere
 
-A new Flutter project.
+TaskSphere is a productivity management app that helps users manage their tasks and todos, and help them keep track of
+their productivity rate.
 
-## Getting Started
+## Design
+The design is located [here](https://www.figma.com/file/sY1EuiCJTbcP6PsnNNizm1/TaskSphere?type=design&node-id=0%3A1&t=XVdUHzMx91fp8pzj-1).
 
-This project is a starting point for a Flutter application.
+### Contact Me
+- Twitter: [@popestrings](https://twitter.com/popestrings)
+- Linkedin: [fola-oluwafemi](https://linkedin.com/in/fola-oluwafemi)
+- Email: [folaoluwafemi55@gmail.com](mailto:folaoluwafemi55@gmail.com)
+- Phone: [+234 816 958 3715](tel:+2348169583715)
+- Whatsapp: [@dart_god](https://wa.me/2348169583715)
 
-A few resources to get you started if this is your first Flutter project:
+# Features
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Authentication
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* Login
+    - users must login to access the application
+    - User login state should be persisted across app access: Users should only have to login once after which they
+      should be automatically logged in once they open the app.
+    - they’ll have to login again if:
+        * they logged out
+        * they app data got cleared
+        * sign up
+
+- Users must have an account to access the app.
+- The required data are just their email, password and name.
+- their email must be verified
+
+## Task Management (core feature)
+
+In this product, the smallest unit of productivity is a Todo, which represents a it’s meaning.
+a Task is a group of Todos.
+This feature entails the various ways users can manage their productivity, my manipulating those two entities in the
+following ways:
+
+* Trash
+    * Add task(s) to trash
+    * Remove task(s) from trash
+* Edit
+    * Edit a todo’s content, priority and status
+    * Edit a task’s title, description, todos
+* Search
+    * Search through all their tasks by name/description and date created
+    * Search through all todos by title and priority
+
+### Entities:
+
+* Todo
+    * Status
+    * Priority
+    * Content
+* Task
+    * Title
+    * Description
+    * Todos
+
+## Analytics
+
+- Analysis of users’ productivity management should be collected and displayed on their dashboard.
+- Same analysis should also be collected and be displayed at the end of the month to show them how productive they’ve
+  been for the month.
