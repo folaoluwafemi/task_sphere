@@ -4,9 +4,16 @@ TaskSphere is a productivity management app that helps users manage their tasks 
 their productivity rate.
 
 ## Design
-The design is located [here](https://www.figma.com/file/sY1EuiCJTbcP6PsnNNizm1/TaskSphere?type=design&node-id=0%3A1&t=XVdUHzMx91fp8pzj-1).
+
+The design is
+located [here](https://www.figma.com/file/sY1EuiCJTbcP6PsnNNizm1/TaskSphere?type=design&node-id=0%3A1&t=XVdUHzMx91fp8pzj-1).
+
+## Contribution Guide
+
+See [CONTRIBUTION_GUIDE.md](CONTRIBUTION_GUIDE.md)
 
 ### Contact Me
+
 - Twitter: [@popestrings](https://twitter.com/popestrings)
 - Linkedin: [fola-oluwafemi](https://linkedin.com/in/fola-oluwafemi)
 - Email: [folaoluwafemi55@gmail.com](mailto:folaoluwafemi55@gmail.com)
