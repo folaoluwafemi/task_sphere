@@ -3,14 +3,14 @@ import 'package:task_sphere/src/entities/app/ui/theme/theme_barrel.dart';
 
 part 'color_shapes.dart';
 
-class ColorExtension extends ThemeExtension<ColorExtension> {
+class TaskSpherePalette extends ThemeExtension<TaskSpherePalette> {
   final AlertColors alerts;
   final NeutralColors neutrals;
   final Color primary;
   final Color secondary;
   final Color bgAccent;
 
-  const ColorExtension._({
+  const TaskSpherePalette._({
     required this.alerts,
     required this.neutrals,
     required this.primary,
@@ -18,7 +18,7 @@ class ColorExtension extends ThemeExtension<ColorExtension> {
     required this.bgAccent,
   });
 
-  const ColorExtension.light()
+  const TaskSpherePalette.light()
       : primary = AppColors.orange,
         secondary = AppColors.brown,
         bgAccent = AppColors.lightOrange,
@@ -40,14 +40,14 @@ class ColorExtension extends ThemeExtension<ColorExtension> {
         );
 
   @override
-  ThemeExtension<ColorExtension> copyWith({
+  ThemeExtension<TaskSpherePalette> copyWith({
     AlertColors? alerts,
     NeutralColors? neutrals,
     Color? primary,
     Color? secondary,
     Color? bgAccent,
   }) =>
-      ColorExtension._(
+      TaskSpherePalette._(
         alerts: alerts ?? this.alerts,
         neutrals: neutrals ?? this.neutrals,
         primary: primary ?? this.primary,
@@ -56,13 +56,13 @@ class ColorExtension extends ThemeExtension<ColorExtension> {
       );
 
   @override
-  ThemeExtension<ColorExtension> lerp(
-    covariant ThemeExtension<ColorExtension>? other,
+  ThemeExtension<TaskSpherePalette> lerp(
+    covariant ThemeExtension<TaskSpherePalette>? other,
     double t,
   ) {
-    if (other is! ColorExtension) return this;
+    if (other is! TaskSpherePalette) return this;
 
-    return ColorExtension._(
+    return TaskSpherePalette._(
       alerts: alerts.lerp(other.alerts, t),
       neutrals: neutrals.lerp(other.neutrals, t),
       primary: Color.lerp(primary, other.primary, t)!,
