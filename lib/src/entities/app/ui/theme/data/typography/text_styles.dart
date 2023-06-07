@@ -45,7 +45,8 @@ abstract final class TextStyles {
     height: 1.25,
     letterSpacing: -0.5,
     fontWeight: FontWeight.w500,
-    fontFamily: FontAssets.spaceGrotesk,
+    fontFamily: FontAssets.workSans,
+    color: AppColors.neutral800,
   );
 
   ///
@@ -54,7 +55,8 @@ abstract final class TextStyles {
     height: 1.4285,
     letterSpacing: -0.5,
     fontWeight: FontWeight.w500,
-    fontFamily: FontAssets.spaceGrotesk,
+    fontFamily: FontAssets.workSans,
+    color: AppColors.neutral800,
   );
 
   ///
@@ -63,7 +65,8 @@ abstract final class TextStyles {
     height: 1.66666667,
     letterSpacing: -0.4,
     fontWeight: FontWeight.w400,
-    fontFamily: FontAssets.spaceGrotesk,
+    fontFamily: FontAssets.workSans,
+    color: AppColors.neutral800,
   );
 
   ///
@@ -72,7 +75,8 @@ abstract final class TextStyles {
     height: 1.2,
     letterSpacing: -0.3,
     fontWeight: FontWeight.w500,
-    fontFamily: FontAssets.spaceGrotesk,
+    fontFamily: FontAssets.workSans,
+    color: AppColors.neutral800,
   );
 
   ///
@@ -81,6 +85,17 @@ abstract final class TextStyles {
     height: 1.2,
     letterSpacing: -0.3,
     fontWeight: FontWeight.w400,
+    fontFamily: FontAssets.workSans,
+    color: AppColors.neutral800,
+  );
+
+  ///
+  static TextStyle buttonLight = TextStyle(
+    fontSize: 10.sp,
+    height: 1.2,
+    letterSpacing: -0.3,
+    fontWeight: FontWeight.w500,
+    color: AppColors.backgroundWhite,
     fontFamily: FontAssets.spaceGrotesk,
   );
 }
