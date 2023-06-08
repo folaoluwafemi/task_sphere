@@ -21,7 +21,6 @@ final ThemeData _lightTheme = ThemeData.light().copyWith(
   ),
   indicatorColor: AppColors.orange,
   highlightColor: AppColors.lightOrange,
-
   textSelectionTheme: const TextSelectionThemeData(
     cursorColor: AppColors.orange,
     selectionColor: AppColors.lightOrange,

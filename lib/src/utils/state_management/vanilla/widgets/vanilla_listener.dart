@@ -36,7 +36,7 @@ class _VanillaListenerState<Notifier extends VanillaNotifier<S>, S>
   ///
   /// If [listenWhen] is provided, it is used to check if listener should be called.
   void listener() {
-    if(!mounted) return;
+    if (!mounted) return;
     final S currentState = context.read<Notifier>().state;
 
     if (currentState == previousState) return;

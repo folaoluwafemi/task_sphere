@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:task_sphere/src/entities/entities_barrel.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 mixin FirebaseErrorHandlerMixin {

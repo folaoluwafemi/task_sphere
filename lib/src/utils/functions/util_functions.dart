@@ -1,4 +1,3 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 abstract final class UtilFunctions {

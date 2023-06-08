@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/widgets.dart';
 import 'package:nested/nested.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 part 'ioc/vanilla_holder.dart';

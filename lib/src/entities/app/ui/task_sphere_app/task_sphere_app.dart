@@ -9,17 +9,14 @@ class TaskSphereApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('building');
     return TaskSphereWrapper(
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         themeMode: ThemeMode.light,
         color: AppColors.orange,
         builder: (context, child) => ScreenUtilInit(
-          builder: (context, child) => Theme(
-            data: AppTheme.light,
-            child: child!,
-          ),
+          builder: (context, child) =>
+              Theme(data: AppTheme.light, child: child!, sdss),
           child: child,
         ),
         routerConfig: AppRouter.routerConfig,

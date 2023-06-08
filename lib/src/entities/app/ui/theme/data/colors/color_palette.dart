@@ -60,7 +60,7 @@ class ColorPalette extends ThemeExtension<ColorPalette> {
         primary: primary ?? this.primary,
         secondary: secondary ?? this.secondary,
         bgAccent: bgAccent ?? this.bgAccent,
-        bg: backGroundColors ?? this.bg,
+        bg: backGroundColors ?? bg,
       );
 
   @override

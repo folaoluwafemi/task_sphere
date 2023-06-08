@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:task_sphere/src/entities/app/ui/components/inputs/input_field.dart';
 import 'package:task_sphere/src/entities/app/ui/components/inputs/otp.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
-
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({Key? key}) : super(key: key);

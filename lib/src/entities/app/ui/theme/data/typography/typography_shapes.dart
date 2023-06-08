@@ -13,8 +13,10 @@ typedef SecondaryTextStyle = ({
 typedef SecondaryParagraph = ({
   /// medium | size 16.sp | height 1.25 | letter spacing -0.5
   TextStyle large,
+
   /// medium | size 14.sp | height 1.4285 | letter spacing -0.5
   TextStyle medium,
+
   /// regular | size 12.sp | height 1.666667 | letter spacing -0.5
   TextStyle small,
 });
