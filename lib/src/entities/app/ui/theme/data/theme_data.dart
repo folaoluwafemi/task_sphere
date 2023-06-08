@@ -16,8 +16,20 @@ final ThemeData _lightTheme = ThemeData.light().copyWith(
   scaffoldBackgroundColor: AppColors.backgroundGrey,
   canvasColor: AppColors.backgroundGrey,
   cardColor: AppColors.backgroundWhite,
+  iconTheme: const IconThemeData(
+    color: AppColors.brown,
+  ),
+  indicatorColor: AppColors.orange,
+  highlightColor: AppColors.lightOrange,
+
+  textSelectionTheme: const TextSelectionThemeData(
+    cursorColor: AppColors.orange,
+    selectionColor: AppColors.lightOrange,
+    selectionHandleColor: AppColors.brown,
+  ),
   extensions: [
     const ColorPalette.light(),
+    const InputPalette.light(),
     AppTypography.light(),
   ],
 );

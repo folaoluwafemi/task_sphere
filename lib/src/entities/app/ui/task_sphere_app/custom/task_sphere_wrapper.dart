@@ -10,22 +10,10 @@ class TaskSphereWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Nested(
-      children: [
-        const ResponsivenessWrapper(
-          designSize: Size(390, 844),
-          useMediaQuery: true,
-        ),
-        VanillaNotifierHolder<ThemeVanilla>(
-          notifier: ThemeVanilla(),
-        ),
-      ],
-      child: Builder(
-        builder: (context) {
-          50.boxHeight;
-          return child;
-        },
-      ),
+    return Builder(
+      builder: (context) {
+        return child;
+      },
     );
   }
 }

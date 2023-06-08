@@ -1,4 +1,4 @@
-part of 'inputs.dart';
+part of 'input_palette.dart';
 
 typedef SingleInputPalette = ({
   SingleInputColors empty,

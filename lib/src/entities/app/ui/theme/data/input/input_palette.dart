@@ -2,20 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:task_sphere/src/entities/app/app_barrel.dart';
 
 part 'otp_input_palette.dart';
-
 part 'single_input_palette.dart';
 
 class InputPalette extends ThemeExtension<InputPalette> {
-  final SingleInputPalette textFieldPalette;
+  final SingleInputPalette singleFieldPalette;
   final OtpInputPalette otpPalette;
 
   const InputPalette._({
-    required this.textFieldPalette,
+    required this.singleFieldPalette,
     required this.otpPalette,
   });
 
   const InputPalette.light()
-      : textFieldPalette = (
+      : singleFieldPalette = (
           empty: const SingleInputColors(
             borderColor: AppColors.neutral300,
             fillColor: AppColors.backgroundGrey,
@@ -45,11 +44,11 @@ class InputPalette extends ThemeExtension<InputPalette> {
 
   @override
   ThemeExtension<InputPalette> copyWith({
-    SingleInputPalette? textFieldPalette,
+    SingleInputPalette? singleFieldPalette,
     OtpInputPalette? otpPalette,
   }) {
     return InputPalette._(
-      textFieldPalette: textFieldPalette ?? this.textFieldPalette,
+      singleFieldPalette: singleFieldPalette ?? this.singleFieldPalette,
       otpPalette: otpPalette ?? this.otpPalette,
     );
   }
@@ -61,9 +60,9 @@ class InputPalette extends ThemeExtension<InputPalette> {
   ) {
     if (other is! InputPalette) return this;
     return InputPalette._(
-      textFieldPalette: SingleInputColors.lerpPalette(
-        textFieldPalette,
-        other.textFieldPalette,
+      singleFieldPalette: SingleInputColors.lerpPalette(
+        singleFieldPalette,
+        other.singleFieldPalette,
         t,
       ),
       otpPalette: OtpInputColors.lerpPalette(otpPalette, other.otpPalette, t),

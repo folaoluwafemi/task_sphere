@@ -1,20 +1,19 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:nested/nested.dart';
 
-class ResponsivenessWrapper extends SingleChildStatelessWidget {
+class ResponsivenessWrapper extends StatefulWidget {
   final Size? screenSize;
   final Size designSize;
   final bool useMediaQuery;
-  final Widget? child;
+  final WidgetBuilder builder;
 
   const ResponsivenessWrapper({
     Key? key,
     this.screenSize,
     required this.designSize,
     required this.useMediaQuery,
-    this.child,
+    required this.builder,
   })  : assert(
           !useMediaQuery ? screenSize != null : true,
           'if [useMediaQuery] is set to false, screenSize must be provided',
@@ -38,26 +37,40 @@ class ResponsivenessWrapper extends SingleChildStatelessWidget {
   }
 
   @override
-  Widget buildWithChild(BuildContext context, Widget? child) {
-    assert(child != null, 'child must not be null');
-    return FutureBuilder(
-      future: ensureUiLaidOut(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState != ConnectionState.done) {
-          return Container();
-        }
-        return LayoutBuilder(
-          builder: (context, constraints) {
-            final Size screenSize_ = useMediaQuery
-                ? Size(constraints.minWidth, constraints.minHeight)
-                : screenSize!;
-            ResponsivenessSizer().initializeWithSize(
-              screenSize: screenSize_,
-              designSize: designSize,
-            );
-            return child!;
-          },
+  State<ResponsivenessWrapper> createState() => _ResponsivenessWrapperState();
+}
+
+class _ResponsivenessWrapperState extends State<ResponsivenessWrapper> {
+  Future<void> initialize() async {
+    await ResponsivenessWrapper.ensureUiLaidOut().then((value) {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        ResponsivenessSizer().initializeWithSize(
+          screenSize: widget.screenSize ?? MediaQuery.of(context).size,
+          designSize: widget.designSize,
         );
+        setState(() {});
+      });
+    });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    initialize();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final Size screenSize_ = widget.useMediaQuery
+            ? Size(constraints.minWidth, constraints.minHeight)
+            : widget.screenSize!;
+        ResponsivenessSizer().initializeWithSize(
+          screenSize: screenSize_,
+          designSize: widget.designSize,
+        );
+        return widget.builder(context);
       },
     );
   }
@@ -74,18 +87,18 @@ class ResponsivenessSizer {
   late double screenWidth;
 
   late Size designSize;
-  bool initialized = false;
+  bool _initialized = false;
 
   void initializeWithSize({
     required Size screenSize,
     required Size designSize,
   }) {
-    if (initialized && (screenHeight != 0 || screenWidth != 0)) return;
+    if (_initialized && (screenHeight != 0 || screenWidth != 0)) return;
     screenHeight = screenSize.height;
     screenWidth = screenSize.width;
 
     this.designSize = designSize;
-    initialized = true;
+    _initialized = true;
   }
 
   double get widthScale => screenWidth / designSize.width;

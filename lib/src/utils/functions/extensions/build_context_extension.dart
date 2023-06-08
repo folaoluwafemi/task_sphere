@@ -7,6 +7,8 @@ extension BuildContextExtension on BuildContext {
 
   ColorPalette get palette => theme.extension<ColorPalette>()!;
 
+  InputPalette get inputPalette => theme.extension<InputPalette>()!;
+
   NeutralColors get neutralColors => palette.neutrals;
 
   AlertColors get alertColors => palette.alerts;
