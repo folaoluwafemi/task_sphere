@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 part 'private.dart';

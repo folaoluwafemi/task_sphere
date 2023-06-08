@@ -2,24 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:task_sphere/src/entities/app/ui/components/inputs/input_field.dart';
 import 'package:task_sphere/src/entities/app/ui/components/inputs/otp.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
-class OnboardingScreen extends StatefulWidget {
+
+class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
-
-  @override
-  State<OnboardingScreen> createState() => _OnboardingScreenState();
-}
-
-class _OnboardingScreenState extends State<OnboardingScreen> {
-  final TextEditingController controller =
-      TextEditingController(text: 'basdajfa sdfa');
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +23,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             30.boxHeight,
-            TextField(controller: controller,),
-            10.boxHeight,
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.m),
               child: InputField(
-                controller: controller,
                 hintText: 'Your Email Address',
                 palette: context.inputPalette.singleFieldPalette,
                 prefixIconBuilder: (context, color) => SvgPicture.asset(
@@ -50,23 +35,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
             30.boxHeight,
-            30.boxHeight,
-            Row(
-              children: [
-                Expanded(
-                  child: CodeFields(
-                    onChanged: (value) {},
-                  ),
-                ),
-                8.boxWidth,
-                Container(
-                  color: Colors.black12,
-                  child: Text(
-                    '  a55 ',
-                    style: context.primaryTypography.title.large,
-                  ),
-                ),
-              ],
+            CodeFields(
+              onChanged: (value) {},
             ),
             10.boxHeight,
           ],

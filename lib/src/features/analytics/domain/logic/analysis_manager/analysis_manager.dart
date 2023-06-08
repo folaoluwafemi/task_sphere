@@ -1,5 +1,6 @@
 import 'package:task_sphere/src/features/analytics/data/analytics_data_barrel.dart';
 import 'package:task_sphere/src/features/analytics/domain/analytics_domain_barrel.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 class AnalysisManager extends VanillaNotifier<Analysis>

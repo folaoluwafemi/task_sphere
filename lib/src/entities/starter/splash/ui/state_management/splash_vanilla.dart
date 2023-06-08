@@ -1,4 +1,5 @@
 import 'package:task_sphere/src/entities/app/app_barrel.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 class SplashVanilla extends VanillaNotifier<AppRoute> {
