@@ -13,36 +13,20 @@ class OnboardingScreen extends StatelessWidget {
         toolbarHeight: 0,
         backgroundColor: context.palette.primary,
       ),
-      backgroundColor: context.palette.bgAccent.withOpacity(0.5),
+      backgroundColor: context.palette.bgAccent,
       body: Center(
-        child: Transform.scale(
-          scale: 2,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TabPill.monochrome(
-                text: 'ALL (15)',
-                state: TabPillState.inactive,
-                onPressed: () {},
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            30.boxHeight,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.m),
+              child: TextField(
+                decoration: InputDecorations.myDecoration(context.palette),
               ),
-              30.boxHeight,
-              const TabPill.monochrome(
-                text: 'ALL (15)',
-                state: TabPillState.active,
-              ),
-              30.boxHeight,
-              const TabPill.colored(
-                text: 'ALL (15)',
-                state: TabPillState.selected,
-              ),
-              30.boxHeight,
-              const TabPill.colored(
-                text: 'ALL (15)',
-                state: TabPillState.unselected,
-              ),
-              30.boxHeight,
-            ],
-          ),
+            ),
+            30.boxHeight,
+          ],
         ),
       ),
     );

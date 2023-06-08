@@ -6,7 +6,7 @@ part 'color_shapes.dart';
 class ColorPalette extends ThemeExtension<ColorPalette> {
   final AlertColors alerts;
   final NeutralColors neutrals;
-  final BackgroundColors backGroundColors;
+  final BackgroundColors bg;
   final Color primary;
   final Color secondary;
   final Color bgAccent;
@@ -17,7 +17,7 @@ class ColorPalette extends ThemeExtension<ColorPalette> {
     required this.primary,
     required this.secondary,
     required this.bgAccent,
-    required this.backGroundColors,
+    required this.bg,
   });
 
   const ColorPalette.light()
@@ -40,7 +40,7 @@ class ColorPalette extends ThemeExtension<ColorPalette> {
           $700: AppColors.neutral700,
           $800: AppColors.neutral800,
         ),
-        backGroundColors = (
+        bg = (
           $50: AppColors.backgroundWhite,
           $100: AppColors.backgroundGrey,
         );
@@ -60,7 +60,7 @@ class ColorPalette extends ThemeExtension<ColorPalette> {
         primary: primary ?? this.primary,
         secondary: secondary ?? this.secondary,
         bgAccent: bgAccent ?? this.bgAccent,
-        backGroundColors: backGroundColors ?? this.backGroundColors,
+        bg: backGroundColors ?? this.bg,
       );
 
   @override
@@ -76,7 +76,7 @@ class ColorPalette extends ThemeExtension<ColorPalette> {
       primary: Color.lerp(primary, other.primary, t)!,
       secondary: Color.lerp(secondary, other.secondary, t)!,
       bgAccent: Color.lerp(bgAccent, other.bgAccent, t)!,
-      backGroundColors: backGroundColors.lerp(other.backGroundColors, t),
+      bg: bg.lerp(other.bg, t),
     );
   }
 }

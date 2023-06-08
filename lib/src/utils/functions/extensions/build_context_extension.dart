@@ -11,7 +11,7 @@ extension BuildContextExtension on BuildContext {
 
   AlertColors get alertColors => palette.alerts;
 
-  BackgroundColors get bgColors => palette.backGroundColors;
+  BackgroundColors get bgColors => palette.bg;
 
   AppTypography get typography => theme.extension<AppTypography>()!;
 

@@ -1,25 +1,50 @@
 part of 'color_palette.dart';
 
 typedef AlertColors = ({
+  /// alertBg #383C50
   Color background,
+
+  /// yellowAlert #E4CB44
   Color info,
+
+  /// redAlert #C14242
   Color error,
+
+  /// greenAlert #32A680
   Color success,
 });
 
 typedef BackgroundColors = ({
+  /// backgroundWhite #FFFFFF
   Color $50,
+
+  /// backgroundGrey #F3F3F3
   Color $100,
 });
 
 typedef NeutralColors = ({
+  /// neutral100 #F5F5F5
   Color $100,
+
+  /// neutral200 #E8EAF0
   Color $200,
+
+  /// neutral300 #DFE1E3
   Color $300,
+
+  /// neutral400 #D2D6E0
   Color $400,
+
+  /// neutral500 #B2B6C0
   Color $500,
+
+  /// neutral600 #777D8D
   Color $600,
+
+  /// neutral700 #585B65
   Color $700,
+
+  /// neutral800 #161617
   Color $800,
 });
 

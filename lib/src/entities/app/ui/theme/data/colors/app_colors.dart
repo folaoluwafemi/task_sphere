@@ -11,14 +11,14 @@ abstract final class AppColors {
   /// #EF8001 Background Accent
   static const Color lightOrange = Color(0xFFFEDEA2);
 
-  /// #EF8001 Background 100
+  /// #F3F3F3 Background 100
   static const Color backgroundGrey = Color(0xFFF3F3F3);
 
   /// #FFFFFF Background 50
   static const Color backgroundWhite = Color(0xFFFFFFFF);
 
   ///Neutral Colors
-  /// #FFFFFF neutral 100
+  /// #F5F6F9 neutral 100
   static const Color neutral100 = Color(0xFFF5F6F9);
 
   /// #E8EAF0 neutral 200
