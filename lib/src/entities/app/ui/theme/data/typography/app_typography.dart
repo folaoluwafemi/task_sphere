@@ -6,18 +6,18 @@ part 'text_styles.dart';
 
 part 'typography_shapes.dart';
 
-class TaskSphereTypography extends ThemeExtension<TaskSphereTypography> {
-  final Primary primary;
-  final Secondary secondary;
+class AppTypography extends ThemeExtension<AppTypography> {
+  final PrimaryTextStyle primary;
+  final SecondaryTextStyle secondary;
   final TextStyle button;
 
-  const TaskSphereTypography._({
+  const AppTypography._({
     required this.primary,
     required this.secondary,
     required this.button,
   });
 
-  TaskSphereTypography.light()
+  AppTypography.light()
       : primary = (
           paragraph: (
             medium: TextStyles.primaryParagraphMedium,
@@ -42,12 +42,12 @@ class TaskSphereTypography extends ThemeExtension<TaskSphereTypography> {
         button = TextStyles.buttonLight;
 
   @override
-  ThemeExtension<TaskSphereTypography> copyWith({
-    Primary? primary,
-    Secondary? secondary,
+  ThemeExtension<AppTypography> copyWith({
+    PrimaryTextStyle? primary,
+    SecondaryTextStyle? secondary,
     TextStyle? button,
   }) {
-    return TaskSphereTypography._(
+    return AppTypography._(
       primary: primary ?? this.primary,
       secondary: secondary ?? this.secondary,
       button: button ?? this.button,
@@ -55,13 +55,13 @@ class TaskSphereTypography extends ThemeExtension<TaskSphereTypography> {
   }
 
   @override
-  ThemeExtension<TaskSphereTypography> lerp(
-    covariant ThemeExtension<TaskSphereTypography>? other,
+  ThemeExtension<AppTypography> lerp(
+    covariant ThemeExtension<AppTypography>? other,
     double t,
   ) {
-    if (other is! TaskSphereTypography) return this;
+    if (other is! AppTypography) return this;
 
-    return TaskSphereTypography._(
+    return AppTypography._(
       primary: primary.lerp(other.primary, t),
       secondary: secondary.lerp(other.secondary, t),
       button: TextStyle.lerp(button, other.button, t)!,

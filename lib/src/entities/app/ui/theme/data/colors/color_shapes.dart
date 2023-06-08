@@ -1,10 +1,15 @@
-part of 'color_extension.dart';
+part of 'color_palette.dart';
 
 typedef AlertColors = ({
   Color background,
   Color info,
   Color error,
   Color success,
+});
+
+typedef BackgroundColors = ({
+  Color $50,
+  Color $100,
 });
 
 typedef NeutralColors = ({
@@ -17,6 +22,17 @@ typedef NeutralColors = ({
   Color $700,
   Color $800,
 });
+
+extension BackGroundColorsExtension on BackgroundColors {
+  BackgroundColors lerp(
+    BackgroundColors other,
+    double t,
+  ) =>
+      (
+        $50: Color.lerp(this.$50, other.$50, t)!,
+        $100: Color.lerp(this.$100, other.$100, t)!,
+      );
+}
 
 extension AlertColorsExtension on AlertColors {
   AlertColors lerp(

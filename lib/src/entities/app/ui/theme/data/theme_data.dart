@@ -17,7 +17,7 @@ final ThemeData _lightTheme = ThemeData.light().copyWith(
   canvasColor: AppColors.backgroundGrey,
   cardColor: AppColors.backgroundWhite,
   extensions: [
-    const TaskSpherePalette.light(),
-    TaskSphereTypography.light(),
+    const ColorPalette.light(),
+    AppTypography.light(),
   ],
 );

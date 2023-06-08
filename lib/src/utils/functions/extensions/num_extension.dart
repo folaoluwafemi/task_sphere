@@ -7,17 +7,13 @@ extension AppSizerDoubleExtension on num {
 
   double get sp => this * ResponsivenessSizer().widthScale;
 
-  double get r => min(
-        ResponsivenessSizer().widthScale,
-        ResponsivenessSizer().heightScale,
-      );
+  double get l => max(w, h);
+
+  double get m => min(w, h);
 
   SizedBox get boxWidth => SizedBox(width: w);
 
-  SizedBox get boxHeight {
-    print('screen height: ${ResponsivenessSizer().screenHeight}');
-    return SizedBox(height: h);
-  }
+  SizedBox get boxHeight => SizedBox(height: h);
 
   double get spMin => min(toDouble(), sp);
 

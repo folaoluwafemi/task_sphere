@@ -1,4 +1,4 @@
-part of 'task_sphere_typography.dart';
+part of 'app_typography.dart';
 
 abstract final class TextStyles {
   ///Primary

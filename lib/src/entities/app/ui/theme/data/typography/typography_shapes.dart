@@ -1,11 +1,11 @@
-part of 'task_sphere_typography.dart';
+part of 'app_typography.dart';
 
-typedef Primary = ({
+typedef PrimaryTextStyle = ({
   Title title,
   PrimaryParagraph paragraph,
 });
 
-typedef Secondary = ({
+typedef SecondaryTextStyle = ({
   SecondaryParagraph paragraph,
   Caption caption,
 });
@@ -43,9 +43,9 @@ typedef Caption = ({
   TextStyle regular,
 });
 
-extension PrimaryExtension on Primary {
-  Primary lerp(
-    Primary other,
+extension PrimaryExtension on PrimaryTextStyle {
+  PrimaryTextStyle lerp(
+    PrimaryTextStyle other,
     double t,
   ) {
     return (
@@ -55,9 +55,9 @@ extension PrimaryExtension on Primary {
   }
 }
 
-extension SecondaryExtension on Secondary {
-  Secondary lerp(
-    Secondary other,
+extension SecondaryExtension on SecondaryTextStyle {
+  SecondaryTextStyle lerp(
+    SecondaryTextStyle other,
     double t,
   ) {
     return (

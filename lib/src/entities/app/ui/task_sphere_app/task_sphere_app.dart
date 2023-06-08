@@ -14,7 +14,8 @@ class TaskSphereApp extends StatelessWidget {
       child: VanillaBuilder<ThemeVanilla, ThemeMode>(
         builder: (context, themeMode) {
           return MaterialApp.router(
-            themeMode: themeMode,
+            debugShowCheckedModeBanner: false,
+            themeMode: ThemeMode.light,
             theme: AppTheme.light,
             darkTheme: ThemeData.dark().copyWith(
               primaryColor: Colors.black87.withBlue(255),

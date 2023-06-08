@@ -16,8 +16,6 @@ class SplashScreen extends StatelessWidget {
         appBar: AppBar(
           elevation: 0,
           toolbarHeight: 0,
-          shadowColor: Colors.transparent,
-          backgroundColor: Colors.transparent,
         ),
         extendBodyBehindAppBar: true,
         backgroundColor: Colors.black87.withBlue(255).withOpacity(0.2),
