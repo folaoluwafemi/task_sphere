@@ -15,8 +15,10 @@ class TaskSphereApp extends StatelessWidget {
         themeMode: ThemeMode.light,
         color: AppColors.orange,
         builder: (context, child) => ScreenUtilInit(
-          builder: (context, child) =>
-              Theme(data: AppTheme.light, child: child!, sdss),
+          builder: (context, child) => Theme(
+            data: AppTheme.light,
+            child: child!,
+          ),
           child: child,
         ),
         routerConfig: AppRouter.routerConfig,
