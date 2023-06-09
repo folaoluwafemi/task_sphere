@@ -17,8 +17,8 @@ class OnboardingScreen extends StatelessWidget {
         toolbarHeight: 0,
         backgroundColor: context.palette.primary,
       ),
-      // backgroundColor: context.neutralColors.$100,
-      backgroundColor: context.palette.secondary,
+      backgroundColor: context.neutralColors.$100,
+      // backgroundColor: context.palette.alerts.info,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -27,13 +27,24 @@ class OnboardingScreen extends StatelessWidget {
             30.boxHeight,
             Center(
               child: Transform.scale(
-                scale: 5,
+                scale: 1,
                 child: SmallButton(
-                  width: 70.w,
-                  height: 37.3.h,
+                  onPressed: () {},
+                  width: 158.w,
+                  height: 50.h,
                   child: Column(
                     children: [],
                   ),
+                ),
+              ),
+            ),
+            120.boxHeight,
+            Center(
+              child: LargeButton(
+                onPressed: () {},
+                height: 50.h,
+                child: Column(
+                  children: [],
                 ),
               ),
             ),

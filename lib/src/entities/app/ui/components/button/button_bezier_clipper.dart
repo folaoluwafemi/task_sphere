@@ -1,17 +1,13 @@
 import 'package:flutter/widgets.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
-class SmallButtonBezierClipper extends CustomClipper<Path> {
+class ButtonBezierClipper extends CustomClipper<Path> {
   final double horizontalLength;
   final double verticalHeight;
-  final double depth;
-  final double radius;
 
-  const SmallButtonBezierClipper({
+  const ButtonBezierClipper({
     required this.horizontalLength,
     required this.verticalHeight,
-    required this.depth,
-    required this.radius,
   });
 
   @override
@@ -67,7 +63,7 @@ class SmallButtonBezierClipper extends CustomClipper<Path> {
         0,
         size.height.half + verticalHeight.half,
       )
-      ..lineTo(0, size.height.half - verticalHeight.half - radius)
+      ..lineTo(0, size.height.half - verticalHeight.half)
       ..quadraticBezierTo(
         0,
         4.bezierRelativeHeight(size.height),

@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_sphere/src/entities/app/ui/components/components_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
-class SmallButton extends StatelessWidget {
+class LargeButton extends StatelessWidget {
   final Widget child;
   final double? width;
   final double? height;
@@ -11,18 +11,19 @@ class SmallButton extends StatelessWidget {
   final Color? color;
   final VoidCallback? onPressed;
 
-  const SmallButton({
+  const LargeButton({
     Key? key,
     required this.child,
     this.width,
     this.height,
     this.gutterWidth,
-    this.onPressed,
     this.color,
+    this.onPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final double width = this.width ?? 354.w;
     return RawMaterialButton(
       splashColor: context.bgColors.$50,
       shape: const RoundedRectangleBorder(
@@ -40,21 +41,22 @@ class SmallButton extends StatelessWidget {
           width: width,
           height: height,
           child: ClipPath(
+            key: UniqueKey(),
             clipper: const ButtonBezierClipper(
               horizontalLength: 20,
               verticalHeight: 10,
             ),
             child: ClipPath(
-              clipper: SmallButtonGutterClipper(
-                horizontalLength: 0.1266 * (width ?? 158.w),
+              clipper: LargeButtonGutterClipper(
+                horizontalLength: 0.2599 * width,
                 verticalHeight: 0.2 * (height ?? 50.h),
-                depth: 2,
+                depth: 3,
                 radius: 1,
               ),
               child: Container(
                 color: onPressed == null
-                    ? (color ?? context.palette.primary).withOpacity(0.5)
-                    : (color ?? context.palette.primary),
+                    ? (color ?? context.palette.secondary).withOpacity(0.5)
+                    : (color ?? context.palette.secondary),
                 child: child,
               ),
             ),

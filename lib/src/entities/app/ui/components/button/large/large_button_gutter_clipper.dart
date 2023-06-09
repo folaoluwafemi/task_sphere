@@ -1,17 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
-enum VerticalsPlacement { left, right }
-
-enum HorizontalsPlacement { top, bottom }
-
-class SmallButtonGutterClipper extends CustomClipper<Path> {
+class LargeButtonGutterClipper extends CustomClipper<Path> {
   final double horizontalLength;
   final double verticalHeight;
   final double depth;
   final double radius;
 
-  const SmallButtonGutterClipper({
+  const LargeButtonGutterClipper({
     required this.horizontalLength,
     required this.verticalHeight,
     required this.depth,
@@ -93,7 +89,7 @@ class SmallButtonGutterClipper extends CustomClipper<Path> {
 
     final Offset startFirstCubicControlPoint = Offset(
       positiveCurveStart.dx,
-      positiveCurveStart.dy - radius.percent(150) ,
+      positiveCurveStart.dy - radius.percent(150),
     );
 
     final Offset startSecondCubicControlPoint = Offset(
