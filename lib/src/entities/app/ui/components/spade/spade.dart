@@ -42,7 +42,7 @@ class Spade extends StatelessWidget {
     final Color firstHalfColor =
         this.firstHalfColor ?? context.palette.secondary;
     final Color secondHalfColor =
-        this.secondHalfColor ?? context.palette.primary;
+        this.secondHalfColor ?? context.palette.secondary;
 
     final CustomPainter painter = switch (_type) {
       _SpadePainterType.half => HalfSpadePainter(

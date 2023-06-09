@@ -1,9 +1,9 @@
 part of 'extensions.dart';
 
 extension AppSizerDoubleExtension on num {
-  double get l => max(w, h);
+  double get l => math.max(w, h);
 
-  double get m => min(w, h);
+  double get m => math.min(w, h);
 
   SizedBox get boxWidth => SizedBox(width: w);
 
@@ -14,4 +14,8 @@ extension AppSizerDoubleExtension on num {
   double percent(double value) => this * value / 100;
 
   double ratio(double value) => this * value;
+
+  double get radians => this * (math.pi / 180);
+
+  double get pi => this * math.pi;
 }

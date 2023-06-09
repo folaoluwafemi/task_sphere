@@ -3,4 +3,6 @@ export 'package:task_sphere/src/entities/app/ui/components/inputs/input_field.da
 export 'package:task_sphere/src/entities/app/ui/components/inputs/input_form_field.dart';
 export 'package:task_sphere/src/entities/app/ui/components/inputs/otp.dart';
 export 'package:task_sphere/src/entities/app/ui/components/inputs/password.dart';
+export 'package:task_sphere/src/entities/app/ui/components/modals/modal_card.dart';
+export 'package:task_sphere/src/entities/app/ui/components/modals/modal_card_clipper.dart';
 export 'package:task_sphere/src/entities/app/ui/components/tab_pills/tab_pill.dart';
