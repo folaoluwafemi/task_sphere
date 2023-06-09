@@ -4,19 +4,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_sphere/src/entities/app/ui/components/inputs/input_field.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
-class CodeFields extends StatefulWidget {
+class OtpField extends StatefulWidget {
   final ValueChanged<String> onChanged;
 
-  const CodeFields({
+  const OtpField({
     Key? key,
     required this.onChanged,
   }) : super(key: key);
 
   @override
-  State createState() => _CodeFieldsState();
+  State createState() => _OtpFieldState();
 }
 
-class _CodeFieldsState extends State<CodeFields> {
+class _OtpFieldState extends State<OtpField> {
   @override
   void initState() {
     super.initState();
@@ -53,7 +53,7 @@ class _CodeFieldsState extends State<CodeFields> {
           return Row(
             children: [
               Flexible(
-                child: CodeField(
+                child: _OtpFieldItem(
                   focusNode: focusNodes[0],
                   controller: controllers[0],
                   onChanged: (value) {
@@ -65,7 +65,7 @@ class _CodeFieldsState extends State<CodeFields> {
               ),
               8.boxWidth,
               Flexible(
-                child: CodeField(
+                child: _OtpFieldItem(
                   focusNode: focusNodes[1],
                   controller: controllers[1],
                   onChanged: (value) {
@@ -79,7 +79,7 @@ class _CodeFieldsState extends State<CodeFields> {
               ),
               8.boxWidth,
               Flexible(
-                child: CodeField(
+                child: _OtpFieldItem(
                   focusNode: focusNodes[2],
                   controller: controllers[2],
                   onChanged: (value) {
@@ -93,7 +93,7 @@ class _CodeFieldsState extends State<CodeFields> {
               ),
               8.boxWidth,
               Flexible(
-                child: CodeField(
+                child: _OtpFieldItem(
                   focusNode: focusNodes[3],
                   controller: controllers[3],
                   onChanged: (value) {
@@ -170,12 +170,12 @@ class _CodeFieldsState extends State<CodeFields> {
   }
 }
 
-class CodeField extends StatelessWidget {
+class _OtpFieldItem extends StatelessWidget {
   final TextEditingController controller;
   final FocusNode? focusNode;
   final ValueChanged<String> onChanged;
 
-  const CodeField({
+  const _OtpFieldItem({
     Key? key,
     this.focusNode,
     required this.onChanged,

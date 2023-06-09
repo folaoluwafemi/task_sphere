@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:task_sphere/src/entities/app/ui/components/inputs/otp.dart';
-import 'package:task_sphere/src/entities/app/ui/components/inputs/password.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task_sphere/src/entities/app/app_barrel.dart';
+import 'package:task_sphere/src/entities/app/ui/components/spade/spade.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 class OnboardingScreen extends StatelessWidget {
@@ -15,28 +15,25 @@ class OnboardingScreen extends StatelessWidget {
         toolbarHeight: 0,
         backgroundColor: context.palette.primary,
       ),
-      backgroundColor: context.palette.bgAccent,
+      backgroundColor: context.neutralColors.$100,
+      // backgroundColor: context.palette.secondary,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             30.boxHeight,
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.m),
-              child: PasswordFormField(
-                hintText: 'Your Password',
-                palette: context.inputPalette.singleFieldPalette,
-                prefixIconBuilder: (context, color) => SvgPicture.asset(
-                  VectorAssets.profileFilled,
-                  color: color,
-                ),
-              ),
+            Transform.scale(
+              scale: 1,
+              child: Spade.linked(),
             ),
             30.boxHeight,
-            CodeFields(
-              onChanged: (value) {},
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.w),
+              child: DateRangePicker(
+                onStartDatePressed: () {},
+              ),
             ),
-            10.boxHeight,
+            60.boxHeight,
           ],
         ),
       ),

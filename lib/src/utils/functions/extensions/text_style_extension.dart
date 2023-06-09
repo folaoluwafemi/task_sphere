@@ -1,7 +1,7 @@
 part of 'extensions.dart';
 
 extension TextStyleExtension on TextStyle {
-  TextStyle withColor(Color color) => copyWith(color: color);
+  TextStyle withColor(Color? color) => copyWith(color: color);
 
   TextStyle withSize(double size) => copyWith(fontSize: size);
 

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:task_sphere/src/entities/app/ui/theme/theme_barrel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task_sphere/src/entities/app/ui/components/components_barrel.dart';
+import 'package:task_sphere/src/entities/app/ui/theme/theme_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
-
-typedef ColorWidgetBuilder = Widget Function(BuildContext context, Color color);
 
 class InputFormField extends StatefulWidget {
   final TextEditingController? controller;
