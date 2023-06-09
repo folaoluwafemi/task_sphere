@@ -1,8 +1,13 @@
+export 'package:task_sphere/src/entities/app/ui/components/button/small/small_button.dart';
+export 'package:task_sphere/src/entities/app/ui/components/button/small/small_button_bezier_clipper.dart';
+export 'package:task_sphere/src/entities/app/ui/components/button/small/small_button_gutter_clipper.dart';
+export 'package:task_sphere/src/entities/app/ui/components/cards/modals/modal_card.dart';
+export 'package:task_sphere/src/entities/app/ui/components/cards/modals/modal_card_clipper.dart';
+export 'package:task_sphere/src/entities/app/ui/components/cards/task/task_card.dart';
+export 'package:task_sphere/src/entities/app/ui/components/cards/task/task_card_clipper.dart';
 export 'package:task_sphere/src/entities/app/ui/components/inputs/date_range_picker.dart';
 export 'package:task_sphere/src/entities/app/ui/components/inputs/input_field.dart';
 export 'package:task_sphere/src/entities/app/ui/components/inputs/input_form_field.dart';
 export 'package:task_sphere/src/entities/app/ui/components/inputs/otp.dart';
 export 'package:task_sphere/src/entities/app/ui/components/inputs/password.dart';
-export 'package:task_sphere/src/entities/app/ui/components/modals/modal_card.dart';
-export 'package:task_sphere/src/entities/app/ui/components/modals/modal_card_clipper.dart';
 export 'package:task_sphere/src/entities/app/ui/components/tab_pills/tab_pill.dart';

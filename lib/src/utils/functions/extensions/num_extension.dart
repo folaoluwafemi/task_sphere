@@ -18,4 +18,12 @@ extension AppSizerDoubleExtension on num {
   double get radians => this * (math.pi / 180);
 
   double get pi => this * math.pi;
+
+  double bezierRelativeWidth(double newWidth) {
+    return this * (newWidth / 107.7.w);
+  }
+
+  double bezierRelativeHeight(double newHeight) {
+    return this * (newHeight / 37.3.w);
+  }
 }
