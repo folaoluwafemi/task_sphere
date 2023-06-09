@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:task_sphere/src/entities/app/ui/components/inputs/input_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task_sphere/src/entities/app/ui/components/inputs/input_field.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 class CodeFields extends StatefulWidget {
@@ -17,25 +17,32 @@ class CodeFields extends StatefulWidget {
 }
 
 class _CodeFieldsState extends State<CodeFields> {
-  bool isLightTheme = false;
-
   @override
   void initState() {
     super.initState();
 
-    focusNode1 = FocusNode(
-      canRequestFocus: text2.isEmpty,
+    focusNodes[0] = FocusNode(
+      canRequestFocus: controllers[1].text.isEmpty,
     );
-    focusNode2 = FocusNode(
-      canRequestFocus: text1.isNotEmpty && text3.isEmpty,
+    focusNodes[1] = FocusNode(
+      canRequestFocus:
+          controllers[0].text.isNotEmpty && controllers[2].text.isEmpty,
     );
-    focusNode3 = FocusNode(
-      canRequestFocus: text2.isNotEmpty && text4.isEmpty,
+    focusNodes[2] = FocusNode(
+      canRequestFocus:
+          controllers[1].text.isNotEmpty && controllers[3].text.isEmpty,
     );
 
-    focusNode4 = FocusNode(
-      canRequestFocus: text3.isNotEmpty,
+    focusNodes[3] = FocusNode(
+      canRequestFocus: controllers[2].text.isNotEmpty,
     );
+    addControllerListener();
+  }
+
+  void addControllerListener() {
+    for (int i = 0; i < controllers.length; i++) {
+      controllers[i].addListener(() => textChangeListener(i));
+    }
   }
 
   @override
@@ -47,60 +54,52 @@ class _CodeFieldsState extends State<CodeFields> {
             children: [
               Flexible(
                 child: CodeField(
-                  focusNode: focusNode1,
-                  lightTheme: isLightTheme,
+                  focusNode: focusNodes[0],
+                  controller: controllers[0],
                   onChanged: (value) {
-                    text1 = value;
                     if (value.isNotEmpty) {
                       FocusScope.of(context).nextFocus();
                     }
-                    widget.onChanged(otp);
                   },
                 ),
               ),
               8.boxWidth,
               Flexible(
                 child: CodeField(
-                  focusNode: focusNode2,
-                  lightTheme: isLightTheme,
+                  focusNode: focusNodes[1],
+                  controller: controllers[1],
                   onChanged: (value) {
-                    text2 = value;
                     if (value.isEmpty) {
                       FocusScope.of(context).previousFocus();
                     } else {
                       FocusScope.of(context).nextFocus();
                     }
-                    widget.onChanged(otp);
                   },
                 ),
               ),
               8.boxWidth,
               Flexible(
                 child: CodeField(
-                  focusNode: focusNode3,
-                  lightTheme: isLightTheme,
+                  focusNode: focusNodes[2],
+                  controller: controllers[2],
                   onChanged: (value) {
-                    text3 = value;
                     if (value.isEmpty) {
                       FocusScope.of(context).previousFocus();
                     } else {
                       FocusScope.of(context).nextFocus();
                     }
-                    widget.onChanged(otp);
                   },
                 ),
               ),
               8.boxWidth,
               Flexible(
                 child: CodeField(
-                  focusNode: focusNode4,
-                  lightTheme: isLightTheme,
+                  focusNode: focusNodes[3],
+                  controller: controllers[3],
                   onChanged: (value) {
-                    text4 = value;
                     if (value.isEmpty) {
                       FocusScope.of(context).previousFocus();
                     }
-                    widget.onChanged(otp);
                   },
                 ),
               ),
@@ -111,41 +110,76 @@ class _CodeFieldsState extends State<CodeFields> {
     );
   }
 
-  late final FocusNode focusNode1;
+  final List<TextEditingController> controllers = [
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+  ];
+  final List<FocusNode> focusNodes = [
+    FocusNode(),
+    FocusNode(),
+    FocusNode(),
+    FocusNode(),
+  ];
 
-  late final FocusNode focusNode2;
+  void textChangeListener(int n) {
+    if (n > 0 && controllers[n].text.isEmpty && n != controllers.lastIndex) {
+      if (controllers.anyAfter(n, (element) => element.text.isNotEmpty)) {
+        controllers.forEachWhereAfter(
+          index: n,
+          where: (element) => element.text.isNotEmpty,
+          action: (element) => element.clear(),
+        );
+      }
+      return;
+    }
 
-  late final FocusNode focusNode3;
+    if (controllers.anyBefore(n, (element) => element.text.isEmpty)) {
+      controllers[n].clear();
 
-  late final FocusNode focusNode4;
+      for (int i = 0; i < n; i++) {
+        if (controllers[i].text.isEmpty) {
+          focusNodes[i].requestFocus();
+        }
+      }
+    }
 
-  String text1 = '';
-  String text2 = '';
-  String text3 = '';
-  String text4 = '';
+    onChanged();
+  }
 
-  String get otp => '$text1$text2$text3$text4';
+  void onChanged() {
+    widget.onChanged(otp);
+  }
+
+  String get otp => controllers.fold(
+        '',
+        (previousValue, element) => previousValue + element.text,
+      );
 
   @override
   void dispose() {
-    focusNode1.dispose();
-    focusNode2.dispose();
-    focusNode3.dispose();
-    focusNode4.dispose();
+    for (FocusNode element in focusNodes) {
+      element.dispose();
+    }
+    for (TextEditingController element in controllers) {
+      element.dispose();
+    }
+
     super.dispose();
   }
 }
 
 class CodeField extends StatelessWidget {
+  final TextEditingController controller;
   final FocusNode? focusNode;
-  final bool lightTheme;
   final ValueChanged<String> onChanged;
 
   const CodeField({
     Key? key,
     this.focusNode,
     required this.onChanged,
-    required this.lightTheme,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -153,6 +187,7 @@ class CodeField extends StatelessWidget {
     return SizedBox(
       width: 52.h,
       child: InputField(
+        controller: controller,
         isDense: true,
         height: 30.h,
         cursorHeight: 30.h,
