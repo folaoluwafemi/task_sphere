@@ -1,12 +1,15 @@
 import 'package:flutter/widgets.dart';
+import 'package:task_sphere/src/entities/app/ui/components/spade/spade.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 class HalfSpadePainter extends CustomPainter {
   final double headSize;
   final double stemLength;
   final Color color;
+  final SpadeOrientation orientation;
 
   const HalfSpadePainter({
+    required this.orientation,
     required this.headSize,
     required this.stemLength,
     required this.color,
@@ -24,11 +27,21 @@ class HalfSpadePainter extends CustomPainter {
       ..strokeWidth = 2
       ..style = PaintingStyle.fill;
 
-    canvas.drawLine(
-      Offset(headSize.half, headSize.half),
-      Offset(headSize + stemLength, headSize.half),
-      paint,
-    );
+    if (orientation == SpadeOrientation.vertical) {
+      canvas.drawLine(
+        Offset(headSize.half, headSize.half),
+        Offset(headSize.half, headSize.half + stemLength),
+        paint,
+      );
+      return;
+    } else {
+      canvas.drawLine(
+        Offset(headSize.half, headSize.half),
+        Offset(headSize.half + stemLength, headSize.half),
+        paint,
+      );
+      return;
+    }
   }
 
   void paintDiamondHead(Canvas canvas, Size size) {

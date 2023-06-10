@@ -7,14 +7,29 @@ class _SplashView extends StatelessWidget {
   Widget build(BuildContext context) {
     return VanillaListener<SplashVanilla, AppRoute>(
       listener: (previous, current) => context.goNamed(current.name),
-      child: const Center(
-        child: Text(
-          'Splash Screen',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 24,
+      child: Stack(
+        children: [
+          Center(
+            child: SizedBox.square(
+              dimension: 80.l,
+              child: SvgPicture.asset(
+                VectorAssets.logo,
+              ),
+            ),
           ),
-        ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: SizedBox(
+              height: 313.h,
+              width: 12,
+              child: Spade.half(
+                orientation: SpadeOrientation.vertical,
+                color: context.neutralColors.$300,
+                stemLength: 313.h,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

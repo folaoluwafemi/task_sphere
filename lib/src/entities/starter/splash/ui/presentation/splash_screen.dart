@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:task_sphere/src/entities/app/ui/components/spade/spade.dart';
 import 'package:task_sphere/src/entities/entities_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
@@ -16,9 +20,11 @@ class SplashScreen extends StatelessWidget {
         appBar: AppBar(
           elevation: 0,
           toolbarHeight: 0,
+          backgroundColor: context.palette.bg.$50,
+          systemOverlayStyle: SystemUiOverlayStyle.dark,
         ),
+        backgroundColor: context.palette.bg.$50,
         extendBodyBehindAppBar: true,
-        backgroundColor: Colors.black87.withBlue(255).withOpacity(0.2),
         body: const _SplashView(),
       ),
     );

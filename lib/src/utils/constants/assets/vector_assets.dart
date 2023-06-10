@@ -7,5 +7,6 @@ abstract final class VectorAssets {
   static const String info = 'assets/vectors/info.svg';
   static const String check = 'assets/vectors/check.svg';
   static const String close = 'assets/vectors/close.svg';
+  static const String logo = 'assets/vectors/logo.svg';
   static const String _helper = 'assets/vectors/.svg';
 }

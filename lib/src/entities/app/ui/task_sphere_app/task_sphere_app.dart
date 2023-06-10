@@ -15,6 +15,7 @@ class TaskSphereApp extends StatelessWidget {
         themeMode: ThemeMode.light,
         color: AppColors.orange,
         builder: (context, child) => ScreenUtilInit(
+          designSize: const Size(390, 844),
           builder: (context, child) => Theme(
             data: AppTheme.light,
             child: child!,

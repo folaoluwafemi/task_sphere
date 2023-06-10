@@ -9,18 +9,25 @@ enum _SpadePainterType {
   linked,
 }
 
+enum SpadeOrientation {
+  vertical,
+  horizontal,
+}
+
 class Spade extends StatelessWidget {
   final double headSize;
   final double stemLength;
   final Color? firstHalfColor;
   final Color? secondHalfColor;
   final _SpadePainterType _type;
+  final SpadeOrientation orientation;
 
   Spade.half({
     double? headSize,
     double? stemLength,
     Color? color,
     super.key,
+    this.orientation = SpadeOrientation.horizontal,
   })  : firstHalfColor = color,
         secondHalfColor = color,
         headSize = headSize ?? 12.w,
@@ -32,6 +39,7 @@ class Spade extends StatelessWidget {
     double? stemLength,
     this.firstHalfColor,
     this.secondHalfColor,
+    this.orientation = SpadeOrientation.horizontal,
     super.key,
   })  : headSize = headSize ?? 12.w,
         stemLength = stemLength ?? 28.w,
@@ -46,8 +54,9 @@ class Spade extends StatelessWidget {
 
     final CustomPainter painter = switch (_type) {
       _SpadePainterType.half => HalfSpadePainter(
+          orientation: orientation,
           headSize: headSize,
-          stemLength: stemLength / 2,
+          stemLength: stemLength,
           color: firstHalfColor,
         ),
       _SpadePainterType.linked => LinkedSpadePainter(

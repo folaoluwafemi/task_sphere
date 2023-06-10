@@ -20,7 +20,7 @@ extension AppSizerDoubleExtension on num {
 
   double ratio(double value) => this * value;
 
-  double get radians => this * (math.pi / 180);
+  double get toRadians => this * (math.pi / 180);
 
   double get pi => this * math.pi;
 
