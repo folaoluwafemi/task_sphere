@@ -27,10 +27,10 @@ class AlertTailPainter extends CustomPainter {
       linePaint,
     );
 
-    paintDiamondHead(canvas, size);
+    paintTriangleHead(canvas, size);
   }
 
-  void paintDiamondHead(Canvas canvas, Size size) {
+  void paintTriangleHead(Canvas canvas, Size size) {
     final double headSize = 12.l;
     final Paint paint = Paint()
       ..color = color
