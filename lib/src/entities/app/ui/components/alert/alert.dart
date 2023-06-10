@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:task_sphere/src/entities/app/ui/components/components_barrel.dart';
-import 'package:task_sphere/src/entities/starter/onboarding/ui/presentation/custom_animation_builder.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 part 'alert_type.dart';
@@ -47,6 +46,7 @@ class Alert extends StatelessWidget {
         super(key: key);
 
   static Size _computeSizeFor(String text, TextStyle style) {
+    text = text.isEmpty ? ' ' : text;
     final TextSpan span = TextSpan(
       text: text,
       style: style,

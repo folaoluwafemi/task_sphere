@@ -29,11 +29,10 @@ class OnboardingScreen extends StatelessWidget {
               child: Transform.scale(
                 scale: 1,
                 alignment: Alignment.center,
-                child: const Padding(
+                child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.0),
                   child: Alert.error(
-                    text:
-                        'Alert are we adsa alsdkfaj dfasd flads a asdlfa sdfalsd ffdjfa dsfladsjf aldsjf asdldoing to day ',
+                    text: '',
                   ),
                 ),
               ),
@@ -51,7 +50,8 @@ class OnboardingScreen extends StatelessWidget {
                 ),
                 child: Text(
                   'Show overlay',
-                  style: context.primaryTypography.paragraph.medium.asMedium.copyWith(
+                  style: context.primaryTypography.paragraph.medium.asMedium
+                      .copyWith(
                     color: context.bgColors.$50,
                   ),
                 ),

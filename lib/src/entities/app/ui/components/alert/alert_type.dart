@@ -61,8 +61,7 @@ class AlertOverlayEntry extends StatelessWidget {
                 shouldRepeat: false,
                 builder: (context, value) {
                   final double height =
-                      (50.h * _AlertAnimationCurve.init.transform(value) +
-                          50.h);
+                      100.h * Curves.bounceOut.transform(value);
                   return Alert._custom(
                     text: text,
                     type: type,
