@@ -20,4 +20,6 @@ extension BuildContextExtension on BuildContext {
   PrimaryTextStyle get primaryTypography => typography.primary;
 
   SecondaryTextStyle get secondaryTypography => typography.secondary;
+
+  TextStyle get buttonTextStyle => primaryTypography.paragraph.medium;
 }

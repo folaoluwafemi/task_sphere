@@ -10,6 +10,7 @@ extension AppSizerDoubleExtension on num {
   SizedBox get boxHeight => SizedBox(height: h);
 
   double get half => this / 2;
+
   double get sixth => this / 6;
 
   double get third => this / 3;

@@ -1,65 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:task_sphere/src/entities/app/ui/components/components_barrel.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:task_sphere/src/entities/app/app_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
+
+part 'views/onboarding_view.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    print('asdasd${37.3.h}');
-    print('asdas${107.7.w}');
-    //128
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         toolbarHeight: 0,
-        backgroundColor: context.palette.secondary,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        backgroundColor: Colors.transparent,
       ),
-      backgroundColor: context.neutralColors.$100,
-      // backgroundColor: context.palette.alerts.success,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            30.boxHeight,
-            30.boxHeight,
-            Center(
-              child: Transform.scale(
-                scale: 1,
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Alert.error(
-                    text: '',
-                  ),
-                ),
+      extendBodyBehindAppBar: true,
+      backgroundColor: context.palette.bgAccent,
+      body: Stack(
+        children: [
+          Opacity(
+            opacity: 0.05,
+            child: SizedBox(
+              width: 615.6.w,
+              height: 615.h,
+              child: Image.asset(
+                Assets.onboardingCover,
+                fit: BoxFit.cover,
               ),
             ),
-            60.boxHeight,
-            LargeButton(
-              onPressed: () => AlertType.success.show(
-                context,
-                text: 'Balablu!!',
-              ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 38.w,
-                  vertical: 13.h,
-                ),
-                child: Text(
-                  'Show overlay',
-                  style: context.primaryTypography.paragraph.medium.asMedium
-                      .copyWith(
-                    color: context.bgColors.$50,
-                  ),
-                ),
-              ),
-            ),
-            60.boxHeight,
-          ],
-        ),
+          ),
+          const SafeArea(
+            child: _OnboardingView(),
+          ),
+        ],
       ),
     );
   }

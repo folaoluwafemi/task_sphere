@@ -15,11 +15,11 @@ class LargeButton extends StatelessWidget {
   const LargeButton({
     Key? key,
     required this.child,
+    required this.onPressed,
     this.width,
     this.height,
     this.gutterWidth,
     this.color,
-    this.onPressed,
     this.alignment,
   }) : super(key: key);
 
