@@ -15,10 +15,10 @@ class OnboardingScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         toolbarHeight: 0,
-        backgroundColor: context.palette.primary,
+        backgroundColor: context.palette.secondary,
       ),
       backgroundColor: context.neutralColors.$100,
-      // backgroundColor: context.palette.alerts.info,
+      // backgroundColor: context.palette.alerts.success,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -28,23 +28,32 @@ class OnboardingScreen extends StatelessWidget {
             Center(
               child: Transform.scale(
                 scale: 1,
-                child: SmallButton(
-                  onPressed: () {},
-                  width: 158.w,
-                  height: 50.h,
-                  child: Column(
-                    children: [],
+                alignment: Alignment.center,
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Alert.error(
+                    text:
+                        'Alert are we adsa alsdkfaj dfasd flads a asdlfa sdfalsd ffdjfa dsfladsjf aldsjf asdldoing to day ',
                   ),
                 ),
               ),
             ),
-            120.boxHeight,
-            Center(
-              child: LargeButton(
-                onPressed: () {},
-                height: 50.h,
-                child: Column(
-                  children: [],
+            60.boxHeight,
+            LargeButton(
+              onPressed: () => AlertType.success.show(
+                context,
+                text: 'Balablu!!',
+              ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 38.w,
+                  vertical: 13.h,
+                ),
+                child: Text(
+                  'Show overlay',
+                  style: context.primaryTypography.paragraph.medium.asMedium.copyWith(
+                    color: context.bgColors.$50,
+                  ),
                 ),
               ),
             ),

@@ -1,4 +1,8 @@
 export 'package:task_sphere/src/entities/app/app_barrel.dart';
+export 'package:task_sphere/src/entities/app/ui/components/alert/alert.dart';
+export 'package:task_sphere/src/entities/app/ui/components/alert/alert_custom_paint.dart';
+export 'package:task_sphere/src/entities/app/ui/components/alert/alert_gutter_clipper.dart';
+export 'package:task_sphere/src/entities/app/ui/components/alert/alert_tail_painter.dart';
 export 'package:task_sphere/src/entities/app/ui/components/button/button_bezier_clipper.dart';
 export 'package:task_sphere/src/entities/app/ui/components/button/large/large_button.dart';
 export 'package:task_sphere/src/entities/app/ui/components/button/large/large_button_gutter_clipper.dart';

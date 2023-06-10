@@ -10,6 +10,7 @@ class LargeButton extends StatelessWidget {
   final double? gutterWidth;
   final Color? color;
   final VoidCallback? onPressed;
+  final Alignment? alignment;
 
   const LargeButton({
     Key? key,
@@ -19,6 +20,7 @@ class LargeButton extends StatelessWidget {
     this.gutterWidth,
     this.color,
     this.onPressed,
+    this.alignment,
   }) : super(key: key);
 
   @override
@@ -57,6 +59,7 @@ class LargeButton extends StatelessWidget {
                 color: onPressed == null
                     ? (color ?? context.palette.secondary).withOpacity(0.5)
                     : (color ?? context.palette.secondary),
+                alignment: alignment ?? Alignment.center,
                 child: child,
               ),
             ),
