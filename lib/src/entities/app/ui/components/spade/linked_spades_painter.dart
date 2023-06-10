@@ -2,13 +2,15 @@ import 'package:flutter/widgets.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 class LinkedSpadePainter extends CustomPainter {
-  final double headSize;
+  final double head1Size;
+  final double head2Size;
   final double stemLength;
   final Color firstHalfColor;
   final Color secondHalfColor;
 
   const LinkedSpadePainter({
-    required this.headSize,
+    required this.head1Size,
+    required this.head2Size,
     required this.stemLength,
     required this.firstHalfColor,
     required this.secondHalfColor,
@@ -17,6 +19,8 @@ class LinkedSpadePainter extends CustomPainter {
   double get firstStemLength => stemLength / 2;
 
   double get secondStemLength => stemLength;
+
+  double get thickness => 2.l;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -29,12 +33,12 @@ class LinkedSpadePainter extends CustomPainter {
   void paintFirstStem(Canvas canvas, Size size) {
     final Paint paint = Paint()
       ..color = firstHalfColor
-      ..strokeWidth = 2
+      ..strokeWidth = thickness
       ..style = PaintingStyle.fill;
 
     canvas.drawLine(
-      Offset(headSize.half, headSize.half),
-      Offset(headSize + firstStemLength, headSize.half),
+      Offset(head1Size.half, size.height.half - thickness.half),
+      Offset(head1Size + firstStemLength, size.height.half - 1.l),
       paint,
     );
   }
@@ -45,14 +49,15 @@ class LinkedSpadePainter extends CustomPainter {
   ) {
     final Paint paint = Paint()
       ..color = secondHalfColor
-      ..strokeWidth = 2
+      ..strokeWidth = thickness
       ..style = PaintingStyle.fill;
 
-    final double leftOffset = headSize + firstStemLength;
+    final double leftOffset = head1Size + firstStemLength;
 
     canvas.drawLine(
-      Offset(leftOffset, headSize.half),
-      Offset((headSize * 1.5) + secondStemLength, headSize.half),
+      Offset(leftOffset, size.height.half - thickness.half),
+      Offset((head2Size * 1.5) + secondStemLength,
+          size.height.half - thickness.half),
       paint,
     );
   }
@@ -63,10 +68,12 @@ class LinkedSpadePainter extends CustomPainter {
       ..style = PaintingStyle.fill;
 
     final Path path = Path()
-      ..moveTo(0, headSize.half)
-      ..lineTo(headSize.half, 0)
-      ..lineTo(headSize, headSize.half)
-      ..lineTo(headSize / 2, headSize)
+      ..moveTo(0, size.height.half - thickness.half)
+      ..lineTo(
+          head1Size.half, size.height.half - (head1Size.half + thickness.half))
+      ..lineTo(head1Size, size.height.half - thickness.half)
+      ..lineTo(
+          head1Size.half, size.height.half + (head1Size.half - thickness.half))
       ..close();
 
     canvas.drawPath(path, paint);
@@ -80,15 +87,16 @@ class LinkedSpadePainter extends CustomPainter {
       ..color = secondHalfColor
       ..style = PaintingStyle.fill;
 
-    final double leftOffset = headSize + stemLength;
+    final double leftOffset = head2Size + secondStemLength;
 
-    final Path path = Path()
-      ..moveTo(leftOffset, headSize.half)
-      ..lineTo(leftOffset + headSize.half, 0)
-      ..lineTo(leftOffset + headSize, headSize.half)
-      ..lineTo(leftOffset + headSize / 2, headSize)
-      ..close();
-
+    final Path path = Path();
+    path
+      ..moveTo(leftOffset, size.height.half - thickness.half)
+      ..lineTo(leftOffset + head2Size.half,
+          size.height.half - (head2Size.half + thickness.half))
+      ..lineTo(leftOffset + head2Size, size.height.half - thickness.half)
+      ..lineTo(leftOffset + head2Size.half,
+          size.height.half + (head2Size.half - thickness.half));
     canvas.drawPath(path, paint);
   }
 

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_sphere/src/entities/app/ui/components/spade/half_spade_painter.dart';
@@ -15,7 +17,8 @@ enum SpadeOrientation {
 }
 
 class Spade extends StatelessWidget {
-  final double headSize;
+  final double head1Size;
+  final double head2Size;
   final double stemLength;
   final Color? firstHalfColor;
   final Color? secondHalfColor;
@@ -30,18 +33,25 @@ class Spade extends StatelessWidget {
     this.orientation = SpadeOrientation.horizontal,
   })  : firstHalfColor = color,
         secondHalfColor = color,
-        headSize = headSize ?? 12.w,
+        head2Size = headSize ?? 12.w,
+        head1Size = headSize ?? 12.w,
         stemLength = stemLength ?? 28.w,
         _type = _SpadePainterType.half;
 
+  asdfsd() {
+    ;
+  }
+
   Spade.linked({
-    double? headSize,
+    double? head1Size,
+    double? head2Size,
     double? stemLength,
     this.firstHalfColor,
     this.secondHalfColor,
     this.orientation = SpadeOrientation.horizontal,
     super.key,
-  })  : headSize = headSize ?? 12.w,
+  })  : head1Size = head1Size ?? 12.w,
+        head2Size = head2Size ?? 12.w,
         stemLength = stemLength ?? 28.w,
         _type = _SpadePainterType.linked;
 
@@ -55,24 +65,26 @@ class Spade extends StatelessWidget {
     final CustomPainter painter = switch (_type) {
       _SpadePainterType.half => HalfSpadePainter(
           orientation: orientation,
-          headSize: headSize,
+          headSize: head1Size,
           stemLength: stemLength,
           color: firstHalfColor,
         ),
       _SpadePainterType.linked => LinkedSpadePainter(
-          headSize: headSize,
+          head1Size: head1Size,
+          head2Size: head2Size,
           stemLength: stemLength,
           firstHalfColor: firstHalfColor,
           secondHalfColor: secondHalfColor,
         ),
     };
     return SizedBox(
-      height: headSize,
+      height: max(head1Size, head2Size),
       width: switch (_type) {
-        _SpadePainterType.half => headSize + stemLength,
-        _SpadePainterType.linked => (headSize * 2) + stemLength,
+        _SpadePainterType.half => head1Size + stemLength,
+        _SpadePainterType.linked => (head1Size + head2Size) + stemLength,
       },
       child: CustomPaint(
+        key: UniqueKey(),
         painter: painter,
       ),
     );

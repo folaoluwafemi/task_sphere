@@ -73,7 +73,7 @@ class _OnboardingView extends StatelessWidget {
           child: LargeButton(
             width: 354.w,
             height: 50.h,
-            onPressed: () {},
+            onPressed: () => context.goNamed(AppRoute.signUp.name),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -97,7 +97,7 @@ class _OnboardingView extends StatelessWidget {
         24.boxHeight,
         Center(
           child: InkWell(
-            onTap: () {},
+            onTap: () => context.goNamed(AppRoute.login.name),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [

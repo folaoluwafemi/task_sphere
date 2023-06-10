@@ -9,9 +9,7 @@ abstract interface class AuthApi {
     required String password,
   });
 
-  Future<User> register({
-    required String firstname,
-    required String lastname,
+  Future<User> registerAndRequestOtp({
     required String email,
     required String password,
   });

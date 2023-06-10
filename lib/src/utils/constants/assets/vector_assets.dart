@@ -11,5 +11,9 @@ abstract final class VectorAssets {
   static const String arrowsRight = 'assets/vectors/arrows_right.svg';
   static const String add = 'assets/vectors/add.svg';
   static const String taskSphereText = 'assets/vectors/task_sphere_text.svg';
+  static const String spadesLines = 'assets/vectors/spades_lines.svg';
+  static const String arrowBack = 'assets/vectors/arrow_back.svg';
+  static const String mail = 'assets/vectors/mail.svg';
+  static const String password = 'assets/vectors/password.svg';
   static const String _helper = 'assets/vectors/.svg';
 }

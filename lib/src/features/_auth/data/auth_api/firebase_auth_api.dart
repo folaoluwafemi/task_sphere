@@ -45,24 +45,18 @@ final class FirebaseAuthApi with FirebaseErrorHandlerMixin implements AuthApi {
   }
 
   @override
-  Future<User> register({
-    required String firstname,
-    required String lastname,
+  Future<User> registerAndRequestOtp({
     required String email,
     required String password,
   }) =>
       handleError(
         _register(
-          firstname: firstname,
-          lastname: lastname,
           email: email,
           password: password,
         ),
       );
 
   Future<User> _register({
-    required String firstname,
-    required String lastname,
     required String email,
     required String password,
   }) async {
@@ -71,8 +65,6 @@ final class FirebaseAuthApi with FirebaseErrorHandlerMixin implements AuthApi {
       email: email,
       password: password,
     );
-
-    await credential.user?.updateDisplayName('$firstname $lastname');
 
     await credential.user?.updateEmail(email);
 

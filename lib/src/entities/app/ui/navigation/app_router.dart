@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:task_sphere/src/entities/entities_barrel.dart';
+import 'package:task_sphere/src/features/features_barrel.dart';
 
 part 'domain/data/app_route.dart';
 
@@ -34,6 +35,25 @@ final GoRouter _router = GoRouter(
       path: AppRoute.onboarding.path,
       name: AppRoute.onboarding.name,
       builder: (context, state) => const OnboardingScreen(),
+      routes: [
+        GoRoute(
+          path: AppRoute.login.path,
+          name: AppRoute.login.name,
+          builder: (context, state) => const LoginScreen(),
+        ),
+        GoRoute(
+          path: AppRoute.signUp.path,
+          name: AppRoute.signUp.name,
+          builder: (context, state) => const SignUpScreen(),
+          routes: [
+            GoRoute(
+              path: AppRoute.enterName.path,
+              name: AppRoute.enterName.name,
+              builder: (context, state) => const EnterNameScreen(),
+            ),
+          ],
+        ),
+      ],
     ),
   ],
 );

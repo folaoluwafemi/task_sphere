@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_sphere/src/entities/app/ui/components/components_barrel.dart';
-import 'package:task_sphere/src/entities/app/ui/theme/theme_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 class InputFormField extends StatefulWidget {
@@ -16,6 +15,7 @@ class InputFormField extends StatefulWidget {
   final AutovalidateMode? autovalidateMode;
   final FormFieldValidator<String>? validator;
   final ValueChanged<String>? onChanged;
+  final TextInputType? keyboardType;
 
   const InputFormField({
     Key? key,
@@ -30,6 +30,7 @@ class InputFormField extends StatefulWidget {
     this.autovalidateMode,
     this.validator,
     this.onChanged,
+    this.keyboardType,
   }) : super(key: key);
 
   @override
@@ -92,6 +93,7 @@ class _InputFormFieldState extends State<InputFormField> {
       autovalidateMode: widget.autovalidateMode,
       validator: widget.validator,
       onChanged: widget.onChanged,
+      keyboardType: widget.keyboardType,
       decoration: InputDecoration(
         filled: false,
         contentPadding: EdgeInsets.zero,
@@ -140,7 +142,7 @@ class _InputFormFieldState extends State<InputFormField> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                    left: 30.w,
+                    left: 40.w,
                   ),
                   child: textField,
                 ),

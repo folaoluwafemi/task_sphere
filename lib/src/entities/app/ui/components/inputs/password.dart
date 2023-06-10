@@ -104,6 +104,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
           autovalidateMode: widget.autovalidateMode,
           validator: widget.validator,
           onChanged: widget.onChanged,
+          obscuringCharacter: '•',
           decoration: InputDecoration(
             filled: false,
             contentPadding: EdgeInsets.zero,

@@ -13,14 +13,14 @@ class LargeButton extends StatelessWidget {
   final Alignment? alignment;
 
   const LargeButton({
-    Key? key,
-    required this.child,
     required this.onPressed,
+    required this.child,
     this.width,
     this.height,
     this.gutterWidth,
     this.color,
     this.alignment,
+    Key? key,
   }) : super(key: key);
 
   @override

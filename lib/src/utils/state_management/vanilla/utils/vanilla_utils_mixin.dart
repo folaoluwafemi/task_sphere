@@ -2,11 +2,11 @@ import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 mixin VanillaUtilsMixin<State extends VanillaStateWithStatus>
     on VanillaNotifier<State> {
-  void emitOnError(Failure error) {
+  void notifyOnError(Failure error) {
     state = state.copyWith(error: error, loading: false, success: false);
   }
 
-  void emitLoading([nullifyError = true]) {
+  void notifyLoading([nullifyError = true]) {
     state = state.copyWith(
       loading: true,
       success: false,
@@ -14,7 +14,7 @@ mixin VanillaUtilsMixin<State extends VanillaStateWithStatus>
     );
   }
 
-  void emitSuccess([nullifyError = true]) {
+  void notifySuccess([nullifyError = true]) {
     state = state.copyWith(
       success: true,
       loading: false,

@@ -5,15 +5,8 @@ abstract interface class NetworkUserSourceInterface {
     required String userId,
   });
 
-  Future<User> updateUser({
-    required User user,
-  });
-
-  Future<User> createUser({
-    required User user,
-  });
-
-  Future<void> deleteUser({
-    required String userId,
+  Future<void> updateName({
+    required String firstname,
+    required String lastname,
   });
 }

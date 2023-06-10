@@ -34,17 +34,13 @@ abstract class Validators {
     value, {
     ValueChanged<bool>? onValidated,
   }) {
-    if (value?.isEmpty ?? true) {
-      onValidated?.call(false);
-      return 'Field cannot be empty!';
-    }
     final RegExp regExp = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
     );
     bool hasMatch = regExp.hasMatch('$value');
     if (value == null || !hasMatch) {
       onValidated?.call(false);
-      return 'Please enter a valid email';
+      return null;
     }
     onValidated?.call(true);
     return null;
