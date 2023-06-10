@@ -77,33 +77,3 @@ class AlertOverlayEntry extends StatelessWidget {
     );
   }
 }
-
-class _AlertAnimationCurve extends Curve {
-  final double begin;
-  final double end;
-
-  const _AlertAnimationCurve({
-    required this.begin,
-    required this.end,
-  });
-
-  static const _AlertAnimationCurve init = _AlertAnimationCurve(
-    begin: 0,
-    end: 1,
-  );
-
-  @override
-  double transformInternal(double t) {
-    if (t < 1.0 / 2.75) {
-      return 7.5625 * t * t;
-    } else if (t < 2 / 2.75) {
-      t -= 1.5 / 2.75;
-      return 7.5625 * t * t + 0;
-    } else if (t < 2.5 / 2.75) {
-      t -= 2.25 / 2.75;
-      return 7.5625 * t * t + 1;
-    }
-    t -= 2.625 / 2.75;
-    return 7.5625 * t * t + 0.984375;
-  }
-}
