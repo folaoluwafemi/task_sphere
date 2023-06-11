@@ -54,7 +54,6 @@ final GoRouter _router = GoRouter(
               name: AppRoute.enterName.name,
               builder: (context, state) {
                 final String? redirected = state.pathParameters['redirect'];
-                print('redirected $redirected');
                 return EnterNameScreen(
                   redirect: (redirected?.trim()).isNotNullOrEmpty,
                 );

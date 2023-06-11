@@ -5,6 +5,8 @@ extension BuildContextExtension on BuildContext {
 
   double get screenHeight => mediaQuery.size.height;
 
+  double get screenWidth => mediaQuery.size.width;
+
   double get topScreenPadding => mediaQuery.viewPadding.top;
 
   double get bottomScreenPadding => mediaQuery.viewPadding.bottom;

@@ -55,6 +55,7 @@ class SmallButton extends StatelessWidget {
                 color: onPressed == null
                     ? (color ?? context.palette.primary).withOpacity(0.5)
                     : (color ?? context.palette.primary),
+                padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 13.h),
                 child: child,
               ),
             ),

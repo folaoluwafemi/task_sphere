@@ -15,6 +15,8 @@ extension AppSizerDoubleExtension on num {
 
   double get third => this / 3;
 
+  double get twoThirds => this * 2 / 3;
+
   double get doubled => this * 2;
 
   double percent(double value) => this * value / 100;
@@ -29,7 +31,21 @@ extension AppSizerDoubleExtension on num {
     return this * (newWidth / 107.7.w);
   }
 
+  bool isAround(num other, {double offBy = 2}) {
+    return other >= this - 2 && other < (this + 2);
+  }
+
   double bezierRelativeHeight(double newHeight) {
     return this * (newHeight / 37.3.w);
   }
+}
+
+extension GenericNumExtension<T extends num> on T {
+  T capAt(T cap) => this > cap ? cap : this;
+
+  T capBetween(T min, T max) => this > max
+      ? max
+      : this < min
+          ? min
+          : this;
 }
