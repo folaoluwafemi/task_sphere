@@ -1,21 +1,21 @@
-part of '../sign_up_screen.dart';
+part of '../login_screen.dart';
 
-class _SignUpView extends StatefulWidget {
+class _LoginView extends StatefulWidget {
   final ScrollController controller;
 
-  const _SignUpView({
+  const _LoginView({
     Key? key,
     required this.controller,
   }) : super(key: key);
 
   @override
-  State<_SignUpView> createState() => _SignUpViewState();
+  State<_LoginView> createState() => _LoginViewState();
 }
 
-class _SignUpViewState extends State<_SignUpView> {
+class _LoginViewState extends State<_LoginView> {
   @override
   Widget build(BuildContext context) {
-    return VanillaListener<SignUpVanilla, SignUpState>(
+    return VanillaListener<LoginVanilla, LoginState>(
       listenWhen: (previous, current) =>
           previous?.error != current.error ||
           previous?.success != current.success,
@@ -23,9 +23,9 @@ class _SignUpViewState extends State<_SignUpView> {
         if (current.success) {
           AlertType.success.show(
             context,
-            text: 'Account created successfully!!',
+            text: 'Logged in successfully!!',
           );
-          context.go('${AppRoute.enterName.fullPath} ');
+          context.goNamed(AppRoute.home.name);
         }
 
         if (current.error == null) return;
@@ -45,12 +45,12 @@ class _SignUpViewState extends State<_SignUpView> {
             ),
             40.boxHeight,
             Text(
-              'Create an account',
+              'Welcome back.',
               style: context.primaryTypography.title.large,
             ),
             6.boxHeight,
             Text(
-              'Join the productivity clan on TaskSphere',
+              'Continue right back from where you stopped.',
               style: context.secondaryTypography.paragraph.medium.asRegular,
             ),
             52.boxHeight,
@@ -112,7 +112,7 @@ class _SignUpViewState extends State<_SignUpView> {
             ValueListenableBuilder<bool>(
               valueListenable: fieldsValidated,
               builder: (_, validated, __) {
-                return VanillaBuilder<SignUpVanilla, SignUpState>(
+                return VanillaBuilder<LoginVanilla, LoginState>(
                   buildWhen: (previous, current) =>
                       previous?.loading != current.loading,
                   builder: (context, state) {
@@ -123,23 +123,11 @@ class _SignUpViewState extends State<_SignUpView> {
                           : onJoinButtonPressed,
                       width: 354.w,
                       height: 50.h,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SizedBox.square(
-                            dimension: 24.l,
-                            child: SvgPicture.asset(
-                              VectorAssets.add,
-                            ),
-                          ),
-                          6.boxWidth,
-                          Text(
-                            'Join TaskSphere',
-                            style: context.buttonTextStyle.withColor(
-                              context.bgColors.$50,
-                            ),
-                          ),
-                        ],
+                      child: Text(
+                        'Login to my account',
+                        style: context.buttonTextStyle.withColor(
+                          context.bgColors.$50,
+                        ),
                       ),
                     );
                   },
@@ -176,8 +164,7 @@ class _SignUpViewState extends State<_SignUpView> {
 
   void onJoinButtonPressed() {
     FocusScope.of(context).unfocus();
-
-    context.read<SignUpVanilla>().signUp(
+    context.read<LoginVanilla>().login(
           email: email,
           password: password,
         );

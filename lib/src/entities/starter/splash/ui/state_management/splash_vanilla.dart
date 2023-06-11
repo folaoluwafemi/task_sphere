@@ -6,6 +6,6 @@ class SplashVanilla extends VanillaNotifier<AppRoute> {
 
   Future<void> navigateToNext() async {
     await Future.delayed(const Duration(milliseconds: 1500));
-    state = AppRoute.onboarding;
+    state = AppRoute.home;
   }
 }

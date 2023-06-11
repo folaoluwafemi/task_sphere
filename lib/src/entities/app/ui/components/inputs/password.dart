@@ -154,7 +154,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
             ),
           Padding(
             padding: EdgeInsets.only(
-              left: widget.prefixIconBuilder == null ? 0 : 30.w,
+              left: widget.prefixIconBuilder == null ? 0 : 40.w,
             ),
             child: textField,
           ),

@@ -3,6 +3,14 @@ part of 'extensions.dart';
 extension BuildContextExtension on BuildContext {
   MediaQueryData get mediaQuery => MediaQuery.of(this);
 
+  double get screenHeight => mediaQuery.size.height;
+
+  double get topScreenPadding => mediaQuery.viewPadding.top;
+
+  double get bottomScreenPadding => mediaQuery.viewPadding.bottom;
+
+  double get verticalPadding => mediaQuery.viewPadding.vertical;
+
   ThemeData get theme => Theme.of(this);
 
   ColorPalette get palette => theme.extension<ColorPalette>()!;

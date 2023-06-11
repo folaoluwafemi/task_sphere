@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_sphere/src/entities/app/ui/components/spade/spade.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
@@ -39,7 +40,7 @@ class _LoaderWidgetState extends State<LoaderWidget> {
               secondHalfColor: widget.color,
               head1Size: head2Size,
               head2Size: head1Size,
-              stemLength: 18,
+              stemLength: 12.w,
             );
           }
           value = (value - 0.5) * 2;
@@ -53,7 +54,7 @@ class _LoaderWidgetState extends State<LoaderWidget> {
             secondHalfColor: widget.color,
             head1Size: head1Size,
             head2Size: head2Size,
-            stemLength: 18,
+            stemLength: 12.w,
           );
         },
       ),

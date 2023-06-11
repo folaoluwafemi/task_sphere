@@ -10,14 +10,28 @@ part 'custom/login_or_load_widget.dart';
 
 part 'custom/sign_up_view.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  final ScrollController controller = ScrollController();
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return VanillaNotifierHolder<SignUpVanilla>(
       notifier: SignUpVanilla(),
       child: Scaffold(
+        backgroundColor: context.bgColors.$50,
         body: Stack(
           clipBehavior: Clip.none,
           children: [
@@ -36,6 +50,12 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ),
             ),
+            SafeArea(
+              top: false,
+              child: _SignUpView(
+                controller: controller,
+              ),
+            ),
             Padding(
               padding: EdgeInsets.only(left: 18.w, top: 65.h),
               child: VanillaBuilder<SignUpVanilla, SignUpState>(
@@ -43,23 +63,11 @@ class SignUpScreen extends StatelessWidget {
                     previous?.loading != current.loading,
                 builder: (context, state) {
                   return BackButton(
+                    filledColor: true,
                     onPressed: state.loading ? null : () => context.pop(),
                   );
                 },
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 18.w, top: 137.h),
-              child: SizedBox.square(
-                dimension: 113.h,
-                child: Image.asset(
-                  Assets.onboardingIllustration,
-                ),
-              ),
-            ),
-            const SafeArea(
-              top: false,
-              child: _SignUpView(),
             ),
           ],
         ),

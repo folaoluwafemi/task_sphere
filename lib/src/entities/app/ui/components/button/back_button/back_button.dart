@@ -5,10 +5,12 @@ import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 class BackButton extends StatelessWidget {
   final VoidCallback? onPressed;
+  final bool filledColor;
 
   const BackButton({
     Key? key,
     this.onPressed,
+    this.filledColor = false,
   }) : super(key: key);
 
   @override
@@ -28,6 +30,7 @@ class BackButton extends StatelessWidget {
               6.h,
             ),
             decoration: BoxDecoration(
+              color: filledColor ? context.bgColors.$50 : null,
               borderRadius: Ui.circularBorder(88.m),
               border: Border.all(
                 width: 1.w,

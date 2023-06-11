@@ -13,7 +13,7 @@ final ThemeData _lightTheme = ThemeData.light().copyWith(
     error: AppColors.redAlert,
     background: AppColors.backgroundGrey,
   ),
-  scaffoldBackgroundColor: AppColors.backgroundGrey,
+  scaffoldBackgroundColor: AppColors.backgroundWhite,
   canvasColor: AppColors.backgroundGrey,
   cardColor: AppColors.backgroundWhite,
   iconTheme: const IconThemeData(

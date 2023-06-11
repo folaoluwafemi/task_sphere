@@ -18,7 +18,7 @@ mixin VanillaUtilsMixin<State extends VanillaStateWithStatus>
     State? state,
     nullifyError = true,
   }) {
-    state = (state ?? this.state).copyWith(
+    this.state = (state ?? this.state).copyWith(
       success: true,
       loading: false,
       error: nullifyError ? null : (state ?? this.state).error,

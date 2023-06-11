@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:task_sphere/src/entities/entities_barrel.dart';
 import 'package:task_sphere/src/features/features_barrel.dart';
+import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 part 'domain/data/app_route.dart';
 
@@ -34,6 +36,7 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: AppRoute.onboarding.path,
       name: AppRoute.onboarding.name,
+      redirect: _NavigationRedirectsManager.authRedirect,
       builder: (context, state) => const OnboardingScreen(),
       routes: [
         GoRoute(
@@ -49,11 +52,22 @@ final GoRouter _router = GoRouter(
             GoRoute(
               path: AppRoute.enterName.path,
               name: AppRoute.enterName.name,
-              builder: (context, state) => const EnterNameScreen(),
+              builder: (context, state) {
+                final String? redirected = state.pathParameters['redirect'];
+                print('redirected $redirected');
+                return EnterNameScreen(
+                  redirect: (redirected?.trim()).isNotNullOrEmpty,
+                );
+              },
             ),
           ],
         ),
       ],
+    ),
+    GoRoute(
+      path: AppRoute.home.path,
+      name: AppRoute.home.name,
+      builder: (context, state) => const HomeScreen(),
     ),
   ],
 );

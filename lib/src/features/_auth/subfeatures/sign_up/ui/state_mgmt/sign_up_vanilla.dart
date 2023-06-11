@@ -27,11 +27,6 @@ class SignUpVanilla extends VanillaNotifier<SignUpState>
   }) async {
     notifyLoading();
     await Future.delayed(const Duration(seconds: 2));
-    state = state.copyWith(
-      loading: false,
-      success: true,
-    );
-    return;
 
     await _repo.register(
       email: email,

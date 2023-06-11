@@ -6,7 +6,15 @@ part 'private.dart';
 abstract final class UserManager {
   static final _UserVanillaNotifier _notifier = _UserVanillaNotifier(null);
 
-  static User? get user => _notifier.readData;
+  static User? get user {
+    if (_notifier.readData != null) return _notifier.readData!;
+
+    if (FirebaseAuth.instance.currentUser != null) {
+      updateUser(FirebaseAuth.instance.currentUser!);
+    }
+
+    return _notifier.readData;
+  }
 
   static User get requireUser {
     if (user != null) return user!;
