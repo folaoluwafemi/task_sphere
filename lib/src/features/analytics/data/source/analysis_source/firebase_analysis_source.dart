@@ -10,7 +10,7 @@ class FirebaseAnalysisSource
   }) : _analysisCollection = FirebaseFirestore.instance
             .collection(Keys.users)
             .doc(userId ?? UserManager.requireUser.uid)
-            .collection(Keys.tasks);
+            .collection(Keys.analysis);
 
   @override
   Future<void> createUserAnalyticsBucket(String userId) => handleError(
@@ -22,7 +22,7 @@ class FirebaseAnalysisSource
       action: AnalyticsAction.create,
       userId: userId,
     );
-    await _analysisCollection.doc(analysis.id).set([analysis.toMap()]);
+    await _analysisCollection.doc(analysis.id).set(analysis.toMap());
   }
 
   @override

@@ -10,10 +10,15 @@ class TaskSphereWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (context) {
-        return child;
-      },
+    return MediaQuery(
+      data: MediaQuery.of(context).copyWith(
+        textScaleFactor: 1,
+      ),
+      child: Builder(
+        builder: (context) {
+          return child;
+        },
+      ),
     );
   }
 }

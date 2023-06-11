@@ -6,7 +6,9 @@ import 'package:task_sphere/src/entities/app/ui/components/components_barrel.dar
 import 'package:task_sphere/src/features/_auth/subfeatures/sign_up/ui/state_mgmt/sign_up_vanilla.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
-part 'views/sign_up_view.dart';
+part 'custom/login_or_load_widget.dart';
+
+part 'custom/sign_up_view.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({Key? key}) : super(key: key);

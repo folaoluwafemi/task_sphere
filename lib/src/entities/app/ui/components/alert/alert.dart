@@ -45,42 +45,38 @@ class Alert extends StatelessWidget {
         size = null,
         super(key: key);
 
-  static Size _computeSizeFor(String text, TextStyle style) {
-    text = text.isEmpty ? ' ' : text;
+  static Size _computeHeight(
+    String text,
+    TextStyle style,
+    double width,
+  ) {
+    text = text.linesRemoved;
+
     final TextSpan span = TextSpan(
       text: text,
       style: style,
     );
+
     final TextPainter textPainter = TextPainter(
       text: span,
-      textDirection: TextDirection.ltr,
       textAlign: TextAlign.center,
-      textWidthBasis: TextWidthBasis.longestLine,
-    )..layout();
+      textDirection: TextDirection.ltr,
+      maxLines: 1,
+    );
+    textPainter.layout();
 
-    if (textPainter.minIntrinsicWidth == textPainter.maxIntrinsicWidth) {
-      return textPainter.size +
+    double lines = (textPainter.size.width / width).ceilToDouble();
+
+    if (textPainter.size.width > width) {
+      lines = lines + 1;
+      return Size(textPainter.size.width, textPainter.height * lines) +
           Offset(
-            38.w.doubled,
+            0,
             9.h.doubled,
           );
     }
 
-    final Size size = Size(
-      textPainter.width - 38.w.doubled,
-      textPainter.height - 9.h.doubled,
-    );
-
-    textPainter.layout(
-      minWidth: size.width,
-      maxWidth: size.width,
-    );
-
-    return textPainter.size +
-        Offset(
-          38.w.doubled,
-          9.h.doubled,
-        );
+    return Size(textPainter.width, textPainter.height * lines);
   }
 
   @override
@@ -88,7 +84,14 @@ class Alert extends StatelessWidget {
     final TextStyle style = context.primaryTypography.paragraph.small.asMedium
         .withColor(context.bgColors.$50);
 
-    final Size size = this.size ?? _computeSizeFor(text, style);
+    final Size size = this.size ??
+        _computeHeight(
+              text,
+              context.primaryTypography.paragraph.small.asMedium,
+              //60 here is the margin horizontal of the alert
+              context.mediaQuery.size.width - 60.w,
+            ) +
+            Offset(38.w.doubled, 9.h.doubled);
 
     return SizedBox(
       width: size.width,
@@ -108,7 +111,6 @@ class Alert extends StatelessWidget {
               ClipRRect(
                 borderRadius: Ui.circularBorder(8),
                 child: ClipPath(
-                  key: UniqueKey(),
                   clipper: AlertGutterClipper(
                     verticalHeight: 16.h,
                     depth: 2.w,
@@ -126,9 +128,10 @@ class Alert extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 38.w, vertical: 9.h),
+                // padding: EdgeInsets.symmetric(horizontal: 38.w, vertical: 9.h),
+                padding: EdgeInsets.symmetric(horizontal: 38.w),
                 child: Text(
-                  text,
+                  text.linesRemoved,
                   textAlign: TextAlign.center,
                   style: style,
                 ),

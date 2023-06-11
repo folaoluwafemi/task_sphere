@@ -7,7 +7,7 @@ abstract class Validators {
   }) {
     if (value?.isEmpty ?? true) {
       onValidated?.call(false);
-      return 'Field cannot be empty!';
+      return null;
     }
     onValidated?.call(true);
     return null;

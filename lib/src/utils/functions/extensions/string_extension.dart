@@ -47,6 +47,8 @@ extension StringExtension on String {
     return upperWords.join(' ');
   }
 
+  String get linesRemoved => removeAll('\n');
+
   List<String> get chars => split('');
 
   String withExcludeParam(String param) {

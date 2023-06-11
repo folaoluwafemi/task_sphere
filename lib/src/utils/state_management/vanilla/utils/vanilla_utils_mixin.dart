@@ -14,11 +14,14 @@ mixin VanillaUtilsMixin<State extends VanillaStateWithStatus>
     );
   }
 
-  void notifySuccess([nullifyError = true]) {
-    state = state.copyWith(
+  void notifySuccess({
+    State? state,
+    nullifyError = true,
+  }) {
+    state = (state ?? this.state).copyWith(
       success: true,
       loading: false,
-      error: nullifyError ? null : state.error,
+      error: nullifyError ? null : (state ?? this.state).error,
     );
   }
 }

@@ -20,8 +20,8 @@ class SignUpState extends VanillaStateWithStatus {
     return SignUpState(
       success: success ?? this.success,
       loading: loading ?? this.loading,
-      error: error ?? this.error,
       email: email ?? this.email,
+      error: error,
     );
   }
 

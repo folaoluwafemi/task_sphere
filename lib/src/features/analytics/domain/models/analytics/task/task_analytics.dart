@@ -28,7 +28,7 @@ final class TaskAnalytics extends Analytics {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'type': type,
+      'type': type.name,
       'data': taskId,
       'action': action.name,
       'timestamp': timestamp.toIso8601String(),

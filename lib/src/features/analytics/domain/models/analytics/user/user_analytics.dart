@@ -37,7 +37,7 @@ final class UserAnalytics extends Analytics {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'type': type,
+      'type': type.name,
       'data': userId,
       'action': action.name,
       'timestamp': timestamp.toIso8601String(),

@@ -26,11 +26,18 @@ class SignUpVanilla extends VanillaNotifier<SignUpState>
     required String password,
   }) async {
     notifyLoading();
+    await Future.delayed(const Duration(seconds: 2));
+    state = state.copyWith(
+      loading: false,
+      success: true,
+    );
+    return;
+
     await _repo.register(
       email: email,
       password: password,
     );
-    notifySuccess(state.copyWith(email: email));
+    notifySuccess(state: state.copyWith(email: email));
   }
 
   Future<void> updateName({
