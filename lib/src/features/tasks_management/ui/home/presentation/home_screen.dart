@@ -128,7 +128,6 @@ class _HomeScreenState extends State<HomeScreen> {
         child: ValueListenableBuilder<double>(
           valueListenable: drawerOffsetNotifier,
           builder: (_, drawerOffset, __) {
-            print('drawer offset: $drawerOffset');
             drawerOffset = drawerOffset.capBetween(0, maxDrawerOffset);
             return Stack(
               clipBehavior: Clip.none,

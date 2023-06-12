@@ -1,4 +1,4 @@
-import 'package:intl/intl.dart' as intl;
+import 'package:flutter/foundation.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 abstract final class UtilFunctions {
@@ -15,12 +15,10 @@ abstract final class UtilFunctions {
     } on FormatException {
       return DateTime.fromMillisecondsSinceEpoch(data as int);
     } catch (e, stackTrace) {
-      print(e);
       if (mustReturnDate) return DateTime(DateTime.now().year);
       throw Failure(message: '$e', stackTrace: stackTrace);
     }
   }
-
 
   static String formatDateWithShortMonth(DateTime date) {
     final String month = Values.shortMonths[date.month];
