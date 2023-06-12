@@ -11,6 +11,8 @@ enum AppRoute {
 
   ///
   home('/home', '/home'),
+  trash('/trash', '/home/trash'),
+  settings('/settings', '/home/settings'),
   ;
 
   final String path;

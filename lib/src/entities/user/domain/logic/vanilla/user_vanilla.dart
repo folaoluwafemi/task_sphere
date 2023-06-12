@@ -4,16 +4,16 @@ import 'package:task_sphere/src/utils/utils_barrel.dart';
 part 'private.dart';
 
 abstract final class UserManager {
-  static final _UserVanillaNotifier _notifier = _UserVanillaNotifier(null);
+  static final UserVanillaNotifier notifier = UserVanillaNotifier(null);
 
   static User? get user {
-    if (_notifier.readData != null) return _notifier.readData!;
+    if (notifier.readData != null) return notifier.readData!;
 
     if (FirebaseAuth.instance.currentUser != null) {
       updateUser(FirebaseAuth.instance.currentUser!);
     }
 
-    return _notifier.readData;
+    return notifier.readData;
   }
 
   static User get requireUser {
@@ -28,7 +28,7 @@ abstract final class UserManager {
     return currentUser;
   }
 
-  static void updateUser(User user) => _notifier.createData(user);
+  static void updateUser(User user) => notifier.createData(user);
 
-  static void deleteUser() => _notifier.deleteData();
+  static void deleteUser() => notifier.deleteData();
 }

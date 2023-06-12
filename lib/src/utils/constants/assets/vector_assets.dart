@@ -15,5 +15,12 @@ abstract final class VectorAssets {
   static const String arrowBack = 'assets/vectors/arrow_back.svg';
   static const String mail = 'assets/vectors/mail.svg';
   static const String password = 'assets/vectors/password.svg';
+  static const String fourDots = 'assets/vectors/four_dots.svg';
+  static const String closeX = 'assets/vectors/close_x.svg';
+  static const String nightMoon = 'assets/vectors/night_moon.svg';
+  static const String search = 'assets/vectors/search.svg';
+  static const String delete = 'assets/vectors/delete.svg';
+  static const String setting = 'assets/vectors/setting.svg';
+  static const String share = 'assets/vectors/share.svg';
   static const String _helper = 'assets/vectors/.svg';
 }

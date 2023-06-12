@@ -13,4 +13,14 @@ abstract final class Ui {
       BorderRadius.vertical(
         top: Radius.circular(radius),
       );
+
+  static BorderRadius circularBorderLeft(double radius) =>
+      BorderRadius.horizontal(
+        left: Radius.circular(radius),
+      );
+
+  static BorderRadius circularBorderRight(double radius) =>
+      BorderRadius.horizontal(
+        right: Radius.circular(radius),
+      );
 }

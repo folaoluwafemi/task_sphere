@@ -16,7 +16,7 @@ class _LoginOrLoadWidget extends StatelessWidget {
                 ? [
                     24.boxHeight,
                     InkWell(
-                      onTap: () => context.goNamed(AppRoute.login.name),
+                      onTap: () => context.goNamed(AppRoute.signUp.name),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [

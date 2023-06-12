@@ -35,17 +35,45 @@ extension AppSizerDoubleExtension on num {
     return other >= this - 2 && other < (this + 2);
   }
 
+  bool isAroundOrGreaterThan(num other, {double offBy = 2}) {
+    return this >= other + 2 || isAround(other, offBy: offBy);
+  }
+
+  bool isAroundOrLessThan(num other, {double offBy = 2}) {
+    return this <= other - 2 || isAround(other, offBy: offBy);
+  }
+
   double bezierRelativeHeight(double newHeight) {
     return this * (newHeight / 37.3.w);
+  }
+
+  String toOrdinal() {
+    final int number = toInt();
+    final int mod = number % 100;
+
+    if (mod >= 11 && mod <= 13) {
+      return '${number}th';
+    }
+
+    switch (number % 10) {
+      case 1:
+        return '${number}st';
+      case 2:
+        return '${number}nd';
+      case 3:
+        return '${number}rd';
+      default:
+        return '${number}th';
+    }
   }
 }
 
 extension GenericNumExtension<T extends num> on T {
-  T capAt(T cap) => this > cap ? cap : this;
+  T capAt(T cap) => this >= cap ? cap : this;
 
-  T capBetween(T min, T max) => this > max
+  T capBetween(T min, T max) => this >= max
       ? max
-      : this < min
+      : this <= min
           ? min
           : this;
 }
