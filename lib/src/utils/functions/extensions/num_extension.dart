@@ -9,6 +9,14 @@ extension AppSizerDoubleExtension on num {
 
   SizedBox get boxHeight => SizedBox(height: h);
 
+  SliverToBoxAdapter get sliverBoxWidth => SliverToBoxAdapter(
+        child: SizedBox(width: w),
+      );
+
+  SliverToBoxAdapter get sliverBoxHeight => SliverToBoxAdapter(
+        child: SizedBox(height: h),
+      );
+
   double get half => this / 2;
 
   double get sixth => this / 6;

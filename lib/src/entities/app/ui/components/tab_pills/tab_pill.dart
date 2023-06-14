@@ -22,42 +22,26 @@ enum TabPillState {
   inactive,
   active;
 
-  Color backgroundColor(BuildContext context) {
-    switch (this) {
-      case TabPillState.selected:
-        return context.neutralColors.$800;
-      case TabPillState.unselected:
-      case TabPillState.inactive:
-        return context.bgColors.$50;
-      case TabPillState.active:
-        return context.palette.bgAccent;
-    }
-  }
+  Color backgroundColor(BuildContext context) => switch (this) {
+        TabPillState.selected => context.neutralColors.$800,
+        TabPillState.unselected => context.bgColors.$50,
+        TabPillState.inactive => context.bgColors.$50,
+        TabPillState.active => context.palette.bgAccent,
+      };
 
-  Color borderColor(BuildContext context) {
-    switch (this) {
-      case TabPillState.selected:
-        return context.neutralColors.$800;
-      case TabPillState.unselected:
-        return context.neutralColors.$500;
-      case TabPillState.inactive:
-        return context.neutralColors.$400;
-      case TabPillState.active:
-        return context.palette.secondary;
-    }
-  }
+  Color borderColor(BuildContext context) => switch (this) {
+        TabPillState.selected => context.neutralColors.$800,
+        TabPillState.unselected => context.neutralColors.$500,
+        TabPillState.inactive => context.neutralColors.$400,
+        TabPillState.active => context.palette.secondary,
+      };
 
-  Color textColor(BuildContext context) {
-    switch (this) {
-      case TabPillState.selected:
-        return context.bgColors.$50;
-      case TabPillState.unselected:
-      case TabPillState.inactive:
-        return context.neutralColors.$600;
-      case TabPillState.active:
-        return context.neutralColors.$800;
-    }
-  }
+  Color textColor(BuildContext context) => switch (this) {
+        TabPillState.selected => context.bgColors.$50,
+        TabPillState.unselected => context.neutralColors.$600,
+        TabPillState.inactive => context.neutralColors.$600,
+        TabPillState.active => context.neutralColors.$800,
+      };
 }
 
 class TabPill extends StatelessWidget {

@@ -54,10 +54,14 @@ class LinkedSpadePainter extends CustomPainter {
 
     final double leftOffset = head1Size + firstStemLength;
 
+    final Path path = Path();
+
     canvas.drawLine(
       Offset(leftOffset, size.height.half - thickness.half),
-      Offset((head2Size * 1.5) + secondStemLength,
-          size.height.half - thickness.half),
+      Offset(
+        (head2Size * 1.5) + secondStemLength,
+        size.height.half - thickness.half,
+      ),
       paint,
     );
   }
@@ -70,10 +74,14 @@ class LinkedSpadePainter extends CustomPainter {
     final Path path = Path()
       ..moveTo(0, size.height.half - thickness.half)
       ..lineTo(
-          head1Size.half, size.height.half - (head1Size.half + thickness.half))
+        head1Size.half,
+        size.height.half - (head1Size.half + thickness.half),
+      )
       ..lineTo(head1Size, size.height.half - thickness.half)
       ..lineTo(
-          head1Size.half, size.height.half + (head1Size.half - thickness.half))
+        head1Size.half,
+        size.height.half + (head1Size.half - thickness.half),
+      )
       ..close();
 
     canvas.drawPath(path, paint);
@@ -92,11 +100,15 @@ class LinkedSpadePainter extends CustomPainter {
     final Path path = Path();
     path
       ..moveTo(leftOffset, size.height.half - thickness.half)
-      ..lineTo(leftOffset + head2Size.half,
-          size.height.half - (head2Size.half + thickness.half))
+      ..lineTo(
+        leftOffset + head2Size.half,
+        size.height.half - (head2Size.half + thickness.half),
+      )
       ..lineTo(leftOffset + head2Size, size.height.half - thickness.half)
-      ..lineTo(leftOffset + head2Size.half,
-          size.height.half + (head2Size.half - thickness.half));
+      ..lineTo(
+        leftOffset + head2Size.half,
+        size.height.half + (head2Size.half - thickness.half),
+      );
     canvas.drawPath(path, paint);
   }
 

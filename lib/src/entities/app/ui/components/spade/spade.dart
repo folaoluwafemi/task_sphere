@@ -38,10 +38,6 @@ class Spade extends StatelessWidget {
         stemLength = stemLength ?? 28.w,
         _type = _SpadePainterType.half;
 
-  asdfsd() {
-    ;
-  }
-
   Spade.linked({
     double? head1Size,
     double? head2Size,

@@ -1,12 +1,9 @@
+import 'package:task_sphere/src/features/tasks_management/task_management_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
-
-part 'components/priority.dart';
-
-part 'components/status.dart';
 
 part 'components/todo_descriptors.dart';
 
-class Todo {
+class Todo implements Comparable<Todo> {
   final String id;
   final String content;
   final Priority priority;
@@ -97,4 +94,7 @@ class Todo {
       updatedAt: UtilFunctions.parseDateTime(map['updatedAt'] as DateTime),
     );
   }
+
+  @override
+  int compareTo(Todo other) => createdAt.compareTo(other.createdAt);
 }

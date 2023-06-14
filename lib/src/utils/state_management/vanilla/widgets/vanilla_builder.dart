@@ -18,6 +18,8 @@ class VanillaBuilder<Notifier extends VanillaNotifier<S>, S>
 
 class _VanillaBuilderState<Notifier extends VanillaNotifier<T>, T>
     extends State<VanillaBuilder<Notifier, T>> {
+  Notifier? notifier;
+
   T? previousState;
 
   @override
@@ -27,7 +29,11 @@ class _VanillaBuilderState<Notifier extends VanillaNotifier<T>, T>
   }
 
   void startListening() {
-    context.read<Notifier>().addListener(listener);
+    if (notifier != null) {
+      notifier!.removeListener(listener);
+    }
+    notifier = context.read<Notifier>();
+    notifier?.addListener(listener);
   }
 
   /// listener is called whenever the state changes.
@@ -36,7 +42,7 @@ class _VanillaBuilderState<Notifier extends VanillaNotifier<T>, T>
   void listener() {
     if (!mounted) return;
 
-    final T currentState = context.read<Notifier>().state;
+    final T currentState = notifier!.state;
 
     if (currentState == previousState) return;
 
@@ -60,21 +66,21 @@ class _VanillaBuilderState<Notifier extends VanillaNotifier<T>, T>
   @override
   void didUpdateWidget(covariant VanillaBuilder<Notifier, T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    context.read<Notifier>().removeListener(listener);
+    notifier?.removeListener(listener);
     startListening();
   }
 
   @override
-  void deactivate() {
-    context.read<Notifier>().removeListener(listener);
-    super.deactivate();
+  void dispose() {
+    notifier?.removeListener(listener);
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return widget.builder(
       context,
-      previousState ?? context.read<Notifier>().state,
+      previousState ?? notifier!.state,
     );
   }
 }

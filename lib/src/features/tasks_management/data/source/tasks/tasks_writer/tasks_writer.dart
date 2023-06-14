@@ -1,9 +1,9 @@
-part of 'task_management_source_interface.dart';
+part of 'task_writer_interface.dart';
 
-class TaskSource with FirebaseErrorHandlerMixin implements TaskSourceInterface {
+class TaskWriter with FirebaseErrorHandlerMixin implements TaskWriterInterface {
   final CollectionReference _tasks;
 
-  TaskSource({
+  TaskWriter({
     required String? userId,
   }) : _tasks = FirebaseFirestore.instance
             .collection(Keys.users)
@@ -22,16 +22,6 @@ class TaskSource with FirebaseErrorHandlerMixin implements TaskSourceInterface {
 
   Future<void> _deleteTask(String taskId) async {
     await _tasks.doc(taskId).delete();
-  }
-
-  @override
-  Future<List<Task>> readTasks() => handleError(_readTasks());
-
-  Future<List<Task>> _readTasks() async {
-    final QuerySnapshot snapshot = await _tasks.get();
-    return snapshot.docs
-        .map((e) => Task.fromMap((e.data() as Map).cast()))
-        .toList();
   }
 
   @override

@@ -2,13 +2,13 @@ import 'package:flutter/widgets.dart';
 import 'package:task_sphere/src/entities/app/ui/components/components_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
-class TaskCard extends StatelessWidget {
+class TaskCardContainer extends StatelessWidget {
   final Widget child;
   final double? width;
   final double? height;
   final double? gutterWidth;
 
-  const TaskCard({
+  const TaskCardContainer({
     Key? key,
     required this.child,
     this.width,

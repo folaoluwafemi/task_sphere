@@ -4,12 +4,10 @@ import 'package:task_sphere/src/entities/user/user_barrel.dart';
 import 'package:task_sphere/src/features/tasks_management/task_management_barrel.dart';
 import 'package:task_sphere/src/utils/constants/constants_barrel.dart';
 
-part 'tasks_source.dart';
+part 'tasks_writer.dart';
 
-abstract interface class TaskSourceInterface {
+abstract interface class TaskWriterInterface {
   Future<void> createTask(Task task);
-
-  Future<List<Task>> readTasks();
 
   Future<void> updateTask(Task task);
 

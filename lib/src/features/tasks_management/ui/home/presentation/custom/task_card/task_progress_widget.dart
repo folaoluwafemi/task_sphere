@@ -1,16 +1,9 @@
-import 'dart:math';
+part of 'task_card.dart';
 
-import 'package:flutter/widgets.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:task_sphere/src/features/tasks_management/task_management_barrel.dart';
-import 'package:task_sphere/src/utils/utils_barrel.dart';
-
-part 'progress_painter.dart';
-
-class TaskCard extends StatelessWidget {
+class TaskProgressWidget extends StatelessWidget {
   final Task task;
 
-  const TaskCard({
+  const TaskProgressWidget({
     Key? key,
     required this.task,
   }) : super(key: key);
@@ -20,15 +13,15 @@ class TaskCard extends StatelessWidget {
     return SizedBox.square(
       dimension: 50.l,
       child: Stack(
-        alignment: Alignment.center,
+        alignment: Alignment.topCenter,
         children: [
           SizedBox.square(
             dimension: 50.l,
             child: CustomPaint(
               painter: TaskProgressPainter(
                 context: context,
-                percentage: task.progressPercentage + 30,
-                progressColor: switch (task.progressPercentage + 30) {
+                percentage: task.progressPercentage,
+                progressColor: switch (task.progressPercentage) {
                   < 25 => context.alertColors.error,
                   < 50 => context.alertColors.info,
                   _ => context.alertColors.success,
@@ -38,7 +31,7 @@ class TaskCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 10.h),
+            padding: EdgeInsets.only(top: 10.h),
             child: Text.rich(
               TextSpan(
                 text: task.progressPercentage.ceil().toString(),

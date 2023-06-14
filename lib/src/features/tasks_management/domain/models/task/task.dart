@@ -1,7 +1,7 @@
 import 'package:task_sphere/src/features/tasks_management/task_management_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
-class Task {
+class Task implements Comparable<Task> {
   final String id;
   final String title;
   final String description;
@@ -15,6 +15,19 @@ class Task {
     required this.todos,
     required this.createdAt,
   });
+
+  bool get isCompleted => todos.every((todo) => todo.status == Status.done);
+
+  bool get isTodo => !isCompleted;
+
+  bool get isCanceled => todos.every((todo) => todo.status == Status.canceled);
+
+  double get progressPercentage {
+    final Iterable<Todo> doneTodos = todos.where((todo) {
+      return todo.status == Status.done;
+    });
+    return (doneTodos.length / todos.length) * 100;
+  }
 
   Task.create({
     required this.title,
@@ -46,4 +59,7 @@ class Task {
       'createdAt': createdAt.toIso8601String(),
     };
   }
+
+  @override
+  int compareTo(Task other) => createdAt.compareTo(other.createdAt);
 }

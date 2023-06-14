@@ -6,4 +6,5 @@ abstract final class Keys {
   static const String id = 'id';
   static const String priority = 'priority';
   static const String status = 'status';
+  static const String createdAt = 'createdAt';
 }

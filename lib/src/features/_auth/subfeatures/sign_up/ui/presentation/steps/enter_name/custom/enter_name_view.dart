@@ -71,7 +71,11 @@ class _EnterNameViewState extends State<_EnterNameView> {
               },
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) {
-                if (value == null || value.words.length != 2) {
+                if (value == null ||
+                    (value.words.length != 2 &&
+                        value.words.every((element) {
+                          return element.isNotEmpty;
+                        }))) {
                   changeFieldsValidated(false);
                   return null;
                 }

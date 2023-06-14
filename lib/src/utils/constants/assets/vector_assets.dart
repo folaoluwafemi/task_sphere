@@ -22,5 +22,11 @@ abstract final class VectorAssets {
   static const String delete = 'assets/vectors/delete.svg';
   static const String setting = 'assets/vectors/setting.svg';
   static const String share = 'assets/vectors/share.svg';
+  static const String priorityLow = 'assets/vectors/priority_low.svg';
+  static const String priorityMedium = 'assets/vectors/priority_medium.svg';
+  static const String priorityHigh = 'assets/vectors/priority_high.svg';
+  static const String todo = 'assets/vectors/todo.svg';
+  static const String done = 'assets/vectors/done.svg';
+  static const String canceled = 'assets/vectors/canceled.svg';
   static const String _helper = 'assets/vectors/.svg';
 }

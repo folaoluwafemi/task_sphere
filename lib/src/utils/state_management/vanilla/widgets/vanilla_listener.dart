@@ -20,6 +20,7 @@ class VanillaListener<Notifier extends VanillaNotifier<S>, S>
 
 class _VanillaListenerState<Notifier extends VanillaNotifier<S>, S>
     extends State<VanillaListener<Notifier, S>> {
+  Notifier? notifier;
   S? previousState;
 
   @override
@@ -29,7 +30,11 @@ class _VanillaListenerState<Notifier extends VanillaNotifier<S>, S>
   }
 
   void startListening() {
-    context.read<Notifier>().addListener(listener);
+    if (notifier != null) {
+      notifier!.removeListener(listener);
+    }
+    notifier = context.read<Notifier>();
+    notifier?.addListener(listener);
   }
 
   /// listener is called whenever the state changes.
@@ -37,7 +42,7 @@ class _VanillaListenerState<Notifier extends VanillaNotifier<S>, S>
   /// If [listenWhen] is provided, it is used to check if listener should be called.
   void listener() {
     if (!mounted) return;
-    final S currentState = context.read<Notifier>().state;
+    final S currentState = notifier!.state;
 
     if (currentState == previousState) return;
 
@@ -57,8 +62,14 @@ class _VanillaListenerState<Notifier extends VanillaNotifier<S>, S>
   @override
   void didUpdateWidget(covariant VanillaListener<Notifier, S> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    context.read<Notifier>().removeListener(listener);
+    notifier?.removeListener(listener);
     startListening();
+  }
+
+  @override
+  void dispose() {
+    notifier?.removeListener(listener);
+    super.dispose();
   }
 
   @override
