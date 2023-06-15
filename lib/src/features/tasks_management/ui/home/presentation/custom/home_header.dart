@@ -13,9 +13,16 @@ class HomeHeader extends SliverPersistentHeaderDelegate {
       margin: EdgeInsets.symmetric(horizontal: 18.w),
       color: context.bgColors.$100,
       child: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 200),
+        transitionBuilder: (child, animation) => FadeTransition(
+          opacity: animation,
+          child: child,
+        ),
+        duration: const Duration(milliseconds: 500),
         child: shrinkOffset > 0
-            ? const TasksFilterWidget()
+            ? const Align(
+                alignment: Alignment.centerLeft,
+                child: TasksFilterWidget(),
+              )
             : Align(
                 alignment: Alignment.centerLeft,
                 child: Text(

@@ -28,5 +28,6 @@ abstract final class VectorAssets {
   static const String todo = 'assets/vectors/todo.svg';
   static const String done = 'assets/vectors/done.svg';
   static const String canceled = 'assets/vectors/canceled.svg';
+  static const String noTasksGhost = 'assets/vectors/no_tasks_ghost.svg';
   static const String _helper = 'assets/vectors/.svg';
 }

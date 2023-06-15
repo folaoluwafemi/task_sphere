@@ -18,6 +18,8 @@ part 'custom/add_task_floating_button.dart';
 
 part 'custom/drawer.dart';
 
+part 'custom/empty_tasks_widget.dart';
+
 part 'custom/home_header.dart';
 
 part 'custom/home_view.dart';

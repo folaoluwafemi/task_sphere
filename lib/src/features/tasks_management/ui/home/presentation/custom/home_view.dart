@@ -45,32 +45,45 @@ class _HomeView extends StatelessWidget {
                   ),
                 ],
               ),
-              MultiSliver(
-                pushPinnedChildren: true,
-                children: [
-                  18.sliverBoxHeight,
-                  SliverPersistentHeader(
-                    floating: false,
-                    pinned: true,
-                    delegate: HomeHeader(),
-                  ),
-                  SliverClip(
-                    child: MultiSliver(
-                      children: [
-                        SliverPadding(
-                          padding: EdgeInsets.symmetric(horizontal: 18.w),
-                          sliver: SliverList.separated(
-                            itemCount: FakeData.tasks.length,
-                            separatorBuilder: (_, __) => 16.boxHeight,
-                            itemBuilder: (_, index) => TaskCard(
-                              task: FakeData.tasks[index],
+              VanillaBuilder<HomeVanilla, HomeState>(
+                buildWhen: (previous, current) =>
+                    previous?.currentTasks != current.currentTasks ||
+                    previous?.currentTasks.length !=
+                        current.currentTasks.length,
+                builder: (context, state) {
+                  if (state.allTasks.isEmpty) {
+                    return const SliverToBoxAdapter(
+                      child: EmptyTasksWidget(),
+                    );
+                  }
+                  return MultiSliver(
+                    pushPinnedChildren: true,
+                    children: [
+                      18.sliverBoxHeight,
+                      SliverPersistentHeader(
+                        floating: false,
+                        pinned: true,
+                        delegate: HomeHeader(),
+                      ),
+                      SliverClip(
+                        child: MultiSliver(
+                          children: [
+                            SliverPadding(
+                              padding: EdgeInsets.symmetric(horizontal: 18.w),
+                              sliver: SliverList.separated(
+                                itemCount: FakeData.tasks.length,
+                                separatorBuilder: (_, __) => 16.boxHeight,
+                                itemBuilder: (_, index) => TaskCard(
+                                  task: FakeData.tasks[index],
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
-                ],
+                      ),
+                    ],
+                  );
+                },
               ),
             ],
           ),
@@ -86,4 +99,3 @@ class _HomeView extends StatelessWidget {
     );
   }
 }
-

@@ -9,6 +9,7 @@ class TasksFilterWidget extends StatelessWidget {
       builder: (context, state) {
         final TasksFilter current = state.filter;
         return Stack(
+          alignment: Alignment.centerLeft,
           children: [
             Container(
               color: context.bgColors.$100,
