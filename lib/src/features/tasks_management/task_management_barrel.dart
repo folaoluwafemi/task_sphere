@@ -1,3 +1,4 @@
+export 'package:task_sphere/src/features/tasks_management/data/repo/tasks_repo_interface.dart';
 export 'package:task_sphere/src/features/tasks_management/data/source/tasks/tasks_reader/tasks_reader_interface.dart';
 export 'package:task_sphere/src/features/tasks_management/data/source/tasks/tasks_writer/task_writer_interface.dart';
 export 'package:task_sphere/src/features/tasks_management/domain/fakes/fake_data.dart';
@@ -5,5 +6,6 @@ export 'package:task_sphere/src/features/tasks_management/domain/models/task/tas
 export 'package:task_sphere/src/features/tasks_management/domain/models/todo/components/priority/priority.dart';
 export 'package:task_sphere/src/features/tasks_management/domain/models/todo/components/status/status.dart';
 export 'package:task_sphere/src/features/tasks_management/domain/models/todo/todo.dart';
+export 'package:task_sphere/src/features/tasks_management/subfeatures/manage_task/ui/presentation/task_screen.dart';
 export 'package:task_sphere/src/features/tasks_management/ui/home/presentation/home_screen.dart';
 export 'package:task_sphere/src/features/tasks_management/ui/home/state_mgmt/home_vanilla.dart';

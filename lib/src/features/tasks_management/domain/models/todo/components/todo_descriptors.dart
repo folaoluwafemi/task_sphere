@@ -4,7 +4,16 @@ enum TodoDescriptor {
   content,
   priority,
   status,
-  deadline;
+  all;
+
+  dynamic dataFromTodo(Todo todo) {
+    return switch (this) {
+      content => todo.content,
+      priority => todo.priority,
+      status => todo.status,
+      all => todo.id,
+    };
+  }
 
   String contentFrom(String value) {
     assert(
@@ -32,13 +41,13 @@ enum TodoDescriptor {
     return Status.fromName(value);
   }
 
-  DateTime deadlineFrom(String value) {
+  String idFrom(String value) {
     assert(
-      this == deadline,
+      this == all,
       'cannot generate priority from wrong descriptor',
     );
 
-    return UtilFunctions.parseDateTime(value);
+    return value.toString();
   }
 
   dynamic dataFromValue(String value) {
@@ -46,7 +55,7 @@ enum TodoDescriptor {
       content => contentFrom(value),
       priority => priorityFrom(value),
       status => statusFrom(value),
-      deadline => deadlineFrom(value),
+      all => idFrom(value),
     };
   }
 
@@ -56,7 +65,7 @@ enum TodoDescriptor {
       'content' => content,
       'priority' => priority,
       'status' => status,
-      'deadline' => deadline,
+      'all' => all,
       _ => throw UnsupportedError('$name is not supported'),
     };
   }

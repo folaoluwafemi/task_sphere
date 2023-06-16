@@ -1,0 +1,46 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart' hide ReorderableList;
+import 'package:flutter_reorderable_list/flutter_reorderable_list.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sliver_tools/sliver_tools.dart';
+import 'package:task_sphere/src/entities/app/ui/components/components_barrel.dart';
+import 'package:task_sphere/src/features/tasks_management/task_management_barrel.dart';
+import 'package:task_sphere/src/utils/utils_barrel.dart';
+
+part 'custom/close_button.dart';
+
+part 'custom/descriptor_modals.dart';
+
+part 'custom/descriptor_picker_dialog.dart';
+
+part 'custom/right_item_widget.dart';
+
+part 'custom/task_view.dart';
+
+part 'custom/title_fields.dart';
+
+part 'custom/title_view.dart';
+
+part 'custom/todo_view.dart';
+
+part 'custom/todo_widget.dart';
+
+class TaskScreen extends StatelessWidget {
+  const TaskScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 0,
+        elevation: 0,
+        backgroundColor: context.bgColors.$50,
+      ),
+      backgroundColor: context.bgColors.$100,
+      body: const SafeArea(child: _TaskView()),
+    );
+  }
+}

@@ -16,6 +16,23 @@ class Task implements Comparable<Task> {
     required this.createdAt,
   });
 
+  Task.create({
+    required this.title,
+    required this.description,
+    required this.todos,
+    required this.createdAt,
+  }) : id = UtilFunctions.generateId();
+
+  Task.empty()
+      : this.create(
+          title: '',
+          description: '',
+          todos: [],
+          createdAt: DateTime.now(),
+        );
+
+  bool get isEmpty => title.isEmpty && description.isEmpty && todos.isEmpty;
+
   bool get isCompleted => todos.every((todo) => todo.status == Status.done);
 
   bool get isTodo => !isCompleted;
@@ -28,13 +45,6 @@ class Task implements Comparable<Task> {
     });
     return (doneTodos.length / todos.length) * 100;
   }
-
-  Task.create({
-    required this.title,
-    required this.description,
-    required this.todos,
-    required this.createdAt,
-  }) : id = UtilFunctions.generateId();
 
   DateTime get updatedAt => todos.reduce((value, element) {
         return value.updatedAt.isAfter(element.updatedAt) ? value : element;
@@ -60,6 +70,22 @@ class Task implements Comparable<Task> {
     };
   }
 
+  Task copyWith({
+    String? id,
+    String? title,
+    String? description,
+    List<Todo>? todos,
+    DateTime? createdAt,
+  }) {
+    return Task(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      todos: todos ?? this.todos,
+      createdAt: createdAt ?? this.createdAt,
+    );
+  }
+
   @override
-  int compareTo(Task other) => createdAt.compareTo(other.createdAt);
+  int compareTo(Task other) => other.updatedAt.compareTo(updatedAt);
 }

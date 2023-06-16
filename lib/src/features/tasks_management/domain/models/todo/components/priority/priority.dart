@@ -20,6 +20,10 @@ enum Priority {
       ? const SizedBox.shrink()
       : _PriorityWidget.small(priority: this);
 
+  Widget widgetWithDimension(double dimension) => this == none
+      ? const SizedBox.shrink()
+      : _PriorityWidget.customSize(size: dimension, priority: this);
+
   Widget get widgetLarge => this == none
       ? const SizedBox.shrink()
       : _PriorityWidget.large(priority: this);

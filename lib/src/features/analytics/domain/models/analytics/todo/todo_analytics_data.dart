@@ -10,13 +10,17 @@ class TodoAnalyticsData {
     required this.value,
   });
 
+  const TodoAnalyticsData.wholeTodo({
+    required String id,
+  })  : type = TodoDescriptor.all,
+        value = id;
+
   String _getSerializerValue() {
     final dynamic data = type.dataFromValue(value);
 
     return switch (data) {
       final String temp => temp,
       final Enum temp => temp.name,
-      final DateTime temp => temp.toIso8601String(),
       _ => throw Failure(message: ErrorMessages.invalidType),
     };
   }

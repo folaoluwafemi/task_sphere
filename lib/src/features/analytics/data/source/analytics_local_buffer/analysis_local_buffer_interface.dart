@@ -7,7 +7,7 @@ part 'analysis_local_buffer.dart';
 abstract interface class AnalyticsLocalBufferInterface {
   Future<void> saveAnalysis(Analysis analysis);
 
-  Future<void> pushAnalytics(Analytics analytics);
+  Future<void> push(Analytics analytics);
 
   Analysis getAnalysis();
 

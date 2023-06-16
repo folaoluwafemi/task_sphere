@@ -13,6 +13,14 @@ extension ListExtension<T> on List<T> {
     return nextList.every(test);
   }
 
+  List<E> mapWithIndex<E>(E Function(int index, T element) test) {
+    final List<E> nextList = [];
+    for (int i = 0; i < length; i++) {
+      nextList.add(test(i, this[i]));
+    }
+    return nextList;
+  }
+
   bool everyBetween(int start, int end, bool Function(T element) test) {
     final List<T> nextList = sublist(start, end);
     return nextList.every(test);

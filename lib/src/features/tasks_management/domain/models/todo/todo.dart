@@ -20,6 +20,16 @@ class Todo implements Comparable<Todo> {
     required this.updatedAt,
   });
 
+  Todo.create({
+    required this.content,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  })  : priority = Priority.low,
+        status = Status.todo,
+        createdAt = updatedAt ?? DateTime.now(),
+        updatedAt = updatedAt ?? DateTime.now(),
+        id = UtilFunctions.generateId();
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -48,7 +58,6 @@ class Todo implements Comparable<Todo> {
     Status? status,
     DateTime? createdAt,
     DateTime? updatedAt,
-    DateTime? deadline,
   }) {
     return Todo(
       id: id ?? this.id,
@@ -56,7 +65,7 @@ class Todo implements Comparable<Todo> {
       priority: priority ?? this.priority,
       status: status ?? this.status,
       createdAt: createdAt ?? this.createdAt,
-      updatedAt: updatedAt ?? this.updatedAt,
+      updatedAt: updatedAt ?? DateTime.now(),
     );
   }
 
@@ -96,5 +105,7 @@ class Todo implements Comparable<Todo> {
   }
 
   @override
-  int compareTo(Todo other) => createdAt.compareTo(other.createdAt);
+  int compareTo(Todo other) {
+    return other.updatedAt.compareTo(updatedAt);
+  }
 }

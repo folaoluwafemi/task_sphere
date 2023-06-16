@@ -3,9 +3,8 @@ part of 'task_writer_interface.dart';
 class TaskWriter with FirebaseErrorHandlerMixin implements TaskWriterInterface {
   final CollectionReference _tasks;
 
-  TaskWriter({
-    required String? userId,
-  }) : _tasks = FirebaseFirestore.instance
+  TaskWriter({String? userId})
+      : _tasks = FirebaseFirestore.instance
             .collection(Keys.users)
             .doc(userId ?? UserManager.requireUser.uid)
             .collection(Keys.tasks);

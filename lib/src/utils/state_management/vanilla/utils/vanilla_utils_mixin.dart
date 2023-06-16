@@ -7,6 +7,7 @@ mixin VanillaUtilsMixin<State extends VanillaStateWithStatus>
   }
 
   void notifyLoading([nullifyError = true]) {
+    if (state.loading) return;
     state = state.copyWith(
       loading: true,
       success: false,

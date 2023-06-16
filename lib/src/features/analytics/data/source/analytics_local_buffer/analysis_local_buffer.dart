@@ -12,12 +12,12 @@ class AnalysisLocalBuffer
   AnalysisLocalBuffer.new_({
     Box<List>? box,
   }) : _box = Hive.box(StorageKeys.analysis.box) {
-    instance = this;
+    _instance = this;
   }
 
-  static AnalysisLocalBuffer instance = AnalysisLocalBuffer._();
+  static AnalysisLocalBuffer _instance = AnalysisLocalBuffer._();
 
-  factory AnalysisLocalBuffer() => instance;
+  factory AnalysisLocalBuffer() => _instance;
 
   @override
   Future<void> clearBuffer() => handleError(_clearBuffer());
@@ -39,7 +39,7 @@ class AnalysisLocalBuffer
   }
 
   @override
-  Future<void> pushAnalytics(Analytics analytics) => handleError(
+  Future<void> push(Analytics analytics) => handleError(
         _pushAnalytics(analytics),
       );
 

@@ -2,25 +2,25 @@ import 'package:task_sphere/src/features/analytics/domain/analytics_domain_barre
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 final class TodoAnalytics extends Analytics {
-  final TodoAnalyticsData? updateData;
+  final TodoAnalyticsData? analyticsData;
 
   const TodoAnalytics({
     required super.id,
-    required this.updateData,
+    required this.analyticsData,
     required super.action,
     required super.timestamp,
   }) : super(
           type: AnalyticsDataType.todo,
-          data: updateData,
+          data: analyticsData,
         );
 
   TodoAnalytics.create({
-    required this.updateData,
+    required this.analyticsData,
     required super.action,
   }) : super(
           id: UtilFunctions.generateId(),
           type: AnalyticsDataType.todo,
-          data: updateData,
+          data: analyticsData,
           timestamp: DateTime.now(),
         );
 
@@ -29,7 +29,7 @@ final class TodoAnalytics extends Analytics {
     return {
       'id': id,
       'type': type.name,
-      'data': updateData?.toMap(),
+      'data': analyticsData?.toMap(),
       'action': action.name,
       'timestamp': timestamp.toIso8601String(),
     };
@@ -38,7 +38,7 @@ final class TodoAnalytics extends Analytics {
   factory TodoAnalytics.fromMap(Map<String, dynamic> map) {
     return TodoAnalytics(
       id: map['id'],
-      updateData: TodoAnalyticsData.fromMap(map['data']),
+      analyticsData: TodoAnalyticsData.fromMap(map['data']),
       action: AnalyticsAction.fromName(map['action']),
       timestamp: UtilFunctions.parseDateTime(map['timestamp']),
     );

@@ -17,7 +17,7 @@ class AddTaskFloatingButton extends StatelessWidget {
         return Visibility(
           visible: showing,
           child: SmallButton(
-            onPressed: () {},
+            onPressed: () => context.goNamed(AppRoute.task.name),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [

@@ -1,12 +1,22 @@
 import 'dart:math';
 
 import 'package:task_sphere/src/features/tasks_management/task_management_barrel.dart';
+import 'package:task_sphere/src/utils/functions/extensions/extensions.dart';
 import 'package:task_sphere/src/utils/functions/util_functions.dart';
 
 abstract final class FakeData {
   static final List<Task> tasks = List.generate(
     4,
     (index) => generateTask(DateTime.now()),
+  );
+
+  static final List<Todo> todos = List.generate(
+    4,
+    (index) => generateTodo(
+      index: index,
+      createdAt: DateTime.now(),
+      content: 'Balablu balablu balablu balablu balablu',
+    ),
   );
 
   static Task generateTask(DateTime createdAt) {
@@ -19,6 +29,7 @@ abstract final class FakeData {
       todos: List.generate(
         3,
         (index) => generateTodo(
+          index: index,
           createdAt: createdAt,
           content: 'Create user flows for basic usage of finding services',
         ),
@@ -27,16 +38,19 @@ abstract final class FakeData {
   }
 
   static Todo generateTodo({
+    required int index,
     required DateTime createdAt,
     required String content,
   }) {
+    final DateTime updatedAt =
+        createdAt.copyWith(minute: 59, hour: -1).copySubtract(minutes: index);
     return Todo(
-      id: UtilFunctions.generateId(),
+      id: updatedAt.millisecondsSinceEpoch.toString(),
       content: content,
       createdAt: createdAt,
       priority: Random().nextBool() ? Priority.medium : Priority.high,
       status: Random().nextBool() ? Status.todo : Status.done,
-      updatedAt: createdAt,
+      updatedAt: updatedAt,
     );
   }
 }
