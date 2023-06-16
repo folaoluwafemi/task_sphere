@@ -7,8 +7,8 @@ class _TopContents extends StatelessWidget {
   const _TopContents({
     required this.drawerOffsetNotifier,
     required this.showDrawer,
-    super.key,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

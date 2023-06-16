@@ -7,8 +7,8 @@ class _TitleFields extends StatelessWidget {
   const _TitleFields({
     required this.onTitleChanged,
     required this.onDescriptionChanged,
-    super.key,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

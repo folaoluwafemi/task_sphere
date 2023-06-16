@@ -14,7 +14,6 @@ class ModalCardClipper extends CustomClipper<Path> {
   })  : gutterHeight = gutterHeight ?? 44.h,
         gutterThickness = gutterThickness ?? 4.w;
 
-
   @override
   Path getClip(Size size) {
     final Path path = Path();

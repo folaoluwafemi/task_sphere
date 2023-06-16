@@ -93,7 +93,7 @@ class SmallButtonGutterClipper extends CustomClipper<Path> {
 
     final Offset startFirstCubicControlPoint = Offset(
       positiveCurveStart.dx,
-      positiveCurveStart.dy - radius.percent(150) ,
+      positiveCurveStart.dy - radius.percent(150),
     );
 
     final Offset startSecondCubicControlPoint = Offset(

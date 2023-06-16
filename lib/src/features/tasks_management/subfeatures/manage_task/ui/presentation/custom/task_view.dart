@@ -60,6 +60,7 @@ class _TaskViewState extends State<_TaskView> {
       todos[newIndex] = newTodo;
       todos.sort();
     });
+    context.read<TaskVanilla>().updateTodos(todos);
   }
 
   void onTaskTitleChanged(String value) {}
@@ -74,15 +75,22 @@ class _TaskViewState extends State<_TaskView> {
       child: CustomScrollView(
         physics: const ClampingScrollPhysics(),
         slivers: [
-          MultiSliver(
+          SliverStack(
             children: [
-              SliverToBoxAdapter(
-                child: _TitleView(
-                  onTitleChanged: onTaskTitleChanged,
-                  onDescriptionChanged: onTaskDescriptionChanged,
-                ),
+              MultiSliver(
+                children: [
+                  SliverToBoxAdapter(
+                    child: _TitleView(
+                      onTitleChanged: onTaskTitleChanged,
+                      onDescriptionChanged: onTaskDescriptionChanged,
+                    ),
+                  ),
+                  _TodoView(todos: todos),
+                ],
               ),
-              _TodoView(todos: todos),
+              const SliverPinnedHeader(
+                child: _PinnedHeader(),
+              ),
             ],
           ),
         ],

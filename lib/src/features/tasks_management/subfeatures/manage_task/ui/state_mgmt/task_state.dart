@@ -12,6 +12,10 @@ class TaskState extends VanillaStateWithStatus {
   })  : isNew = task == null,
         task = task ?? Task.empty();
 
+  TaskState withTask(Task task) => copyWith(
+        task: task,
+      );
+
   @override
   TaskState copyWith({
     bool? success,

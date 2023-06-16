@@ -55,8 +55,6 @@ abstract final class AppColors {
   /// #32A680 alert/green
   static const Color greenAlert = Color(0xFF32A680);
 
-
-
   ///Foreign
   /// #F44336 red
   static const Color red = Color(0xFFF44336);

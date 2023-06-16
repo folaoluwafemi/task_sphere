@@ -71,7 +71,9 @@ final GoRouter _router = GoRouter(
         GoRoute(
           path: AppRoute.task.path,
           name: AppRoute.task.name,
-          builder: (context, state) => const TaskScreen(),
+          builder: (context, state) => TaskScreen(
+            task: state.extra as Task?,
+          ),
         ),
       ],
     ),

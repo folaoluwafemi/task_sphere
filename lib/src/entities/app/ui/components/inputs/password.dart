@@ -165,11 +165,13 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
               icon: ValueListenableBuilder<bool>(
                 valueListenable: obscureTextNotifier,
                 builder: (_, obscuring, ___) {
-                  return SvgPicture.asset(
-                    obscuring
-                        ? VectorAssets.visibility
-                        : VectorAssets.visibilityOff,
+                  return SvgDecorator(
                     color: context.neutralColors.$500,
+                    child: SvgPicture.asset(
+                      obscuring
+                          ? VectorAssets.visibility
+                          : VectorAssets.visibilityOff,
+                    ),
                   );
                 },
               ),

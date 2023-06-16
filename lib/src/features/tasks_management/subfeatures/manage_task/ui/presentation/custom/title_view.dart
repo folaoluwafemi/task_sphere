@@ -7,8 +7,8 @@ class _TitleView extends StatelessWidget {
   const _TitleView({
     required this.onTitleChanged,
     required this.onDescriptionChanged,
-    super.key,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +17,7 @@ class _TitleView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const _CloseButton(),
-          22.boxHeight,
+          76.boxHeight,
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 18.w),
             child: _TitleFields(

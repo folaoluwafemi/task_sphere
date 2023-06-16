@@ -25,6 +25,8 @@ class _TodoViewState extends State<_TodoView> {
     todos.removeAt(index);
     if (deleted) return setState(() => todos.sort());
     setState(() => todos.insert(index, todo_));
+
+    context.read<TaskVanilla>().updateTodo(todo_);
   }
 
   void onNewTodoAdded(Todo todo) {
@@ -33,6 +35,8 @@ class _TodoViewState extends State<_TodoView> {
         ..add(todo)
         ..sort();
     });
+
+    context.read<TaskVanilla>().addTodo(todo);
   }
 
   @override

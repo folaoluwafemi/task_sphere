@@ -7,7 +7,7 @@ class AnalysisLocalBuffer
 
   AnalysisLocalBuffer._({
     Box<List>? box,
-  }) : _box = box ?? Hive.box(StorageKeys.analysis.box);
+  }) : _box = box ?? Hive.box<List>(StorageKeys.analysis.box);
 
   AnalysisLocalBuffer.new_({
     Box<List>? box,

@@ -62,4 +62,3 @@ class _CustomAnimationBuilderState extends State<CustomAnimationBuilder>
     super.dispose();
   }
 }
-

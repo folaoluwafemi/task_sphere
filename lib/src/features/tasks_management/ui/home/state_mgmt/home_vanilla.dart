@@ -8,10 +8,9 @@ class HomeVanilla extends VanillaNotifier<HomeState>
   late final TasksReader _taskReader = TasksReader();
 
   HomeVanilla()
-      : super(const HomeState(
-          allTasks: [],
-          currentTasks: [],
-        ));
+      : super(
+          const HomeState(allTasks: [], currentTasks: []),
+        );
 
   Future<void> initialize() => handleError(_initialize());
 
@@ -19,16 +18,17 @@ class HomeVanilla extends VanillaNotifier<HomeState>
     notifyLoading();
     final List<Task> initialTasks = await _taskReader.fetch(aFresh: true);
     notifySuccess(
-        state: state.copyWith(
-      allTasks: initialTasks,
-      currentTasks: state.filter.filterTasks(initialTasks),
-    ));
+      state: state.copyWith(
+        allTasks: initialTasks,
+        currentTasks: state.filter.filterTasks(initialTasks),
+      ),
+    );
     _taskReader.addListener(_tasksListener);
   }
 
-  Future<void> fetchTasks(Task task) => handleError(_fetchTasks(task));
+  Future<void> fetchTasks() => handleError(_fetchTasks());
 
-  Future<void> _fetchTasks(Task task) async {
+  Future<void> _fetchTasks() async {
     await _taskReader.fetch(more: true);
   }
 

@@ -2,8 +2,8 @@ part of '../login_screen.dart';
 
 class _LoginOrLoadWidget extends StatelessWidget {
   const _LoginOrLoadWidget({
-    super.key,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
