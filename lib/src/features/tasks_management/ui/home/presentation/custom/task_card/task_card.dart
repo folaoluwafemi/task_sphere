@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:task_sphere/src/entities/app/app_barrel.dart';
 import 'package:task_sphere/src/features/tasks_management/task_management_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
@@ -26,12 +27,15 @@ class TaskCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TaskCardContainer(
-      child: Column(
-        children: [
-          _TaskContentRow(task: task),
-          _TodoContent(task: task),
-        ],
+    return GestureDetector(
+      onTap: () => context.goNamed(AppRoute.task.name, extra: task),
+      child: TaskCardContainer(
+        child: Column(
+          children: [
+            _TaskContentRow(task: task),
+            _TodoContent(task: task),
+          ],
+        ),
       ),
     );
   }

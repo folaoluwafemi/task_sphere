@@ -35,6 +35,8 @@ extension AppSizerDoubleExtension on num {
 
   double get pi => this * math.pi;
 
+  num get oneIfZero => this == 0 ? 1 : this;
+
   double bezierRelativeWidth(double newWidth) {
     return this * (newWidth / 107.7.w);
   }
@@ -78,6 +80,7 @@ extension AppSizerDoubleExtension on num {
 
 extension GenericNumExtension<T extends num> on T {
   T capAt(T cap) => this >= cap ? cap : this;
+
 
   T capBetween(T min, T max) => this >= max
       ? max

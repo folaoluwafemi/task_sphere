@@ -5,6 +5,8 @@ extension ListExtension<T> on List<T> {
 
   int get lastIndex => length - 1;
 
+  List<T> get copy => List.from(this);
+
   bool everyAfter(
     int index,
     bool Function(T element) test,
@@ -19,6 +21,36 @@ extension ListExtension<T> on List<T> {
       nextList.add(test(i, this[i]));
     }
     return nextList;
+  }
+
+  void clearDuplicates() {
+    final List<T> nextList = [];
+    for (int i = 0; i < length; i++) {
+      if (!nextList.contains(this[i])) {
+        nextList.add(this[i]);
+      }
+    }
+    clear();
+    addAll(nextList);
+  }
+
+  void clearDuplicatesWhere(bool Function(T element1, T element2) test){
+    final List<T> nextList = [];
+    for (int i = 0; i < length; i++) {
+      if (!nextList.containsWhere((element) => test(element, this[i]))) {
+        nextList.add(this[i]);
+      }
+    }
+    clear();
+    addAll(nextList);
+  }
+
+
+  void replaceWhere(Iterable<T> replacement, bool Function(T element) test) {
+    int index = indexWhere(test);
+
+    if (index == -1) throw StateError('index not found in $this');
+    replaceRange(index, index + 1, replacement);
   }
 
   bool everyBetween(int start, int end, bool Function(T element) test) {
@@ -185,13 +217,6 @@ extension ListExtension<T> on List<T> {
       isEqual = [i] == other[i];
     }
     return isEqual;
-  }
-
-  void replaceWhere(Iterable<T> replacement, bool Function(T element) test) {
-    int index = indexWhere(test);
-
-    if (index == -1) throw StateError('index not found in $this');
-    replaceRange(index, index + 1, replacement);
   }
 
   void replaceLast(Iterable<T> replacement) {

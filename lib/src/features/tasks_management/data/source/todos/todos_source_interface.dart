@@ -10,17 +10,7 @@ abstract interface class TodoSourceInterface {
 
   Future<List<Todo>> readTodos();
 
-  Future<void> updateTodo(Todo todo);
-
-  Future<void> updateTodoPriority({
-    required String todoId,
-    required Priority priority,
-  });
-
-  Future<void> updateTodoStatus({
-    required String todoId,
-    required Status status,
-  });
+  Future<void> updateTodos(List<Todo> todos);
 
   Future<void> deleteTodo(Todo todo);
 

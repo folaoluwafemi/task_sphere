@@ -1,14 +1,19 @@
 part of '../task_screen.dart';
 
 class _TaskView extends StatefulWidget {
-  const _TaskView({Key? key}) : super(key: key);
+  final List<Todo> todos;
+
+  const _TaskView({
+    Key? key,
+    required this.todos,
+  }) : super(key: key);
 
   @override
   State<_TaskView> createState() => _TaskViewState();
 }
 
 class _TaskViewState extends State<_TaskView> {
-  late final List<Todo> todos = FakeData.todos;
+  late final List<Todo> todos = widget.todos;
 
   bool onReorder(Key draggedKey, Key newKey) {
     draggedKey = draggedKey as ValueKey<DateTime>;
@@ -56,16 +61,16 @@ class _TaskViewState extends State<_TaskView> {
       );
     }
 
+    todos.clearDuplicatesWhere(
+      (element1, element2) => element1.id == element2.id,
+    );
+
     setState(() {
       todos[newIndex] = newTodo;
       todos.sort();
     });
     context.read<TaskVanilla>().updateTodos(todos);
   }
-
-  void onTaskTitleChanged(String value) {}
-
-  void onTaskDescriptionChanged(String value) {}
 
   @override
   Widget build(BuildContext context) {
@@ -79,18 +84,13 @@ class _TaskViewState extends State<_TaskView> {
             children: [
               MultiSliver(
                 children: [
-                  SliverToBoxAdapter(
-                    child: _TitleView(
-                      onTitleChanged: onTaskTitleChanged,
-                      onDescriptionChanged: onTaskDescriptionChanged,
-                    ),
+                  const SliverToBoxAdapter(child: _TitleView()),
+                  _TodoView(
+                    todos: todos,
                   ),
-                  _TodoView(todos: todos),
                 ],
               ),
-              const SliverPinnedHeader(
-                child: _PinnedHeader(),
-              ),
+              const SliverPinnedHeader(child: _PinnedHeader()),
             ],
           ),
         ],

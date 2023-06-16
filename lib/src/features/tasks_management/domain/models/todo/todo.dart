@@ -100,7 +100,7 @@ class Todo implements Comparable<Todo> {
       priority: Priority.values[map['priority'] as int],
       status: Status.values[map['status'] as int],
       createdAt: UtilFunctions.parseDateTime(map['createdAt']),
-      updatedAt: UtilFunctions.parseDateTime(map['updatedAt'] as DateTime),
+      updatedAt: UtilFunctions.parseDateTime(map['updatedAt']),
     );
   }
 

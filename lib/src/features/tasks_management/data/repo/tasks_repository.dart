@@ -51,6 +51,8 @@ class TasksRepository implements TasksRepoInterface {
     );
 
     await _analyticsLocalBuffer.push(analytics);
+
+    await _reader.fetch(aFresh: true);
   }
 
   @override
@@ -92,16 +94,16 @@ class TasksRepository implements TasksRepoInterface {
   }
 
   @override
-  Future<void> updateTodo(
-    Todo todo, {
+  Future<void> updateTodos(
+    List<Todo> todos, {
     required String taskId,
   }) async {
     final TodoSource source = TodoSource(taskId: taskId);
 
-    await source.updateTodo(todo);
+    await source.updateTodos(todos);
 
-    final TodoAnalytics analytics = TodoAnalytics.create(
-      analyticsData: TodoAnalyticsData.wholeTodo(id: todo.id),
+    final TaskAnalytics analytics = TaskAnalytics.create(
+      taskId: taskId,
       action: AnalyticsAction.update,
     );
 

@@ -1,6 +1,6 @@
 part of '../home_screen.dart';
 
-class AddTaskFloatingButton extends StatefulWidget {
+class AddTaskFloatingButton extends StatelessWidget {
   final ValueNotifier<double> drawerOffsetNotifier;
 
   const AddTaskFloatingButton({
@@ -9,26 +9,15 @@ class AddTaskFloatingButton extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<AddTaskFloatingButton> createState() => _AddTaskFloatingButtonState();
-}
-
-class _AddTaskFloatingButtonState extends State<AddTaskFloatingButton> {
-  Future<void> onPressed() async {
-    await context.pushNamed(AppRoute.task.name);
-    if (!mounted) return;
-    context.read<HomeVanilla>().fetchTasks();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<double>(
-      valueListenable: widget.drawerOffsetNotifier,
+      valueListenable: drawerOffsetNotifier,
       builder: (_, offset, __) {
         final bool showing = offset.isAroundOrLessThan(0);
         return Visibility(
           visible: showing,
           child: SmallButton(
-            onPressed: onPressed,
+            onPressed: () => context.goNamed(AppRoute.task.name),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [

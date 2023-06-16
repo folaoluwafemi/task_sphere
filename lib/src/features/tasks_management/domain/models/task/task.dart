@@ -33,22 +33,30 @@ class Task implements Comparable<Task> {
 
   bool get isEmpty => title.isEmpty && description.isEmpty && todos.isEmpty;
 
-  bool get isCompleted => todos.every((todo) => todo.status == Status.done);
+  bool get isCompleted =>
+      todos.isEmpty ? false : todos.every((todo) => todo.status == Status.done);
 
-  bool get isTodo => !isCompleted;
+  bool get isTodo => todos.isEmpty ? false : !isCompleted;
 
-  bool get isCanceled => todos.every((todo) => todo.status == Status.canceled);
+  bool get isCanceled => todos.isEmpty
+      ? false
+      : todos.every((todo) => todo.status == Status.canceled);
 
   double get progressPercentage {
+    if (todos.isEmpty) return 0;
+
     final Iterable<Todo> doneTodos = todos.where((todo) {
       return todo.status == Status.done;
     });
     return (doneTodos.length / todos.length) * 100;
   }
 
-  DateTime get updatedAt => todos.reduce((value, element) {
-        return value.updatedAt.isAfter(element.updatedAt) ? value : element;
-      }).updatedAt;
+  DateTime get updatedAt {
+    if (todos.isEmpty) return createdAt;
+    return todos.reduce((value, element) {
+      return value.updatedAt.isAfter(element.updatedAt) ? value : element;
+    }).updatedAt;
+  }
 
   factory Task.fromMap(Map<String, dynamic> map) {
     return Task(

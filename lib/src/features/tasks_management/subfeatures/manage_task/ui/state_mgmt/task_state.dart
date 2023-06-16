@@ -23,6 +23,15 @@ class TaskState extends VanillaStateWithStatus {
     Failure? error,
     Task? task,
   }) {
+    if (task != null) {
+      task = task.copyWith(
+        todos: task.todos
+          ..clearDuplicatesWhere(
+            (element1, element2) => element1.id == element2.id,
+          ),
+      );
+    }
+
     return TaskState(
       task: task ?? this.task,
       success: success ?? this.success,

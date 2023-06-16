@@ -15,7 +15,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VanillaNotifierHolder<SplashVanilla>(
-      notifier: SplashVanilla()..navigateToNext(),
+      createNotifier: () => SplashVanilla()..navigateToNext(),
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,

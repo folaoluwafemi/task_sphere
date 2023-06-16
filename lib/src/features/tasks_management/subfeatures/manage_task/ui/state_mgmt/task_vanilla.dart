@@ -16,10 +16,21 @@ class TaskVanilla extends VanillaNotifier<TaskState>
   Future<void> initialize() => handleError(_initialize());
 
   Future<void> _initialize() async {
-    await _reFetch();
-    if (!state.isNew) return;
-
+    if (state.isNew) return;
     await save();
+    await _reFetch();
+  }
+
+  Future<void> createNewTask() => handleError(
+        _createNewTask(),
+        catcher: notifyOnError,
+      );
+
+  Future<void> _createNewTask() async {
+    if (!state.isNew) return;
+    notifyLoading();
+    await _repo.createTask(state.task);
+    notifySuccess();
   }
 
   Future<void> updateTitle(String title) => handleError(
@@ -28,6 +39,8 @@ class TaskVanilla extends VanillaNotifier<TaskState>
       );
 
   Future<void> _updateTitle(String title) async {
+    await _createNewTask();
+    if (state.task.title == title) return;
     state = state.copyWith(task: state.task.copyWith(title: title));
     await _save();
   }
@@ -38,6 +51,8 @@ class TaskVanilla extends VanillaNotifier<TaskState>
       );
 
   Future<void> _updateDescription(String description) async {
+    await _createNewTask();
+    if (state.task.description == description) return;
     state = state.copyWith(task: state.task.copyWith(description: description));
     await _save();
   }
@@ -48,6 +63,7 @@ class TaskVanilla extends VanillaNotifier<TaskState>
       );
 
   Future<void> _addTodo(Todo todo) async {
+    await _createNewTask();
     state = state.copyWith(
       task: state.task.copyWith(
         todos: [...state.task.todos, todo],
@@ -63,7 +79,12 @@ class TaskVanilla extends VanillaNotifier<TaskState>
 
   Future<void> _updateTodo(Todo todo) async {
     notifyLoading();
-    await _repo.updateTodo(todo, taskId: state.task.id);
+
+    final List<Todo> todos = state.task.todos.copy;
+
+    todos.replaceWhere([todo], (element) => element.id == todo.id);
+
+    await _repo.updateTodos(todos, taskId: state.task.id);
     await _reFetch();
   }
 
@@ -119,6 +140,7 @@ class TaskVanilla extends VanillaNotifier<TaskState>
     notifyLoading();
 
     final List<Todo> todos = await _repo.readTodos(taskId: state.task.id);
+    todos.sort();
 
     notifySuccess(
       state: state.copyWith(task: state.task.copyWith(todos: todos)),

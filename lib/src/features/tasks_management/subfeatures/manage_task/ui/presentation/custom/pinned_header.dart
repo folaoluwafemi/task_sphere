@@ -5,13 +5,16 @@ class _PinnedHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _CloseButton(),
-        Spacer(),
-        StateText(),
-      ],
+    return Container(
+      color: context.bgColors.$50,
+      child: const Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _CloseButton(),
+          Spacer(),
+          StateText(),
+        ],
+      ),
     );
   }
 }
@@ -62,6 +65,7 @@ class _CloseButton extends StatefulWidget {
 
 class _CloseButtonState extends State<_CloseButton> {
   Future<void> onClose() async {
+    FocusScope.of(context).unfocus();
     final bool isEmpty = await context.read<TaskVanilla>().deleteEmptyTask();
     if (!mounted) return;
     if (!isEmpty) context.read<TaskVanilla>().save();

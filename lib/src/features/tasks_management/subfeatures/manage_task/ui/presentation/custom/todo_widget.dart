@@ -104,6 +104,7 @@ class _TodoWidgetState extends State<TodoWidget> {
     todo = todo!.copyWith(
       status: value.$1,
       priority: value.$2,
+      updatedAt: DateTime.now(),
     );
     if (todo_ != todo) widget.onChanged((todo!, false));
   }

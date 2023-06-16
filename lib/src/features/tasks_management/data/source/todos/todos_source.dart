@@ -50,16 +50,18 @@ class TodoSource with FirebaseErrorHandlerMixin implements TodoSourceInterface {
     final QueryDocumentSnapshot document = snapshot.docs.first;
 
     return (document.data() as Map)[Keys.todos]
-        .map<Todo>((e) => Todo.fromMap((e as Map).cast()))
-        .toList();
+            ?.map<Todo>((e) => Todo.fromMap((e as Map).cast()))
+            .toList() ??
+        [];
   }
 
   @override
-  Future<void> updateTodo(Todo todo) => handleError(_updateTodo(todo));
+  Future<void> updateTodos(List<Todo> todos) =>
+      handleError(_updateTodos(todos));
 
-  Future<void> _updateTodo(Todo todo) async {
+  Future<void> _updateTodos(List<Todo> todos) async {
     await _tasks.doc(_taskId).update({
-      Keys.todos: FieldValue.arrayUnion([todo.toMap()]),
+      Keys.todos: todos.map((e) => e.toMap()).toList(),
     });
   }
 

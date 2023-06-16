@@ -5,13 +5,15 @@ enum TasksFilter {
   todo,
   completed;
 
-  List<Task> filterTasks(List<Task> tasks) => tasks.where((element) {
-        return switch (this) {
-          all => true,
-          todo => element.isTodo,
-          completed => element.isCompleted,
-        };
-      }).toList();
+  List<Task> filterTasks(List<Task> tasks) => List.from(
+        tasks.where((element) {
+          return switch (this) {
+            all => true,
+            todo => element.isTodo,
+            completed => element.isCompleted,
+          };
+        }).toList(),
+      );
 
   int count(List<Task> tasks) => switch (this) {
         all => tasks.length,

@@ -15,6 +15,7 @@ class HomeVanilla extends VanillaNotifier<HomeState>
   Future<void> initialize() => handleError(_initialize());
 
   Future<void> _initialize() async {
+    print('re-initializing');
     notifyLoading();
     final List<Task> initialTasks = await _taskReader.fetch(aFresh: true);
     notifySuccess(
@@ -47,7 +48,7 @@ class HomeVanilla extends VanillaNotifier<HomeState>
 
   void _tasksListener() {
     state = state.copyWith(
-      allTasks: _taskReader.tasks,
+      allTasks: List.from(_taskReader.tasks),
       currentTasks: state.filter.filterTasks(_taskReader.tasks),
     );
   }

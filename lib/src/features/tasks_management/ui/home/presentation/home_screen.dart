@@ -32,14 +32,14 @@ part 'custom/tasks_filter.dart';
 
 part 'custom/top_contents.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomePageState extends State<HomePage> {
   bool showingDrawer = false;
 
   final ValueNotifier<double> drawerOffsetNotifier = ValueNotifier<double>(0);
@@ -124,44 +124,53 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return VanillaNotifierHolder<HomeVanilla>(
-      notifier: HomeVanilla()..initialize(),
-      child: Scaffold(
-        backgroundColor: context.bgColors.$100,
-        body: GestureDetector(
-          behavior: HitTestBehavior.translucent,
-          onHorizontalDragEnd: (details) => animateToExtreme(),
-          onHorizontalDragUpdate: (details) {
-            lastDraggedDirectionIsNegative = details.delta.dx.isNegative;
+    return Scaffold(
+      backgroundColor: context.bgColors.$100,
+      body: GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onHorizontalDragEnd: (details) => animateToExtreme(),
+        onHorizontalDragUpdate: (details) {
+          lastDraggedDirectionIsNegative = details.delta.dx.isNegative;
 
-            setDrawerOffsetValue(
-              drawerOffsetNotifier.value + details.delta.dx,
+          setDrawerOffsetValue(
+            drawerOffsetNotifier.value + details.delta.dx,
+          );
+        },
+        child: ValueListenableBuilder<double>(
+          valueListenable: drawerOffsetNotifier,
+          builder: (_, drawerOffset, __) {
+            drawerOffset = drawerOffset.capBetween(0, maxDrawerOffset);
+            return Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Transform.translate(
+                  offset: Offset(drawerOffset - maxDrawerOffset, 0),
+                  child: const _Drawer(),
+                ),
+                Transform.translate(
+                  offset: Offset(drawerOffset, 0),
+                  child: _HomeView(
+                    showDrawer: toggleShowing,
+                    drawerOffsetNotifier: drawerOffsetNotifier,
+                  ),
+                ),
+              ],
             );
           },
-          child: ValueListenableBuilder<double>(
-            valueListenable: drawerOffsetNotifier,
-            builder: (_, drawerOffset, __) {
-              drawerOffset = drawerOffset.capBetween(0, maxDrawerOffset);
-              return Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  Transform.translate(
-                    offset: Offset(drawerOffset - maxDrawerOffset, 0),
-                    child: const _Drawer(),
-                  ),
-                  Transform.translate(
-                    offset: Offset(drawerOffset, 0),
-                    child: _HomeView(
-                      showDrawer: toggleShowing,
-                      drawerOffsetNotifier: drawerOffsetNotifier,
-                    ),
-                  ),
-                ],
-              );
-            },
-          ),
         ),
       ),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return VanillaNotifierHolder<HomeVanilla>(
+      createNotifier: () => HomeVanilla()..initialize(),
+      child: const HomePage(),
     );
   }
 }

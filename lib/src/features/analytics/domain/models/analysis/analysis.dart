@@ -3,8 +3,11 @@ import 'package:task_sphere/src/features/analytics/domain/analytics_domain_barre
 typedef Analysis = List<Analytics>;
 
 abstract final class AnalysisUtils {
-  static Analysis fromSerializerList(List<Map<String, dynamic>> list) {
-    return list.map((e) => Analytics.fromMap(e)).toList();
+  static Analysis fromSerializerList(List<Map> list) {
+    final Analysis analysis = list.map((map) {
+      return Analytics.fromMap(map.cast<String, dynamic>());
+    }).toList();
+    return analysis;
   }
 }
 

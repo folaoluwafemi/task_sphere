@@ -21,7 +21,7 @@ class _TodoItemWidget extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
       child: Row(
         children: [
-          Flexible(
+          Expanded(
             child: Text(
               todo.content,
               overflow: TextOverflow.ellipsis,

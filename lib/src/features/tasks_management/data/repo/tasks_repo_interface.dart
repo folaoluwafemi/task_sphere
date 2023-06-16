@@ -12,8 +12,8 @@ abstract interface class TasksRepoInterface {
 
   Future<List<Todo>> readTodos({required String taskId});
 
-  Future<void> updateTodo(
-    Todo todo, {
+  Future<void> updateTodos(
+    List<Todo> todos, {
     required String taskId,
   });
 

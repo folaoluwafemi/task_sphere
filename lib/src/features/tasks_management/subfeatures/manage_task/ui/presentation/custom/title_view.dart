@@ -1,12 +1,7 @@
 part of '../task_screen.dart';
 
 class _TitleView extends StatelessWidget {
-  final ValueChanged<String> onTitleChanged;
-  final ValueChanged<String> onDescriptionChanged;
-
   const _TitleView({
-    required this.onTitleChanged,
-    required this.onDescriptionChanged,
     Key? key,
   }) : super(key: key);
 
@@ -20,10 +15,7 @@ class _TitleView extends StatelessWidget {
           76.boxHeight,
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 18.w),
-            child: _TitleFields(
-              onTitleChanged: (value) {},
-              onDescriptionChanged: (value) {},
-            ),
+            child: const _TitleFields(),
           ),
           30.boxHeight,
         ],

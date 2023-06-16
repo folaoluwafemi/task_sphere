@@ -22,9 +22,28 @@ class _TodoViewState extends State<_TodoView> {
     required int index,
     required bool deleted,
   }) {
+    if (todo_.status == Status.canceled) {
+      final Todo leastRecentTodo = todos.reduce((value, element) {
+        return value.updatedAt.isBefore(element.updatedAt) ? value : element;
+      });
+
+      todo_ = todo_.copyWith(
+        updatedAt: leastRecentTodo.updatedAt.copySubtract(seconds: 2),
+      );
+    }
+
     todos.removeAt(index);
     if (deleted) return setState(() => todos.sort());
-    setState(() => todos.insert(index, todo_));
+
+    todos.clearDuplicatesWhere(
+      (element1, element2) => element1.id == element2.id,
+    );
+
+    setState(
+      () => todos
+        ..insert(index, todo_)
+        ..sort(),
+    );
 
     context.read<TaskVanilla>().updateTodo(todo_);
   }
@@ -35,6 +54,10 @@ class _TodoViewState extends State<_TodoView> {
         ..add(todo)
         ..sort();
     });
+
+    todos.clearDuplicatesWhere(
+      (element1, element2) => element1.id == element2.id,
+    );
 
     context.read<TaskVanilla>().addTodo(todo);
   }

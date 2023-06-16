@@ -34,7 +34,7 @@ class TodoAnalyticsData {
 
   factory TodoAnalyticsData.fromMap(Map<String, dynamic> map) {
     return TodoAnalyticsData(
-      type: TodoDescriptor.fromName(map['type']),
+      type: TodoDescriptor.fromName(map['type'] as String),
       value: map['value'] as String,
     );
   }

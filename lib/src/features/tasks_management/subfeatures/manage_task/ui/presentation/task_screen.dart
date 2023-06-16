@@ -38,7 +38,7 @@ class TaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VanillaNotifierHolder<TaskVanilla>(
-      notifier: TaskVanilla(task: task)..initialize(),
+      createNotifier: () => TaskVanilla(task: task)..initialize(),
       child: VanillaListener<TaskVanilla, TaskState>(
         listenWhen: (previous, current) => previous?.error != current.error,
         listener: (previous, current) {
@@ -56,7 +56,14 @@ class TaskScreen extends StatelessWidget {
             backgroundColor: context.bgColors.$50,
           ),
           backgroundColor: context.bgColors.$100,
-          body: const SafeArea(child: _TaskView()),
+          body: SafeArea(
+            child: VanillaBuilder<TaskVanilla, TaskState>(
+              builder: (context, state) {
+                print('todo ${state.task.todos.map((e) => e.id)}');
+                return _TaskView(todos: state.task.todos);
+              },
+            ),
+          ),
         ),
       ),
     );

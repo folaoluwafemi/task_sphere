@@ -71,10 +71,10 @@ class _HomeView extends StatelessWidget {
                             SliverPadding(
                               padding: EdgeInsets.symmetric(horizontal: 18.w),
                               sliver: SliverList.separated(
-                                itemCount: FakeData.tasks.length,
+                                itemCount: state.currentTasks.length,
                                 separatorBuilder: (_, __) => 16.boxHeight,
                                 itemBuilder: (_, index) => TaskCard(
-                                  task: FakeData.tasks[index],
+                                  task: state.currentTasks[index],
                                 ),
                               ),
                             ),

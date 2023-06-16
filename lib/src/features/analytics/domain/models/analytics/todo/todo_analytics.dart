@@ -38,9 +38,9 @@ final class TodoAnalytics extends Analytics {
   factory TodoAnalytics.fromMap(Map<String, dynamic> map) {
     return TodoAnalytics(
       id: map['id'],
-      analyticsData: TodoAnalyticsData.fromMap(map['data']),
-      action: AnalyticsAction.fromName(map['action']),
-      timestamp: UtilFunctions.parseDateTime(map['timestamp']),
+      analyticsData: TodoAnalyticsData.fromMap((map['data'] as Map).cast()),
+      action: AnalyticsAction.fromName(map['action'] as String),
+      timestamp: UtilFunctions.parseDateTime(map['timestamp'] as String),
     );
   }
 }
