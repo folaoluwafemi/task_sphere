@@ -34,7 +34,7 @@ extension ListExtension<T> on List<T> {
     addAll(nextList);
   }
 
-  void clearDuplicatesWhere(bool Function(T element1, T element2) test){
+  void clearDuplicatesWhere(bool Function(T element1, T element2) test) {
     final List<T> nextList = [];
     for (int i = 0; i < length; i++) {
       if (!nextList.containsWhere((element) => test(element, this[i]))) {
@@ -44,7 +44,6 @@ extension ListExtension<T> on List<T> {
     clear();
     addAll(nextList);
   }
-
 
   void replaceWhere(Iterable<T> replacement, bool Function(T element) test) {
     int index = indexWhere(test);

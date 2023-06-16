@@ -59,7 +59,6 @@ class TaskScreen extends StatelessWidget {
           body: SafeArea(
             child: VanillaBuilder<TaskVanilla, TaskState>(
               builder: (context, state) {
-                print('todo ${state.task.todos.map((e) => e.id)}');
                 return _TaskView(todos: state.task.todos);
               },
             ),

@@ -54,8 +54,6 @@ class LinkedSpadePainter extends CustomPainter {
 
     final double leftOffset = head1Size + firstStemLength;
 
-    final Path path = Path();
-
     canvas.drawLine(
       Offset(leftOffset, size.height.half - thickness.half),
       Offset(

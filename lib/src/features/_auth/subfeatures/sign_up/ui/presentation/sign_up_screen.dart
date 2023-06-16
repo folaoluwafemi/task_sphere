@@ -29,7 +29,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return VanillaNotifierHolder<SignUpVanilla>(
-      createNotifier: () =>  SignUpVanilla(),
+      createNotifier: () => SignUpVanilla(),
       child: Scaffold(
         backgroundColor: context.bgColors.$50,
         body: Stack(

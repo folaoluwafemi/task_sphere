@@ -64,44 +64,4 @@ class TodoSource with FirebaseErrorHandlerMixin implements TodoSourceInterface {
       Keys.todos: todos.map((e) => e.toMap()).toList(),
     });
   }
-
-  @override
-  Future<void> updateTodoPriority({
-    required String todoId,
-    required Priority priority,
-  }) =>
-      handleError(
-        _updateTodoPriority(todoId: todoId, priority: priority),
-      );
-
-  Future<void> _updateTodoPriority({
-    required String todoId,
-    required Priority priority,
-  }) async {
-    await _tasks.doc(_taskId).update({
-      Keys.todos: FieldValue.arrayUnion([
-        {Keys.id: todoId, Keys.priority: priority.index}
-      ]),
-    });
-  }
-
-  @override
-  Future<void> updateTodoStatus({
-    required String todoId,
-    required Status status,
-  }) =>
-      handleError(
-        _updateTodoStatus(todoId: todoId, status: status),
-      );
-
-  Future<void> _updateTodoStatus({
-    required String todoId,
-    required Status status,
-  }) async {
-    await _tasks.doc(_taskId).update({
-      Keys.todos: FieldValue.arrayUnion([
-        {Keys.id: todoId, Keys.status: status.index}
-      ]),
-    });
-  }
 }

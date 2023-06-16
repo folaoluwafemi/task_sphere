@@ -81,7 +81,6 @@ extension AppSizerDoubleExtension on num {
 extension GenericNumExtension<T extends num> on T {
   T capAt(T cap) => this >= cap ? cap : this;
 
-
   T capBetween(T min, T max) => this >= max
       ? max
       : this <= min

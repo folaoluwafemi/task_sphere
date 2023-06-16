@@ -1,13 +1,11 @@
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 enum AnalyticsDataType {
-  user('user'),
-  task('task'),
-  todo('todo');
+  user(),
+  task(),
+  todo();
 
-  final String _data;
-
-  const AnalyticsDataType(this._data);
+  const AnalyticsDataType();
 
   factory AnalyticsDataType.fromName(String name) {
     name = name.cleanLower;

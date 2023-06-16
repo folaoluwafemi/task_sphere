@@ -21,7 +21,7 @@ class EnterNameScreen extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async => !redirect,
       child: VanillaNotifierHolder<SignUpVanilla>(
-        createNotifier: () =>  SignUpVanilla(),
+        createNotifier: () => SignUpVanilla(),
         child: Scaffold(
           body: Stack(
             children: [
