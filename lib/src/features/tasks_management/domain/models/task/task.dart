@@ -70,6 +70,14 @@ class Task implements Comparable<Task> {
     }).updatedAt;
   }
 
+  Task copyWithTodosCompleted() {
+    final List<Todo> todos_ = [];
+    for (final Todo todo in todos) {
+      todos_.add(todo.copyWith(status: Status.done));
+    }
+    return copyWith(todos: todos_);
+  }
+
   factory Task.fromMap(Map<String, dynamic> map) {
     return Task(
       id: map['id'],

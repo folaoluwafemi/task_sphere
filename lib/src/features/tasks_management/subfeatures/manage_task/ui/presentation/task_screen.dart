@@ -13,6 +13,8 @@ part 'custom/descriptor_modals.dart';
 
 part 'custom/descriptor_picker_dialog.dart';
 
+part 'custom/more.dart';
+
 part 'custom/pinned_header.dart';
 
 part 'custom/right_item_widget.dart';

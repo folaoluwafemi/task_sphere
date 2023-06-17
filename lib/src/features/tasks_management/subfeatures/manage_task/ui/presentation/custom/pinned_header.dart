@@ -1,8 +1,13 @@
 part of '../task_screen.dart';
 
-class _PinnedHeader extends StatelessWidget {
+class _PinnedHeader extends StatefulWidget {
   const _PinnedHeader({Key? key}) : super(key: key);
 
+  @override
+  State<_PinnedHeader> createState() => _PinnedHeaderState();
+}
+
+class _PinnedHeaderState extends State<_PinnedHeader> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -13,6 +18,7 @@ class _PinnedHeader extends StatelessWidget {
           _CloseButton(),
           Spacer(),
           StateText(),
+          _MoreButton(),
         ],
       ),
     );
@@ -37,7 +43,7 @@ class StateText extends StatelessWidget {
           }
           if (state.loading) {
             return Text(
-              'Saving...',
+              state.loadingText ?? 'Saving...',
               style: context.primaryTypography.paragraph.small.asMedium
                   .withColor(context.neutralColors.$600),
             );

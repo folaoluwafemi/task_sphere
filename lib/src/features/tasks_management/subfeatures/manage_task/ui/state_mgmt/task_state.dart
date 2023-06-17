@@ -3,12 +3,14 @@ part of 'task_vanilla.dart';
 class TaskState extends VanillaStateWithStatus {
   final bool isNew;
   final Task task;
+  final String? loadingText;
 
   TaskState({
     super.success = false,
     super.loading = false,
     super.error,
     required Task? task,
+    this.loadingText,
   })  : isNew = task == null,
         task = task ?? Task.empty();
 
@@ -22,6 +24,7 @@ class TaskState extends VanillaStateWithStatus {
     bool? loading,
     Failure? error,
     Task? task,
+    String? loadingText,
   }) {
     if (task != null) {
       task = task.copyWith(
@@ -37,6 +40,7 @@ class TaskState extends VanillaStateWithStatus {
       success: success ?? this.success,
       loading: loading ?? this.loading,
       error: error,
+      loadingText: loadingText,
     );
   }
 

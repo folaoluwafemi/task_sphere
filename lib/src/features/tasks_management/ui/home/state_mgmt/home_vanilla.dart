@@ -46,6 +46,7 @@ class HomeVanilla extends VanillaNotifier<HomeState>
   }
 
   void _tasksListener() {
+    print('state tasks is empty: ${state.currentTasks.isEmpty}');
     state = state.copyWith(
       allTasks: List.from(_taskReader.tasks),
       currentTasks: state.filter.filterTasks(_taskReader.tasks),

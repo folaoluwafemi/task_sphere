@@ -27,15 +27,12 @@ class TaskCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => context.goNamed(AppRoute.task.name, extra: task),
-      child: TaskCardContainer(
-        child: Column(
-          children: [
-            _TaskContentRow(task: task),
-            _TodoContent(task: task),
-          ],
-        ),
+    return TaskCardContainer(
+      child: Column(
+        children: [
+          _TaskContentRow(task: task),
+          _TodoContent(task: task),
+        ],
       ),
     );
   }

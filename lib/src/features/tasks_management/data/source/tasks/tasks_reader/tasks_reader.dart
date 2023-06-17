@@ -38,7 +38,7 @@ class TasksReader extends VanillaNotifier<List<Task>>
     required bool fetchAfresh,
     required bool fetchMore,
   }) async {
-    if (fetchAfresh) clearCurrentTasks();
+    if (fetchAfresh) _nextQuery = null;
 
     _nextQuery ??= _tasks.orderBy(Keys.createdAt, descending: true);
 
@@ -46,11 +46,13 @@ class TasksReader extends VanillaNotifier<List<Task>>
 
     if (snapshot.docs.isEmpty) return state;
 
-    _nextQuery = _nextQuery!.startAfterDocument(snapshot.docs.last);
+    _nextQuery = _nextQuery!.startAfterDocument(snapshot.docs.last).limit(25);
 
     final List<Task> tasks = snapshot.docs
         .map((e) => Task.fromMap((e.data() as Map).cast()))
         .toList();
+
+    if (fetchAfresh) state.clear();
 
     state = List.from(state)..addAll(tasks);
 

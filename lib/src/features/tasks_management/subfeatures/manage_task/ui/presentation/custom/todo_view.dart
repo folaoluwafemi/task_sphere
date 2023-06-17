@@ -33,7 +33,10 @@ class _TodoViewState extends State<_TodoView> {
     }
 
     todos.removeAt(index);
-    if (deleted) return setState(() => todos.sort());
+    if (deleted) {
+      context.read<TaskVanilla>().deleteTodo(todo_);
+      return setState(() => todos.sort());
+    }
 
     todos.clearDuplicatesWhere(
       (element1, element2) => element1.id == element2.id,

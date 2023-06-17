@@ -31,7 +31,10 @@ class _DescriptorPickerDialogState extends State<_DescriptorPickerDialog> {
     onChanged();
   }
 
-  void onChanged() => widget.onChanged((currentStatus, currentPriority));
+  void onChanged() {
+    widget.onChanged((currentStatus, currentPriority));
+    Navigator.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {

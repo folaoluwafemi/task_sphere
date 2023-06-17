@@ -6,9 +6,12 @@ mixin VanillaUtilsMixin<State extends VanillaStateWithStatus>
     state = state.copyWith(error: error, loading: false, success: false);
   }
 
-  void notifyLoading([nullifyError = true]) {
+  void notifyLoading({
+    nullifyError = true,
+    State? state_,
+  }) {
     if (state.loading) return;
-    state = state.copyWith(
+    state = (state_ ?? state).copyWith(
       loading: true,
       success: false,
       error: nullifyError ? null : state.error,

@@ -57,6 +57,48 @@ class TaskVanilla extends VanillaNotifier<TaskState>
     await _save();
   }
 
+  Future<void> markAllTodoCompleted() => handleError(_markAllAsCompleted());
+
+  Future<void> _markAllAsCompleted() async {
+    if (state.task.todos.isEmpty) {
+      notifyOnError(Failure(message: 'There are no todos, please create one'));
+      return;
+    }
+    notifyLoading();
+
+    final Task allAsCompleted = state.task.copyWithTodosCompleted();
+
+    await _repo.updateTodos(allAsCompleted.todos, taskId: state.task.id);
+
+    notifySuccess();
+  }
+
+  Future<void> deleteTask() => handleError(_deleteTask());
+
+  Future<void> _deleteTask() async {
+    state = state.copyWith(
+      loadingText: 'Deleting...',
+      loading: true,
+      success: false,
+    );
+    await _repo.deleteTask(state.task.id);
+    notifySuccess();
+  }
+
+  Future<void> deleteTodo(Todo todo) => handleError(_deleteTodo(todo));
+
+  Future<void> _deleteTodo(Todo todo) async {
+    state = state.copyWith(
+      loadingText: 'Deleting...',
+      loading: true,
+      success: false,
+    );
+
+    await _repo.deleteTodo(todo, taskId: state.task.id);
+    reFetch();
+    notifySuccess();
+  }
+
   Future<void> addTodo(Todo todo) => handleError(
         _addTodo(todo),
         catcher: notifyOnError,
@@ -94,30 +136,15 @@ class TaskVanilla extends VanillaNotifier<TaskState>
       );
 
   Future<void> _updateTodos(List<Todo> todos) async {
+    notifyLoading();
+
     state = state.copyWith(
       task: state.task.copyWith(
         todos: List.from(todos),
       ),
     );
+
     await _save();
-  }
-
-  Future<bool> deleteEmptyTask() => handleError(
-        _deleteEmptyTask(),
-        catcher: (failure) {
-          notifyOnError(failure);
-          return true;
-        },
-      );
-
-  Future<bool> _deleteEmptyTask() async {
-    if (!state.task.isEmpty) return false;
-    notifyLoading();
-
-    await _repo.deleteTask(state.task.id);
-
-    notifySuccess();
-    return true;
   }
 
   Future<void> save() => handleError(_save(), catcher: notifyOnError);

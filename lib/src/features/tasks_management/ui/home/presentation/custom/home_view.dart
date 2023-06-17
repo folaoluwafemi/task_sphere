@@ -1,6 +1,6 @@
 part of '../home_screen.dart';
 
-class _HomeView extends StatelessWidget {
+class _HomeView extends StatefulWidget {
   final VoidCallback showDrawer;
   final ValueNotifier<double> drawerOffsetNotifier;
 
@@ -9,6 +9,18 @@ class _HomeView extends StatelessWidget {
     required this.showDrawer,
     required this.drawerOffsetNotifier,
   }) : super(key: key);
+
+  @override
+  State<_HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<_HomeView> {
+  Future<void> onTaskCardPressed(Task task) async {
+    await context.pushNamed(AppRoute.task.name, extra: task);
+
+    if (!mounted) return;
+    context.read<HomeVanilla>().refresh();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +38,8 @@ class _HomeView extends StatelessWidget {
                       padding: EdgeInsets.only(left: 18.w, top: 18.h),
                       color: context.bgColors.$100,
                       child: _TopContents(
-                        drawerOffsetNotifier: drawerOffsetNotifier,
-                        showDrawer: showDrawer,
+                        drawerOffsetNotifier: widget.drawerOffsetNotifier,
+                        showDrawer: widget.showDrawer,
                       ),
                     ),
                   ),
@@ -47,7 +59,7 @@ class _HomeView extends StatelessWidget {
               ),
               VanillaBuilder<HomeVanilla, HomeState>(
                 buildWhen: (previous, current) =>
-                    previous?.currentTasks != current.currentTasks ||
+                previous?.currentTasks != current.currentTasks ||
                     previous?.currentTasks.length !=
                         current.currentTasks.length,
                 builder: (context, state) {
@@ -73,9 +85,15 @@ class _HomeView extends StatelessWidget {
                               sliver: SliverList.separated(
                                 itemCount: state.currentTasks.length,
                                 separatorBuilder: (_, __) => 16.boxHeight,
-                                itemBuilder: (_, index) => TaskCard(
-                                  task: state.currentTasks[index],
-                                ),
+                                itemBuilder: (_, index) =>
+                                    GestureDetector(
+                                      onTap: () =>
+                                          onTaskCardPressed(
+                                              state.currentTasks[index]),
+                                      child: TaskCard(
+                                        task: state.currentTasks[index],
+                                      ),
+                                    ),
                               ),
                             ),
                           ],
@@ -91,7 +109,7 @@ class _HomeView extends StatelessWidget {
             alignment: Alignment.bottomRight,
             margin: EdgeInsets.only(bottom: 24.h, right: 24.w),
             child: AddTaskFloatingButton(
-              drawerOffsetNotifier: drawerOffsetNotifier,
+              drawerOffsetNotifier: widget.drawerOffsetNotifier,
             ),
           ),
         ],
