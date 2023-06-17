@@ -111,4 +111,20 @@ class TasksRepository implements TasksRepoInterface {
 
     await _reader.fetch(aFresh: true);
   }
+
+  @override
+  Future<void> deleteAllTodos(String taskId) async {
+    final TodoSource source = TodoSource(taskId: taskId);
+
+    await source.deleteAllTodos();
+
+    final TaskAnalytics analytics = TaskAnalytics.create(
+      taskId: taskId,
+      action: AnalyticsAction.delete,
+    );
+
+    await _analyticsLocalBuffer.push(analytics);
+
+    await _reader.fetch(aFresh: true);
+  }
 }

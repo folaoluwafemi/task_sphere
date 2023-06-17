@@ -94,6 +94,13 @@ class TaskVanilla extends VanillaNotifier<TaskState>
       success: false,
     );
 
+    if (state.task.todos.length == 1) {
+      await _repo.deleteAllTodos(state.task.id);
+      reFetch();
+      notifySuccess();
+      return;
+    }
+
     await _repo.deleteTodo(todo, taskId: state.task.id);
     reFetch();
     notifySuccess();

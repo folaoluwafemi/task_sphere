@@ -59,7 +59,7 @@ class _HomeViewState extends State<_HomeView> {
               ),
               VanillaBuilder<HomeVanilla, HomeState>(
                 buildWhen: (previous, current) =>
-                previous?.currentTasks != current.currentTasks ||
+                    previous?.currentTasks != current.currentTasks ||
                     previous?.currentTasks.length !=
                         current.currentTasks.length,
                 builder: (context, state) {
@@ -85,15 +85,13 @@ class _HomeViewState extends State<_HomeView> {
                               sliver: SliverList.separated(
                                 itemCount: state.currentTasks.length,
                                 separatorBuilder: (_, __) => 16.boxHeight,
-                                itemBuilder: (_, index) =>
-                                    GestureDetector(
-                                      onTap: () =>
-                                          onTaskCardPressed(
-                                              state.currentTasks[index]),
-                                      child: TaskCard(
-                                        task: state.currentTasks[index],
-                                      ),
-                                    ),
+                                itemBuilder: (_, index) => GestureDetector(
+                                  onTap: () => onTaskCardPressed(
+                                      state.currentTasks[index]),
+                                  child: TaskCard(
+                                    task: state.currentTasks[index],
+                                  ),
+                                ),
                               ),
                             ),
                           ],

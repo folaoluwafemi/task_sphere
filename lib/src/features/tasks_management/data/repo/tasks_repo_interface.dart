@@ -22,6 +22,8 @@ abstract interface class TasksRepoInterface {
     required String taskId,
   });
 
+  Future<void> deleteAllTodos(String taskId);
+
   Future<void> createTask(Task task);
 
   Future<void> updateTask(Task task);

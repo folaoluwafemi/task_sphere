@@ -26,9 +26,7 @@ class TodoSource with FirebaseErrorHandlerMixin implements TodoSourceInterface {
   Future<void> deleteAllTodos() => handleError(_deleteAllTodos());
 
   Future<void> _deleteAllTodos() async {
-    await _tasks.doc(_taskId).set({
-      Keys.todos: [],
-    });
+    await _tasks.doc(_taskId).update({Keys.todos: FieldValue.delete()});
   }
 
   @override
@@ -50,6 +48,8 @@ class TodoSource with FirebaseErrorHandlerMixin implements TodoSourceInterface {
   Future<List<Todo>> _readTodos() async {
     final QuerySnapshot snapshot =
         await _tasks.where(Keys.id, isEqualTo: _taskId).get();
+
+    if (snapshot.docs.isEmpty) return [];
 
     final QueryDocumentSnapshot document = snapshot.docs.first;
 

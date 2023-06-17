@@ -83,7 +83,9 @@ class Task implements Comparable<Task> {
       id: map['id'],
       title: map['title'],
       description: map['description'],
-      todos: List<Todo>.from(map['todos']?.map((data) => Todo.fromMap(data))),
+      todos: List<Todo>.from(
+        map['todos']?.map<Todo>((data) => Todo.fromMap(data)) ?? [],
+      ),
       createdAt: UtilFunctions.parseDateTime(map['createdAt']),
     );
   }
