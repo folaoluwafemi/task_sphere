@@ -1,4 +1,5 @@
 import 'package:task_sphere/src/features/analytics/analytics_barrel.dart';
+import 'package:task_sphere/src/features/analytics/domain/logic/analysis_manager/analysis_manager.dart';
 import 'package:task_sphere/src/features/tasks_management/data/source/todos/todos_source_interface.dart';
 import 'package:task_sphere/src/features/tasks_management/task_management_barrel.dart';
 

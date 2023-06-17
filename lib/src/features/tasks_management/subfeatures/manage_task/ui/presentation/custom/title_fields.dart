@@ -54,10 +54,14 @@ class _TitleFieldsState extends State<_TitleFields> {
   }
 
   void onTitleSaved() {
+    title = title.trim();
+    if (title.isEmpty) return;
     context.read<TaskVanilla>().updateTitle(title);
   }
 
   void onDescriptionSaved() {
+    description = description.trim();
+    if (description.isEmpty) return;
     context.read<TaskVanilla>().updateDescription(description);
   }
 
@@ -107,15 +111,19 @@ class _TitleFieldsState extends State<_TitleFields> {
           focusNode: descriptionFocusNode,
           onChanged: onDescriptionChanged,
           onSubmitted: onDescriptionChanged,
-          style: context.secondaryTypography.paragraph.large.asRegular
-              .withColor(context.neutralColors.$700),
+          style: context.secondaryTypography.paragraph.large.copyWith(
+            fontWeight: FontWeight.w400,
+            color: context.neutralColors.$600,
+          ),
           maxLines: null,
           decoration: InputDecoration(
             contentPadding: EdgeInsets.zero,
             isDense: true,
             hintText: 'Add description...',
-            hintStyle: context.secondaryTypography.paragraph.large.asRegular
-                .withColor(context.neutralColors.$600),
+            hintStyle: context.secondaryTypography.paragraph.large.copyWith(
+              fontWeight: FontWeight.w400,
+              color: context.neutralColors.$600,
+            ),
             border: InputBorder.none,
           ),
         ),

@@ -1,8 +1,8 @@
 import 'dart:math';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:task_sphere/src/entities/app/app_barrel.dart';
 import 'package:task_sphere/src/features/tasks_management/task_management_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
@@ -31,7 +31,8 @@ class TaskCard extends StatelessWidget {
       child: Column(
         children: [
           _TaskContentRow(task: task),
-          _TodoContent(task: task),
+          if (task.todos.isEmpty) 22.boxHeight,
+          if (task.todos.isNotEmpty) _TodoContent(task: task),
         ],
       ),
     );

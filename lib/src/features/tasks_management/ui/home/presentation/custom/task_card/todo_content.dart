@@ -10,9 +10,12 @@ class _TodoContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 121.h,
+    return Padding(
+      padding: task.todos.length <= 2
+          ? EdgeInsets.only(bottom: 12.h)
+          : EdgeInsets.zero,
       child: Stack(
+        alignment: Alignment.bottomCenter,
         children: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 8.w),
@@ -41,12 +44,15 @@ class _TodoContent extends StatelessWidget {
                   padding: EdgeInsets.only(
                     left: 10.w,
                     right: 10.w,
-                    top: 26.h,
+                    top: 16.h,
                   ),
-                  child: SizedBox(
+                  child: Container(
                     width: double.infinity,
-                    height: 100.h,
+                    constraints: BoxConstraints(
+                      maxHeight: 101.h,
+                    ),
                     child: ListView.separated(
+                      shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: task.todos.length,
                       padding: EdgeInsets.zero,
@@ -60,18 +66,36 @@ class _TodoContent extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            height: 121.l,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: Ui.circularBorder(7.l),
-              gradient: LinearGradient(
-                transform: GradientRotation(90.toRadians),
-                stops: const [-0.9, 1],
-                colors: [
-                  context.bgColors.$50.withOpacity(0),
-                  context.bgColors.$50.withOpacity(1),
-                ],
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              width: double.infinity,
+              constraints: BoxConstraints(
+                maxHeight: 111.h,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: Ui.circularBorder(7.l),
+                gradient: LinearGradient(
+                  transform: GradientRotation(90.toRadians),
+                  stops: const [-0.9, 1],
+                  colors: [
+                    context.bgColors.$50.withOpacity(0),
+                    context.bgColors.$50.withOpacity(1),
+                  ],
+                ),
+              ),
+              child: Visibility.maintain(
+                visible: false,
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: task.todos.length,
+                  padding: EdgeInsets.zero,
+                  separatorBuilder: (context, index) => 4.boxHeight,
+                  itemBuilder: (context, index) => _TodoItemWidget(
+                    todo: task.todos[index],
+                  ),
+                ),
               ),
             ),
           ),

@@ -53,12 +53,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return switch (show) {
       true => animate(to: maxDrawerOffset, toTheLeft: false),
       false => animate(to: 0, toTheLeft: true),
-      null => drawerOffsetNotifier.value.isAroundOrGreaterThan(
-          maxDrawerOffset,
-          offBy: 5,
-        )
-            ? animate(to: 0, toTheLeft: true)
-            : animate(to: maxDrawerOffset, toTheLeft: false),
+      null => drawerOffsetNotifier.value
+              .isAroundOrGreaterThan(maxDrawerOffset, offBy: 5)
+          ? animate(to: 0, toTheLeft: true)
+          : animate(to: maxDrawerOffset, toTheLeft: false),
     };
   }
 

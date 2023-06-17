@@ -85,9 +85,9 @@ class _TaskViewState extends State<_TaskView> {
               MultiSliver(
                 children: [
                   const SliverToBoxAdapter(child: _TitleView()),
-                  _TodoView(
-                    todos: todos,
-                  ),
+                  _TodoView(todos: todos),
+                  18.sliverBoxHeight,
+                  const SliverToBoxAdapter(child: CreatedDate()),
                 ],
               ),
               const SliverPinnedHeader(child: _PinnedHeader()),
@@ -96,5 +96,45 @@ class _TaskViewState extends State<_TaskView> {
         ],
       ),
     );
+  }
+}
+
+class CreatedDate extends StatelessWidget {
+  const CreatedDate({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final DateTime createdAt = context.read<TaskVanilla>().state.task.createdAt;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Divider(
+          color: context.neutralColors.$400,
+          thickness: 1.h,
+          height: 1.h,
+        ),
+        8.boxHeight,
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 18.w),
+          child: Text(
+            formatDate(createdAt),
+            style: context.secondaryTypography.caption.medium
+                .withColor(context.neutralColors.$600),
+          ),
+        ),
+      ],
+    );
+  }
+
+  String formatDate(DateTime date) {
+    final String month = DateFormat.MMM().format(date);
+    final String day = date.day.toOrdinal();
+    final String year = date.year.toString().substring(2);
+    final String time = DateFormat.jm().format(date).removeAll(' ');
+
+    final bool isToday = date.day == DateTime.now().day;
+
+    return 'CREATED${isToday ? ' TODAY' : ''}: $day $month, $year | $time'
+        .toUpperCase();
   }
 }

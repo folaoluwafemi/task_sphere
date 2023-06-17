@@ -3,14 +3,14 @@ part of 'tasks_repo_interface.dart';
 class TasksRepository implements TasksRepoInterface {
   late final TasksReader _reader = TasksReader();
   final TaskWriterInterface _tasksWriter;
-  final AnalyticsLocalBufferInterface _analyticsLocalBuffer;
+  final AnalysisManager _analysisManager;
 
   TasksRepository({
     TaskWriterInterface? tasksWriter,
     TodoSourceInterface? todoSource,
-    AnalyticsLocalBufferInterface? analyticsLocalBuffer,
+    AnalysisManager? analysisManager,
   })  : _tasksWriter = tasksWriter ?? TaskWriter(),
-        _analyticsLocalBuffer = analyticsLocalBuffer ?? AnalysisLocalBuffer();
+        _analysisManager = analysisManager ?? AnalysisManager.default_();
 
   @override
   Future<void> addTodo(
@@ -26,7 +26,7 @@ class TasksRepository implements TasksRepoInterface {
       action: AnalyticsAction.create,
     );
 
-    await _analyticsLocalBuffer.push(analytics);
+    await _analysisManager.addAnalytics(analytics);
   }
 
   @override
@@ -38,7 +38,7 @@ class TasksRepository implements TasksRepoInterface {
       action: AnalyticsAction.create,
     );
 
-    await _analyticsLocalBuffer.push(analytics);
+    await _analysisManager.addAnalytics(analytics);
   }
 
   @override
@@ -50,7 +50,7 @@ class TasksRepository implements TasksRepoInterface {
       action: AnalyticsAction.delete,
     );
 
-    await _analyticsLocalBuffer.push(analytics);
+    await _analysisManager.addAnalytics(analytics);
 
     await _reader.fetch(aFresh: true);
   }
@@ -69,7 +69,7 @@ class TasksRepository implements TasksRepoInterface {
       action: AnalyticsAction.delete,
     );
 
-    await _analyticsLocalBuffer.push(analytics);
+    await _analysisManager.addAnalytics(analytics);
   }
 
   @override
@@ -88,7 +88,7 @@ class TasksRepository implements TasksRepoInterface {
       action: AnalyticsAction.update,
     );
 
-    await _analyticsLocalBuffer.push(analytics);
+    await _analysisManager.addAnalytics(analytics);
 
     await _reader.fetch(aFresh: true);
   }
@@ -107,7 +107,7 @@ class TasksRepository implements TasksRepoInterface {
       action: AnalyticsAction.update,
     );
 
-    await _analyticsLocalBuffer.push(analytics);
+    await _analysisManager.addAnalytics(analytics);
 
     await _reader.fetch(aFresh: true);
   }
@@ -123,7 +123,7 @@ class TasksRepository implements TasksRepoInterface {
       action: AnalyticsAction.delete,
     );
 
-    await _analyticsLocalBuffer.push(analytics);
+    await _analysisManager.addAnalytics(analytics);
 
     await _reader.fetch(aFresh: true);
   }

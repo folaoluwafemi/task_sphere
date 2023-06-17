@@ -7,12 +7,19 @@ class AnalysisManager extends VanillaNotifier<Analysis>
   final AnalysisSourceInterface _analyticsSource;
   final AnalyticsLocalBufferInterface _analyticsLocalBuffer;
 
-  AnalysisManager({
+  AnalysisManager._({
     required AnalysisSourceInterface analyticsSource,
     required AnalyticsLocalBufferInterface analyticsLocalBuffer,
   })  : _analyticsSource = analyticsSource,
         _analyticsLocalBuffer = analyticsLocalBuffer,
         super(analyticsLocalBuffer.getAnalysis());
+
+  static final AnalysisManager _instance = AnalysisManager._(
+    analyticsSource: FirebaseAnalysisSource(),
+    analyticsLocalBuffer: AnalysisLocalBuffer(),
+  );
+
+  factory AnalysisManager.default_() => _instance;
 
   Future<void> addAnalytics(Analytics analytics) => handleError(
         _addAnalytics(analytics),
