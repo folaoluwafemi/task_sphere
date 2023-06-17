@@ -114,8 +114,6 @@ class TaskVanilla extends VanillaNotifier<TaskState>
     if (!state.task.isEmpty) return false;
     notifyLoading();
 
-    await Future.delayed(const Duration(seconds: 2));
-
     await _repo.deleteTask(state.task.id);
 
     notifySuccess();
@@ -126,8 +124,6 @@ class TaskVanilla extends VanillaNotifier<TaskState>
 
   Future<void> _save() async {
     notifyLoading();
-
-    await Future.delayed(const Duration(seconds: 2));
 
     await _repo.updateTask(state.task);
 

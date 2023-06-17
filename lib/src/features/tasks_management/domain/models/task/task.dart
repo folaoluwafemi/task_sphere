@@ -31,6 +31,18 @@ class Task implements Comparable<Task> {
           createdAt: DateTime.now(),
         );
 
+  @override
+  String toString() {
+    return '''
+    Task{
+      id: $id,
+      title: $title,
+      description: $description,
+      todos: $todos,
+      createdAt: $createdAt
+    }''';
+  }
+
   bool get isEmpty => title.isEmpty && description.isEmpty && todos.isEmpty;
 
   bool get isCompleted =>

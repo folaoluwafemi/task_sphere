@@ -34,6 +34,10 @@ class TodoSource with FirebaseErrorHandlerMixin implements TodoSourceInterface {
   @override
   Future<void> deleteTodo(Todo todo) => handleError(_deleteTodo(todo));
 
+  Future<void> searchForTodo(String query) async {
+    _tasks.where('todos', arrayContains: 'query');
+  }
+
   Future<void> _deleteTodo(Todo todo) async {
     await _tasks.doc(_taskId).update({
       Keys.todos: FieldValue.arrayRemove([todo.toMap()]),

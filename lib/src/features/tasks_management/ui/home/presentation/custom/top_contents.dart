@@ -58,15 +58,15 @@ class _TopContents extends StatelessWidget {
             ),
           ),
         ),
-        IconButton(
-          onPressed: () {},
-          icon: SvgDecorator(
-            color: context.neutralColors.$800,
-            child: SvgPicture.asset(
-              VectorAssets.nightMoon,
-            ),
-          ),
-        ),
+        // IconButton(
+        //   onPressed: () {},
+        //   icon: SvgDecorator(
+        //     color: context.neutralColors.$800,
+        //     child: SvgPicture.asset(
+        //       VectorAssets.nightMoon,
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

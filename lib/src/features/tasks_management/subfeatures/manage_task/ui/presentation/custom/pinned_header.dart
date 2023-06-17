@@ -66,9 +66,6 @@ class _CloseButton extends StatefulWidget {
 class _CloseButtonState extends State<_CloseButton> {
   Future<void> onClose() async {
     FocusScope.of(context).unfocus();
-    final bool isEmpty = await context.read<TaskVanilla>().deleteEmptyTask();
-    if (!mounted) return;
-    if (!isEmpty) context.read<TaskVanilla>().save();
     context.pop();
   }
 

@@ -22,6 +22,8 @@ class _TaskContentRow extends StatelessWidget {
                 Text(
                   task.title,
                   style: context.primaryTypography.title.small,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
                 ),
                 9.boxHeight,
                 Text(

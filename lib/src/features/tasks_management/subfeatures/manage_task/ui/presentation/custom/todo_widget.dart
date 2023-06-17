@@ -80,7 +80,10 @@ class _TodoWidgetState extends State<TodoWidget> {
             onSubmitted: onSubmit,
             maxLines: null,
             style: context.secondaryTypography.paragraph.medium.asRegular,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
+              hintText: 'Enter item',
+              hintStyle: context.secondaryTypography.paragraph.medium.asRegular
+                  .copyWith(color: context.neutralColors.$600),
               isDense: true,
               border: InputBorder.none,
             ),
