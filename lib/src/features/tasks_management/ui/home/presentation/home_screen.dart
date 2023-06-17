@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 import 'package:task_sphere/src/entities/app/app_barrel.dart';
 import 'package:task_sphere/src/entities/user/user_barrel.dart';
 import 'package:task_sphere/src/features/_auth/auth_barrel.dart';
+import 'package:task_sphere/src/features/analytics/analytics_barrel.dart';
 import 'package:task_sphere/src/features/tasks_management/task_management_barrel.dart';
 import 'package:task_sphere/src/features/tasks_management/ui/home/presentation/custom/task_card/task_card.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
@@ -26,20 +26,18 @@ part 'custom/home_view.dart';
 
 part 'custom/menu_button.dart';
 
-part 'custom/progressive_analytics_widget.dart';
-
 part 'custom/tasks_filter.dart';
 
 part 'custom/top_contents.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeScreenState extends State<HomeScreen> {
   bool showingDrawer = false;
 
   final ValueNotifier<double> drawerOffsetNotifier = ValueNotifier<double>(0);
@@ -124,53 +122,44 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: context.bgColors.$100,
-      body: GestureDetector(
-        behavior: HitTestBehavior.translucent,
-        onHorizontalDragEnd: (details) => animateToExtreme(),
-        onHorizontalDragUpdate: (details) {
-          lastDraggedDirectionIsNegative = details.delta.dx.isNegative;
-
-          setDrawerOffsetValue(
-            drawerOffsetNotifier.value + details.delta.dx,
-          );
-        },
-        child: ValueListenableBuilder<double>(
-          valueListenable: drawerOffsetNotifier,
-          builder: (_, drawerOffset, __) {
-            drawerOffset = drawerOffset.capBetween(0, maxDrawerOffset);
-            return Stack(
-              clipBehavior: Clip.none,
-              children: [
-                Transform.translate(
-                  offset: Offset(drawerOffset - maxDrawerOffset, 0),
-                  child: const _Drawer(),
-                ),
-                Transform.translate(
-                  offset: Offset(drawerOffset, 0),
-                  child: _HomeView(
-                    showDrawer: toggleShowing,
-                    drawerOffsetNotifier: drawerOffsetNotifier,
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
-      ),
-    );
-  }
-}
-
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
     return VanillaNotifierHolder<HomeVanilla>(
       createNotifier: () => HomeVanilla()..initialize(),
-      child: const HomePage(),
+      child: Scaffold(
+        backgroundColor: context.bgColors.$100,
+        body: GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onHorizontalDragEnd: (details) => animateToExtreme(),
+          onHorizontalDragUpdate: (details) {
+            lastDraggedDirectionIsNegative = details.delta.dx.isNegative;
+
+            setDrawerOffsetValue(
+              drawerOffsetNotifier.value + details.delta.dx,
+            );
+          },
+          child: ValueListenableBuilder<double>(
+            valueListenable: drawerOffsetNotifier,
+            builder: (_, drawerOffset, __) {
+              drawerOffset = drawerOffset.capBetween(0, maxDrawerOffset);
+              return Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  Transform.translate(
+                    offset: Offset(drawerOffset - maxDrawerOffset, 0),
+                    child: const _Drawer(),
+                  ),
+                  Transform.translate(
+                    offset: Offset(drawerOffset, 0),
+                    child: _HomeView(
+                      showDrawer: toggleShowing,
+                      drawerOffsetNotifier: drawerOffsetNotifier,
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+        ),
+      ),
     );
   }
 }

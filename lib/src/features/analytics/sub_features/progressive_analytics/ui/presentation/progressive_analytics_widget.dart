@@ -1,7 +1,10 @@
-part of '../home_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
+import 'package:task_sphere/src/utils/utils_barrel.dart';
 
-class _ProgressiveAnalyticsWidget extends StatelessWidget {
-  const _ProgressiveAnalyticsWidget({
+class ProgressiveAnalyticsWidget extends StatelessWidget {
+  const ProgressiveAnalyticsWidget({
     Key? key,
   }) : super(key: key);
 
