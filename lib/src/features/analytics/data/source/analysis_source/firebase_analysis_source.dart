@@ -8,7 +8,7 @@ class FirebaseAnalysisSource
   FirebaseAnalysisSource({
     String? userId,
   }) : _analysisCollection = FirebaseFirestore.instance
-            .collection(Keys.users)
+            .collection(Keys.user)
             .doc(userId ?? UserManager.requireUser.uid)
             .collection(Keys.analysis);
 
@@ -39,12 +39,22 @@ class FirebaseAnalysisSource
   @override
   Future<void> uploadAnalysis(Analysis analysis) => handleError(
         _uploadAnalysis(analysis),
+        catcher: (failure) {
+          print('upload analysis error: ${failure.message}');
+        },
       );
 
   Future<void> _uploadAnalysis(Analysis analysis) async {
-    final WriteBatch batch = FirebaseFirestore.instance.batch();
+    WriteBatch batch = FirebaseFirestore.instance.batch();
 
-    for (final Analytics analytics in analysis) {
+    for (int i = 0; i < analysis.length; i++) {
+      if (i % 300 == 0) {
+        await batch.commit();
+        batch = FirebaseFirestore.instance.batch();
+      }
+
+      final Analytics analytics = analysis[i];
+      if (analytics is TodoAnalytics) continue;
       batch.set(
         _analysisCollection.doc(analytics.id),
         analytics.toMap(),

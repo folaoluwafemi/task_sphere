@@ -17,7 +17,7 @@ mixin BasicErrorHandlerMixin {
       } else {
         failure = e;
       }
-      debugPrint('bloc handler error: $failure');
+      debugPrint('basic error handler: $failure');
 
       return catcher != null ? catcher.call(failure) : Future<T>.error(failure);
     }

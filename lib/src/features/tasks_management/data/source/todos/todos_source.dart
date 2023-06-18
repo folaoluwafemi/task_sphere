@@ -9,7 +9,7 @@ class TodoSource with FirebaseErrorHandlerMixin implements TodoSourceInterface {
     required String taskId,
   })  : _taskId = taskId,
         _tasks = FirebaseFirestore.instance
-            .collection(Keys.users)
+            .collection(Keys.user)
             .doc(userId ?? UserManager.requireUser.uid)
             .collection(Keys.tasks);
 

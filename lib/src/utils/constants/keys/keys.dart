@@ -1,5 +1,5 @@
 abstract final class Keys {
-  static const String users = 'User';
+  static const String user = 'User';
   static const String tasks = 'Tasks';
   static const String analysis = 'Analysis';
   static const String todos = 'todos';

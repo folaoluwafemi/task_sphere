@@ -8,7 +8,7 @@ class TasksReader extends VanillaNotifier<List<Task>>
   TasksReader._({
     required String? userId,
   })  : _tasks = FirebaseFirestore.instance
-            .collection(Keys.users)
+            .collection(Keys.user)
             .doc(userId ?? UserManager.requireUser.uid)
             .collection(Keys.tasks),
         super([]);

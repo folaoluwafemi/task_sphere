@@ -15,6 +15,9 @@ class _HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<_HomeView> {
+
+
+
   Future<void> onTaskCardPressed(Task task) async {
     await context.pushNamed(AppRoute.task.name, extra: task);
 

@@ -1,3 +1,4 @@
+import 'package:task_sphere/src/entities/entities_barrel.dart';
 import 'package:task_sphere/src/features/analytics/data/analytics_data_barrel.dart';
 import 'package:task_sphere/src/features/analytics/domain/analytics_domain_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
@@ -14,12 +15,12 @@ class AnalysisManager extends VanillaNotifier<Analysis>
         _analyticsLocalBuffer = analyticsLocalBuffer,
         super(analyticsLocalBuffer.getAnalysis());
 
-  static final AnalysisManager _instance = AnalysisManager._(
+  static final AnalysisManager instance = AnalysisManager._(
     analyticsSource: FirebaseAnalysisSource(),
     analyticsLocalBuffer: AnalysisLocalBuffer(),
   );
 
-  factory AnalysisManager.default_() => _instance;
+  factory AnalysisManager.default_() => instance;
 
   Future<void> addAnalytics(Analytics analytics) => handleError(
         _addAnalytics(analytics),
@@ -35,12 +36,41 @@ class AnalysisManager extends VanillaNotifier<Analysis>
     state = newAnalysis;
   }
 
-  Future<void> flushBuffer() => handleError(_flushBuffer());
+  Future<void> flushBuffer() => handleError(
+        _flushBuffer(),
+        catcher: (failure) {
+          Future.delayed(const Duration(seconds: 2), () {
+            if (AppRouter.navigatorKey.currentContext != null) {
+              AlertType.error.show(
+                AppRouter.navigatorKey.currentContext!,
+                text: 'An error occurred uploading your analytics!!',
+              );
+            }
+          });
+        },
+      );
 
   Future<void> _flushBuffer() async {
     final List<Analytics> buffer = _analyticsLocalBuffer.getAnalysis();
+    if (buffer.isEmpty) return;
 
-    await _analyticsSource.uploadAnalysis(buffer);
+    // await _analyticsSource.uploadAnalysis(buffer);
+
+    //
+    // // print('')
+    //
+    //
+    // debugPrint(
+    //   '''
+    //   buffer: ${buffer.whereType<TaskAnalytics>().toList().map((e) {
+    //     return e
+    //         .toMap()
+    //         .entries
+    //         .map((entry) => '\nkeytype: ${entry.key.runtimeType} | valueType: ${entry.value.runtimeType}\n');
+    //   })}
+    //
+    //   ''',
+    // );
 
     await clear();
   }
@@ -48,5 +78,7 @@ class AnalysisManager extends VanillaNotifier<Analysis>
   Future<void> clear() async {
     await _analyticsLocalBuffer.clearBuffer();
     state = [];
+
+    print('buffer cleared');
   }
 }
