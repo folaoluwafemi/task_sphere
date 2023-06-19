@@ -4,6 +4,7 @@ import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 part 'tasks_buffer.dart';
 
+// might not be useful
 abstract interface class TasksBufferInterface {
   List<Task> fetchTasks();
 

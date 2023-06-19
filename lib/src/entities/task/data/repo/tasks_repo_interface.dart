@@ -2,6 +2,7 @@ import 'package:task_sphere/src/entities/task/task_barrel.dart';
 import 'package:task_sphere/src/entities/todo/data/source/todos_source_interface.dart';
 import 'package:task_sphere/src/features/analytics/sub_features/progressive_analytics/data/source/tasks_buffer_interface.dart';
 import 'package:task_sphere/src/features/tasks_management/task_management_barrel.dart';
+import 'package:task_sphere/src/entities/productivity_history/productivity_history_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 part 'tasks_repository.dart';

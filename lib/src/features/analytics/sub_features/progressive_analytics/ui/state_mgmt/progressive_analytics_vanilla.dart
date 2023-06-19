@@ -8,14 +8,8 @@ class ProgressiveAnalyticsVanilla extends VanillaNotifier {
 
   ProgressiveAnalyticsVanilla() : super(null);
 
-  ProgressiveAnalysis _computeAnalysisFrom(List<Task> tasks) {
+  void _computeAnalysisFrom(List<Task> tasks) {
     final ProgressiveAnalysis analysis = {};
-    for(final Task task in tasks){
-
-
-
-
-    }
-
+    for (final Task task in tasks) {}
   }
 }

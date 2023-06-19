@@ -1,6 +1,12 @@
 import 'package:task_sphere/src/entities/productivity_history/domain/model/productivity_snapshot.dart';
 
-class TaskProductivityHistory {
+extension ProductivitySnapshotsExtension on List<ProductivitySnapshot> {
+  List<Map<String, dynamic>> toSerializerList() {
+    return map((e) => e.toMap()).toList();
+  }
+}
+
+class TaskProductivityHistory implements Comparable<TaskProductivityHistory> {
   final String taskId;
   final List<ProductivitySnapshot> snapshots;
 
@@ -44,10 +50,9 @@ class TaskProductivityHistory {
       snapshots: snapshots ?? this.snapshots,
     );
   }
-}
 
-extension ProductivitySnapshotsExtension on List<ProductivitySnapshot> {
-  List<Map<String, dynamic>> toSerializerList() {
-    return map((e) => e.toMap()).toList();
+  @override
+  int compareTo(TaskProductivityHistory other) {
+    return other.taskId.compareTo(taskId);
   }
 }

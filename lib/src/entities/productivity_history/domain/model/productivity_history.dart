@@ -1,4 +1,4 @@
-import 'package:task_sphere/src/entities/productivity_history/domain/model/task_productivity_history.dart';
+import 'package:task_sphere/src/entities/productivity_history/productivity_history_barrel.dart';
 
 typedef ProductivityHistory = List<TaskProductivityHistory>;
 

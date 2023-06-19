@@ -84,4 +84,13 @@ class ProductivityHistorySource
 
     return history;
   }
+
+  @override
+  Future<void> removeHistoryFor(String taskId) => handleError(
+        _removeHistoryFor(taskId),
+      );
+
+  Future<void> _removeHistoryFor(String taskId) async {
+    await _box.delete(taskId);
+  }
 }

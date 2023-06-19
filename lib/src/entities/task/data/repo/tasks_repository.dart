@@ -2,6 +2,8 @@ part of 'tasks_repo_interface.dart';
 
 class TasksRepository implements TasksRepoInterface {
   late final TasksReader _reader = TasksReader();
+  late final ProductivityHistoryManager _historyManager =
+      ProductivityHistoryManager();
   final TaskWriterInterface _tasksWriter;
   final TasksBufferInterface _buffer;
 
@@ -18,6 +20,8 @@ class TasksRepository implements TasksRepoInterface {
 
     await _buffer.addTask(task);
 
+    await _historyManager.pushSnapshotFrom(task);
+
     await _reader.fetch(aFresh: true);
   }
 
@@ -26,6 +30,8 @@ class TasksRepository implements TasksRepoInterface {
     await _tasksWriter.deleteTask(taskId);
 
     await _buffer.removeTask(taskId);
+
+    await _historyManager.deleteHistoryFor(taskId);
 
     await _reader.fetch(aFresh: true);
   }
@@ -45,6 +51,8 @@ class TasksRepository implements TasksRepoInterface {
       );
     }
 
+    await _historyManager.pushSnapshotFrom(task);
+
     await _buffer.updateTask(task);
   }
 
@@ -60,6 +68,8 @@ class TasksRepository implements TasksRepoInterface {
     await _tasksWriter.updateTask(task);
 
     await _buffer.updateTask(task);
+
+    await _historyManager.pushSnapshotFrom(task);
 
     await _reader.fetch(aFresh: true);
   }
@@ -79,6 +89,8 @@ class TasksRepository implements TasksRepoInterface {
         ..addAll(todos),
     );
 
+    await _historyManager.pushSnapshotFrom(task);
+
     await _buffer.updateTask(task);
 
     await _reader.fetch(aFresh: true);
@@ -89,6 +101,8 @@ class TasksRepository implements TasksRepoInterface {
     final TodoSource source = TodoSource(taskId: taskId);
 
     await source.deleteAllTodos();
+
+    await _historyManager.deleteHistoryFor(taskId);
 
     await _buffer.removeTask(taskId);
 
