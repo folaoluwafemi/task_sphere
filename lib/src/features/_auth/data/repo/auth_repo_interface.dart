@@ -3,7 +3,6 @@ import 'package:task_sphere/archive/analytics/data/source/analysis_source/analys
 import 'package:task_sphere/src/entities/user/data/user_source/network_user_source.dart';
 import 'package:task_sphere/src/entities/user/user_barrel.dart';
 import 'package:task_sphere/src/features/_auth/data/auth_api/auth_api.dart';
-import 'package:task_sphere/src/features/analytics/analytics_barrel.dart';
 
 part 'auth_repository.dart';
 

@@ -44,7 +44,7 @@ class _HomeViewState extends State<_HomeView> {
                     ),
                   ),
                   43.sliverBoxHeight,
-                  SliverToBoxAdapter(
+                  const SliverToBoxAdapter(
                     child: ProgressiveAnalyticsWidget(),
                   ),
                   24.sliverBoxHeight,

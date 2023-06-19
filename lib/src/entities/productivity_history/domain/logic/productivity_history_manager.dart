@@ -60,14 +60,12 @@ class ProductivityHistoryManager extends VanillaNotifier<ProductivityHistory>
 
   @override
   List<ProductivitySnapshot> get snapshots => history.fold(
-      [], (previousValue, element) => previousValue..addAll(element.snapshots))
-    ..sort(ProductivitySnapshotUtils.compare);
+        [],
+        (previousValue, element) => previousValue..addAll(element.snapshots),
+      )..sort(ProductivitySnapshotUtils.compare);
 
   void _updateState() {
     state = List.from(_source.fetchAll());
-    print(
-      'state: ${snapshots.fold(0, (value, element) => value + element.value)}',
-    );
   }
 
   @override

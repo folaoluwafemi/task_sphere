@@ -7,7 +7,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 import 'package:task_sphere/src/entities/app/app_barrel.dart';
-import 'package:task_sphere/src/entities/task/task_barrel.dart';
 import 'package:task_sphere/src/entities/user/user_barrel.dart';
 import 'package:task_sphere/src/features/_auth/auth_barrel.dart';
 import 'package:task_sphere/src/features/analytics/analytics_barrel.dart';

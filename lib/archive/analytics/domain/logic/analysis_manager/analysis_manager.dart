@@ -1,20 +1,16 @@
 import 'package:task_sphere/archive/analytics/data/analytics_data_barrel.dart';
 import 'package:task_sphere/archive/analytics/domain/analytics_domain_barrel.dart';
 import 'package:task_sphere/src/entities/entities_barrel.dart';
-import 'package:task_sphere/src/entities/task/task_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 class AnalysisManager extends VanillaNotifier<Analysis>
     with BasicErrorHandlerMixin {
-  final AnalysisSourceInterface _analyticsSource;
   final AnalyticsLocalBufferInterface _analyticsLocalBuffer;
-  late final TasksReader _reader = TasksReader();
 
   AnalysisManager._({
     required AnalysisSourceInterface analyticsSource,
     required AnalyticsLocalBufferInterface analyticsLocalBuffer,
-  })  : _analyticsSource = analyticsSource,
-        _analyticsLocalBuffer = analyticsLocalBuffer,
+  })  : _analyticsLocalBuffer = analyticsLocalBuffer,
         super(analyticsLocalBuffer.getAnalysis());
 
   static final AnalysisManager instance = AnalysisManager._(
@@ -64,7 +60,5 @@ class AnalysisManager extends VanillaNotifier<Analysis>
   Future<void> clear() async {
     await _analyticsLocalBuffer.clearBuffer();
     state = [];
-
-    print('buffer cleared');
   }
 }

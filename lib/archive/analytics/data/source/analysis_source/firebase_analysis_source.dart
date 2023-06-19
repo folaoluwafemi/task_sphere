@@ -39,9 +39,6 @@ class FirebaseAnalysisSource
   @override
   Future<void> uploadAnalysis(Analysis analysis) => handleError(
         _uploadAnalysis(analysis),
-        catcher: (failure) {
-          print('upload analysis error: ${failure.message}');
-        },
       );
 
   Future<void> _uploadAnalysis(Analysis analysis) async {

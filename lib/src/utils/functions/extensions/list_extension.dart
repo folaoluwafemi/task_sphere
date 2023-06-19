@@ -40,7 +40,9 @@ extension ListExtension<T> on List<T> {
   }
 
   bool isEqualBy(
-      List<T> list, bool Function(T element, T other) equalityChecker) {
+    List<T> list,
+    bool Function(T element, T other) equalityChecker,
+  ) {
     if (length != list.length) return false;
     for (int i = 0; i < length; i++) {
       if (!equalityChecker(this[i], list[i])) return false;
