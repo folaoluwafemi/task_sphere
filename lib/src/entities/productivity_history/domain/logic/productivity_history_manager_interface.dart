@@ -14,4 +14,6 @@ abstract interface class ProductivityHistoryManagerInterface {
   ProductivityHistory get history;
 
   List<ProductivitySnapshot> get snapshots;
+
+  void fetchHistory();
 }

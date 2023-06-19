@@ -1,13 +1,10 @@
 part of 'progressive_analytics_vanilla.dart';
 
-/// DateTime = day
-/// int = productivity point
-
 class ProgressiveAnalysisState extends VanillaStateWithStatus {
-  final ProgressiveAnalysis progressiveAnalysis;
+  final List<ProductivitySnapshot> historySnapshots;
 
   const ProgressiveAnalysisState({
-    required this.progressiveAnalysis,
+    required this.historySnapshots,
     super.success = false,
     super.loading = false,
     super.error,
@@ -15,13 +12,13 @@ class ProgressiveAnalysisState extends VanillaStateWithStatus {
 
   @override
   ProgressiveAnalysisState copyWith({
-    ProgressiveAnalysis? progressiveAnalysis,
+    List<ProductivitySnapshot>? historySnapshots,
     bool? success,
     bool? loading,
     Failure? error,
   }) {
     return ProgressiveAnalysisState(
-      progressiveAnalysis: progressiveAnalysis ?? this.progressiveAnalysis,
+      historySnapshots: historySnapshots ?? this.historySnapshots,
       success: success ?? this.success,
       loading: loading ?? this.loading,
       error: error ?? this.error,
@@ -30,19 +27,9 @@ class ProgressiveAnalysisState extends VanillaStateWithStatus {
 
   @override
   List<Object?> get props => [
-        progressiveAnalysis,
+        historySnapshots,
         success,
         loading,
         error,
       ];
-}
-
-typedef ProgressiveAnalysis = Map<DateTime, int>;
-
-extension on ProgressiveAnalysis {
-  DateTime? maybeKeyWithin(DateTime dateTime) {
-    return keys.toList().firstWhereOrNull((key) {
-      return key.containsTimeWithinDay(dateTime);
-    });
-  }
 }

@@ -73,4 +73,7 @@ class ProductivityHistoryManager extends VanillaNotifier<ProductivityHistory>
     await _source.removeHistoryFor(taskId);
     _updateState();
   }
+
+  @override
+  void fetchHistory() => _updateState();
 }
