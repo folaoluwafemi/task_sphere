@@ -87,7 +87,8 @@ class _HomeViewState extends State<_HomeView> {
                                 separatorBuilder: (_, __) => 16.boxHeight,
                                 itemBuilder: (_, index) => GestureDetector(
                                   onTap: () => onTaskCardPressed(
-                                      state.currentTasks[index]),
+                                    state.currentTasks[index],
+                                  ),
                                   child: TaskCard(
                                     task: state.currentTasks[index],
                                   ),

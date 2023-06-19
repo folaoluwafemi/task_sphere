@@ -44,7 +44,10 @@ class TasksReader extends VanillaNotifier<List<Task>>
 
     final QuerySnapshot snapshot = await _nextQuery!.get();
 
-    if (snapshot.docs.isEmpty) return state;
+    if (snapshot.docs.isEmpty) {
+      state = [];
+      return state;
+    }
 
     _nextQuery = _nextQuery!.startAfterDocument(snapshot.docs.last).limit(25);
 

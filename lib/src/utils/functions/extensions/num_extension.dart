@@ -85,6 +85,9 @@ extension IntExtension on int {
         this,
         (int index) => index + start,
       );
+
+  Duration get seconds => Duration(seconds: this);
+
 }
 
 extension GenericNumExtension<T extends num> on T {

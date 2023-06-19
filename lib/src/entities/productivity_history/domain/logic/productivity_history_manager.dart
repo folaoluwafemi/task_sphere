@@ -37,8 +37,10 @@ class ProductivityHistoryManager extends VanillaNotifier<ProductivityHistory>
 
     taskHistory.snapshots.sort(ProductivitySnapshotUtils.compare);
 
-    final int productivityValue =
-        task.productivityPoint - taskHistory.snapshots.last.value;
+    final int incoming = task.productivityPoint;
+    final int current = taskHistory.snapshots.last.value;
+
+    final int productivityValue = incoming > current ? incoming : -current;
 
     await _source.addSnapshot(
       taskId: task.id,
@@ -63,6 +65,9 @@ class ProductivityHistoryManager extends VanillaNotifier<ProductivityHistory>
 
   void _updateState() {
     state = List.from(_source.fetchAll());
+    print(
+      'state: ${snapshots.fold(0, (value, element) => value + element.value)}',
+    );
   }
 
   @override

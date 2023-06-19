@@ -64,12 +64,15 @@ class TasksRepository implements TasksRepoInterface {
   }
 
   @override
-  Future<void> updateTask(Task task) async {
+  Future<void> updateTask(
+    Task task, {
+    required bool shouldUpdateHistory,
+  }) async {
     await _tasksWriter.updateTask(task);
 
     await _buffer.updateTask(task);
 
-    await _historyManager.pushSnapshotFrom(task);
+    if (shouldUpdateHistory) await _historyManager.pushSnapshotFrom(task);
 
     await _reader.fetch(aFresh: true);
   }
@@ -77,6 +80,7 @@ class TasksRepository implements TasksRepoInterface {
   @override
   Future<void> updateTodos(
     List<Todo> todos, {
+    required bool shouldUpdateHistory,
     required Task task,
   }) async {
     final TodoSource source = TodoSource(taskId: task.id);
@@ -89,7 +93,7 @@ class TasksRepository implements TasksRepoInterface {
         ..addAll(todos),
     );
 
-    await _historyManager.pushSnapshotFrom(task);
+    if (shouldUpdateHistory) await _historyManager.pushSnapshotFrom(task);
 
     await _buffer.updateTask(task);
 

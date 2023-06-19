@@ -1,3 +1,4 @@
+import 'package:task_sphere/src/entities/productivity_history/productivity_history_barrel.dart';
 import 'package:task_sphere/src/features/tasks_management/task_management_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
@@ -68,7 +69,11 @@ class TaskVanilla extends VanillaNotifier<TaskState>
 
     final Task allAsCompleted = state.task.copyWithTodosCompleted();
 
-    await _repo.updateTodos(allAsCompleted.todos, task: state.task);
+    await _repo.updateTodos(
+      allAsCompleted.todos,
+      task: state.task,
+      shouldUpdateHistory: true,
+    );
 
     notifySuccess();
   }
@@ -118,6 +123,7 @@ class TaskVanilla extends VanillaNotifier<TaskState>
         todos: [...state.task.todos, todo],
       ),
     );
+    await ProductivityHistoryManager.instance.pushSnapshotFrom(state.task);
     await _save();
   }
 
@@ -133,7 +139,14 @@ class TaskVanilla extends VanillaNotifier<TaskState>
 
     todos.replaceWhere([todo], (element) => element.id == todo.id);
 
-    await _repo.updateTodos(todos, task: state.task);
+    await _repo.updateTodos(
+      todos,
+      task: state.task,
+      shouldUpdateHistory: !state.task.todos.isEqualBy(todos, (element, other) {
+        return element.status == other.status &&
+            element.priority == other.priority;
+      }),
+    );
     await _reFetch();
   }
 
@@ -159,7 +172,7 @@ class TaskVanilla extends VanillaNotifier<TaskState>
   Future<void> _save() async {
     notifyLoading();
 
-    await _repo.updateTask(state.task);
+    await _repo.updateTask(state.task, shouldUpdateHistory: false);
 
     notifySuccess();
   }

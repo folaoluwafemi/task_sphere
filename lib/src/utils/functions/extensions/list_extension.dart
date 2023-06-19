@@ -31,6 +31,23 @@ extension ListExtension<T> on List<T> {
     return nextList.every(test);
   }
 
+  bool isEqualTo(List<T> list) {
+    if (length != list.length) return false;
+    for (int i = 0; i < length; i++) {
+      if (this[i] != list[i]) return false;
+    }
+    return true;
+  }
+
+  bool isEqualBy(
+      List<T> list, bool Function(T element, T other) equalityChecker) {
+    if (length != list.length) return false;
+    for (int i = 0; i < length; i++) {
+      if (!equalityChecker(this[i], list[i])) return false;
+    }
+    return true;
+  }
+
   List<E> mapWithIndex<E>(E Function(int index, T element) test) {
     final List<E> nextList = [];
     for (int i = 0; i < length; i++) {

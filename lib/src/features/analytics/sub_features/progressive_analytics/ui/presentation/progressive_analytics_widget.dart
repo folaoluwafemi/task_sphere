@@ -18,10 +18,15 @@ class ProgressiveAnalyticsWidget extends StatelessWidget {
     return VanillaBuilder<ProgressiveAnalyticsVanilla,
         ProgressiveAnalysisState>(
       builder: (context, state) {
-        final List<ProductivitySnapshot> snapshots = state.historySnapshots;
+        final List<ProductivitySnapshot> snapshots = List.from(
+          state.historySnapshots.isEmpty
+              ? [ProductivitySnapshotUtils.empty]
+              : state.historySnapshots,
+        );
 
         return _ProgressiveAnalysisBuilder(
           snapshots: snapshots,
+          key: ValueKey(snapshots),
         );
       },
     );
@@ -245,11 +250,12 @@ class _ProgressiveAnalysisBuilderState
                         mainAxisExtent: 18.w,
                         childAspectRatio: 18.w / 14.h,
                       ),
-                      itemBuilder: (context, index) =>
-                          ProductivityUnit.fromValue(
-                        values[index],
-                        maxValue: maxValue,
-                      ).widget,
+                      itemBuilder: (context, index) {
+                        return ProductivityUnit.fromValue(
+                          values[index],
+                          maxValue: maxValue,
+                        ).widget;
+                      },
                     ),
                   ),
                 ],

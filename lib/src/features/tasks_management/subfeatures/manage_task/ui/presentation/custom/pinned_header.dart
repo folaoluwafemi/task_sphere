@@ -71,6 +71,12 @@ class _CloseButton extends StatefulWidget {
 
 class _CloseButtonState extends State<_CloseButton> {
   Future<void> onClose() async {
+    final bool isLoading = context.read<TaskVanilla>().state.loading;
+    if (isLoading) {
+      AlertType.info.show(context, text: 'Wait a sec...😉', delay: 3.seconds);
+      return;
+    }
+
     FocusScope.of(context).unfocus();
     context.pop();
   }

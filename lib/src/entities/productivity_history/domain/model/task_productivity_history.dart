@@ -22,6 +22,12 @@ class TaskProductivityHistory implements Comparable<TaskProductivityHistory> {
     };
   }
 
+  int get totalProductivityPoint {
+    return snapshots.fold<int>(0, (previousValue, element) {
+      return previousValue + element.value;
+    });
+  }
+
   factory TaskProductivityHistory.fromMap(Map<String, dynamic> map) {
     return TaskProductivityHistory(
       taskId: map['taskId'] as String,

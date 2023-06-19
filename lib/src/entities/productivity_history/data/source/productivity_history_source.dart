@@ -53,7 +53,9 @@ class ProductivityHistorySource
 
     return TaskProductivityHistory(
       taskId: taskId,
-      snapshots: data.map((e) => ProductivitySnapshotUtils.fromMap(e)).toList(),
+      snapshots: data.map((e) {
+        return ProductivitySnapshotUtils.fromMap((e as Map).cast());
+      }).toList(),
     );
   }
 

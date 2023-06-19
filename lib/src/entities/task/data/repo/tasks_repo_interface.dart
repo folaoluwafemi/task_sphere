@@ -1,8 +1,8 @@
+import 'package:task_sphere/src/entities/productivity_history/productivity_history_barrel.dart';
 import 'package:task_sphere/src/entities/task/task_barrel.dart';
 import 'package:task_sphere/src/entities/todo/data/source/todos_source_interface.dart';
 import 'package:task_sphere/src/features/analytics/sub_features/progressive_analytics/data/source/tasks_buffer_interface.dart';
 import 'package:task_sphere/src/features/tasks_management/task_management_barrel.dart';
-import 'package:task_sphere/src/entities/productivity_history/productivity_history_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 part 'tasks_repository.dart';
@@ -13,6 +13,7 @@ abstract interface class TasksRepoInterface {
   Future<void> updateTodos(
     List<Todo> todos, {
     required Task task,
+    required bool shouldUpdateHistory,
   });
 
   Future<void> deleteTodo(
@@ -24,7 +25,10 @@ abstract interface class TasksRepoInterface {
 
   Future<void> createTask(Task task);
 
-  Future<void> updateTask(Task task);
+  Future<void> updateTask(
+    Task task, {
+    required bool shouldUpdateHistory,
+  });
 
   Future<void> deleteTask(String taskId);
 }

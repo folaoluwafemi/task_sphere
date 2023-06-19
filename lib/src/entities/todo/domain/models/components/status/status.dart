@@ -8,7 +8,7 @@ part 'status_widget.dart';
 enum Status {
   todo(1, 'Todo', 'To-do', VectorAssets.todo),
   done(2, 'Done', 'Completed', VectorAssets.done),
-  canceled(0, 'Canceled', 'Canceled', VectorAssets.canceled),
+  canceled(-1, 'Canceled', 'Canceled', VectorAssets.canceled),
   ;
 
   final String text, styledText, vectorAsset;

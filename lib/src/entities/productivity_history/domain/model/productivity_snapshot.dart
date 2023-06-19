@@ -3,6 +3,11 @@ import 'package:task_sphere/src/utils/utils_barrel.dart';
 typedef ProductivitySnapshot = ({DateTime dateTime, int value});
 
 abstract final class ProductivitySnapshotUtils {
+  static ProductivitySnapshot get empty => (
+        dateTime: DateTime.now(),
+        value: 0,
+      );
+
   static int compare(ProductivitySnapshot a, ProductivitySnapshot b) {
     return a.dateTime.compareTo(b.dateTime);
   }
