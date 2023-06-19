@@ -7,6 +7,22 @@ extension ListExtension<T> on List<T> {
 
   List<T> get copy => List.from(this);
 
+  T? firstWhereOrNull(bool Function(T element) test) {
+    try {
+      return firstWhere(test);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  T? lastWhereOrNull(bool Function(T element) test) {
+    try {
+      return lastWhere(test);
+    } catch (e) {
+      return null;
+    }
+  }
+
   bool everyAfter(
     int index,
     bool Function(T element) test,
