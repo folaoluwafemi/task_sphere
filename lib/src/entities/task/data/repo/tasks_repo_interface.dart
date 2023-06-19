@@ -1,26 +1,22 @@
-import 'package:task_sphere/src/features/analytics/analytics_barrel.dart';
-import 'package:task_sphere/src/features/analytics/domain/logic/analysis_manager/analysis_manager.dart';
-import 'package:task_sphere/src/features/tasks_management/data/source/todos/todos_source_interface.dart';
+import 'package:task_sphere/src/entities/task/task_barrel.dart';
+import 'package:task_sphere/src/entities/todo/data/source/todos_source_interface.dart';
+import 'package:task_sphere/src/features/analytics/sub_features/progressive_analytics/data/source/tasks_buffer_interface.dart';
 import 'package:task_sphere/src/features/tasks_management/task_management_barrel.dart';
+import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 part 'tasks_repository.dart';
 
 abstract interface class TasksRepoInterface {
-  Future<void> addTodo(
-    Todo todo, {
-    required String taskId,
-  });
-
   Future<List<Todo>> readTodos({required String taskId});
 
   Future<void> updateTodos(
     List<Todo> todos, {
-    required String taskId,
+    required Task task,
   });
 
   Future<void> deleteTodo(
     Todo todo, {
-    required String taskId,
+    required Task task,
   });
 
   Future<void> deleteAllTodos(String taskId);

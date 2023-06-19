@@ -1,5 +1,6 @@
 enum StorageKeys {
   analysis,
+  taskBuffer,
   ;
 
   String get box => '$name-box';

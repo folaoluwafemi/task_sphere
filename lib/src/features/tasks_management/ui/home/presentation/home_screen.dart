@@ -10,7 +10,6 @@ import 'package:task_sphere/src/entities/app/app_barrel.dart';
 import 'package:task_sphere/src/entities/user/user_barrel.dart';
 import 'package:task_sphere/src/features/_auth/auth_barrel.dart';
 import 'package:task_sphere/src/features/analytics/analytics_barrel.dart';
-import 'package:task_sphere/src/features/analytics/domain/logic/analysis_manager/analysis_manager.dart';
 import 'package:task_sphere/src/features/tasks_management/task_management_barrel.dart';
 import 'package:task_sphere/src/features/tasks_management/ui/home/presentation/custom/task_card/task_card.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
@@ -40,12 +39,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool showingDrawer = false;
-
-  @override
-  void initState() {
-    super.initState();
-    AnalysisManager.instance.flushBuffer();
-  }
 
   final ValueNotifier<double> drawerOffsetNotifier = ValueNotifier<double>(0);
 

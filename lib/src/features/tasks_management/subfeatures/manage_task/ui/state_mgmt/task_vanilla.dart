@@ -68,7 +68,7 @@ class TaskVanilla extends VanillaNotifier<TaskState>
 
     final Task allAsCompleted = state.task.copyWithTodosCompleted();
 
-    await _repo.updateTodos(allAsCompleted.todos, taskId: state.task.id);
+    await _repo.updateTodos(allAsCompleted.todos, task: state.task);
 
     notifySuccess();
   }
@@ -101,7 +101,7 @@ class TaskVanilla extends VanillaNotifier<TaskState>
       return;
     }
 
-    await _repo.deleteTodo(todo, taskId: state.task.id);
+    await _repo.deleteTodo(todo, task: state.task);
     reFetch();
     notifySuccess();
   }
@@ -133,7 +133,7 @@ class TaskVanilla extends VanillaNotifier<TaskState>
 
     todos.replaceWhere([todo], (element) => element.id == todo.id);
 
-    await _repo.updateTodos(todos, taskId: state.task.id);
+    await _repo.updateTodos(todos, task: state.task);
     await _reFetch();
   }
 

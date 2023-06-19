@@ -1,7 +1,7 @@
-import 'package:task_sphere/src/entities/entities_barrel.dart';
 import 'package:task_sphere/archive/analytics/data/analytics_data_barrel.dart';
 import 'package:task_sphere/archive/analytics/domain/analytics_domain_barrel.dart';
-import 'package:task_sphere/src/features/tasks_management/task_management_barrel.dart';
+import 'package:task_sphere/src/entities/entities_barrel.dart';
+import 'package:task_sphere/src/entities/task/task_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 class AnalysisManager extends VanillaNotifier<Analysis>
@@ -58,25 +58,8 @@ class AnalysisManager extends VanillaNotifier<Analysis>
 
     // await _analyticsSource.uploadAnalysis(buffer);
 
-    //
-    // // print('')
-    //
-    //
-    // debugPrint(
-    //   '''
-    //   buffer: ${buffer.whereType<TaskAnalytics>().toList().map((e) {
-    //     return e
-    //         .toMap()
-    //         .entries
-    //         .map((entry) => '\nkeytype: ${entry.key.runtimeType} | valueType: ${entry.value.runtimeType}\n');
-    //   })}
-    //
-    //   ''',
-    // );
-
     await clear();
   }
-
 
   Future<void> clear() async {
     await _analyticsLocalBuffer.clearBuffer();

@@ -1,4 +1,4 @@
-import 'package:task_sphere/src/features/tasks_management/task_management_barrel.dart';
+import 'package:task_sphere/src/entities/todo/todo_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 class Task implements Comparable<Task> {
@@ -42,6 +42,11 @@ class Task implements Comparable<Task> {
       createdAt: $createdAt
     }''';
   }
+
+  int get productivityPoint => todos.fold<int>(0, (previousValue, todo) {
+        final int todoPoint = todo.priority.value * todo.status.multiplier;
+        return previousValue + todoPoint;
+      });
 
   bool get isEmpty => title.isEmpty && description.isEmpty && todos.isEmpty;
 

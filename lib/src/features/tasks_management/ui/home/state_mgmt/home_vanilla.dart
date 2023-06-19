@@ -1,4 +1,4 @@
-import 'package:task_sphere/src/features/tasks_management/task_management_barrel.dart';
+import 'package:task_sphere/src/entities/task/task_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 part 'home_state.dart';
