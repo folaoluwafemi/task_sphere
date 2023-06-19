@@ -8,6 +8,8 @@ abstract final class ApiClientsSetup {
   static Future<void> setup() async {
     await Hive.initFlutter();
     await Hive.openBox<List>(StorageKeys.analysis.box);
+    await Hive.openBox<List>(StorageKeys.history.box);
+    await Hive.openBox<Map>(StorageKeys.taskBuffer.box);
 
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,

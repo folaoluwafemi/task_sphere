@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:task_sphere/src/entities/app/ui/theme/theme_barrel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task_sphere/src/entities/app/ui/theme/theme_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 part 'text_styles.dart';
@@ -39,6 +39,7 @@ class AppTypography extends ThemeExtension<AppTypography> {
             medium: TextStyles.secondaryParagraphMediumReg,
             small: TextStyles.secondaryParagraphSmallReg,
           ),
+          footnote: TextStyles.secondaryFootnote,
         ),
         button = TextStyles.buttonLight;
 
@@ -47,6 +48,7 @@ class AppTypography extends ThemeExtension<AppTypography> {
     PrimaryTextStyle? primary,
     SecondaryTextStyle? secondary,
     TextStyle? button,
+    TextStyle? footnote,
   }) {
     return AppTypography._(
       primary: primary ?? this.primary,

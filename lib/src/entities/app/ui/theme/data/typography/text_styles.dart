@@ -98,4 +98,14 @@ abstract final class TextStyles {
     color: AppColors.backgroundWhite,
     fontFamily: FontAssets.spaceGrotesk,
   );
+
+  ///
+  static TextStyle secondaryFootnote = TextStyle(
+    fontSize: 8.sp,
+    height: 2.976,
+    letterSpacing: -0.6,
+    fontWeight: FontWeight.w500,
+    color: AppColors.neutral800,
+    fontFamily: FontAssets.workSans,
+  );
 }

@@ -35,7 +35,7 @@ class ProductivityHistoryManager extends VanillaNotifier<ProductivityHistory>
       return;
     }
 
-    taskHistory.snapshots.sort();
+    taskHistory.snapshots.sort(ProductivitySnapshotUtils.compare);
 
     final int productivityValue =
         task.productivityPoint - taskHistory.snapshots.last.value;
@@ -59,7 +59,7 @@ class ProductivityHistoryManager extends VanillaNotifier<ProductivityHistory>
   @override
   List<ProductivitySnapshot> get snapshots => history.fold(
       [], (previousValue, element) => previousValue..addAll(element.snapshots))
-    ..sort();
+    ..sort(ProductivitySnapshotUtils.compare);
 
   void _updateState() {
     state = List.from(_source.fetchAll());

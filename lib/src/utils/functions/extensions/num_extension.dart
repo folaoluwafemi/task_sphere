@@ -80,6 +80,13 @@ extension AppSizerDoubleExtension on num {
   }
 }
 
+extension IntExtension on int {
+  List<int> range([int start = 1]) => List<int>.generate(
+        this,
+        (int index) => index + start,
+      );
+}
+
 extension GenericNumExtension<T extends num> on T {
   T capAt(T cap) => this >= cap ? cap : this;
 

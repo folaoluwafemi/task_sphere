@@ -123,7 +123,7 @@ class _PriorityLeveLModalState extends State<_PriorityLeveLModal> {
                   style: context.primaryTypography.paragraph.medium,
                 ),
                 20.boxHeight,
-                ...Priority.values.skip(1).map(
+                ...Priority.values.map(
                       (priority) => GestureDetector(
                         onTap: () => changePriority(priority),
                         //do not remove: it allows tapping on the spacer

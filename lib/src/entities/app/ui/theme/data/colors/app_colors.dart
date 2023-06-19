@@ -7,6 +7,13 @@ abstract final class AppColors {
   /// #A3582F Secondary
   static const Color brown = Color(0xFFA3582F);
 
+  /// Variants
+  /// ##CB9374
+  static const Color brown100 = Color(0xFFCB9374);
+
+  ///#F8CEB7
+  static const Color brown200 = Color(0xFFF8CEB7);
+
   /// Background Colors
   /// #EF8001 Background Accent
   static const Color lightOrange = Color(0xFFFEDEA2);

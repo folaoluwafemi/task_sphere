@@ -4,12 +4,14 @@ typedef ProductivitySnapshot = ({DateTime dateTime, int value});
 
 abstract final class ProductivitySnapshotUtils {
   static int compare(ProductivitySnapshot a, ProductivitySnapshot b) {
-    return b.dateTime.compareTo(a.dateTime);
+    return a.dateTime.compareTo(b.dateTime);
   }
 
   static ProductivitySnapshot fromMap(Map<String, dynamic> map) {
     return (
-      dateTime: UtilFunctions.parseDateTime(map['dateTime']),
+      dateTime: map['dateTime'] is DateTime
+          ? map['dateTime']!
+          : UtilFunctions.parseDateTime(map['dateTime']),
       value: map['value'],
     );
   }

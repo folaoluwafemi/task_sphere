@@ -8,6 +8,7 @@ typedef PrimaryTextStyle = ({
 typedef SecondaryTextStyle = ({
   SecondaryParagraph paragraph,
   Caption caption,
+  TextStyle footnote,
 });
 
 typedef SecondaryParagraph = ({
@@ -65,6 +66,7 @@ extension SecondaryExtension on SecondaryTextStyle {
     return (
       paragraph: this.paragraph.lerp(other.paragraph, t),
       caption: this.caption.lerp(other.caption, t),
+      footnote: TextStyle.lerp(this.footnote, other.footnote, t)!,
     );
   }
 }

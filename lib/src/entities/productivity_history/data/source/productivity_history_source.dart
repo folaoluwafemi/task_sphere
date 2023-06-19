@@ -7,7 +7,7 @@ class ProductivityHistorySource
 
   ProductivityHistorySource({
     Box<List>? box,
-  }) : _box = box ?? Hive.box(StorageKeys.history.box);
+  }) : _box = box ?? Hive.box<List>(StorageKeys.history.box);
 
   @override
   Future<void> addSnapshot({
@@ -76,7 +76,7 @@ class ProductivityHistorySource
         TaskProductivityHistory(
           taskId: pair.first,
           snapshots: pair.second
-              .map((e) => ProductivitySnapshotUtils.fromMap(e))
+              .map((e) => ProductivitySnapshotUtils.fromMap((e as Map).cast()))
               .toList(),
         ),
       );

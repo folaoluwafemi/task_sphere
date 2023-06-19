@@ -10,10 +10,17 @@ class TaskSphereWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (context) {
-        return child;
-      },
+    return Nested(
+      children: [
+        VanillaNotifierHolder<ProgressiveAnalyticsVanilla>(
+          createNotifier: () => ProgressiveAnalyticsVanilla(),
+        ),
+      ],
+      child: Builder(
+        builder: (context) {
+          return child;
+        },
+      ),
     );
   }
 }

@@ -7,6 +7,7 @@ class ColorPalette extends ThemeExtension<ColorPalette> {
   final AlertColors alerts;
   final NeutralColors neutrals;
   final BackgroundColors bg;
+  final ProductivityColors productivityColors;
   final Color primary;
   final Color secondary;
   final Color bgAccent;
@@ -18,6 +19,7 @@ class ColorPalette extends ThemeExtension<ColorPalette> {
     required this.secondary,
     required this.bgAccent,
     required this.bg,
+    required this.productivityColors,
   });
 
   const ColorPalette.light()
@@ -43,18 +45,27 @@ class ColorPalette extends ThemeExtension<ColorPalette> {
         bg = (
           $50: AppColors.backgroundWhite,
           $100: AppColors.backgroundGrey,
+        ),
+        productivityColors = (
+          extra: AppColors.orange,
+          high: AppColors.brown,
+          medium: AppColors.brown100,
+          low: AppColors.brown200,
+          none: AppColors.backgroundWhite,
         );
 
   @override
   ThemeExtension<ColorPalette> copyWith({
     AlertColors? alerts,
     NeutralColors? neutrals,
+    ProductivityColors? productivityColors,
     Color? primary,
     Color? secondary,
     Color? bgAccent,
     BackgroundColors? backGroundColors,
   }) =>
       ColorPalette._(
+        productivityColors: productivityColors ?? this.productivityColors,
         alerts: alerts ?? this.alerts,
         neutrals: neutrals ?? this.neutrals,
         primary: primary ?? this.primary,
@@ -71,6 +82,7 @@ class ColorPalette extends ThemeExtension<ColorPalette> {
     if (other is! ColorPalette) return this;
 
     return ColorPalette._(
+      productivityColors: productivityColors.lerp(other.productivityColors, t),
       alerts: alerts.lerp(other.alerts, t),
       neutrals: neutrals.lerp(other.neutrals, t),
       primary: Color.lerp(primary, other.primary, t)!,

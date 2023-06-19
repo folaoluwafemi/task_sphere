@@ -1,5 +1,13 @@
 part of 'color_palette.dart';
 
+typedef ProductivityColors = ({
+  Color none,
+  Color low,
+  Color medium,
+  Color high,
+  Color extra,
+});
+
 typedef AlertColors = ({
   /// alertBg #383C50
   Color background,
@@ -86,5 +94,19 @@ extension NeutralColorsExtension on NeutralColors {
         $600: Color.lerp(this.$600, other.$600, t)!,
         $700: Color.lerp(this.$700, other.$700, t)!,
         $800: Color.lerp(this.$800, other.$800, t)!,
+      );
+}
+
+extension ProductivityColorExtension on ProductivityColors {
+  ProductivityColors lerp(
+    ProductivityColors other,
+    double t,
+  ) =>
+      (
+        none: Color.lerp(this.none, other.none, t)!,
+        low: Color.lerp(this.low, other.low, t)!,
+        medium: Color.lerp(this.medium, other.medium, t)!,
+        extra: Color.lerp(this.extra, other.extra, t)!,
+        high: Color.lerp(this.high, other.high, t)!,
       );
 }

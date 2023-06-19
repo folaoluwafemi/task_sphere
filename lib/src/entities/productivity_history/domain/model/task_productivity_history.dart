@@ -55,4 +55,9 @@ class TaskProductivityHistory implements Comparable<TaskProductivityHistory> {
   int compareTo(TaskProductivityHistory other) {
     return other.taskId.compareTo(taskId);
   }
+
+  @override
+  String noSuchMethod(Invocation invocation) {
+    return 'This method does not exist';
+  }
 }
