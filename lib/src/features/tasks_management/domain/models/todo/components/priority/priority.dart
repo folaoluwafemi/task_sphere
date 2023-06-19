@@ -6,30 +6,26 @@ import 'package:task_sphere/src/utils/utils_barrel.dart';
 part 'priority_widget.dart';
 
 enum Priority {
-  none,
-  low(VectorAssets.priorityLow, 'Low Priority'),
-  medium(VectorAssets.priorityMedium, 'Medium Priority'),
-  high(VectorAssets.priorityHigh, 'High Priority');
+  low(1, VectorAssets.priorityLow, 'Low Priority'),
+  medium(2, VectorAssets.priorityMedium, 'Medium Priority'),
+  high(3, VectorAssets.priorityHigh, 'High Priority');
 
   final String? vectorAsset;
   final String? text;
+  final int value;
 
-  const Priority([this.vectorAsset, this.text]);
+  const Priority(this.value, [this.vectorAsset, this.text]);
 
-  Widget get widgetSmall => this == none
-      ? const SizedBox.shrink()
-      : _PriorityWidget.small(priority: this);
+  Widget get widgetSmall => _PriorityWidget.small(priority: this);
 
-  Widget widgetWithDimension(double dimension) => this == none
-      ? const SizedBox.shrink()
-      : _PriorityWidget.customSize(size: dimension, priority: this);
+  Widget widgetWithDimension(double dimension) => _PriorityWidget.customSize(
+        size: dimension,
+        priority: this,
+      );
 
-  Widget get widgetLarge => this == none
-      ? const SizedBox.shrink()
-      : _PriorityWidget.large(priority: this);
+  Widget get widgetLarge => _PriorityWidget.large(priority: this);
 
   Color? colorFromPalette(AlertColors alerts) => switch (this) {
-        none => null,
         low => alerts.success,
         medium => alerts.info,
         high => alerts.error,
@@ -38,7 +34,6 @@ enum Priority {
   factory Priority.fromName(String name) {
     name = name.cleanLower;
     return switch (name) {
-      'none' => none,
       'low' => low,
       'medium' => medium,
       'high' => high,

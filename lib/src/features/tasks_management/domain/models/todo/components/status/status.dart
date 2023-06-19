@@ -6,15 +6,15 @@ import 'package:task_sphere/src/utils/utils_barrel.dart';
 part 'status_widget.dart';
 
 enum Status {
-  todo('Todo', 'To-do', VectorAssets.todo),
-  done('Done', 'Completed', VectorAssets.done),
-  canceled('Canceled', 'Canceled', VectorAssets.canceled),
+  todo(1, 'Todo', 'To-do', VectorAssets.todo),
+  done(2, 'Done', 'Completed', VectorAssets.done),
+  canceled(0, 'Canceled', 'Canceled', VectorAssets.canceled),
   ;
 
-  final String text, styledText;
-  final String vectorAsset;
+  final String text, styledText, vectorAsset;
+  final int multiplier;
 
-  const Status(this.text, this.styledText, this.vectorAsset);
+  const Status(this.multiplier, this.text, this.styledText, this.vectorAsset);
 
   Widget get widget => _StatusWidget(status: this);
 

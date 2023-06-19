@@ -1,12 +1,14 @@
 import 'package:task_sphere/src/entities/entities_barrel.dart';
-import 'package:task_sphere/src/features/analytics/data/analytics_data_barrel.dart';
-import 'package:task_sphere/src/features/analytics/domain/analytics_domain_barrel.dart';
+import 'package:task_sphere/archive/analytics/data/analytics_data_barrel.dart';
+import 'package:task_sphere/archive/analytics/domain/analytics_domain_barrel.dart';
+import 'package:task_sphere/src/features/tasks_management/task_management_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 class AnalysisManager extends VanillaNotifier<Analysis>
     with BasicErrorHandlerMixin {
   final AnalysisSourceInterface _analyticsSource;
   final AnalyticsLocalBufferInterface _analyticsLocalBuffer;
+  late final TasksReader _reader = TasksReader();
 
   AnalysisManager._({
     required AnalysisSourceInterface analyticsSource,
@@ -74,6 +76,7 @@ class AnalysisManager extends VanillaNotifier<Analysis>
 
     await clear();
   }
+
 
   Future<void> clear() async {
     await _analyticsLocalBuffer.clearBuffer();
