@@ -6,9 +6,9 @@ import 'package:task_sphere/src/entities/task/task_barrel.dart';
 import 'package:task_sphere/src/features/features_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
-part 'domain/data/app_route.dart';
-
 part 'domain/logic/redirects_manager.dart';
+
+part 'domain/model/app_route.dart';
 
 abstract final class AppRouter {
   static final RouterConfig<Object> routerConfig = RouterConfig(

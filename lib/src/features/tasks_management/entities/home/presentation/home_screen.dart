@@ -12,7 +12,6 @@ import 'package:task_sphere/src/entities/user/user_barrel.dart';
 import 'package:task_sphere/src/features/_auth/auth_barrel.dart';
 import 'package:task_sphere/src/features/analytics/analytics_barrel.dart';
 import 'package:task_sphere/src/features/tasks_management/task_management_barrel.dart';
-import 'package:task_sphere/src/features/tasks_management/ui/home/presentation/custom/task_card/task_card.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 part 'custom/add_task_floating_button.dart';

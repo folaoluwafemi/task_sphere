@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nested/nested.dart';
 import 'package:task_sphere/src/entities/app/app_barrel.dart';
-import 'package:task_sphere/src/features/analytics/sub_features/progressive_analytics/ui/state_mgmt/progressive_analytics_vanilla.dart';
+import 'package:task_sphere/src/features/analytics/analytics_barrel.dart';
 import 'package:task_sphere/src/utils/state_management/state_management_utils.dart';
 
 part 'custom/task_sphere_wrapper.dart';

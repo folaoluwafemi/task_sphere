@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:task_sphere/src/entities/app/ui/components/components_barrel.dart';
-import 'package:task_sphere/src/features/_auth/subfeatures/sign_up/ui/state_mgmt/sign_up_vanilla.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
+import 'package:task_sphere/src/features/_auth/auth_barrel.dart';
 
 part 'custom/login_or_load_widget.dart';
 

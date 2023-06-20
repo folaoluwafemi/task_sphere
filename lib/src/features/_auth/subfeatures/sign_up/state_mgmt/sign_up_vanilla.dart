@@ -1,4 +1,4 @@
-import 'package:task_sphere/src/features/_auth/data/repo/auth_repo_interface.dart';
+import 'package:task_sphere/src/features/_auth/auth_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 part 'sign_up_state.dart';

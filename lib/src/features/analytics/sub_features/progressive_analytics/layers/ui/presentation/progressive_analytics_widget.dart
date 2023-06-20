@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:task_sphere/src/entities/entities_barrel.dart';
 import 'package:task_sphere/src/entities/productivity_history/productivity_history_barrel.dart';
-import 'package:task_sphere/src/features/analytics/sub_features/progressive_analytics/ui/state_mgmt/progressive_analytics_vanilla.dart';
+import 'package:task_sphere/src/features/analytics/analytics_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 part 'custom/productivity_unit_widget.dart';
