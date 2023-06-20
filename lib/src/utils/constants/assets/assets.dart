@@ -10,5 +10,6 @@ abstract final class Assets {
       'assets/images/onboarding_illustration.png';
   static const String signUpSuccessIllustration =
       'assets/images/sign_up_success_illustration.png';
+  static const String taskAchievement = 'assets/images/task_achievement.png';
   static const String _helper = 'assets/images/.png';
 }

@@ -77,23 +77,35 @@ class _TaskViewState extends State<_TaskView> {
     return ReorderableList(
       onReorder: onReorder,
       onReorderDone: onReorderDone,
-      child: CustomScrollView(
-        physics: const ClampingScrollPhysics(),
-        slivers: [
-          SliverStack(
-            children: [
-              MultiSliver(
+      child: VanillaBuilder<TaskVanilla, TaskState>(
+        buildWhen: (previous, current) {
+          return previous?.showAchievement != current.showAchievement;
+        },
+        builder: (context, state) {
+          return CustomScrollView(
+            physics: const ClampingScrollPhysics(),
+            slivers: [
+              SliverStack(
                 children: [
-                  const SliverToBoxAdapter(child: _TitleView()),
-                  _TodoView(todos: todos),
-                  18.sliverBoxHeight,
-                  const SliverToBoxAdapter(child: CreatedDate()),
+                  state.showAchievement
+                      ? const SliverToBoxAdapter(child: _TaskAchievement())
+                      : SliverSafeArea(
+                          top: false,
+                          sliver: MultiSliver(
+                            children: [
+                              const SliverToBoxAdapter(child: _TitleView()),
+                              _TodoView(todos: todos),
+                              18.sliverBoxHeight,
+                              const SliverToBoxAdapter(child: CreatedDate()),
+                            ],
+                          ),
+                        ),
+                  const SliverPinnedHeader(child: _PinnedHeader()),
                 ],
               ),
-              const SliverPinnedHeader(child: _PinnedHeader()),
             ],
-          ),
-        ],
+          );
+        },
       ),
     );
   }

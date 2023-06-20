@@ -10,16 +10,29 @@ class _PinnedHeader extends StatefulWidget {
 class _PinnedHeaderState extends State<_PinnedHeader> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: context.bgColors.$50,
-      child: const Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _CloseButton(),
-          Spacer(),
-          StateText(),
-          _MoreButton(),
-        ],
+    return SafeArea(
+      child: VanillaBuilder<TaskVanilla, TaskState>(
+        buildWhen: (previous, current) {
+          return previous?.showAchievement != current.showAchievement;
+        },
+        builder: (context, state) {
+          final bool showAchievement = state.showAchievement;
+          return Container(
+            color:
+                showAchievement ? context.bgColors.$100 : context.bgColors.$50,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const _CloseButton(),
+                const Spacer(),
+                if (!showAchievement) ...[
+                  const StateText(),
+                  const _MoreButton(),
+                ],
+              ],
+            ),
+          );
+        },
       ),
     );
   }

@@ -61,6 +61,7 @@ class TaskVanilla extends VanillaNotifier<TaskState>
   Future<void> markAllTodoCompleted() => handleError(_markAllAsCompleted());
 
   Future<void> _markAllAsCompleted() async {
+    final bool taskPreviouslyComplete = state.task.isCompleted;
     if (state.task.todos.isEmpty) {
       notifyOnError(Failure(message: 'There are no todos, please create one'));
       return;
@@ -75,7 +76,11 @@ class TaskVanilla extends VanillaNotifier<TaskState>
       shouldUpdateHistory: true,
     );
 
-    notifySuccess();
+    if (!taskPreviouslyComplete) {
+      notifySuccess(
+        state: state.copyWith(showAchievement: true),
+      );
+    }
   }
 
   Future<void> deleteTask() => handleError(_deleteTask());
@@ -133,6 +138,7 @@ class TaskVanilla extends VanillaNotifier<TaskState>
       );
 
   Future<void> _updateTodo(Todo todo) async {
+    final bool taskPreviouslyComplete = state.task.isCompleted;
     notifyLoading();
 
     final List<Todo> todos = state.task.todos.copy;
@@ -148,6 +154,9 @@ class TaskVanilla extends VanillaNotifier<TaskState>
       }),
     );
     await _reFetch();
+    if (state.task.isCompleted && !taskPreviouslyComplete) {
+      notifySuccess(state: state.copyWith(showAchievement: true));
+    }
   }
 
   Future<void> updateTodos(List<Todo> todos) => handleError(
@@ -156,6 +165,8 @@ class TaskVanilla extends VanillaNotifier<TaskState>
       );
 
   Future<void> _updateTodos(List<Todo> todos) async {
+    final bool taskPreviouslyComplete = state.task.isCompleted;
+
     notifyLoading();
 
     state = state.copyWith(
@@ -165,6 +176,10 @@ class TaskVanilla extends VanillaNotifier<TaskState>
     );
 
     await _save();
+
+    if (state.task.isCompleted && !taskPreviouslyComplete) {
+      notifySuccess(state: state.copyWith(showAchievement: true));
+    }
   }
 
   Future<void> save() => handleError(_save(), catcher: notifyOnError);

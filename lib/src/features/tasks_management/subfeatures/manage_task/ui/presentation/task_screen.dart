@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 import 'package:task_sphere/src/entities/app/ui/components/components_barrel.dart';
+import 'package:task_sphere/src/entities/app/ui/components/spade/spade.dart';
 import 'package:task_sphere/src/entities/todo/todo_barrel.dart';
 import 'package:task_sphere/src/features/tasks_management/subfeatures/manage_task/ui/state_mgmt/task_vanilla.dart';
 import 'package:task_sphere/src/features/tasks_management/task_management_barrel.dart';
@@ -20,6 +21,8 @@ part 'custom/more.dart';
 part 'custom/pinned_header.dart';
 
 part 'custom/right_item_widget.dart';
+
+part 'custom/task_achievement_view.dart';
 
 part 'custom/task_view.dart';
 
@@ -53,20 +56,20 @@ class TaskScreen extends StatelessWidget {
             );
           }
         },
-        child: Scaffold(
-          appBar: AppBar(
-            toolbarHeight: 0,
-            elevation: 0,
-            backgroundColor: context.bgColors.$50,
-          ),
-          backgroundColor: context.bgColors.$100,
-          body: SafeArea(
-            child: VanillaBuilder<TaskVanilla, TaskState>(
-              builder: (context, state) {
-                return _TaskView(todos: state.task.todos);
-              },
-            ),
-          ),
+        child: VanillaBuilder<TaskVanilla, TaskState>(
+          builder: (context, state) {
+            return Scaffold(
+              appBar: state.showAchievement
+                  ? null
+                  : AppBar(
+                      toolbarHeight: 0,
+                      elevation: 0,
+                      backgroundColor: context.bgColors.$50,
+                    ),
+              backgroundColor: context.bgColors.$100,
+              body: _TaskView(todos: state.task.todos),
+            );
+          },
         ),
       ),
     );

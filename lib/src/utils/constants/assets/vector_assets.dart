@@ -35,5 +35,6 @@ abstract final class VectorAssets {
   static const String pointer = 'assets/vectors/pointer.svg';
   static const String moreVertical = 'assets/vectors/more_vertical.svg';
   static const String deleteOutlined = 'assets/vectors/delete_outlined.svg';
+  static const String tickSquare = 'assets/vectors/tick_square.svg';
   static const String _helper = 'assets/vectors/.svg';
 }
