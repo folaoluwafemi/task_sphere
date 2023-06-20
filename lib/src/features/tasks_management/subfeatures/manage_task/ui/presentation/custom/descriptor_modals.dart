@@ -124,36 +124,36 @@ class _PriorityLeveLModalState extends State<_PriorityLeveLModal> {
                 ),
                 20.boxHeight,
                 ...Priority.values.map(
-                      (priority) => GestureDetector(
-                        onTap: () => changePriority(priority),
-                        //do not remove: it allows tapping on the spacer
-                        child: Container(
-                          color: Colors.transparent,
-                          padding: EdgeInsets.symmetric(vertical: 8.h),
-                          child: Row(
-                            children: [
-                              SvgDecorator.square(
-                                dimension: 20.l,
-                                child: SvgPicture.asset(priority.vectorAsset!),
-                              ),
-                              8.boxWidth,
-                              Text(
-                                priority.text!,
-                                style: context.secondaryTypography.paragraph
-                                    .medium.asRegular,
-                              ),
-                              const Spacer(),
-                              SvgDecorator(
-                                color: currentStatus == priority
-                                    ? context.palette.secondary
-                                    : context.neutralColors.$200,
-                                child: SvgPicture.asset(VectorAssets.pointer),
-                              ),
-                            ],
+                  (priority) => GestureDetector(
+                    onTap: () => changePriority(priority),
+                    //do not remove: it allows tapping on the spacer
+                    child: Container(
+                      color: Colors.transparent,
+                      padding: EdgeInsets.symmetric(vertical: 8.h),
+                      child: Row(
+                        children: [
+                          SvgDecorator.square(
+                            dimension: 20.l,
+                            child: SvgPicture.asset(priority.vectorAsset!),
                           ),
-                        ),
+                          8.boxWidth,
+                          Text(
+                            priority.text!,
+                            style: context
+                                .secondaryTypography.paragraph.medium.asRegular,
+                          ),
+                          const Spacer(),
+                          SvgDecorator(
+                            color: currentStatus == priority
+                                ? context.palette.secondary
+                                : context.neutralColors.$200,
+                            child: SvgPicture.asset(VectorAssets.pointer),
+                          ),
+                        ],
                       ),
                     ),
+                  ),
+                ),
               ],
             );
           },

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:task_sphere/src/entities/entities_barrel.dart';
+import 'package:task_sphere/src/entities/task/task_barrel.dart';
 import 'package:task_sphere/src/features/features_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
@@ -74,6 +75,11 @@ final GoRouter _router = GoRouter(
           builder: (context, state) => TaskScreen(
             task: state.extra as Task?,
           ),
+        ),
+        GoRoute(
+          path: AppRoute.search.path,
+          name: AppRoute.search.name,
+          builder: (context, state) => const SearchScreen(),
         ),
       ],
     ),

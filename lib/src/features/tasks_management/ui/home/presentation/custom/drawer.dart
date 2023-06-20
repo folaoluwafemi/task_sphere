@@ -1,7 +1,7 @@
 part of '../home_screen.dart';
 
 enum DrawerItems {
-  trash('Trash', VectorAssets.delete, AppRoute.trash),
+  trash('Trash', VectorAssets.delete, AppRoute.search),
   settings('Settings', VectorAssets.setting, AppRoute.settings),
   ;
 

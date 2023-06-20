@@ -1,4 +1,4 @@
-import 'package:task_sphere/src/features/tasks_management/task_management_barrel.dart';
+import 'package:task_sphere/src/entities/todo/todo_barrel.dart';
 import 'package:task_sphere/src/utils/error_handling/data/failure.dart';
 
 class TodoAnalyticsData {

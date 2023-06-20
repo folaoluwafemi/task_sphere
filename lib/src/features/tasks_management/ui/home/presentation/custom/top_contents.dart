@@ -50,7 +50,7 @@ class _TopContents extends StatelessWidget {
         ),
         const Spacer(),
         IconButton(
-          onPressed: () {},
+          onPressed: () => context.goNamed(AppRoute.search.name),
           icon: SvgDecorator(
             color: context.neutralColors.$800,
             child: SvgPicture.asset(
@@ -58,6 +58,7 @@ class _TopContents extends StatelessWidget {
             ),
           ),
         ),
+        6.boxWidth,
         // IconButton(
         //   onPressed: () {},
         //   icon: SvgDecorator(

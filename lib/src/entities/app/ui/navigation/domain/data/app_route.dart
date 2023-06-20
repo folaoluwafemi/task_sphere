@@ -12,7 +12,7 @@ enum AppRoute {
   ///
   home('/home', '/home'),
   task('task', '/home/task'),
-  trash('trash', '/home/trash'),
+  search('search', '/home/search'),
   settings('settings', '/home/settings'),
   ;
 

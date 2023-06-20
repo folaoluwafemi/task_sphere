@@ -1,8 +1,6 @@
 part of 'tasks_buffer_interface.dart';
 
-class TasksBuffer
-    with BasicErrorHandlerMixin
-    implements TasksBufferInterface {
+class TasksBuffer with BasicErrorHandlerMixin implements TasksBufferInterface {
   final Box<Map> _buffer;
 
   TasksBuffer({
