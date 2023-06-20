@@ -54,7 +54,7 @@ class _MoreButtonState extends State<_MoreButton> {
 
 enum _MoreOption {
   markAsCompleted('Mark task as completed', VectorAssets.done),
-  trash('Move to trash', VectorAssets.deleteOutlined),
+  trash('Delete task', VectorAssets.deleteOutlined),
   ;
 
   final String title, vectorAsset;
@@ -77,8 +77,11 @@ class _MoreOverlay extends StatelessWidget {
       case _MoreOption.markAsCompleted:
         closeCallback(
           (context) => taskVanilla.markAllTodoCompleted().then(
-                (value) => context.pop(),
-              ),
+            (value) {
+              if (taskVanilla.state.showAchievement) return;
+              context.pop();
+            },
+          ),
         );
         break;
       case _MoreOption.trash:
