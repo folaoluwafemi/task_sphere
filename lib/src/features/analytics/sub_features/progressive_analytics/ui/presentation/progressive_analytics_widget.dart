@@ -120,7 +120,23 @@ class _ProgressiveAnalysisBuilderState
 
     final List<DateTime> daysInCurrentYear = getDaysInCurrentYear();
 
-    final int numberOfSnapshotsToAdd = daysInCurrentYear.length - feeder.length;
+    // adding one since DateTime.weekday starts from 1 [Monday] and we are ordering from sunday
+    final int earliestSnapshotDayOfWeek = feeder.first.dateTime.weekday + 1;
+
+    for (int i = 1; i < earliestSnapshotDayOfWeek; i++) {
+      final DateTime dayOfNewSnapshot = feeder.first.dateTime.subtract(
+        Duration(days: i),
+      );
+      newSnapshots.add(
+        (dateTime: dayOfNewSnapshot, value: 0),
+      );
+    }
+
+    completeSnapshots.addAll(newSnapshots);
+    newSnapshots.clear();
+
+    final int numberOfSnapshotsToAdd =
+        daysInCurrentYear.length - (feeder.length + completeSnapshots.length);
 
     final DateTime dayOfLastSnapshot = feeder.last.dateTime;
 
@@ -133,8 +149,9 @@ class _ProgressiveAnalysisBuilderState
       );
     }
 
-    completeSnapshots.clear();
     completeSnapshots.addAll([...feeder, ...newSnapshots]);
+
+    completeSnapshots.sort(ProductivitySnapshotUtils.compare);
   }
 
   int getEarliestMonthIn(List<ProductivitySnapshot> snapshots) {

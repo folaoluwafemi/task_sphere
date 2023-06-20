@@ -38,7 +38,7 @@ enum ProductivityUnit {
         extra => palette.high,
         high => palette.high.withOpacity(0),
         medium => palette.medium.withOpacity(0),
-        low => palette.medium.withOpacity(0/*.2*/),
+        low => palette.medium.withOpacity(0 /*.2*/),
         none => palette.none,
       };
 
