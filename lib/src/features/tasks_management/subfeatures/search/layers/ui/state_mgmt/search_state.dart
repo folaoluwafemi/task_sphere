@@ -14,7 +14,7 @@ class SearchState extends VanillaStateWithStatus {
   final SearchFilter filter;
   final SearchDateFilter? dateFilter;
 
-  SearchState({
+  const SearchState({
     this.allResults = const [],
     this.currentResults = const [],
     this.history = const [],

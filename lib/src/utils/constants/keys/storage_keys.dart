@@ -2,6 +2,7 @@ enum StorageKeys {
   analysis,
   taskBuffer,
   history,
+  searchHistory,
   ;
 
   String get box => '$name-box';
