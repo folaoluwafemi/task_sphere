@@ -12,6 +12,14 @@ extension DateTimeExtension on DateTime {
         .join(' ');
   }
 
+  bool isAfterOrAt(DateTime other) {
+    return isAfter(other) || isAtSameMomentAs(other);
+  }
+
+  bool isBeforeOrAt(DateTime other) {
+    return isBefore(other) || isAtSameMomentAs(other);
+  }
+
   DateTime getTimeBetween(DateTime other) {
     final int initialMilliseconds = millisecondsSinceEpoch;
     final int finalMilliseconds = other.millisecondsSinceEpoch;

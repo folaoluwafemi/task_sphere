@@ -2,9 +2,13 @@ part of 'task_writer_interface.dart';
 
 class TaskWriter with FirebaseErrorHandlerMixin implements TaskWriterInterface {
   final CollectionReference _tasks;
+  final TasksBufferInterface _buffer;
 
-  TaskWriter({String? userId})
-      : _tasks = FirebaseFirestore.instance
+  TaskWriter({
+    String? userId,
+    TasksBufferInterface? buffer,
+  })  : _buffer = buffer ?? TasksBuffer(),
+        _tasks = FirebaseFirestore.instance
             .collection(Keys.user)
             .doc(userId ?? UserManager.requireUser.uid)
             .collection(Keys.tasks);
@@ -21,6 +25,7 @@ class TaskWriter with FirebaseErrorHandlerMixin implements TaskWriterInterface {
 
   Future<void> _deleteTask(String taskId) async {
     await _tasks.doc(taskId).delete();
+    await _buffer.removeTask(taskId);
   }
 
   @override
@@ -28,5 +33,6 @@ class TaskWriter with FirebaseErrorHandlerMixin implements TaskWriterInterface {
 
   Future<void> _updateTask(Task task) async {
     await _tasks.doc(task.id).update(task.toMap());
+    await _buffer.updateTask(task);
   }
 }

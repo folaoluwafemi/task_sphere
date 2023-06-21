@@ -24,6 +24,7 @@ class SearchHistorySource
 
     final List<QueryWithTimestamp> currentList =
         _fetchSearchQueryWithTimeStamp();
+
     currentList.sort(_listSorter);
 
     if (currentList.length >= 7) {
@@ -38,7 +39,10 @@ class SearchHistorySource
     );
 
     for (final QueryWithTimestamp data in currentList) {
-      await _box.put(data.timestamp, data.query);
+      await _box.put(
+        data.timestamp.toIso8601String(),
+        data.query,
+      );
     }
   }
 
@@ -48,8 +52,10 @@ class SearchHistorySource
       );
 
   List<String> _fetchSearchQueries() {
-    final List<String> data = _box.values.toList();
-    return data;
+    final List<QueryWithTimestamp> data = _fetchSearchQueryWithTimeStamp();
+    data.sort(_listSorter);
+
+    return data.map((e) => e.query).toList().cast();
   }
 
   @override
@@ -58,14 +64,15 @@ class SearchHistorySource
       );
 
   List<QueryWithTimestamp> _fetchSearchQueryWithTimeStamp() {
-    final List<DateTime> keys = _box.keys.toList().cast();
+    final List<DateTime> keys =
+        _box.keys.map((e) => DateTime.parse(e as String)).toList().cast();
     final List<QueryWithTimestamp> data = [];
 
     for (final DateTime key in keys) {
       data.add(
         (
           timestamp: key,
-          query: _box.get(key)!,
+          query: _box.get(key.toIso8601String())!,
         ),
       );
     }
@@ -77,6 +84,13 @@ class SearchHistorySource
     QueryWithTimestamp a,
     QueryWithTimestamp b,
   ) {
-    return a.timestamp.compareTo(b.timestamp);
+    return b.timestamp.compareTo(a.timestamp);
+  }
+
+  @override
+  Future<void> clearHistory() => handleError(_clearHistory());
+
+  Future<void> _clearHistory() async {
+    await _box.clear();
   }
 }

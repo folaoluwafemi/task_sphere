@@ -6,6 +6,8 @@ part 'search_history_source.dart';
 abstract interface class SearchHistorySourceInterface {
   Future<void> addSearchQuery(String query);
 
+  Future<void> clearHistory();
+
   List<String> fetchSearchQueries();
 
   List<QueryWithTimestamp> fetchSearchQueryWithTimeStamp();

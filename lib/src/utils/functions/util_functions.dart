@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 abstract final class UtilFunctions {
@@ -10,7 +11,10 @@ abstract final class UtilFunctions {
     bool mustReturnDate = false,
   }) {
     try {
-      return DateTime.parse(data);
+      if (data is Timestamp) {
+        return data.toDate().toLocal();
+      }
+      return DateTime.parse(data).toLocal();
     } on FormatException {
       return DateTime.fromMillisecondsSinceEpoch(data as int);
     } catch (e, stackTrace) {

@@ -2,8 +2,7 @@ part of 'tasks_repo_interface.dart';
 
 class TasksRepository implements TasksRepoInterface {
   late final TasksReader _reader = TasksReader();
-  late final ProductivityHistoryManager _historyManager =
-      ProductivityHistoryManager();
+  late final ProductivityHistoryManager _historyManager = ProductivityHistoryManager();
   final TaskWriterInterface _tasksWriter;
   final TasksBufferInterface _buffer;
 

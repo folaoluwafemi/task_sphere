@@ -1,25 +1,20 @@
 part of 'search_vanilla.dart';
 
-enum SearchFilter {
-  all,
-  tasks,
-  todos,
-  ;
-}
-
 class SearchState extends VanillaStateWithStatus {
   final List<SearchResult> allResults;
   final List<SearchResult> currentResults;
   final List<String> history;
   final SearchFilter filter;
   final SearchDateFilter? dateFilter;
+  final String query;
 
   const SearchState({
     this.allResults = const [],
     this.currentResults = const [],
-    this.history = const [],
+    required this.history,
     this.filter = SearchFilter.all,
     this.dateFilter,
+    this.query = '',
     bool success = false,
     bool loading = false,
     Failure? error,
@@ -29,11 +24,28 @@ class SearchState extends VanillaStateWithStatus {
           error: error,
         );
 
+  SearchState updateStartDateFilter(DateTime startDate) {
+    return copyWith(
+      dateFilter: dateFilter == null
+          ? SearchDateFilter(startDate: startDate)
+          : dateFilter!.copyWith(startDate: startDate),
+    );
+  }
+
+  SearchState updateEndDateFilter(DateTime endDate) {
+    if (dateFilter?.startDate == null) {
+      throw Failure(message: 'Date filter or start date must be set');
+    }
+
+    return copyWith(dateFilter: dateFilter!.copyWith(endDate: endDate));
+  }
+
   @override
   SearchState copyWith({
     List<SearchResult>? allResults,
     List<SearchResult>? currentResults,
     List<String>? history,
+    String? query,
     SearchFilter? filter,
     SearchDateFilter? dateFilter,
     bool? success,
@@ -41,6 +53,7 @@ class SearchState extends VanillaStateWithStatus {
     Failure? error,
   }) {
     return SearchState(
+      query: query ?? this.query,
       allResults: allResults ?? this.allResults,
       currentResults: currentResults ?? this.currentResults,
       history: history ?? this.history,
@@ -62,25 +75,6 @@ class SearchState extends VanillaStateWithStatus {
         success,
         loading,
         error,
+        query,
       ];
-}
-
-class SearchDateFilter {
-  final DateTime startDate;
-  final DateTime? endDate;
-
-  const SearchDateFilter({
-    required this.startDate,
-    this.endDate,
-  });
-}
-
-class SearchResult {
-  final Task task;
-  final Todo? value;
-
-  const SearchResult({
-    required this.task,
-    this.value,
-  });
 }

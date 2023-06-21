@@ -1,6 +1,13 @@
-export 'package:task_sphere/src/features/tasks_management/layers/domain/fakes/fake_data.dart';
-export 'package:task_sphere/src/features/tasks_management/subfeatures/manage_task/ui/presentation/task_screen.dart';
-export 'package:task_sphere/src/features/tasks_management/subfeatures/search/layers/ui/presentation/search_screen.dart';
+export 'package:task_sphere/src/features/tasks_management/entities/home/presentation/custom/task_card/task_card.dart';
 export 'package:task_sphere/src/features/tasks_management/entities/home/presentation/home_screen.dart';
 export 'package:task_sphere/src/features/tasks_management/entities/home/state_mgmt/home_vanilla.dart';
-export 'package:task_sphere/src/features/tasks_management/entities/home/presentation/custom/task_card/task_card.dart';
+export 'package:task_sphere/src/features/tasks_management/layers/domain/fakes/fake_data.dart';
+export 'package:task_sphere/src/features/tasks_management/subfeatures/manage_task/ui/presentation/task_screen.dart';
+export 'package:task_sphere/src/features/tasks_management/subfeatures/search/entities/search_history/data/search_history_source_interface.dart';
+export 'package:task_sphere/src/features/tasks_management/subfeatures/search/entities/search_history/domain/search_history_manager_interface.dart';
+export 'package:task_sphere/src/features/tasks_management/subfeatures/search/layers/data/search_engine/search_engine_interface.dart';
+export 'package:task_sphere/src/features/tasks_management/subfeatures/search/layers/domain/models/search_date_filter.dart';
+export 'package:task_sphere/src/features/tasks_management/subfeatures/search/layers/domain/models/search_filter.dart';
+export 'package:task_sphere/src/features/tasks_management/subfeatures/search/layers/domain/models/search_result.dart';
+export 'package:task_sphere/src/features/tasks_management/subfeatures/search/layers/ui/presentation/search_screen.dart';
+export 'package:task_sphere/src/features/tasks_management/subfeatures/search/layers/ui/state_mgmt/search_vanilla.dart';

@@ -37,5 +37,8 @@ abstract final class VectorAssets {
   static const String deleteOutlined = 'assets/vectors/delete_outlined.svg';
   static const String tickSquare = 'assets/vectors/tick_square.svg';
   static const String searchGhost = 'assets/vectors/search_ghost.svg';
+  static const String arrowLeft = 'assets/vectors/arrow_left.svg';
+  static const String arrowUpRight = 'assets/vectors/arrow_up_right.svg';
+  static const String clock = 'assets/vectors/clock.svg';
   static const String _helper = 'assets/vectors/.svg';
 }

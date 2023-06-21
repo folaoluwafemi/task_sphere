@@ -10,6 +10,7 @@ abstract final class ApiClientsSetup {
     await Hive.openBox<List>(StorageKeys.analysis.box);
     await Hive.openBox<List>(StorageKeys.history.box);
     await Hive.openBox<Map>(StorageKeys.taskBuffer.box);
+    await Hive.openBox<String>(StorageKeys.searchHistory.box);
 
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,

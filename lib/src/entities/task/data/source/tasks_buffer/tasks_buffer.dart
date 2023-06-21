@@ -53,4 +53,15 @@ class TasksBuffer with BasicErrorHandlerMixin implements TasksBufferInterface {
   Future<void> _clear() async {
     await _buffer.clear();
   }
+
+  @override
+  Future<void> addMultiple(List<Task> tasks) => handleError(
+        _addMultiple(tasks),
+      );
+
+  Future<void> _addMultiple(List<Task> tasks) async {
+    for (final Task task in tasks) {
+      await _addTask(task);
+    }
+  }
 }

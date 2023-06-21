@@ -4,13 +4,16 @@ class TasksReader extends VanillaNotifier<List<Task>>
     with FirebaseErrorHandlerMixin
     implements TasksReaderInterface {
   final CollectionReference _tasks;
+  final TasksBufferInterface _buffer;
 
   TasksReader._({
     required String? userId,
+    TasksBufferInterface? buffer,
   })  : _tasks = FirebaseFirestore.instance
             .collection(Keys.user)
             .doc(userId ?? UserManager.requireUser.uid)
             .collection(Keys.tasks),
+        _buffer = buffer ?? TasksBuffer(),
         super([]);
 
   static final TasksReader instance = TasksReader._(
@@ -58,6 +61,8 @@ class TasksReader extends VanillaNotifier<List<Task>>
     if (fetchAfresh) state.clear();
 
     state = List.from(state)..addAll(tasks);
+
+    await _buffer.addMultiple(tasks);
 
     return this.tasks;
   }
