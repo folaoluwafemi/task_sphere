@@ -38,6 +38,8 @@ class SearchHistorySource
       ),
     );
 
+    await clearHistory();
+
     for (final QueryWithTimestamp data in currentList) {
       await _box.put(
         data.timestamp.toIso8601String(),

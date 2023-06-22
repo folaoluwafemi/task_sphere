@@ -31,11 +31,12 @@ class _TopContentsState extends State<_TopContents> {
     onSearchPressed();
   }
 
-  void onBackPressed() {
-    if (widget.focusNode.hasFocus ||
-        context.read<SearchVanilla>().state.hasActiveFilter) {
-      context.read<SearchVanilla>().clearQuery();
-      context.read<SearchVanilla>().clearFilters();
+  void onBackPressed(BuildContext context) {
+    final SearchVanilla vanilla = context.read<SearchVanilla>();
+
+    if (widget.focusNode.hasFocus || vanilla.state.hasActiveFilter) {
+      vanilla.clearQuery();
+      vanilla.clearFilters();
       return widget.focusNode.unfocus();
     }
 
@@ -49,13 +50,17 @@ class _TopContentsState extends State<_TopContents> {
       padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 20.h),
       child: Row(
         children: [
-          GestureDetector(
-            onTap: onBackPressed,
-            child: SvgDecorator.square(
-              dimension: 24.l,
-              color: context.neutralColors.$700,
-              child: SvgPicture.asset(VectorAssets.arrowLeft),
-            ),
+          Builder(
+            builder: (context) {
+              return GestureDetector(
+                onTap: () => onBackPressed(context),
+                child: SvgDecorator.square(
+                  dimension: 24.l,
+                  color: context.neutralColors.$700,
+                  child: SvgPicture.asset(VectorAssets.arrowLeft),
+                ),
+              );
+            },
           ),
           24.boxWidth,
           Expanded(

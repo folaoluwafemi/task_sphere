@@ -47,7 +47,13 @@ class _DateFilterDialogState extends State<DateFilterDialog> {
     if (dateFilterNotifier.value == null) {
       return Navigator.of(context).pop();
     }
+
     final SearchDateFilter filter = dateFilterNotifier.value!;
+    if (!filter.isWithinProperLimit) {
+      AlertType.info.show(context, text: 'Start date must be before end date');
+      return;
+    }
+
     widget.onDateFilterSet(filter);
     Navigator.of(context).pop();
   }
@@ -71,6 +77,15 @@ class _DateFilterDialogState extends State<DateFilterDialog> {
   DateTime? currentDate;
 
   void onAcceptChangesPressed() {
+    if (dateFilterNotifier.value == null) {
+      selectingType.value = null;
+      return;
+    }
+    final SearchDateFilter filter = dateFilterNotifier.value!;
+    if (!filter.isWithinProperLimit) {
+      AlertType.info.show(context, text: 'Start date must be before end date');
+      return;
+    }
     selectingType.value = null;
   }
 
@@ -110,6 +125,9 @@ class _DateFilterDialogState extends State<DateFilterDialog> {
                     builder: (context) {
                       if (type != null) {
                         return _DatePickerSection(
+                          maxDate: type == _DateFilterType.start
+                              ? filter?.endDate
+                              : DateTime.now(),
                           onDonePressed: onAcceptChangesPressed,
                           onDateChanged: (value) => onDateChanged(value, type),
                         );

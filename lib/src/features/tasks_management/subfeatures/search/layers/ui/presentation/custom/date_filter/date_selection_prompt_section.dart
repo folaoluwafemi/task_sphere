@@ -35,6 +35,7 @@ class _DateSelectionPromptSection extends StatelessWidget {
           24.boxHeight,
           Center(
             child: DateRangePicker(
+              startActive: type == null ? null : type == _DateFilterType.start,
               startDate: filter?.startDate,
               onStartDatePressed: onStartDatePressed,
               onEndDatePressed: onEndDatePressed,

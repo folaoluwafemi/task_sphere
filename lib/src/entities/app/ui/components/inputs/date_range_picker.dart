@@ -13,6 +13,7 @@ class DateRangePicker extends StatefulWidget {
   final DateTime? endDate;
   final VoidCallback? onStartDatePressed;
   final VoidCallback? onEndDatePressed;
+  final bool? startActive;
 
   const DateRangePicker({
     Key? key,
@@ -20,6 +21,7 @@ class DateRangePicker extends StatefulWidget {
     this.endDate,
     this.onStartDatePressed,
     this.onEndDatePressed,
+    this.startActive,
   }) : super(key: key);
 
   @override
@@ -31,40 +33,43 @@ class _DateRangePickerState extends State<DateRangePicker> {
 
   DateTime? get endDate => widget.endDate;
 
+  bool? get startActive => widget.startActive;
+
   @override
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        RawMaterialButton(
-          onPressed: widget.onStartDatePressed,
-          focusElevation: 2,
-          elevation: 2,
-          highlightElevation: 2,
+        Container(
           padding: EdgeInsets.all(2.m),
-          shape: RoundedRectangleBorder(
+          decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(7.m),
+            color: (startActive ?? false) ? context.palette.bgAccent : null,
           ),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(6.m),
-              color: context.neutralColors.$100,
-              border: Border.all(
-                color: context.neutralColors.$500,
-                width: 0.5.l,
+          child: RawMaterialButton(
+            onPressed: widget.onStartDatePressed,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6.m),
+                color: context.neutralColors.$100,
+                border: Border.all(
+                  color: context.neutralColors.$500,
+                  width: 0.5.l,
+                ),
               ),
-            ),
-            alignment: Alignment.center,
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 11.h),
-            child: SizedBox(
-              width: 85.w,
-              child: Center(
-                child: Text(
-                  startDate?.formatSimpleDate() ?? '-- -- --',
-                  overflow: TextOverflow.visible,
-                  maxLines: 1,
-                  style: context.secondaryTypography.paragraph.large.asRegular,
+              alignment: Alignment.center,
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 11.h),
+              child: SizedBox(
+                width: 85.w,
+                child: Center(
+                  child: Text(
+                    startDate?.formatSimpleDate() ?? '-- -- --',
+                    overflow: TextOverflow.visible,
+                    maxLines: 1,
+                    style:
+                        context.secondaryTypography.paragraph.large.asRegular,
+                  ),
                 ),
               ),
             ),
@@ -82,38 +87,42 @@ class _DateRangePickerState extends State<DateRangePicker> {
           },
         ),
         14.boxWidth,
-        RawMaterialButton(
-          focusElevation: 2,
-          elevation: 2,
-          highlightElevation: 2,
+        Container(
           padding: EdgeInsets.all(2.m),
-          shape: RoundedRectangleBorder(
+          decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(7.m),
+            color: (startActive == null)
+                ? null
+                : startActive!
+                    ? null
+                    : context.palette.bgAccent,
           ),
-          onPressed: startDate == null ? null : widget.onEndDatePressed,
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(6.m),
-              color: context.neutralColors.$100,
-              border: Border.all(
-                color: startDate == null
-                    ? context.neutralColors.$400
-                    : context.neutralColors.$500,
-                width: 0.5.l,
+          child: RawMaterialButton(
+            onPressed: startDate == null ? null : widget.onEndDatePressed,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6.m),
+                color: context.neutralColors.$100,
+                border: Border.all(
+                  color: startDate == null
+                      ? context.neutralColors.$400
+                      : context.neutralColors.$500,
+                  width: 0.5.l,
+                ),
               ),
-            ),
-            alignment: Alignment.center,
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 11.h),
-            child: SizedBox(
-              width: 85.w,
-              child: Center(
-                child: Text(
-                  endDate?.formatSimpleDate() ?? '-- -- --',
-                  overflow: TextOverflow.visible,
-                  maxLines: 1,
-                  style: context.secondaryTypography.paragraph.large.asRegular
-                      .withColor(
-                    startDate == null ? context.neutralColors.$500 : null,
+              alignment: Alignment.center,
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 11.h),
+              child: SizedBox(
+                width: 85.w,
+                child: Center(
+                  child: Text(
+                    endDate?.formatSimpleDate() ?? '-- -- --',
+                    overflow: TextOverflow.visible,
+                    maxLines: 1,
+                    style: context.secondaryTypography.paragraph.large.asRegular
+                        .withColor(
+                      startDate == null ? context.neutralColors.$500 : null,
+                    ),
                   ),
                 ),
               ),

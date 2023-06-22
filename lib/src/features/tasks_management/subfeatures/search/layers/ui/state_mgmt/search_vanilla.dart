@@ -30,7 +30,7 @@ class SearchVanilla extends VanillaNotifier<SearchState>
   }
 
   void changeSearchFilterTo(SearchFilter filter) {
-    final SearchState newState = state.copyWith(
+    final SearchState newState = state.copyWithAsNull(
       filter: filter,
       dateFilter: null,
     );
@@ -44,7 +44,7 @@ class SearchVanilla extends VanillaNotifier<SearchState>
     SearchDateFilter filter, {
     bool setToNull = false,
   }) {
-    final SearchState newState = state.copyWith(
+    final SearchState newState = state.copyWithAsNull(
       dateFilter: setToNull ? null : filter,
     );
     state = newState.copyWith(
@@ -75,19 +75,25 @@ class SearchVanilla extends VanillaNotifier<SearchState>
   }
 
   void clearQuery() {
-    state = state.copyWith(
+    final SearchState newState = state.copyWithAsNull(
       query: '',
       dateFilter: null,
       filter: SearchFilter.all,
-      currentResults: state.applyFilterTo(state.allResults),
+    );
+
+    state = newState.copyWith(
+      currentResults: newState.applyFilterTo(state.allResults),
     );
   }
 
   void clearFilters() {
-    state = state.copyWith(
+    final SearchState newState = state.copyWithAsNull(
       dateFilter: null,
       filter: SearchFilter.all,
-      currentResults: state.applyFilterTo(state.allResults),
+    );
+
+    state = newState.copyWith(
+      currentResults: newState.applyFilterTo(state.allResults),
     );
   }
 

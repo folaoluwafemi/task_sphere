@@ -55,6 +55,30 @@ class SearchState extends VanillaStateWithStatus {
     );
   }
 
+  SearchState copyWithAsNull({
+    List<SearchResult>? allResults,
+    List<SearchResult>? currentResults,
+    List<String>? history,
+    String? query,
+    SearchFilter? filter,
+    SearchDateFilter? dateFilter,
+    bool? success,
+    bool? loading,
+    Failure? error,
+  }) {
+    return SearchState(
+      query: query ?? this.query,
+      allResults: allResults ?? this.allResults,
+      currentResults: currentResults ?? this.currentResults,
+      history: history ?? this.history,
+      filter: filter ?? this.filter,
+      dateFilter: dateFilter,
+      success: success ?? this.success,
+      loading: loading ?? this.loading,
+      error: error,
+    );
+  }
+
   @override
   List<Object?> get props => [
         allResults,
@@ -62,6 +86,7 @@ class SearchState extends VanillaStateWithStatus {
         history,
         filter,
         dateFilter,
+        dateFilter?.copyWith(),
         success,
         loading,
         error,

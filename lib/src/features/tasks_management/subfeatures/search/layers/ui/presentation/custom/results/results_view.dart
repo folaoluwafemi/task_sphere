@@ -17,19 +17,16 @@ part 'filter_tabs.dart';
 part 'loader_parent.dart';
 
 class ResultsView extends StatelessWidget {
-  final bool showFilter;
+  final bool canChooseToShowFilter;
 
   const ResultsView({
     Key? key,
-    required this.showFilter,
+    required this.canChooseToShowFilter,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return VanillaBuilder<SearchVanilla, SearchState>(
-      buildWhen: (previous, current) =>
-          previous?.currentResults != current.currentResults ||
-          previous?.currentResults.length != current.currentResults.length,
       builder: (context, state) {
         return LoaderParent(
           shouldLoad: state.loading,
@@ -37,7 +34,7 @@ class ResultsView extends StatelessWidget {
             slivers: [
               8.sliverBoxHeight,
               SliverPinnedHeader(
-                child: !showFilter
+                child: !canChooseToShowFilter
                     ? 30.boxHeight
                     : state.dateFilter != null
                         ? _DateFilterWidget(filter: state.dateFilter!)
@@ -55,7 +52,7 @@ class ResultsView extends StatelessWidget {
                           final SearchResult result =
                               state.currentResults[index];
                           return GestureDetector(
-                            onTap: () => context.goNamed(
+                            onTap: () => context.pushNamed(
                               AppRoute.task.name,
                               extra: result.task,
                             ),

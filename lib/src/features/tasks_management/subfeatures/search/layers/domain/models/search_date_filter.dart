@@ -19,15 +19,22 @@ class SearchDateFilter {
     );
   }
 
+  bool get isWithinProperLimit {
+    if (endDate == null) {
+      return true;
+    }
+    return startDate.isBefore(endDate!);
+  }
+
   List<SearchResult> applyFilterTo(List<SearchResult> results) {
     if (endDate == null) {
       return results.where((result) {
-        return result.updatedAt.isAfter(startDate);
+        return result.createdAt.isAfter(startDate);
       }).toList();
     }
 
     return results.where((result) {
-      return result.updatedAt.isAfter(startDate) &&
+      return result.createdAt.isAfter(startDate) &&
           result.createdAt.isBefore(endDate!);
     }).toList();
   }

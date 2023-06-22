@@ -3,11 +3,13 @@ part of 'date_filter_dialog.dart';
 class _DatePickerSection extends StatelessWidget {
   final ValueChanged<DateTime> onDateChanged;
   final VoidCallback onDonePressed;
+  final DateTime? maxDate;
 
   const _DatePickerSection({
     Key? key,
     required this.onDateChanged,
     required this.onDonePressed,
+    this.maxDate,
   }) : super(key: key);
 
   @override
@@ -22,8 +24,11 @@ class _DatePickerSection extends StatelessWidget {
             color: context.bgColors.$50,
           ),
           child: CupertinoDatePicker(
-            initialDateTime: DateTime.now().subtract(const Duration(days: 7)),
-            maximumDate: DateTime.now(),
+            initialDateTime: maxDate ??
+                DateTime.now().subtract(
+                  const Duration(days: 7),
+                ),
+            maximumDate: maxDate ?? DateTime.now(),
             dateOrder: DatePickerDateOrder.dmy,
             mode: CupertinoDatePickerMode.date,
             onDateTimeChanged: onDateChanged,

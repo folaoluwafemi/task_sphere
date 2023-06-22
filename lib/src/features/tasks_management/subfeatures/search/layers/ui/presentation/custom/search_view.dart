@@ -73,7 +73,7 @@ class _SearchViewState extends State<SearchView> {
                 children: [
                   hasFocus && isEmpty
                       ? HistoryView(controller: searchController)
-                      : ResultsView(showFilter: !hasFocus),
+                      : ResultsView(canChooseToShowFilter: !hasFocus),
                   if (hasFocus)
                     Align(
                       alignment: Alignment.topRight,
