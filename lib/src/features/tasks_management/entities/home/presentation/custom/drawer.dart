@@ -1,18 +1,24 @@
 part of '../home_screen.dart';
 
-enum DrawerItems {
+enum DrawerItem {
+  aboutApp('About app', VectorAssets.about, AppRoute.about),
   trash('Trash', VectorAssets.delete, AppRoute.search),
-  settings('Settings', VectorAssets.setting, AppRoute.settings),
+  settings('Settings', VectorAssets.setting, AppRoute.home),
   ;
 
   final String text, vectorAsset;
   final AppRoute route;
 
-  const DrawerItems(this.text, this.vectorAsset, this.route);
+  const DrawerItem(this.text, this.vectorAsset, this.route);
 }
 
 class _Drawer extends StatelessWidget {
-  const _Drawer({Key? key}) : super(key: key);
+  final ValueNotifier<double> drawerOffsetNotifier;
+
+  const _Drawer({
+    Key? key,
+    required this.drawerOffsetNotifier,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,42 +46,26 @@ class _Drawer extends StatelessWidget {
               ),
             ),
             56.boxHeight,
-            ...DrawerItems.values.map(
-              (item) => Padding(
-                padding: EdgeInsets.only(bottom: 16.h),
-                child: GestureDetector(
-                  // borderRadius: Ui.circularBorder(7.l),
-                  onTap: () {
-                    //TODO: implement
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 14.w,
-                      vertical: 12.h,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: Ui.circularBorder(7.l),
-                      color: context.neutralColors.$100,
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SvgDecorator.square(
-                          dimension: 24.l,
-                          color: context.palette.primary,
-                          child: SvgPicture.asset(item.vectorAsset),
-                        ),
-                        10.boxWidth,
-                        Text(
-                          item.text,
-                          style: context.primaryTypography.paragraph.medium,
-                        ),
-                      ],
-                    ),
+            ...DrawerItem.values.take(1).map(
+                  (item) =>
+                  InkWell(
+                    borderRadius: Ui.circularBorder(7.l),
+                    onTap: () {
+                      drawerOffsetNotifier.value = 0;
+                      context.goNamed(item.route.name);
+                    },
+                    child: _DrawerItemWidget(item: item),
                   ),
-                ),
-              ),
+            ),
+            48.boxHeight,
+            Text(
+              'COMING SOON',
+              style: context.primaryTypography.paragraph.small.asRegular,
+            ),
+            16.boxHeight,
+            const Opacity(
+              opacity: 0.5,
+              child: _DisabledOptions(),
             ),
             const Spacer(),
             Padding(
@@ -101,7 +91,7 @@ class _Drawer extends StatelessWidget {
                       Text(
                         'Log out',
                         style:
-                            context.primaryTypography.paragraph.medium.copyWith(
+                        context.primaryTypography.paragraph.medium.copyWith(
                           color: AppColors.red,
                         ),
                       ),
@@ -122,5 +112,65 @@ class _Drawer extends StatelessWidget {
       UserManager.deleteUser();
       AppRouter.navigatorKey.currentContext?.goNamed(AppRoute.onboarding.name);
     });
+  }
+}
+
+class _DisabledOptions extends StatelessWidget {
+  const _DisabledOptions({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        ...DrawerItem.values.skip(1).map(
+              (item) =>
+              Padding(
+                padding: EdgeInsets.only(bottom: 16.h),
+                child: _DrawerItemWidget(item: item),
+              ),
+        ),
+      ],
+    );
+  }
+}
+
+class _DrawerItemWidget extends StatelessWidget {
+  final DrawerItem item;
+
+  const _DrawerItemWidget({
+    required this.item,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: 14.w,
+        vertical: 12.h,
+      ),
+      decoration: BoxDecoration(
+        borderRadius: Ui.circularBorder(7.l),
+        color: context.neutralColors.$100,
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SvgDecorator.square(
+            dimension: 24.l,
+            color: context.palette.primary,
+            child: SvgPicture.asset(item.vectorAsset),
+          ),
+          10.boxWidth,
+          Text(
+            item.text,
+            style: context.primaryTypography.paragraph.medium,
+          ),
+        ],
+      ),
+    );
   }
 }

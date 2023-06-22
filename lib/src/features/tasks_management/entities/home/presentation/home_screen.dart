@@ -144,7 +144,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Transform.translate(
                     offset: Offset(drawerOffset - maxDrawerOffset, 0),
-                    child: const _Drawer(),
+                    child: _Drawer(
+                      drawerOffsetNotifier: drawerOffsetNotifier,
+                    ),
                   ),
                   Transform.translate(
                     offset: Offset(drawerOffset, 0),

@@ -13,7 +13,7 @@ enum AppRoute {
   home('/home', '/home'),
   task('task', '/home/task'),
   search('search', '/home/search'),
-  settings('settings', '/home/settings'),
+  about('about', '/home/about'),
   ;
 
   final String path;

@@ -81,6 +81,11 @@ final GoRouter _router = GoRouter(
           name: AppRoute.search.name,
           builder: (context, state) => const SearchScreen(),
         ),
+        GoRoute(
+          path: AppRoute.about.path,
+          name: AppRoute.about.name,
+          builder: (context, state) => const AboutAppScreen(),
+        ),
       ],
     ),
   ],
