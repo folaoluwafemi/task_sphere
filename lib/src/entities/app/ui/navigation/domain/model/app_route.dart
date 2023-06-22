@@ -14,6 +14,7 @@ enum AppRoute {
   task('task', '/home/task'),
   search('search', '/home/search'),
   about('about', '/home/about'),
+  aboutDesignAndDev('about-des-dev', '/home/about/about-des-dev'),
   ;
 
   final String path;

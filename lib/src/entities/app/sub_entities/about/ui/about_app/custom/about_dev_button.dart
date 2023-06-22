@@ -10,6 +10,13 @@ enum AboutButton {
 
   static const String privacyPolicyLink =
       'https://docs.google.com/document/d/1E_tUvtQZyyskYSWmTW3RLWjzJr2oSAh2ko5AlpeCj4k/edit?usp=sharing';
+
+  void action(BuildContext context) => switch (this) {
+        aboutDev => context.goNamed(AppRoute.aboutDesignAndDev.name),
+        privacyPolicy => launchPrivacyPolicy(),
+      };
+
+  Future<void> launchPrivacyPolicy() async {}
 }
 
 class AboutDevButton extends StatelessWidget {

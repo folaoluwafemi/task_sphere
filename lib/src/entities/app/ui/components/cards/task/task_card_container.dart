@@ -7,6 +7,8 @@ class TaskCardContainer extends StatelessWidget {
   final double? width;
   final double? height;
   final double? gutterWidth;
+  final double? gutterThickness;
+  final double? gutterRadius;
 
   const TaskCardContainer({
     Key? key,
@@ -14,6 +16,8 @@ class TaskCardContainer extends StatelessWidget {
     this.width,
     this.height,
     this.gutterWidth,
+    this.gutterThickness,
+    this.gutterRadius,
   }) : super(key: key);
 
   @override
@@ -25,9 +29,9 @@ class TaskCardContainer extends StatelessWidget {
         borderRadius: Ui.circularBorder(15.l),
         child: ClipPath(
           clipper: TaskCardClipper(
-            gutterRadius: 4,
-            gutterThickness: 4,
-            gutterWidth: gutterWidth,
+            gutterRadius: gutterRadius ?? 4,
+            gutterThickness: gutterThickness ?? 4,
+            gutterWidth: gutterWidth, //defaults to [44.h]
           ),
           child: Container(
             color: context.bgColors.$50,

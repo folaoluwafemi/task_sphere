@@ -106,7 +106,9 @@ class TaskCardClipper extends CustomClipper<Path> {
   }
 
   @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    return false;
+  bool shouldReclip(TaskCardClipper oldClipper) {
+    return oldClipper.gutterRadius != gutterRadius ||
+        oldClipper.gutterWidth != gutterWidth ||
+        oldClipper.gutterThickness != gutterThickness;
   }
 }

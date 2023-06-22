@@ -85,6 +85,13 @@ final GoRouter _router = GoRouter(
           path: AppRoute.about.path,
           name: AppRoute.about.name,
           builder: (context, state) => const AboutAppScreen(),
+          routes: [
+            GoRoute(
+              path: AppRoute.aboutDesignAndDev.path,
+              name: AppRoute.aboutDesignAndDev.name,
+              builder: (context, state) => const AboutDesignAndDev(),
+            ),
+          ],
         ),
       ],
     ),

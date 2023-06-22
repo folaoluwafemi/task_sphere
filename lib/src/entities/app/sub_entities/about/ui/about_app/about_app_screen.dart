@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sliver_tools/sliver_tools.dart';
+import 'package:task_sphere/src/entities/app/app_barrel.dart';
 import 'package:task_sphere/src/entities/app/ui/components/cards/task/task_card_container.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
@@ -65,7 +66,7 @@ class AboutAppScreen extends StatelessWidget {
                       (detail) => Padding(
                         padding: EdgeInsets.only(top: 12.h),
                         child: AboutDevButton(
-                          onPressed: () {},
+                          onPressed: () => detail.action(context),
                           aboutButtonDetail: detail,
                         ),
                       ),
