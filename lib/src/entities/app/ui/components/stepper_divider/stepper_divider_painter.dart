@@ -27,8 +27,6 @@ class StepperDividerPainter extends CustomPainter {
     final int stepCount = (size.width / (stepWidth)).floor();
     final double stepSpacing = spacing;
 
-    final double extentY = 1.h;
-
     for (int i = 0; i < stepCount - 1; i++) {
       final double lineStart = (i * (stepWidth + stepSpacing));
       final double spacingStart = lineStart - stepSpacing;

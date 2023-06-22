@@ -3,9 +3,8 @@ part of 'search_engine_interface.dart';
 class _TasksFetcher with FirebaseErrorHandlerMixin {
   final CollectionReference _tasksRef;
 
-  _TasksFetcher({
-    String? userId,
-  }) : _tasksRef = FirebaseFirestore.instance
+  _TasksFetcher()
+      : _tasksRef = FirebaseFirestore.instance
             .collection(Keys.user)
             .doc(UserManager.requireUser.uid)
             .collection(Keys.tasks);

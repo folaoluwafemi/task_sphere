@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:task_sphere/src/entities/apis/firebase/firebase_api_barrel.dart';
 import 'package:task_sphere/src/entities/task/task_barrel.dart';
 import 'package:task_sphere/src/entities/user/user_barrel.dart';
-import 'package:task_sphere/src/features/analytics/analytics_barrel.dart';
 import 'package:task_sphere/src/utils/constants/constants_barrel.dart';
 
 part 'tasks_writer.dart';

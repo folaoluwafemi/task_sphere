@@ -6,7 +6,6 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 import 'package:task_sphere/src/entities/app/ui/components/components_barrel.dart';
-import 'package:task_sphere/src/entities/app/ui/components/spade/spade.dart';
 import 'package:task_sphere/src/entities/task/task_barrel.dart';
 import 'package:task_sphere/src/entities/todo/todo_barrel.dart';
 import 'package:task_sphere/src/features/tasks_management/subfeatures/manage_task/ui/state_mgmt/task_vanilla.dart';
