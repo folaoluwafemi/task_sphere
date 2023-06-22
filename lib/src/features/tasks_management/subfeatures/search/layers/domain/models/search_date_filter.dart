@@ -1,3 +1,5 @@
+import 'package:task_sphere/src/features/tasks_management/task_management_barrel.dart';
+
 class SearchDateFilter {
   final DateTime startDate;
   final DateTime? endDate;
@@ -15,5 +17,18 @@ class SearchDateFilter {
       startDate: startDate ?? this.startDate,
       endDate: endDate ?? this.endDate,
     );
+  }
+
+  List<SearchResult> applyFilterTo(List<SearchResult> results) {
+    if (endDate == null) {
+      return results.where((result) {
+        return result.updatedAt.isAfter(startDate);
+      }).toList();
+    }
+
+    return results.where((result) {
+      return result.updatedAt.isAfter(startDate) &&
+          result.createdAt.isBefore(endDate!);
+    }).toList();
   }
 }

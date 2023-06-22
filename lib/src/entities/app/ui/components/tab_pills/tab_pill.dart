@@ -49,26 +49,35 @@ class TabPill extends StatelessWidget {
   final TabPillState state;
   final _TabPillType _type;
   final VoidCallback? onPressed;
+  final TextStyle? textStyle;
+  final double? borderRadius;
+  final EdgeInsets? padding;
 
   const TabPill.monochrome({
     required this.text,
     required this.state,
     this.onPressed,
+    this.textStyle,
+    this.borderRadius,
     super.key,
+    this.padding,
   }) : _type = _TabPillType.monochrome;
 
   const TabPill.colored({
     required this.text,
     required this.state,
     this.onPressed,
+    this.textStyle,
+    this.borderRadius,
     super.key,
+    this.padding,
   }) : _type = _TabPillType.colored;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onPressed,
-      borderRadius: Ui.circularBorder(6.m),
+      borderRadius: Ui.circularBorder(borderRadius ?? 6.m),
       child: Container(
         decoration: BoxDecoration(
           color: _type.backgroundColor(context, state),
@@ -78,18 +87,20 @@ class TabPill extends StatelessWidget {
             width: 1,
           ),
         ),
-        padding: EdgeInsets.symmetric(
-          horizontal: 12.w,
-          vertical: 5.h,
-        ),
+        padding: padding ??
+            EdgeInsets.symmetric(
+              horizontal: 12.w,
+              vertical: 5.h,
+            ),
         child: Text(
           text,
           textAlign: TextAlign.center,
-          style: context.primaryTypography.paragraph.medium.copyWith(
-            color: _type.textColor(context, state),
-            fontSize: 10.sp,
-            letterSpacing: 0.5,
-          ),
+          style: (textStyle ??
+                  context.primaryTypography.paragraph.medium.copyWith(
+                    fontSize: 10.sp,
+                    letterSpacing: 0.5,
+                  ))
+              .withColor(_type.textColor(context, state)),
         ),
       ),
     );

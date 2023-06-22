@@ -35,10 +35,17 @@ class _DateRangePickerState extends State<DateRangePicker> {
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
       children: [
-        InkWell(
-          borderRadius: BorderRadius.circular(6.m),
-          onTap: widget.onStartDatePressed,
+        RawMaterialButton(
+          onPressed: widget.onStartDatePressed,
+          focusElevation: 2,
+          elevation: 2,
+          highlightElevation: 2,
+          padding: EdgeInsets.all(2.m),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(7.m),
+          ),
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(6.m),
@@ -48,14 +55,22 @@ class _DateRangePickerState extends State<DateRangePicker> {
                 width: 0.5.l,
               ),
             ),
+            alignment: Alignment.center,
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 11.h),
-            child: Text(
-              startDate?.formatSimpleDate() ?? '-- -- --',
-              style: context.secondaryTypography.paragraph.large.asRegular,
+            child: SizedBox(
+              width: 85.w,
+              child: Center(
+                child: Text(
+                  startDate?.formatSimpleDate() ?? '-- -- --',
+                  overflow: TextOverflow.visible,
+                  maxLines: 1,
+                  style: context.secondaryTypography.paragraph.large.asRegular,
+                ),
+              ),
             ),
           ),
         ),
-        16.boxWidth,
+        14.boxWidth,
         Spade.linked(
           firstHalfColor: switch (startDate) {
             null => context.neutralColors.$400,
@@ -66,10 +81,16 @@ class _DateRangePickerState extends State<DateRangePicker> {
             _ => context.palette.primary,
           },
         ),
-        16.boxWidth,
-        InkWell(
-          borderRadius: BorderRadius.circular(6.m),
-          onTap: startDate == null ? null : widget.onEndDatePressed,
+        14.boxWidth,
+        RawMaterialButton(
+          focusElevation: 2,
+          elevation: 2,
+          highlightElevation: 2,
+          padding: EdgeInsets.all(2.m),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(7.m),
+          ),
+          onPressed: startDate == null ? null : widget.onEndDatePressed,
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(6.m),
@@ -81,12 +102,20 @@ class _DateRangePickerState extends State<DateRangePicker> {
                 width: 0.5.l,
               ),
             ),
+            alignment: Alignment.center,
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 11.h),
-            child: Text(
-              endDate?.formatSimpleDate() ?? '-- -- --',
-              style: context.secondaryTypography.paragraph.large.asRegular
-                  .withColor(
-                startDate == null ? context.neutralColors.$500 : null,
+            child: SizedBox(
+              width: 85.w,
+              child: Center(
+                child: Text(
+                  endDate?.formatSimpleDate() ?? '-- -- --',
+                  overflow: TextOverflow.visible,
+                  maxLines: 1,
+                  style: context.secondaryTypography.paragraph.large.asRegular
+                      .withColor(
+                    startDate == null ? context.neutralColors.$500 : null,
+                  ),
+                ),
               ),
             ),
           ),

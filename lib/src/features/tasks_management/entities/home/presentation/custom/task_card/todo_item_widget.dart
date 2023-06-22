@@ -1,9 +1,9 @@
 part of 'task_card.dart';
 
-class _TodoItemWidget extends StatelessWidget {
+class TodoItemWidget extends StatelessWidget {
   final Todo todo;
 
-  const _TodoItemWidget({
+  const TodoItemWidget({
     Key? key,
     required this.todo,
   }) : super(key: key);

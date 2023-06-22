@@ -10,7 +10,11 @@ class SearchResult implements Comparable<SearchResult> {
     this.value,
   });
 
+  bool get isTask => value == null;
+
   DateTime get updatedAt => value?.updatedAt ?? task.updatedAt;
+
+  DateTime get createdAt => value?.createdAt ?? task.createdAt;
 
   @override
   int compareTo(SearchResult other) => other.updatedAt.compareTo(updatedAt);

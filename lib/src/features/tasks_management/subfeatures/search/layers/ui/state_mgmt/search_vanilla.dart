@@ -22,36 +22,34 @@ class SearchVanilla extends VanillaNotifier<SearchState>
         catcher: notifyOnError,
       );
 
-  void _initialize() => _historyManager.addListener(_searchHistoryListener);
-
-  void changeSearchFilterTo(SearchFilter filter) {
-    state = state.copyWith(filter: filter);
+  void _initialize() {
+    _historyManager.addListener(_searchHistoryListener);
+    state = state.copyWith(
+      allResults: _searchEngine.searchSync(''),
+    );
   }
 
-  void changeDateFilter({
-    DateTime? startDate,
-    DateTime? endDate,
-    bool disable = false,
-  }) =>
-      handleSyncError(
-        _changeDateFilter(
-          startDate: startDate,
-          endDate: endDate,
-          setToNull: disable,
-        ),
-      );
+  void changeSearchFilterTo(SearchFilter filter) {
+    final SearchState newState = state.copyWith(
+      filter: filter,
+      dateFilter: null,
+    );
 
-  void _changeDateFilter({
-    DateTime? startDate,
-    DateTime? endDate,
-    required bool setToNull,
+    state = newState.copyWith(
+      currentResults: newState.applyFilterTo(state.allResults),
+    );
+  }
+
+  void changeDateFilter(
+    SearchDateFilter filter, {
+    bool setToNull = false,
   }) {
-    if (setToNull) {
-      state = state.copyWith(dateFilter: null);
-      return;
-    }
-    if (startDate != null) state = state.updateStartDateFilter(startDate);
-    if (endDate != null) state = state.updateEndDateFilter(endDate);
+    final SearchState newState = state.copyWith(
+      dateFilter: setToNull ? null : filter,
+    );
+    state = newState.copyWith(
+      currentResults: newState.applyFilterTo(state.allResults),
+    );
   }
 
   void searchQuick(String query) => handleSyncError(
@@ -67,14 +65,29 @@ class SearchVanilla extends VanillaNotifier<SearchState>
 
     state = state.copyWith(
       query: query,
-      currentResults: state.filter.applyTo(results),
+      currentResults: state.applyFilterTo(results),
     );
+  }
+
+  void maybeSearch(String query) {
+    if (state.currentResults.isNotEmpty) return;
+    searchQuick(query);
   }
 
   void clearQuery() {
     state = state.copyWith(
       query: '',
-      currentResults: state.filter.applyTo(state.allResults),
+      dateFilter: null,
+      filter: SearchFilter.all,
+      currentResults: state.applyFilterTo(state.allResults),
+    );
+  }
+
+  void clearFilters() {
+    state = state.copyWith(
+      dateFilter: null,
+      filter: SearchFilter.all,
+      currentResults: state.applyFilterTo(state.allResults),
     );
   }
 
@@ -93,6 +106,8 @@ class SearchVanilla extends VanillaNotifier<SearchState>
       );
 
   Future<void> _searchFor(String query) async {
+    if (query.isEmpty) return searchQuick(query);
+
     notifyLoading(state_: state.copyWith(query: query));
 
     final List<SearchResult> results = await _searchEngine.searchFor(
@@ -104,13 +119,9 @@ class SearchVanilla extends VanillaNotifier<SearchState>
 
     notifySuccess(
       state: state.copyWith(
-        currentResults: state.filter.applyTo(results),
+        currentResults: state.applyFilterTo(results),
       ),
     );
-  }
-
-  void setInitialDateFilter(DateTime startDate) {
-    state = state.updateStartDateFilter(startDate);
   }
 
   void _searchHistoryListener() {

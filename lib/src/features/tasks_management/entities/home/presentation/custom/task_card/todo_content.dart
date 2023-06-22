@@ -57,7 +57,7 @@ class _TodoContent extends StatelessWidget {
                       itemCount: task.todos.length,
                       padding: EdgeInsets.zero,
                       separatorBuilder: (context, index) => 4.boxHeight,
-                      itemBuilder: (context, index) => _TodoItemWidget(
+                      itemBuilder: (context, index) => TodoItemWidget(
                         todo: task.todos[index],
                       ),
                     ),
@@ -92,7 +92,7 @@ class _TodoContent extends StatelessWidget {
                   itemCount: task.todos.length,
                   padding: EdgeInsets.zero,
                   separatorBuilder: (context, index) => 4.boxHeight,
-                  itemBuilder: (context, index) => _TodoItemWidget(
+                  itemBuilder: (context, index) => TodoItemWidget(
                     todo: task.todos[index],
                   ),
                 ),

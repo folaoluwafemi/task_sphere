@@ -7,6 +7,7 @@ class ModalCard extends StatelessWidget {
   final double? width;
   final double? height;
   final double? gutterHeight;
+  final BorderRadius? borderRadius;
 
   const ModalCard({
     Key? key,
@@ -14,6 +15,7 @@ class ModalCard extends StatelessWidget {
     this.width,
     this.height,
     this.gutterHeight,
+    this.borderRadius,
   }) : super(key: key);
 
   @override
@@ -22,7 +24,7 @@ class ModalCard extends StatelessWidget {
       width: width,
       height: height,
       child: ClipRRect(
-        borderRadius: Ui.circularBorder(8),
+        borderRadius: borderRadius ?? Ui.circularBorder(8),
         child: ClipPath(
           clipper: ModalCardClipper(
             gutterRadius: 4,

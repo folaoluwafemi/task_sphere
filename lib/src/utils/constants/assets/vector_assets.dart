@@ -40,5 +40,8 @@ abstract final class VectorAssets {
   static const String arrowLeft = 'assets/vectors/arrow_left.svg';
   static const String arrowUpRight = 'assets/vectors/arrow_up_right.svg';
   static const String clock = 'assets/vectors/clock.svg';
+  static const String calendar = 'assets/vectors/calendar.svg';
+  static const String searchPlus = 'assets/vectors/search_plus.svg';
+  static const String checkWeighted = 'assets/vectors/check_weighted.svg';
   static const String _helper = 'assets/vectors/.svg';
 }

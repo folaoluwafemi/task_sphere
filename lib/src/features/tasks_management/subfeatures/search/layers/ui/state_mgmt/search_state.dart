@@ -24,20 +24,10 @@ class SearchState extends VanillaStateWithStatus {
           error: error,
         );
 
-  SearchState updateStartDateFilter(DateTime startDate) {
-    return copyWith(
-      dateFilter: dateFilter == null
-          ? SearchDateFilter(startDate: startDate)
-          : dateFilter!.copyWith(startDate: startDate),
-    );
-  }
+  bool get hasActiveFilter => filter != SearchFilter.all || dateFilter != null;
 
-  SearchState updateEndDateFilter(DateTime endDate) {
-    if (dateFilter?.startDate == null) {
-      throw Failure(message: 'Date filter or start date must be set');
-    }
-
-    return copyWith(dateFilter: dateFilter!.copyWith(endDate: endDate));
+  List<SearchResult> applyFilterTo(List<SearchResult> results) {
+    return dateFilter?.applyFilterTo(results) ?? filter.applyTo(results);
   }
 
   @override

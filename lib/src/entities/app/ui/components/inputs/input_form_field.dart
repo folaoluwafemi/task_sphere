@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:task_sphere/src/entities/app/ui/components/components_barrel.dart';
+import 'package:task_sphere/src/entities/app/app_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 class InputFormField extends StatefulWidget {
