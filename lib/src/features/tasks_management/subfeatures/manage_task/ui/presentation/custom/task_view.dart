@@ -15,6 +15,44 @@ class _TaskView extends StatefulWidget {
 class _TaskViewState extends State<_TaskView> {
   late final List<Todo> todos = widget.todos;
 
+  @override
+  Widget build(BuildContext context) {
+    return ReorderableList(
+      onReorder: onReorder,
+      onReorderDone: onReorderDone,
+      child: VanillaBuilder<TaskVanilla, TaskState>(
+        buildWhen: (previous, current) {
+          return previous?.showAchievement != current.showAchievement;
+        },
+        builder: (context, state) {
+          return CustomScrollView(
+            physics: const ClampingScrollPhysics(),
+            slivers: [
+              SliverStack(
+                children: [
+                  state.showAchievement
+                      ? const SliverToBoxAdapter(child: _TaskAchievement())
+                      : SliverSafeArea(
+                          top: false,
+                          sliver: MultiSliver(
+                            children: [
+                              const SliverToBoxAdapter(child: _TitleView()),
+                              _TodoView(todos: todos),
+                              18.sliverBoxHeight,
+                              const SliverToBoxAdapter(child: CreatedDate()),
+                            ],
+                          ),
+                        ),
+                  const SliverPinnedHeader(child: _PinnedHeader()),
+                ],
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
   bool onReorder(Key draggedKey, Key newKey) {
     draggedKey = draggedKey as ValueKey<DateTime>;
     newKey = newKey as ValueKey<DateTime>;
@@ -70,44 +108,6 @@ class _TaskViewState extends State<_TaskView> {
       todos.sort();
     });
     context.read<TaskVanilla>().updateTodos(todos);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ReorderableList(
-      onReorder: onReorder,
-      onReorderDone: onReorderDone,
-      child: VanillaBuilder<TaskVanilla, TaskState>(
-        buildWhen: (previous, current) {
-          return previous?.showAchievement != current.showAchievement;
-        },
-        builder: (context, state) {
-          return CustomScrollView(
-            physics: const ClampingScrollPhysics(),
-            slivers: [
-              SliverStack(
-                children: [
-                  state.showAchievement
-                      ? const SliverToBoxAdapter(child: _TaskAchievement())
-                      : SliverSafeArea(
-                          top: false,
-                          sliver: MultiSliver(
-                            children: [
-                              const SliverToBoxAdapter(child: _TitleView()),
-                              _TodoView(todos: todos),
-                              18.sliverBoxHeight,
-                              const SliverToBoxAdapter(child: CreatedDate()),
-                            ],
-                          ),
-                        ),
-                  const SliverPinnedHeader(child: _PinnedHeader()),
-                ],
-              ),
-            ],
-          );
-        },
-      ),
-    );
   }
 }
 

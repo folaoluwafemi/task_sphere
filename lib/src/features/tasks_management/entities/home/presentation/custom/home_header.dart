@@ -7,36 +7,42 @@ class HomeHeader extends SliverPersistentHeaderDelegate {
     double shrinkOffset,
     bool overlapsContent,
   ) {
-    return Container(
-      height: 55.h,
-      width: double.infinity,
-      margin: EdgeInsets.symmetric(horizontal: 18.w),
-      color: context.bgColors.$100,
-      child: AnimatedSwitcher(
-        transitionBuilder: (child, animation) => FadeTransition(
-          opacity: animation,
-          child: child,
-        ),
-        duration: const Duration(milliseconds: 500),
-        child: shrinkOffset > 0
-            ? const Align(
-                alignment: Alignment.centerLeft,
-                child: TasksFilterWidget(),
-              )
-            : Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'MOST RECENT TASKS',
-                  style: context.primaryTypography.paragraph.small.copyWith(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 10.sp,
-                    height: 2,
-                    letterSpacing: 0.5,
-                    color: context.neutralColors.$700,
+    return VanillaBuilder<HomeVanilla, HomeState>(
+      buildWhen: (previous, current) => previous?.filter != current.filter,
+      builder: (context, state) {
+        final bool mustShowFilters = state.filter != TasksFilter.all;
+        return Container(
+          height: 55.h,
+          width: double.infinity,
+          margin: EdgeInsets.symmetric(horizontal: 18.w),
+          color: context.bgColors.$100,
+          child: AnimatedSwitcher(
+            transitionBuilder: (child, animation) => FadeTransition(
+              opacity: animation,
+              child: child,
+            ),
+            duration: const Duration(milliseconds: 500),
+            child: (shrinkOffset > 0 || mustShowFilters)
+                ? const Align(
+                    alignment: Alignment.centerLeft,
+                    child: TasksFilterWidget(),
+                  )
+                : Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'MOST RECENT TASKS',
+                      style: context.primaryTypography.paragraph.small.copyWith(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 10.sp,
+                        height: 2,
+                        letterSpacing: 0.5,
+                        color: context.neutralColors.$700,
+                      ),
+                    ),
                   ),
-                ),
-              ),
-      ),
+          ),
+        );
+      },
     );
   }
 

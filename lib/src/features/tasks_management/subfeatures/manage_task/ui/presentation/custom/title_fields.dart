@@ -84,12 +84,16 @@ class _TitleFieldsState extends State<_TitleFields> {
     description = value;
   }
 
+  late final bool autofocus =
+      context.read<TaskVanilla>().state.task.title.isEmpty;
+
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextField(
+          autofocus: autofocus,
           controller: titleController,
           onChanged: onTitleChanged,
           onSubmitted: onTitleChanged,

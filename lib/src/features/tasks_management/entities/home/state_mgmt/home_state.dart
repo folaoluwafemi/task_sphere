@@ -26,11 +26,13 @@ class HomeState extends VanillaStateWithStatus {
   final List<Task> allTasks;
   final List<Task> currentTasks;
   final TasksFilter filter;
+  final bool hasReachedLimit;
 
   const HomeState({
     required this.allTasks,
     required this.currentTasks,
     this.filter = TasksFilter.all,
+    this.hasReachedLimit = false,
     super.success = false,
     super.loading = false,
     super.error,
@@ -47,6 +49,7 @@ class HomeState extends VanillaStateWithStatus {
     List<Task>? allTasks,
     List<Task>? currentTasks,
     TasksFilter? filter,
+    bool? hasReachedLimit,
     bool? success,
     bool? loading,
     Failure? error,
@@ -55,6 +58,7 @@ class HomeState extends VanillaStateWithStatus {
       allTasks: allTasks ?? this.allTasks,
       currentTasks: currentTasks ?? this.currentTasks,
       filter: filter ?? this.filter,
+      hasReachedLimit: hasReachedLimit ?? this.hasReachedLimit  ,
       success: success ?? this.success,
       loading: loading ?? this.loading,
       error: error ?? this.error,
@@ -66,6 +70,7 @@ class HomeState extends VanillaStateWithStatus {
         allTasks,
         currentTasks,
         filter,
+        hasReachedLimit,
         success,
         loading,
         error,

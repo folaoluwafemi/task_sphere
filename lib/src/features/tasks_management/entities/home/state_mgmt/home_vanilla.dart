@@ -19,6 +19,7 @@ class HomeVanilla extends VanillaNotifier<HomeState>
     final List<Task> initialTasks = await _taskReader.fetch(aFresh: true);
     notifySuccess(
       state: state.copyWith(
+        hasReachedLimit: false,
         allTasks: initialTasks,
         currentTasks: state.filter.filterTasks(initialTasks),
       ),
@@ -29,7 +30,9 @@ class HomeVanilla extends VanillaNotifier<HomeState>
   Future<void> fetchTasks() => handleError(_fetchTasks());
 
   Future<void> _fetchTasks() async {
+    notifyLoading();
     await _taskReader.fetch(more: true);
+    notifySuccess();
   }
 
   Future<void> refresh() => handleError(_refresh());
@@ -47,6 +50,7 @@ class HomeVanilla extends VanillaNotifier<HomeState>
 
   void _tasksListener() {
     state = state.copyWith(
+      hasReachedLimit: _taskReader.tasks.length == state.allTasks.length,
       allTasks: List.from(_taskReader.tasks),
       currentTasks: state.filter.filterTasks(_taskReader.tasks),
     );

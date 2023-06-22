@@ -37,22 +37,31 @@ class TasksReader extends VanillaNotifier<List<Task>>
 
   Query? _nextQuery;
 
+  int currentPage = 0;
+
+  static const int limit = 4;
+
+  void setPage() {
+    currentPage = state.length % limit;
+  }
+
   Future<List<Task>> _fetchTasks({
     required bool fetchAfresh,
     required bool fetchMore,
   }) async {
     if (fetchAfresh) _nextQuery = null;
 
-    _nextQuery ??= _tasks.orderBy(Keys.createdAt, descending: true);
+    _nextQuery ??=
+        _tasks.orderBy(Keys.createdAt, descending: true).limit(limit);
 
     final QuerySnapshot snapshot = await _nextQuery!.get();
 
-    if (snapshot.docs.isEmpty) {
-      state = [];
-      return state;
-    }
+    _nextQuery ??=
+        _tasks.orderBy(Keys.createdAt, descending: true).limit(limit);
 
-    _nextQuery = _nextQuery!.startAfterDocument(snapshot.docs.last).limit(25);
+    _nextQuery = snapshot.docs.lastOrNull == null
+        ? null
+        : _nextQuery!.startAfterDocument(snapshot.docs.last).limit(limit);
 
     final List<Task> tasks = snapshot.docs
         .map((e) => Task.fromMap((e.data() as Map).cast()))

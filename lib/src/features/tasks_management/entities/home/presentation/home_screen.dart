@@ -13,6 +13,7 @@ import 'package:task_sphere/src/features/_auth/auth_barrel.dart';
 import 'package:task_sphere/src/features/analytics/analytics_barrel.dart';
 import 'package:task_sphere/src/features/tasks_management/task_management_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
+import 'package:very_good_infinite_list/very_good_infinite_list.dart';
 
 part 'custom/add_task_floating_button.dart';
 

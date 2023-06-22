@@ -19,7 +19,7 @@ class TaskVanilla extends VanillaNotifier<TaskState>
 
   Future<void> _initialize() async {
     if (state.isNew) return;
-    await save();
+    // await save();
     await _reFetch();
   }
 

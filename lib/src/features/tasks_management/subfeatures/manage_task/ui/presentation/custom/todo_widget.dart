@@ -56,6 +56,8 @@ class _TodoWidgetState extends State<TodoWidget> {
     content = value;
   }
 
+  late final bool autofocus = isNew;
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -73,6 +75,7 @@ class _TodoWidgetState extends State<TodoWidget> {
         16.boxWidth,
         Flexible(
           child: TextField(
+            autofocus: autofocus,
             onChanged: onChanged,
             focusNode: focusNode,
             controller: contentController,
