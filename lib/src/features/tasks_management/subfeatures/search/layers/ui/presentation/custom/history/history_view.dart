@@ -49,7 +49,8 @@ class _HistoryViewState extends State<HistoryView> {
             ),
             6.sliverBoxHeight,
             SliverList.separated(
-              separatorBuilder: (context, index) => 6.boxHeight,
+              itemCount: state.history.length,
+              separatorBuilder: (context, index) => 12.boxHeight,
               itemBuilder: (context, index) => _HistoryItemWidget(
                 history: state.history[index],
                 controller: widget.controller,

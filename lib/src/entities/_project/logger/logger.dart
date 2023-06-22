@@ -1,14 +1,12 @@
-import 'package:logger/logger.dart';
+import 'package:flutter/foundation.dart';
 
 abstract final class Log {
-  static final Logger _logger = Logger();
-
   static void warning(
     dynamic message, [
     dynamic error,
     StackTrace? stackTrace,
   ]) {
-    _logger.w(message, error, stackTrace);
+    debugPrint("$message\n\n$error\n\n$stackTrace\n");
   }
 
   static void error(
@@ -16,7 +14,7 @@ abstract final class Log {
     dynamic error,
     StackTrace? stackTrace,
   ]) {
-    _logger.e(message, error, stackTrace);
+    debugPrint("$message\n\n$error\n\n$stackTrace\n");
   }
 
   static void debug(
@@ -24,7 +22,7 @@ abstract final class Log {
     dynamic error,
     StackTrace? stackTrace,
   ]) {
-    _logger.d(message, error, stackTrace);
+    debugPrint("$message\n\n$error\n\n$stackTrace\n");
   }
 
   static void info(
@@ -32,7 +30,7 @@ abstract final class Log {
     dynamic error,
     StackTrace? stackTrace,
   ]) {
-    _logger.i(message, error, stackTrace);
+    debugPrint("$message\n\n$error\n\n$stackTrace\n");
   }
 
   static void verbose(
@@ -40,7 +38,7 @@ abstract final class Log {
     dynamic error,
     StackTrace? stackTrace,
   ]) {
-    _logger.v(message, error, stackTrace);
+    debugPrint("$message\n\n$error\n\n$stackTrace\n");
   }
 
   static void escalatedError(
@@ -48,6 +46,6 @@ abstract final class Log {
     dynamic error,
     StackTrace? stackTrace,
   ]) {
-    _logger.wtf(message, error, stackTrace);
+    debugPrint("$message\n\n$error\n\n$stackTrace\n");
   }
 }
