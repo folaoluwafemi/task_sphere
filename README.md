@@ -20,27 +20,12 @@ See [CONTRIBUTION_GUIDE.md](CONTRIBUTION_GUIDE.md)
 - Phone: [+234 816 958 3715](tel:+2348169583715)
 - Whatsapp: [@dart_god](https://wa.me/2348169583715)
 
-<table>
-    <tbody width=100%>
-    <tr>
-        <th>
-            Hello world
-        </th>
-        <th>
-            Hello world
-        </th>
-        <th>
-            Hello world
-        </th>
-    </tr>
-    <tr>
-        <td>
+<p>
             <img width=33% src="https://github.com/folaoluwafemi/task_sphere/assets/89414401/1c1ef098-7d91-471d-8767-0edd517283b5" alt="Balablu"></img>
             <img width=33% src="https://github.com/folaoluwafemi/task_sphere/assets/89414401/0d9e2583-5470-4c14-b5ce-484d803b4af1" alt="Balablu"></img>
             <img width=33% src="https://github.com/folaoluwafemi/task_sphere/assets/89414401/a13cbaa7-c5d5-42b1-ba49-93f6c880305f" alt="Balablu"></img>
-        </td>
-    </tr>
-</table>
+    
+</p>
 
 
 ## Quick look
