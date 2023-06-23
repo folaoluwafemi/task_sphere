@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -17,6 +19,12 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ViewPadding padding = View.of(context).viewPadding;
+    final EdgeInsets viewInsets = MediaQuery.of(context).viewInsets;
+    final EdgeInsets viewPadding = MediaQuery.of(context).viewPadding;
+    print(' \n\nview padding: $viewPadding');
+    print('view insets: $viewInsets');
+    print('context view: $padding\n\n');
     return VanillaNotifierHolder<SearchVanilla>(
       createNotifier: () => SearchVanilla()..initialize(),
       child: VanillaListener<SearchVanilla, SearchState>(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nested/nested.dart';
 import 'package:task_sphere/src/entities/app/app_barrel.dart';
@@ -12,6 +13,7 @@ class TaskSphereApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([]);
     return TaskSphereWrapper(
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
@@ -19,10 +21,9 @@ class TaskSphereApp extends StatelessWidget {
         color: AppColors.orange,
         builder: (context, child) => ScreenUtilInit(
           designSize: const Size(390, 844),
+          useInheritedMediaQuery: true,
           builder: (context, child) => MediaQuery(
-            data: MediaQuery.of(context).copyWith(
-              textScaleFactor: 1,
-            ),
+            data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
             child: Theme(
               data: AppTheme.light,
               child: child!,

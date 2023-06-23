@@ -39,6 +39,8 @@ extension AppSizerDoubleExtension on num {
 
   int get zeroIfLess => this < 0 ? 0 : (this as int);
 
+  double? get nullIfZero => this == 0 ? null : (this as double);
+
   double bezierRelativeWidth(double newWidth) {
     return this * (newWidth / 107.7.w);
   }
