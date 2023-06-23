@@ -31,6 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return VanillaNotifierHolder<LoginVanilla>(
       createNotifier: () => LoginVanilla(),
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         backgroundColor: context.bgColors.$50,
         body: Stack(
           clipBehavior: Clip.none,

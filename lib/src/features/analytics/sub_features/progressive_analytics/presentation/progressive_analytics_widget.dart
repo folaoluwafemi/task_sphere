@@ -202,7 +202,7 @@ class _ProgressiveAnalysisBuilderState
           Padding(
             padding: EdgeInsets.only(top: 24.h),
             child: SizedBox(
-              height: (14.h * 7) + (6 * 3.h),
+              height: (14.h * 7) + (6 * 3.h) + 23.h,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

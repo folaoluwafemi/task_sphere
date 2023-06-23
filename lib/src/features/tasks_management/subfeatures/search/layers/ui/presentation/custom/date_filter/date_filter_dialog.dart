@@ -102,6 +102,7 @@ class _DateFilterDialogState extends State<DateFilterDialog> {
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
           surfaceTintColor: Colors.transparent,
+          elevation: 0,
           insetPadding: EdgeInsets.symmetric(horizontal: 15.w),
           child: ListenableBuilder(
             listenable: Listenable.merge([

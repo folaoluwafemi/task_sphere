@@ -15,6 +15,8 @@ class _LoginView extends StatefulWidget {
 class _LoginViewState extends State<_LoginView> {
   @override
   Widget build(BuildContext context) {
+    print('view padding: ${MediaQuery.viewPaddingOf(context)}');
+
     return VanillaListener<LoginVanilla, LoginState>(
       listenWhen: (previous, current) =>
           previous?.error != current.error ||
