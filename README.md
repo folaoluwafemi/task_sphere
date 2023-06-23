@@ -33,9 +33,11 @@ See [CONTRIBUTION_GUIDE.md](CONTRIBUTION_GUIDE.md)
         * they app data got cleared
         * sign up
 
-- Users must have an account to access the app.
-- The required data are just their email, password and name.
-- their email must be verified
+
+* Sign up
+    - Users must have an account to access the app.
+    - The required data are just their email, password and name.
+    - their email must be verified
 
 ## Task Management (core feature)
 
@@ -44,9 +46,6 @@ a Task is a group of Todos.
 This feature entails the various ways users can manage their productivity, my manipulating those two entities in the
 following ways:
 
-* Trash
-    * Add task(s) to trash
-    * Remove task(s) from trash
 * Edit
     * Edit a todo’s content, priority and status
     * Edit a task’s title, description, todos
@@ -66,7 +65,6 @@ following ways:
     * Todos
 
 ## Analytics
-
-- Analysis of users’ productivity management should be collected and displayed on their dashboard.
-- Same analysis should also be collected and be displayed at the end of the month to show them how productive they’ve
-  been for the month.
+### Productivity History
+- Users can view their productivity history like github’s contribution chart
+- Users' tasks and todo update and completion rate is collected and displayed in a chart
