@@ -14,7 +14,7 @@ class _SearchByDateButton extends StatelessWidget {
       highlightColor: Colors.transparent,
       onTap: onPressed,
       child: Container(
-        color: Colors.transparent,
+        color: context.bgColors.$100,
         padding: EdgeInsets.symmetric(
           horizontal: 8.w,
           vertical: 8.h,

@@ -23,10 +23,12 @@ class HistoryView extends StatefulWidget {
 }
 
 class _HistoryViewState extends State<HistoryView> {
-  void onItemPressed(String query) {
+  Future<void> onItemPressed(String query) async {
     FocusScope.of(context).unfocus();
     widget.controller.text = query;
-    context.read<SearchVanilla>().searchFor(query);
+    await context.read<SearchVanilla>().searchFor(query);
+    if(!mounted) return;
+    FocusScope.of(context).unfocus();
   }
 
   @override

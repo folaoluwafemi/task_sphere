@@ -68,6 +68,7 @@ class _TopContentsState extends State<_TopContents> {
               autofocus: true,
               controller: widget.searchController,
               focusNode: widget.focusNode,
+              textInputAction: TextInputAction.search,
               onSubmitted: onSubmitted,
               decoration: InputDecoration(
                 isDense: true,
