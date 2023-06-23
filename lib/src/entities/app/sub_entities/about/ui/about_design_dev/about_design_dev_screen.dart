@@ -9,7 +9,7 @@ import 'package:task_sphere/src/entities/app/app_barrel.dart';
 import 'package:task_sphere/src/entities/todo/todo_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
-part 'custom/about_design\$dev_view.dart';
+part 'custom/about_design_and_dev_view.dart';
 
 part 'custom/about_task_sphere.dart';
 

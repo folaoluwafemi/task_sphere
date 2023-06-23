@@ -45,7 +45,8 @@ abstract final class VectorAssets {
   static const String checkWeighted = 'assets/vectors/check_weighted.svg';
   static const String about = 'assets/vectors/about.svg';
   static const String arrowRight = 'assets/vectors/arrow_right.svg';
-  static const String arrowUpRightWeighted = 'assets/vectors/arrow_up_right_weighted.svg';
+  static const String arrowUpRightWeighted =
+      'assets/vectors/arrow_up_right_weighted.svg';
   static const String emailIcon = 'assets/vectors/email_icon.svg';
   static const String twitter = 'assets/vectors/twitter.svg';
   static const String whatsapp = 'assets/vectors/whatsapp.svg';

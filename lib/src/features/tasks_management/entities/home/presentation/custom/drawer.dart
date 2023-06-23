@@ -47,8 +47,7 @@ class _Drawer extends StatelessWidget {
             ),
             56.boxHeight,
             ...DrawerItem.values.take(1).map(
-                  (item) =>
-                  InkWell(
+                  (item) => InkWell(
                     borderRadius: Ui.circularBorder(7.l),
                     onTap: () {
                       drawerOffsetNotifier.value = 0;
@@ -56,7 +55,7 @@ class _Drawer extends StatelessWidget {
                     },
                     child: _DrawerItemWidget(item: item),
                   ),
-            ),
+                ),
             48.boxHeight,
             Text(
               'COMING SOON',
@@ -91,7 +90,7 @@ class _Drawer extends StatelessWidget {
                       Text(
                         'Log out',
                         style:
-                        context.primaryTypography.paragraph.medium.copyWith(
+                            context.primaryTypography.paragraph.medium.copyWith(
                           color: AppColors.red,
                         ),
                       ),
@@ -117,20 +116,19 @@ class _Drawer extends StatelessWidget {
 
 class _DisabledOptions extends StatelessWidget {
   const _DisabledOptions({
-    super.key,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         ...DrawerItem.values.skip(1).map(
-              (item) =>
-              Padding(
+              (item) => Padding(
                 padding: EdgeInsets.only(bottom: 16.h),
                 child: _DrawerItemWidget(item: item),
               ),
-        ),
+            ),
       ],
     );
   }

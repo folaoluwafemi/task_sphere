@@ -42,7 +42,8 @@ class _HomeViewState extends State<_HomeView> {
                     children: [
                       SliverPinnedHeader(
                         child: Container(
-                          padding: EdgeInsets.only(left: 18.w, top: 18.h, bottom: 9.h),
+                          padding: EdgeInsets.only(
+                              left: 18.w, top: 18.h, bottom: 9.h),
                           color: context.bgColors.$100,
                           child: _TopContents(
                             drawerOffsetNotifier: widget.drawerOffsetNotifier,

@@ -62,8 +62,14 @@ class _ProgressiveAnalysisBuilderState
   }
 
   double getInitialScrollPosition() {
-    final double wholeRatio = snapshots.length / completeSnapshots.length;
-    return scrollController2.position.maxScrollExtent * wholeRatio;
+    double wholeRatio = snapshots.length / completeSnapshots.length;
+
+    wholeRatio = wholeRatio < (14 / 365) ? 0 : wholeRatio;
+
+    final double initialPositionValue =
+        scrollController2.position.maxScrollExtent * wholeRatio;
+
+    return initialPositionValue;
   }
 
   @override

@@ -58,7 +58,7 @@ class HomeState extends VanillaStateWithStatus {
       allTasks: allTasks ?? this.allTasks,
       currentTasks: currentTasks ?? this.currentTasks,
       filter: filter ?? this.filter,
-      hasReachedLimit: hasReachedLimit ?? this.hasReachedLimit  ,
+      hasReachedLimit: hasReachedLimit ?? this.hasReachedLimit,
       success: success ?? this.success,
       loading: loading ?? this.loading,
       error: error ?? this.error,
