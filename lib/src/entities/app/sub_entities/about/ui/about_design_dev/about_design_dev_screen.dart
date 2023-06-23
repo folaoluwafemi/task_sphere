@@ -19,6 +19,8 @@ part 'custom/contact_card.dart';
 
 part 'custom/contact_widget.dart';
 
+part 'custom/footer_bar.dart';
+
 part 'custom/stacked_text.dart';
 
 class AboutDesignAndDev extends StatelessWidget {
@@ -62,38 +64,6 @@ class AboutDesignAndDev extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class _FooterBar extends StatelessWidget {
-  const _FooterBar({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      // mainAxisAlignment: MainAxisAlignment.end,
-      alignment: Alignment.bottomCenter,
-      children: [
-        Container(
-          color: context.bgColors.$100.withOpacity(0.12),
-          width: context.screenWidth,
-          height: context.bottomScreenPadding,
-        ),
-        Container(
-          color: context.bgColors.$100.withOpacity(0.12),
-          width: context.screenWidth,
-          height: context.bottomScreenPadding,
-          child: ClipRect(
-            child: BackdropFilter(
-              filter: ImageFilter.blur(
-                sigmaX: 6,
-                sigmaY: 6,
-              ),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

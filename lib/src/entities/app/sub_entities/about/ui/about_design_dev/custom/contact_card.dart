@@ -17,7 +17,7 @@ class _ContactCard extends StatelessWidget {
         color: context.bgColors.$50,
         borderRadius: Ui.circularBorder(7.l),
       ),
-      padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 18.w),
+      padding: EdgeInsets.fromLTRB(18.w, 16.h, 18.w, 14.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -26,18 +26,18 @@ class _ContactCard extends StatelessWidget {
             style: context.primaryTypography.paragraph.small.asMedium
                 .withColor(context.palette.secondary),
           ),
-          32.boxHeight,
+          24.boxHeight,
           Text(
             collaborator.name,
             style: context.primaryTypography.title.small.asBold,
           ),
-          24.boxHeight,
+          12.boxHeight,
           ListView.separated(
             shrinkWrap: true,
             padding: EdgeInsets.zero,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: collaborator.contacts.length,
-            separatorBuilder: (context, index) => 8.boxHeight,
+            separatorBuilder: (context, index) => 4.boxHeight,
             itemBuilder: (context, index) => _ContactWidget(
               priority: index <= 2 ? Priority.values[2 - index] : Priority.low,
               contact: collaborator.contacts[index],

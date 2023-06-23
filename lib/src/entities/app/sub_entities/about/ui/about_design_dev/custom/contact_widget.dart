@@ -1,6 +1,6 @@
 part of '../about_design_dev_screen.dart';
 
-class _ContactWidget extends StatelessWidget {
+class _ContactWidget extends StatefulWidget {
   final Priority priority;
   final Contact contact;
 
@@ -11,14 +11,26 @@ class _ContactWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<_ContactWidget> createState() => _ContactWidgetState();
+}
+
+class _ContactWidgetState extends State<_ContactWidget> {
+  void catchLaunchError(String message) {
+    if (!mounted) return;
+    AlertType.error.show(context, text: message);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: context.neutralColors.$500,
+    return RawMaterialButton(
+      onPressed: () => widget.contact.launchUrl(catchLaunchError),
+      highlightColor: Colors.transparent,
+      shape: RoundedRectangleBorder(
+        borderRadius: Ui.circularBorder(7.l),
+        side: BorderSide(
+          color: context.neutralColors.$400,
           width: 1.l,
         ),
-        borderRadius: Ui.circularBorder(7.l),
       ),
       padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
       child: Row(
@@ -27,12 +39,12 @@ class _ContactWidget extends StatelessWidget {
           SvgDecorator.square(
             dimension: 18.l,
             color: context.neutralColors.$400,
-            child: SvgPicture.asset(contact.vectorAsset),
+            child: SvgPicture.asset(widget.contact.vectorAsset),
           ),
           8.boxWidth,
           Expanded(
             child: Text(
-              contact.placeholder,
+              widget.contact.placeholder,
               overflow: TextOverflow.ellipsis,
               strutStyle: const StrutStyle(height: 1.2),
               style: context.primaryTypography.paragraph.small.asRegular
@@ -44,7 +56,7 @@ class _ContactWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              priority.widgetSmall,
+              widget.priority.widgetSmall,
               8.boxWidth,
               Status.todo.widget,
             ],

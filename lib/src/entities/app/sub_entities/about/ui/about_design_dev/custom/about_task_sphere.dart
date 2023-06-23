@@ -13,13 +13,13 @@ class _AboutTaskSphere extends StatelessWidget {
           Text(
             'About TaskSphere',
             style: context.primaryTypography.title.small.asBold
-                .withColor(context.neutralColors.$500),
+                .withColor(context.neutralColors.$700),
           ),
           16.boxHeight,
           Text(
             TaskSphereInfo.aboutTaskSphere,
             style: context.secondaryTypography.paragraph.medium.asRegular
-                .withColor(context.neutralColors.$700),
+                .withColor(context.neutralColors.$800),
           ),
           200.boxHeight,
         ],

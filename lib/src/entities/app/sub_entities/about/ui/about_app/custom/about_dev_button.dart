@@ -13,10 +13,24 @@ enum AboutButton {
 
   void action(BuildContext context) => switch (this) {
         aboutDev => context.goNamed(AppRoute.aboutDesignAndDev.name),
-        privacyPolicy => launchPrivacyPolicy(),
+        privacyPolicy => launchPrivacyPolicy(
+            (message) => AlertType.error.show(context, text: message),
+          ),
       };
 
-  Future<void> launchPrivacyPolicy() async {}
+  Future<void> launchPrivacyPolicy(Function(String message) onError) async {
+    try {
+      final Uri uri = Uri.parse(privacyPolicyLink);
+      final bool canLaunch = await url_launcher.canLaunchUrl(uri);
+      if (!canLaunch) {
+        onError('Cannot launch url');
+      }
+      await url_launcher.launchUrl(uri);
+    } catch (e) {
+      final Failure failure = e is Failure ? e : Failure(message: e.toString());
+      onError(failure.message ?? 'unknown error occurred');
+    }
+  }
 }
 
 class AboutDevButton extends StatelessWidget {

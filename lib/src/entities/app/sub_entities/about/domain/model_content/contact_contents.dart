@@ -44,6 +44,10 @@ abstract final class ContactContents {
         placeholder: 'boladevictory@gmail.com',
         url: 'mailto:boladevictory@gmail.com',
       ),
+      Contact.whatsapp(
+        placeholder: '@boladevictory',
+        url: 'https://wa.me/2349028344017',
+      ),
     ],
   );
 }
