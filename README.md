@@ -22,18 +22,13 @@ See [CONTRIBUTION_GUIDE.md](CONTRIBUTION_GUIDE.md)
 
 
 ## Quick look
-
-![Simulator Screen Shot - iPhone 13 Pro Max - 2023-06-23 at 05 13 03](https://github.com/folaoluwafemi/task_sphere/assets/89414401/1c1ef098-7d91-471d-8767-0edd517283b5)
-
-
-![Simulator Screen Shot - iPhone 13 Pro Max - 2023-06-23 at 05 13 10](https://github.com/folaoluwafemi/task_sphere/assets/89414401/0d9e2583-5470-4c14-b5ce-484d803b4af1)
-
-
-![Simulator Screen Shot - iPhone 13 Pro Max - 2023-06-23 at 05 13 17](https://github.com/folaoluwafemi/task_sphere/assets/89414401/a13cbaa7-c5d5-42b1-ba49-93f6c880305f)
-
-
-![Simulator Screen Shot - iPhone 13 Pro Max - 2023-06-23 at 05 12 42](https://github.com/folaoluwafemi/task_sphere/assets/89414401/c53736d9-1ebf-4675-9e71-bde0b088cac9)
-
+| Balablu blu b | bula ba corn  | agbado area   |
+| ------------- | ------------- | ------------- |
+| ![Simulator Screen Shot - iPhone 13 Pro Max - 2023-06-23 at 05 13 03](https://github.com/folaoluwafemi/task_sphere/assets/89414401/1c1ef098-7d91-471d-8767-0edd517283b5) |
+![Simulator Screen Shot - iPhone 13 Pro Max - 2023-06-23 at 05 13 10](https://github.com/folaoluwafemi/task_sphere/assets/89414401/0d9e2583-5470-4c14-b5ce-484d803b4af1) |
+| ![Simulator Screen Shot - iPhone 13 Pro Max - 2023-06-23 at 05 13 17](https://github.com/folaoluwafemi/task_sphere/assets/89414401/a13cbaa7-c5d5-42b1-ba49-93f6c880305f) |
+| ![Simulator Screen Shot - iPhone 13 Pro Max - 2023-06-23 at 05 12 42](https://github.com/folaoluwafemi/task_sphere/assets/89414401/c53736d9-1ebf-4675-9e71-bde0b088cac9) |
+|    |    |
 
 
 
