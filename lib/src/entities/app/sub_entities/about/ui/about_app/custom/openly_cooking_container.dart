@@ -97,16 +97,7 @@ class _OpenlyCookingContainerState extends State<_OpenlyCookingContainer> {
 
   Future<void> launchLink(String url) async {
     try {
-      final Uri uri = Uri.parse(url);
-      final bool canLaunch = await url_launcher.canLaunchUrl(uri);
-      if (!canLaunch) {
-        if (!mounted) return;
-        AlertType.error.show(
-          context,
-          text: 'Cannot launch url!',
-        );
-      }
-      await url_launcher.launchUrl(uri);
+      await url_launcher.launchUrl(Uri.parse(url));
     } catch (e) {
       debugPrint('error $e');
       final Failure failure = e is Failure ? e : Failure(message: e.toString());

@@ -36,6 +36,9 @@ class _HomeViewState extends State<_HomeView> {
               await context.read<HomeVanilla>().refresh();
             },
             child: CustomScrollView(
+              physics: const BouncingScrollPhysics(
+                parent: AlwaysScrollableScrollPhysics(),
+              ),
               slivers: [
                 VanillaBuilder<HomeVanilla, HomeState>(
                   buildWhen: (previous, current) =>

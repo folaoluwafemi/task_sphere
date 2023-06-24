@@ -20,12 +20,7 @@ enum AboutButton {
 
   Future<void> launchPrivacyPolicy(Function(String message) onError) async {
     try {
-      final Uri uri = Uri.parse(privacyPolicyLink);
-      final bool canLaunch = await url_launcher.canLaunchUrl(uri);
-      if (!canLaunch) {
-        onError('Cannot launch url');
-      }
-      await url_launcher.launchUrl(uri);
+      await url_launcher.launchUrl(Uri.parse(privacyPolicyLink));
     } catch (e) {
       final Failure failure = e is Failure ? e : Failure(message: e.toString());
       onError(failure.message ?? 'unknown error occurred');

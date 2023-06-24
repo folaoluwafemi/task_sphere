@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 import 'package:task_sphere/src/utils/constants/assets/assets.dart';
 import 'package:task_sphere/src/utils/error_handling/data/failure.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
@@ -26,15 +25,7 @@ class Contact {
 
   Future<void> launchUrl(Function(String message) onError) async {
     try {
-      final Uri uri = Uri.parse(url);
-      final bool canLaunch = await url_launcher.canLaunchUrl(uri);
-      if (!canLaunch) {
-        await Clipboard.setData(ClipboardData(text: url));
-        onError(
-          'Cannot  launch  url!!,   But  it  has  been  copied  to  your  clipboard!',
-        );
-      }
-      await url_launcher.launchUrl(uri);
+      await url_launcher.launchUrl(Uri.parse(url));
     } catch (e) {
       debugPrint('error $e');
       final Failure failure = e is Failure ? e : Failure(message: e.toString());
