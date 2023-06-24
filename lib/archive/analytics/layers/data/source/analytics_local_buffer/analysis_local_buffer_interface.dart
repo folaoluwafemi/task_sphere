@@ -1,5 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:task_sphere/archive/analytics/domain/analytics_domain_barrel.dart';
+import 'package:task_sphere/archive/analytics/layers/domain/analytics_domain_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 part 'analysis_local_buffer.dart';

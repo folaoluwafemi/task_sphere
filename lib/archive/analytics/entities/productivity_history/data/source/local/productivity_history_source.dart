@@ -1,11 +1,11 @@
 part of 'productivity_history_source_interface.dart';
 
-class ProductivityHistorySource
+class LocalProductivityHistorySource
     with BasicErrorHandlerMixin
-    implements ProductivityHistorySourceInterface {
+    implements LocalProductivityHistorySourceInterface {
   final Box<List> _box;
 
-  ProductivityHistorySource({
+  LocalProductivityHistorySource({
     Box<List>? box,
   }) : _box = box ?? Hive.box<List>(StorageKeys.history.box);
 

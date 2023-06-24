@@ -31,10 +31,17 @@ class _LoaderWidgetState extends State<LoaderWidget> {
 
           if (firstRun) {
             value = value * 2;
-            final double head1Size =
-                Tween<double>(begin: minSize, end: maxSize).transform(value);
-            final double head2Size =
-                Tween<double>(begin: maxSize, end: minSize).transform(value);
+
+            final double head1Size = Tween<double>(
+              begin: minSize,
+              end: maxSize,
+            ).transform(value);
+
+            final double head2Size = Tween<double>(
+              begin: maxSize,
+              end: minSize,
+            ).transform(value);
+
             return Spade.linked(
               firstHalfColor: widget.color,
               secondHalfColor: widget.color,
@@ -43,12 +50,19 @@ class _LoaderWidgetState extends State<LoaderWidget> {
               stemLength: 12.w,
             );
           }
+
           value = (value - 0.5) * 2;
 
-          final double head1Size =
-              Tween<double>(begin: minSize, end: maxSize).transform(value);
-          final double head2Size =
-              Tween<double>(begin: maxSize, end: minSize).transform(value);
+          final double head1Size = Tween<double>(
+            begin: minSize,
+            end: maxSize,
+          ).transform(value);
+
+          final double head2Size = Tween<double>(
+            begin: maxSize,
+            end: minSize,
+          ).transform(value);
+
           return Spade.linked(
             firstHalfColor: widget.color,
             secondHalfColor: widget.color,

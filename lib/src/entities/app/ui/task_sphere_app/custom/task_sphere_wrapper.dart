@@ -13,7 +13,7 @@ class TaskSphereWrapper extends StatelessWidget {
     return Nested(
       children: [
         VanillaNotifierHolder<ProgressiveAnalyticsVanilla>(
-          createNotifier: () => ProgressiveAnalyticsVanilla(),
+          createNotifier: () => ProgressiveAnalyticsVanilla()..initialize(),
         ),
       ],
       child: Builder(

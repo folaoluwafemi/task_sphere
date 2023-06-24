@@ -1,6 +1,13 @@
 import 'package:task_sphere/src/entities/productivity_history/domain/model/productivity_snapshot.dart';
 
 extension ProductivitySnapshotsExtension on List<ProductivitySnapshot> {
+  Map<String, int> toFirebaseList() {
+    return {
+      for (final snapshot in this)
+        snapshot.dateTime.toIso8601String(): snapshot.value,
+    };
+  }
+
   List<Map<String, dynamic>> toSerializerList() {
     return map((e) => e.toMap()).toList();
   }

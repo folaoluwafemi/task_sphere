@@ -1,5 +1,5 @@
-import 'package:task_sphere/archive/analytics/data/analytics_data_barrel.dart';
-import 'package:task_sphere/archive/analytics/domain/analytics_domain_barrel.dart';
+import 'package:task_sphere/archive/analytics/layers/data/analytics_data_barrel.dart';
+import 'package:task_sphere/archive/analytics/layers/domain/analytics_domain_barrel.dart';
 import 'package:task_sphere/src/entities/entities_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 

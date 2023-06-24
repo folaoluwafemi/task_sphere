@@ -6,7 +6,7 @@ import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 part 'productivity_history_source.dart';
 
-abstract interface class ProductivityHistorySourceInterface {
+abstract interface class LocalProductivityHistorySourceInterface {
   Future<void> addSnapshot({
     required String taskId,
     required ProductivitySnapshot snapshot,

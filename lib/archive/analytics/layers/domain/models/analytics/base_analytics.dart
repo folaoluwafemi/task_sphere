@@ -1,4 +1,4 @@
-import 'package:task_sphere/archive/analytics/domain/analytics_domain_barrel.dart';
+import 'package:task_sphere/archive/analytics/layers/domain/analytics_domain_barrel.dart';
 
 abstract base class Analytics {
   final String id;

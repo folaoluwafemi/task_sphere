@@ -5,7 +5,7 @@ part 'progressive_analytics_state.dart';
 
 class ProgressiveAnalyticsVanilla
     extends VanillaNotifier<ProgressiveAnalysisState>
-    with BasicErrorHandlerMixin {
+    with VanillaUtilsMixin<ProgressiveAnalysisState>, BasicErrorHandlerMixin {
   late final ProductivityHistoryManager _historyManager =
       ProductivityHistoryManager();
 
@@ -23,8 +23,12 @@ class ProgressiveAnalyticsVanilla
 
   void initialize() => handleSyncError(_initialize());
 
-  void _initialize() {
-    _historyManager.fetchHistory();
+  Future<void> _initialize() async {
+    await Future.delayed(const Duration(milliseconds: 1000));
+    
+    notifyLoading();
+    await _historyManager.fetchHistory();
+    notifySuccess();
   }
 
   void _updateStateFromHistory() {

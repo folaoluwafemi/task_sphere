@@ -20,6 +20,13 @@ abstract final class ProductivitySnapshotUtils {
       value: map['value'],
     );
   }
+
+  static ProductivitySnapshot fromSnapshotMap(MapEntry entry) {
+    return (
+      dateTime: UtilFunctions.parseDateTime(entry.key),
+      value: entry.value as int,
+    );
+  }
 }
 
 extension ProductivitySnapshotExtension on ProductivitySnapshot {

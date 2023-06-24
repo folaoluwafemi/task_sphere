@@ -15,14 +15,21 @@ class ProgressiveAnalyticsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return VanillaBuilder<ProgressiveAnalyticsVanilla,
-        ProgressiveAnalysisState>(
+    return VanillaBuilder<ProgressiveAnalyticsVanilla, ProgressiveAnalysisState>(
       builder: (context, state) {
         final List<ProductivitySnapshot> snapshots = List.from(
           state.historySnapshots.isEmpty
               ? [ProductivitySnapshotUtils.empty]
               : state.historySnapshots,
         );
+
+        if (state.loading) {
+          return Center(
+            child: LoaderWidget(
+              color: context.palette.primary,
+            ),
+          );
+        }
 
         return _ProgressiveAnalysisBuilder(
           snapshots: snapshots,
