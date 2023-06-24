@@ -22,7 +22,7 @@ class _TodoViewState extends State<_TodoView> {
     required int index,
     required bool deleted,
   }) {
-    if (todo_.status == Status.canceled) {
+    if (todo_.status == Status.canceled || todo_.status == Status.done) {
       final Todo leastRecentTodo = todos.reduce((value, element) {
         return value.updatedAt.isBefore(element.updatedAt) ? value : element;
       });

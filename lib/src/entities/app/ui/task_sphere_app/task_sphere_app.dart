@@ -13,7 +13,10 @@ class TaskSphereApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([]);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return TaskSphereWrapper(
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
@@ -21,6 +24,7 @@ class TaskSphereApp extends StatelessWidget {
         color: AppColors.orange,
         builder: (context, child) => ScreenUtilInit(
           designSize: const Size(390, 844),
+          splitScreenMode: true,
           useInheritedMediaQuery: true,
           builder: (context, child) => MediaQuery(
             data: MediaQuery.of(context).copyWith(textScaleFactor: 1),

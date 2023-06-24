@@ -40,6 +40,7 @@ class _TaskViewState extends State<_TaskView> {
                               _TodoView(todos: todos),
                               18.sliverBoxHeight,
                               const SliverToBoxAdapter(child: CreatedDate()),
+                              150.boxHeight,
                             ],
                           ),
                         ),

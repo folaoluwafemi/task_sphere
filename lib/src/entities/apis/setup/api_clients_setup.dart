@@ -17,7 +17,7 @@ abstract final class ApiClientsSetup {
     );
 
     FirebaseFirestore.instance.settings = const Settings(
-      persistenceEnabled: false,
+      persistenceEnabled: true,
     );
   }
 }
