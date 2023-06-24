@@ -20,6 +20,8 @@ class Todo implements Comparable<Todo> {
     required this.updatedAt,
   });
 
+  bool get isDone => status == Status.done;
+
   Todo.create({
     required this.content,
     DateTime? createdAt,

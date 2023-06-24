@@ -80,6 +80,13 @@ extension AppSizerDoubleExtension on num {
         return '${number}th';
     }
   }
+
+  String get pluralS {
+    if (this == 1) {
+      return '';
+    }
+    return 's';
+  }
 }
 
 extension IntExtension on int {

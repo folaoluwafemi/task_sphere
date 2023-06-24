@@ -32,10 +32,9 @@ class _HomeViewState extends State<_HomeView> {
             color: context.palette.primary,
             onRefresh: () async {
               await context.read<ProgressiveAnalyticsVanilla>().refresh();
-              if(!mounted) return;
+              if (!mounted) return;
               await context.read<HomeVanilla>().refresh();
             },
-            triggerMode: RefreshIndicatorTriggerMode.onEdge,
             child: CustomScrollView(
               slivers: [
                 VanillaBuilder<HomeVanilla, HomeState>(
@@ -53,7 +52,7 @@ class _HomeViewState extends State<_HomeView> {
                             padding: EdgeInsets.only(
                               left: 18.w,
                               top: 18.h,
-                              bottom: 9.h,
+                              bottom: 0.h,
                             ),
                             color: context.bgColors.$100,
                             child: _TopContents(
@@ -62,7 +61,7 @@ class _HomeViewState extends State<_HomeView> {
                             ),
                           ),
                         ),
-                        34.sliverBoxHeight,
+                        41.sliverBoxHeight,
                         const SliverToBoxAdapter(
                           child: ProgressiveAnalyticsWidget(),
                         ),

@@ -1,4 +1,6 @@
 import 'package:task_sphere/src/entities/productivity_history/productivity_history_barrel.dart';
+import 'package:task_sphere/src/entities/task/task_barrel.dart';
+import 'package:task_sphere/src/entities/todo/todo_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 part 'progressive_analytics_state.dart';
@@ -8,6 +10,7 @@ class ProgressiveAnalyticsVanilla
     with VanillaUtilsMixin<ProgressiveAnalysisState>, BasicErrorHandlerMixin {
   late final ProductivityHistoryManager _historyManager =
       ProductivityHistoryManager();
+  late final TasksReader _tasksReader = TasksReader();
 
   ProgressiveAnalyticsVanilla()
       : super(
@@ -19,6 +22,7 @@ class ProgressiveAnalyticsVanilla
           ),
         ) {
     _historyManager.addListener(_historyListener);
+    _tasksReader.addListener(_tasksListener);
   }
 
   void initialize() => handleSyncError(_initialize());
@@ -49,8 +53,17 @@ class ProgressiveAnalyticsVanilla
     _updateStateFromHistory();
   }
 
+  void _tasksListener() {
+    _updateTaskListState();
+  }
+
+  void _updateTaskListState() {
+    state = state.copyWith(tasks: List.from(_tasksReader.tasks));
+  }
+
   @override
   void dispose() {
+    _tasksReader.removeListener(_tasksListener);
     _historyManager.removeListener(_historyListener);
     super.dispose();
   }
