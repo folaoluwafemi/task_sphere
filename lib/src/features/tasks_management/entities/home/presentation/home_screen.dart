@@ -121,43 +121,46 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return VanillaNotifierHolder<HomeVanilla>(
-      createNotifier: () => HomeVanilla()..initialize(),
-      child: Scaffold(
-        backgroundColor: context.bgColors.$100,
-        body: GestureDetector(
-          behavior: HitTestBehavior.translucent,
-          onHorizontalDragEnd: (details) => animateToExtreme(),
-          onHorizontalDragUpdate: (details) {
-            lastDraggedDirectionIsNegative = details.delta.dx.isNegative;
+    return VanillaNotifierHolder<ProgressiveAnalyticsVanilla>(
+      createNotifier: () => ProgressiveAnalyticsVanilla()..initialize(),
+      child: VanillaNotifierHolder<HomeVanilla>(
+        createNotifier: () => HomeVanilla()..initialize(),
+        child: Scaffold(
+          backgroundColor: context.bgColors.$100,
+          body: GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onHorizontalDragEnd: (details) => animateToExtreme(),
+            onHorizontalDragUpdate: (details) {
+              lastDraggedDirectionIsNegative = details.delta.dx.isNegative;
 
-            setDrawerOffsetValue(
-              drawerOffsetNotifier.value + details.delta.dx,
-            );
-          },
-          child: ValueListenableBuilder<double>(
-            valueListenable: drawerOffsetNotifier,
-            builder: (_, drawerOffset, __) {
-              drawerOffset = drawerOffset.capBetween(0, maxDrawerOffset);
-              return Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  Transform.translate(
-                    offset: Offset(drawerOffset - maxDrawerOffset, 0),
-                    child: _Drawer(
-                      drawerOffsetNotifier: drawerOffsetNotifier,
-                    ),
-                  ),
-                  Transform.translate(
-                    offset: Offset(drawerOffset, 0),
-                    child: _HomeView(
-                      showDrawer: toggleShowing,
-                      drawerOffsetNotifier: drawerOffsetNotifier,
-                    ),
-                  ),
-                ],
+              setDrawerOffsetValue(
+                drawerOffsetNotifier.value + details.delta.dx,
               );
             },
+            child: ValueListenableBuilder<double>(
+              valueListenable: drawerOffsetNotifier,
+              builder: (_, drawerOffset, __) {
+                drawerOffset = drawerOffset.capBetween(0, maxDrawerOffset);
+                return Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Transform.translate(
+                      offset: Offset(drawerOffset - maxDrawerOffset, 0),
+                      child: _Drawer(
+                        drawerOffsetNotifier: drawerOffsetNotifier,
+                      ),
+                    ),
+                    Transform.translate(
+                      offset: Offset(drawerOffset, 0),
+                      child: _HomeView(
+                        showDrawer: toggleShowing,
+                        drawerOffsetNotifier: drawerOffsetNotifier,
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
           ),
         ),
       ),

@@ -1,12 +1,13 @@
 part of '../vanilla.dart';
 
 class VanillaNotifierHolder<Notifier extends VanillaNotifier>
-    extends SingleChildStatefulWidget {
+    extends StatefulWidget {
   final Notifier Function() createNotifier;
+  final Widget child;
 
   const VanillaNotifierHolder({
     required this.createNotifier,
-    super.child,
+    required this.child,
     Key? key,
   }) : super(key: key);
 
@@ -38,7 +39,7 @@ class VanillaNotifierHolder<Notifier extends VanillaNotifier>
   }
 
   @override
-  SingleChildStatefulElement createElement() =>
+  StatefulElement createElement() =>
       VanillaNotifierElement<Notifier>(this, createNotifier());
 
   @override
@@ -47,15 +48,13 @@ class VanillaNotifierHolder<Notifier extends VanillaNotifier>
 }
 
 class VanillaHolderState<Notifier extends VanillaNotifier>
-    extends SingleChildState<VanillaNotifierHolder<Notifier>> {
-  asdf() {}
-
+    extends State<VanillaNotifierHolder<Notifier>> {
   @override
-  Widget buildWithChild(BuildContext context, Widget? child) => child!;
+  Widget build(BuildContext context) => widget.child;
 }
 
 class VanillaNotifierElement<Notifier extends ValueNotifier>
-    extends SingleChildStatefulElement {
+    extends StatefulElement {
   final Notifier notifier;
 
   VanillaNotifierElement(super.widget, this.notifier);

@@ -169,7 +169,12 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
             right: -12,
             child: IconButton(
               autofocus: false,
-              focusNode: FocusNode(canRequestFocus: false),
+              focusNode: FocusNode(
+                canRequestFocus: false,
+                skipTraversal: true,
+                descendantsAreFocusable: false,
+                descendantsAreTraversable: false,
+              ),
               onPressed: () => setObscuring(!obscureTextNotifier.value),
               icon: ValueListenableBuilder<bool>(
                 valueListenable: obscureTextNotifier,
