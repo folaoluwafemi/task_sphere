@@ -25,8 +25,11 @@ class ProgressiveAnalyticsWidget extends StatelessWidget {
 
         if (state.loading) {
           return Center(
-            child: LoaderWidget(
-              color: context.palette.primary,
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 20.h),
+              child: LoaderWidget(
+                color: context.palette.primary,
+              ),
             ),
           );
         }

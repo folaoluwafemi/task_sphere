@@ -38,7 +38,9 @@ class HomeVanilla extends VanillaNotifier<HomeState>
   Future<void> refresh() => handleError(_refresh());
 
   Future<void> _refresh() async {
+    state = state.copyWith(allTasks: [], currentTasks: [], loading: true);
     await _taskReader.fetch(aFresh: true);
+    notifySuccess();
   }
 
   void setFilter(TasksFilter filter) {

@@ -44,7 +44,7 @@ class ResultsView extends StatelessWidget {
               state.currentResults.isEmpty
                   ? const SliverToBoxAdapter(child: _EmptyResultsView())
                   : SliverPadding(
-                      padding: EdgeInsets.symmetric(horizontal: 18.w),
+                      padding: EdgeInsets.fromLTRB(18.w, 0, 18.w, 150.h),
                       sliver: SliverList.separated(
                         itemCount: state.currentResults.length,
                         separatorBuilder: (context, index) => 16.boxHeight,

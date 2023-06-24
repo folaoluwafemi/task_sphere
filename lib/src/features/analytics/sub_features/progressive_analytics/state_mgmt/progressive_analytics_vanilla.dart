@@ -25,7 +25,13 @@ class ProgressiveAnalyticsVanilla
 
   Future<void> _initialize() async {
     await Future.delayed(const Duration(milliseconds: 1000));
-    
+
+    notifyLoading();
+    await _historyManager.fetchHistory();
+    notifySuccess();
+  }
+
+  Future<void> refresh() async {
     notifyLoading();
     await _historyManager.fetchHistory();
     notifySuccess();
