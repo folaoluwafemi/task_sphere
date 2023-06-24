@@ -16,6 +16,8 @@ class InputFormField extends StatefulWidget {
   final FormFieldValidator<String>? validator;
   final ValueChanged<String>? onChanged;
   final TextInputType? keyboardType;
+  final TextInputAction? textInputAction;
+  final ValueChanged<String>? onFieldSubmitted;
 
   const InputFormField({
     Key? key,
@@ -31,6 +33,8 @@ class InputFormField extends StatefulWidget {
     this.validator,
     this.onChanged,
     this.keyboardType,
+    this.textInputAction,
+    this.onFieldSubmitted,
   }) : super(key: key);
 
   @override
@@ -92,6 +96,8 @@ class _InputFormFieldState extends State<InputFormField> {
           context.primaryTypography.paragraph.medium.withHeight(1),
       autovalidateMode: widget.autovalidateMode,
       validator: widget.validator,
+      textInputAction: widget.textInputAction,
+      onFieldSubmitted: widget.onFieldSubmitted,
       onChanged: widget.onChanged,
       keyboardType: widget.keyboardType,
       decoration: InputDecoration(

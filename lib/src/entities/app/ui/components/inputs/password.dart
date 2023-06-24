@@ -18,6 +18,9 @@ class PasswordFormField extends StatefulWidget {
   final FormFieldValidator<String>? validator;
   final ValueChanged<String>? onChanged;
 
+  final TextInputAction? textInputAction;
+  final ValueChanged<String>? onFieldSubmitted;
+
   const PasswordFormField({
     Key? key,
     this.controller,
@@ -31,6 +34,8 @@ class PasswordFormField extends StatefulWidget {
     this.autovalidateMode,
     this.validator,
     this.onChanged,
+    this.textInputAction,
+    this.onFieldSubmitted,
   }) : super(key: key);
 
   @override
@@ -102,6 +107,8 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
           style: widget.textStyle ??
               context.primaryTypography.paragraph.medium.withHeight(1),
           autovalidateMode: widget.autovalidateMode,
+          textInputAction: widget.textInputAction,
+          onFieldSubmitted: widget.onFieldSubmitted,
           validator: widget.validator,
           onChanged: widget.onChanged,
           obscuringCharacter: '•',
@@ -161,6 +168,8 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
           Positioned(
             right: -12,
             child: IconButton(
+              autofocus: false,
+              focusNode: FocusNode(canRequestFocus: false),
               onPressed: () => setObscuring(!obscureTextNotifier.value),
               icon: ValueListenableBuilder<bool>(
                 valueListenable: obscureTextNotifier,

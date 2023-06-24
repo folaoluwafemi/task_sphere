@@ -60,7 +60,8 @@ class _EnterNameViewState extends State<_EnterNameView> {
             8.boxHeight,
             InputFormField(
               hintText: 'Firstname Lastname',
-              prefixIconBuilder: (context, color) => CustomColorFilter(
+              prefixIconBuilder: (context, color) => SvgDecorator.square(
+                dimension: 24.l,
                 color: color,
                 child: SvgPicture.asset(
                   VectorAssets.profileFilled,

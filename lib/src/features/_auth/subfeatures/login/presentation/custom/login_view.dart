@@ -63,6 +63,8 @@ class _LoginViewState extends State<_LoginView> {
               InputFormField(
                 hintText: 'Enter your email address',
                 keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.next,
+                onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
                 onChanged: (value) {
                   email = value;
                 },
@@ -74,7 +76,8 @@ class _LoginViewState extends State<_LoginView> {
                   },
                 ),
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                prefixIconBuilder: (_, color) => CustomColorFilter(
+                prefixIconBuilder: (_, color) => SvgDecorator.square(
+                  dimension: 24.l,
                   color: color,
                   child: SvgPicture.asset(
                     VectorAssets.mail,
@@ -90,6 +93,13 @@ class _LoginViewState extends State<_LoginView> {
               8.boxHeight,
               PasswordFormField(
                 hintText: 'Your password',
+                textInputAction: TextInputAction.done,
+                onFieldSubmitted: (_) {
+                  if (!fieldsValidated.value) {
+                    return FocusScope.of(context).unfocus();
+                  }
+                  login();
+                },
                 onChanged: (value) {
                   password = value;
                 },
@@ -101,7 +111,8 @@ class _LoginViewState extends State<_LoginView> {
                   },
                 ),
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                prefixIconBuilder: (_, color) => CustomColorFilter(
+                prefixIconBuilder: (_, color) => SvgDecorator.square(
+                  dimension: 24.l,
                   color: color,
                   child: SvgPicture.asset(
                     VectorAssets.password,
@@ -118,9 +129,7 @@ class _LoginViewState extends State<_LoginView> {
                     builder: (context, state) {
                       return LargeButton(
                         color: context.palette.primary,
-                        onPressed: (state.loading || !validated)
-                            ? null
-                            : onJoinButtonPressed,
+                        onPressed: (state.loading || !validated) ? null : login,
                         width: 354.w,
                         height: 50.h,
                         child: Text(
@@ -163,7 +172,7 @@ class _LoginViewState extends State<_LoginView> {
     );
   }
 
-  void onJoinButtonPressed() {
+  void login() {
     FocusScope.of(context).unfocus();
     context.read<LoginVanilla>().login(
           email: email,

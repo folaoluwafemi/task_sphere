@@ -62,6 +62,8 @@ class _SignUpViewState extends State<_SignUpView> {
               8.boxHeight,
               InputFormField(
                 hintText: 'Enter your email address',
+                textInputAction: TextInputAction.next,
+                onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
                 keyboardType: TextInputType.emailAddress,
                 onChanged: (value) {
                   email = value;
@@ -74,7 +76,8 @@ class _SignUpViewState extends State<_SignUpView> {
                   },
                 ),
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                prefixIconBuilder: (_, color) => CustomColorFilter(
+                prefixIconBuilder: (_, color) => SvgDecorator.square(
+                  dimension: 24.l,
                   color: color,
                   child: SvgPicture.asset(
                     VectorAssets.mail,
@@ -90,6 +93,13 @@ class _SignUpViewState extends State<_SignUpView> {
               8.boxHeight,
               PasswordFormField(
                 hintText: 'Your password',
+                textInputAction: TextInputAction.done,
+                onFieldSubmitted: (_) {
+                  if (!fieldsValidated.value) {
+                    return FocusScope.of(context).unfocus();
+                  }
+                  signUp();
+                },
                 onChanged: (value) {
                   password = value;
                 },
@@ -101,11 +111,10 @@ class _SignUpViewState extends State<_SignUpView> {
                   },
                 ),
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                prefixIconBuilder: (_, color) => CustomColorFilter(
+                prefixIconBuilder: (_, color) => SvgDecorator.square(
+                  dimension: 24.l,
                   color: color,
-                  child: SvgPicture.asset(
-                    VectorAssets.password,
-                  ),
+                  child: SvgPicture.asset(VectorAssets.password),
                 ),
               ),
               48.boxHeight,
@@ -118,9 +127,8 @@ class _SignUpViewState extends State<_SignUpView> {
                     builder: (context, state) {
                       return LargeButton(
                         color: context.palette.primary,
-                        onPressed: (state.loading || !validated)
-                            ? null
-                            : onJoinButtonPressed,
+                        onPressed:
+                            (state.loading || !validated) ? null : signUp,
                         width: 354.w,
                         height: 50.h,
                         child: Row(
@@ -128,9 +136,7 @@ class _SignUpViewState extends State<_SignUpView> {
                           children: [
                             SizedBox.square(
                               dimension: 24.l,
-                              child: SvgPicture.asset(
-                                VectorAssets.add,
-                              ),
+                              child: SvgPicture.asset(VectorAssets.add),
                             ),
                             6.boxWidth,
                             Text(
@@ -175,7 +181,7 @@ class _SignUpViewState extends State<_SignUpView> {
     );
   }
 
-  void onJoinButtonPressed() {
+  void signUp() {
     FocusScope.of(context).unfocus();
 
     context.read<SignUpVanilla>().signUp(

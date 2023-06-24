@@ -43,7 +43,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: SizedBox(
                     width: 313.w,
                     height: 347.h,
-                    child: CustomColorFilter(
+                    child: SvgDecorator(
                       color: context.neutralColors.$200,
                       child: SvgPicture.asset(
                         VectorAssets.spadesLines,
