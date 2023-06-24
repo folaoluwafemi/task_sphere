@@ -26,64 +26,9 @@ class FirebaseProductivityHistorySource
     required String taskId,
     required ProductivitySnapshot snapshot,
   }) async {
-    // when adding a snapshot to a task, the overall amount of tasks must be at most 7
-    // if it's more than 7, then we need to remove the oldest snapshot
-
-    await FirebaseFirestore.instance.runTransaction(
-      (transaction) => _transactionHandler(
-        transaction,
-        taskId: taskId,
-        snapshot: snapshot,
-      ),
-    );
-  }
-
-  Future _transactionHandler(
-    Transaction transaction, {
-    required String taskId,
-    required ProductivitySnapshot snapshot,
-  }) async {
-    final DocumentSnapshot historySnapshot = await transaction.get(
-      _history.doc(taskId),
-    );
-
-    if (!historySnapshot.exists || historySnapshot.data() == null) {
-      final TaskProductivityHistory history = TaskProductivityHistory(
-        taskId: taskId,
-        snapshots: [snapshot],
-      );
-
-      transaction = transaction.set(
-        _history.doc(taskId),
-        history.snapshots.toFirebaseList(),
-      );
-      return transaction;
-    }
-
-    final List<ProductivitySnapshot> snapshots = (historySnapshot.data() as Map)
-        .entries
-        .map((e) => ProductivitySnapshotUtils.fromSnapshotMap(e))
-        .toList();
-
-    if (snapshots.length >= 7) {
-      final ProductivitySnapshot oldestSnapshot = snapshots.first;
-
-      transaction = transaction.update(
-        _history.doc(taskId),
-        {oldestSnapshot.dateTime.toIso8601String(): FieldValue.delete()},
-      );
-    }
-
-    final TaskProductivityHistory history = TaskProductivityHistory(
-      taskId: taskId,
-      snapshots: snapshots..add(snapshot),
-    );
-
-    transaction = transaction.set(
-      _history.doc(taskId),
-      history.snapshots.toFirebaseList(),
-    );
-    return transaction;
+    await _history
+        .doc(taskId)
+        .set(snapshot.toFirebaseMap(), SetOptions(merge: true));
   }
 
   @override
@@ -104,10 +49,12 @@ class FirebaseProductivityHistorySource
 
     for (final QueryDocumentSnapshot itemData in data) {
       final String taskId = itemData.id;
+
       final List<ProductivitySnapshot> snapshots = (itemData.data() as Map)
           .entries
           .map((e) => ProductivitySnapshotUtils.fromSnapshotMap(e))
           .toList();
+
       final TaskProductivityHistory taskHistory = TaskProductivityHistory(
         taskId: taskId,
         snapshots: snapshots,

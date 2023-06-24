@@ -25,6 +25,7 @@ class EnterNameScreen extends StatelessWidget {
         child: Scaffold(
           body: Stack(
             children: [
+              const _EnterNameView(),
               if (!redirect)
                 Padding(
                   padding: EdgeInsets.only(left: 18.w, top: 65.h),
@@ -39,7 +40,6 @@ class EnterNameScreen extends StatelessWidget {
                     },
                   ),
                 ),
-              const _EnterNameView(),
             ],
           ),
         ),

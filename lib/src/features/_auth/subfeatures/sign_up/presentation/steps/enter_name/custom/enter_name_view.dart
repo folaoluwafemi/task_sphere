@@ -26,7 +26,7 @@ class _EnterNameViewState extends State<_EnterNameView> {
         if (current.error == null) return;
         AlertType.error.show(context, text: current.error?.message ?? '');
       },
-      child: Padding(
+      child: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(18.w, 139.h, 18.w, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,10 +72,10 @@ class _EnterNameViewState extends State<_EnterNameView> {
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) {
                 if (value == null ||
-                    (value.words.length != 2 &&
-                        value.words.every((element) {
-                          return element.isNotEmpty;
-                        }))) {
+                    value.words.length != 2 ||
+                    value.words.any((element) {
+                      return element.trim().isEmpty;
+                    })) {
                   changeFieldsValidated(false);
                   return null;
                 }

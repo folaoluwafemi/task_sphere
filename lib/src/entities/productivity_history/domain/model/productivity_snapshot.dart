@@ -36,4 +36,10 @@ extension ProductivitySnapshotExtension on ProductivitySnapshot {
       'value': value,
     };
   }
+
+  Map<String, int> toFirebaseMap() {
+    return <String, int>{
+      dateTime.toIso8601String(): value,
+    };
+  }
 }

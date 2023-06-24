@@ -39,7 +39,7 @@ class TasksReader extends VanillaNotifier<List<Task>>
 
   int currentPage = 0;
 
-  static const int limit = 4;
+  static const int limit = 40;
 
   void setPage() {
     currentPage = state.length % limit;
