@@ -24,6 +24,7 @@ class _Drawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 212.w,
+      height: context.screenHeight,
       decoration: BoxDecoration(
         color: context.bgColors.$50,
         border: Border.symmetric(
@@ -33,42 +34,49 @@ class _Drawer extends StatelessWidget {
           ),
         ),
       ),
-      child: Padding(
-        padding: EdgeInsets.only(left: 18.w, right: 24.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            72.boxHeight,
-            SizedBox.square(
-              dimension: 45.m,
-              child: SvgPicture.asset(
-                VectorAssets.logo,
-              ),
-            ),
-            56.boxHeight,
-            ...DrawerItem.values.take(1).map(
-                  (item) => InkWell(
-                    borderRadius: Ui.circularBorder(7.l),
-                    onTap: () {
-                      drawerOffsetNotifier.value = 0;
-                      context.goNamed(item.route.name);
-                    },
-                    child: _DrawerItemWidget(item: item),
+      child: Stack(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(left: 18.w, right: 24.w),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                72.boxHeight,
+                SizedBox.square(
+                  dimension: 45.m,
+                  child: SvgPicture.asset(
+                    VectorAssets.logo,
                   ),
                 ),
-            48.boxHeight,
-            Text(
-              'COMING SOON',
-              style: context.primaryTypography.paragraph.small.asRegular,
+                56.boxHeight,
+                ...DrawerItem.values.take(1).map(
+                      (item) => InkWell(
+                        borderRadius: Ui.circularBorder(7.l),
+                        onTap: () {
+                          drawerOffsetNotifier.value = 0;
+                          context.goNamed(item.route.name);
+                        },
+                        child: _DrawerItemWidget(item: item),
+                      ),
+                    ),
+                48.boxHeight,
+                Text(
+                  'COMING SOON',
+                  style: context.primaryTypography.paragraph.small.asRegular,
+                ),
+                16.boxHeight,
+                const Opacity(
+                  opacity: 0.5,
+                  child: _DisabledOptions(),
+                ),
+              ],
             ),
-            16.boxHeight,
-            const Opacity(
-              opacity: 0.5,
-              child: _DisabledOptions(),
-            ),
-            const Spacer(),
-            Padding(
-              padding: EdgeInsets.only(left: 2.w),
+          ),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Padding(
+              padding: EdgeInsets.only(left: 32.w,bottom: 66.h),
               child: SafeArea(
                 top: false,
                 child: RawMaterialButton(
@@ -79,6 +87,7 @@ class _Drawer extends StatelessWidget {
                   onPressed: logout,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       SvgDecorator.square(
                         dimension: 16.l,
@@ -99,9 +108,8 @@ class _Drawer extends StatelessWidget {
                 ),
               ),
             ),
-            66.boxHeight,
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -1,61 +1,30 @@
 part of '../vanilla.dart';
 
-class VanillaNotifierHolder<Notifier extends VanillaNotifier>
-    extends StatefulWidget {
+class InheritedVanilla<Notifier extends VanillaNotifier>
+    extends InheritedWidget {
   final Notifier Function() createNotifier;
-  final Widget child;
 
-  const VanillaNotifierHolder({
+  const InheritedVanilla({
     required this.createNotifier,
-    required this.child,
+    required Widget child,
     Key? key,
-  }) : super(key: key);
+  }) : super(key: key, child: child);
 
-  static T read<T extends VanillaNotifier>(BuildContext context) {
-    try {
-      return _elementOfType<T>(context)!.notifier;
-    } catch (e, s) {
-      throw Failure(
-        message: 'Cannot find VanillaNotifierHolder<$T> in the widget tree',
-        stackTrace: s,
+  @override
+  bool updateShouldNotify(covariant InheritedWidget oldWidget) {
+    return false;
+  }
+
+  @override
+  InheritedVanillaElement createElement() => InheritedVanillaElement<Notifier>(
+        this,
+        createNotifier(),
       );
-    }
-  }
-
-  static VanillaNotifierElement<Notifier>?
-      _elementOfType<Notifier extends VanillaNotifier>(
-    BuildContext context,
-  ) {
-    VanillaNotifierElement<Notifier>? element;
-
-    context.visitAncestorElements((ancestor) {
-      if (ancestor is VanillaNotifierElement<Notifier>) {
-        element = ancestor;
-        return false;
-      }
-      return true;
-    });
-    return element;
-  }
-
-  @override
-  StatefulElement createElement() =>
-      VanillaNotifierElement<Notifier>(this, createNotifier());
-
-  @override
-  State<VanillaNotifierHolder<Notifier>> createState() =>
-      VanillaHolderState<Notifier>();
 }
 
-class VanillaHolderState<Notifier extends VanillaNotifier>
-    extends State<VanillaNotifierHolder<Notifier>> {
-  @override
-  Widget build(BuildContext context) => widget.child;
-}
-
-class VanillaNotifierElement<Notifier extends ValueNotifier>
-    extends StatefulElement {
+class InheritedVanillaElement<Notifier extends VanillaNotifier>
+    extends InheritedElement {
   final Notifier notifier;
 
-  VanillaNotifierElement(super.widget, this.notifier);
+  InheritedVanillaElement(super.widget, this.notifier);
 }

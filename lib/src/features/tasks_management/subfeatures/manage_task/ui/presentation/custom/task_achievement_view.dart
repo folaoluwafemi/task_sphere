@@ -20,7 +20,7 @@ class _TaskAchievement extends StatelessWidget {
                         alignment: Alignment.topCenter,
                         margin: EdgeInsets.only(top: 126.h),
                         child: SizedBox.square(
-                          dimension: 346.l,
+                          dimension: 346.m,
                           child: Image.asset(
                             Assets.taskAchievement,
                           ),

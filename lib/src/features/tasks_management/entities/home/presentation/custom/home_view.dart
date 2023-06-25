@@ -69,6 +69,11 @@ class _HomeViewState extends State<_HomeView> {
                           child: ProgressiveAnalyticsWidget(),
                         ),
                         24.sliverBoxHeight,
+                        // 100.sliverBoxHeight,
+                        // SliverToBoxAdapter(
+                        //   child: EditText(),
+                        // ),
+                        // 100.sliverBoxHeight,
                         SliverToBoxAdapter(
                           child: Divider(
                             height: 1.h,
@@ -172,3 +177,62 @@ class _HomeViewState extends State<_HomeView> {
     );
   }
 }
+
+// class EditText extends StatefulWidget {
+//   const EditText({Key? key}) : super(key: key);
+//
+//   @override
+//   State<EditText> createState() => _EditTextState();
+// }
+//
+// class _EditTextState extends State<EditText> {
+//   final TextEditingController controller =
+//   TextEditingController(text: 'Balablu balablu balablu balablu')
+//     ..selection = const TextSelection(
+//       baseOffset: 0,
+//       extentOffset: 'Balablu balablu balablu balablu'.length,
+//     );
+//   final FocusNode focusNode = FocusNode();
+//
+//   @override
+//   void dispose() {
+//     controller.dispose();
+//     focusNode.dispose();
+//     super.dispose();
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       color: context.neutralColors.$200,
+//       child: EditableText(
+//         controller: controller,
+//         focusNode: focusNode,
+//         enableInteractiveSelection: true,
+//         selectionControls: ContextMenuController().,
+//         scribbleEnabled: true,
+//         contextMenuBuilder: (context, _) {
+//           return Container(
+//             width: 200,
+//             height: 30,
+//             color: Colors.red,
+//           );
+//         },
+//         toolbarOptions: const ToolbarOptions(
+//           copy: true,
+//           cut: true,
+//           paste: true,
+//           selectAll: true,
+//         ),
+//         onSelectionChanged: (selection, cause) {
+//           print('selection $selection cause $cause');
+//           controller.selection = selection;
+//         },
+//         style: context.primaryTypography.title.small
+//             .withColor(context.neutralColors.$800),
+//         cursorColor: context.neutralColors.$800,
+//         backgroundCursorColor: context.neutralColors.$100,
+//       ),
+//     );
+//   }
+// }

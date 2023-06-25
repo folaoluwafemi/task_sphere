@@ -121,10 +121,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return VanillaNotifierHolder<ProgressiveAnalyticsVanilla>(
-      createNotifier: () => ProgressiveAnalyticsVanilla()..initialize(),
-      child: VanillaNotifierHolder<HomeVanilla>(
-        createNotifier: () => HomeVanilla()..initialize(),
+    return InheritedVanilla<ProgressiveAnalyticsVanilla>(
+      createNotifier: () =>  ProgressiveAnalyticsVanilla()..initialize(),
+      child: InheritedVanilla<HomeVanilla>(
+        createNotifier: () =>  HomeVanilla()..initialize(),
         child: Scaffold(
           backgroundColor: context.bgColors.$100,
           body: GestureDetector(

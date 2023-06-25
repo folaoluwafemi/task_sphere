@@ -29,8 +29,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return VanillaNotifierHolder<LoginVanilla>(
-      createNotifier: () => LoginVanilla(),
+    return InheritedVanilla<LoginVanilla>(
+      createNotifier: () =>  LoginVanilla(),
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         backgroundColor: context.bgColors.$50,

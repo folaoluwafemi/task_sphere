@@ -43,8 +43,8 @@ class TaskScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return VanillaNotifierHolder<TaskVanilla>(
-      createNotifier: () => TaskVanilla(task: task)..initialize(),
+    return InheritedVanilla<TaskVanilla>(
+      createNotifier: () =>  TaskVanilla(task: task)..initialize(),
       child: VanillaListener<TaskVanilla, TaskState>(
         listenWhen: (previous, current) => previous?.error != current.error,
         listener: (previous, current) {

@@ -74,7 +74,7 @@ class AboutAppScreen extends StatelessWidget {
                     ),
                     24.boxHeight,
                     Text(
-                      'Version 1.0.0',
+                      'Version 1.1.0',
                       style: context.secondaryTypography.paragraph.small
                           .withColor(context.neutralColors.$600),
                     ),

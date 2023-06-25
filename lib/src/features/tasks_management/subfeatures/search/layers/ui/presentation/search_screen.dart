@@ -22,11 +22,8 @@ class SearchScreen extends StatelessWidget {
     final ViewPadding padding = View.of(context).viewPadding;
     final EdgeInsets viewInsets = MediaQuery.of(context).viewInsets;
     final EdgeInsets viewPadding = MediaQuery.of(context).viewPadding;
-    print(' \n\nview padding: $viewPadding');
-    print('view insets: $viewInsets');
-    print('context view: $padding\n\n');
-    return VanillaNotifierHolder<SearchVanilla>(
-      createNotifier: () => SearchVanilla()..initialize(),
+    return InheritedVanilla<SearchVanilla>(
+      createNotifier: () =>  SearchVanilla()..initialize(),
       child: VanillaListener<SearchVanilla, SearchState>(
         listenWhen: (previous, current) => previous?.error != current.error,
         listener: (previous, current) {

@@ -272,26 +272,25 @@ class _ProgressiveAnalysisBuilderState
       0,
     ).day;
 
+    final TextStyle weekDayStyle = context.secondaryTypography.footnote
+        .withColor(context.neutralColors.$600)
+        .withHeight(1);
     return Padding(
       padding: EdgeInsets.only(left: 18.w),
       child: Row(
         children: [
-          Padding(
-            padding: EdgeInsets.only(top: 12.h),
-            child: SizedBox(
-              height: (14.h * 7) + (6 * 3.h) + 23.h,
+          SizedBox(
+            height: (14.h * 7) + (6 * 3.h),
+            child: Padding(
+              padding: EdgeInsets.only(top: 26.h),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ...['Mon', 'Wed', 'Fri'].map(
-                    (e) => Text(
-                      e,
-                      textAlign: TextAlign.center,
-                      strutStyle: const StrutStyle(leading: 1.87, height: 1.01),
-                      style: context.secondaryTypography.footnote
-                          .withColor(context.neutralColors.$600),
-                    ),
-                  ),
+                  Text('Mon', style: weekDayStyle),
+                  26.boxHeight,
+                  Text('Wed', style: weekDayStyle),
+                  26.boxHeight,
+                  Text('Fri', style: weekDayStyle),
                 ],
               ),
             ),
