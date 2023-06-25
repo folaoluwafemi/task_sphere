@@ -13,7 +13,7 @@ class AuthRepository implements AuthRepoInterface {
   @override
   Future<User> fetchUser() async {
     final User user = await _authApi.fetchUser();
-    UserManager.updateUser(user);
+    UserManager().updateUser(user);
     return user;
   }
 
@@ -26,14 +26,15 @@ class AuthRepository implements AuthRepoInterface {
       email: email,
       password: password,
     );
-    UserManager.updateUser(user);
+    UserManager().updateUser(user);
     return user;
   }
 
   @override
-  Future<void> logout() {
-    UserManager.deleteUser();
-    return _authApi.logout();
+  Future<void> logout() async {
+    UserManager().deleteUser();
+    await SearchHistoryManager().clearHistory();
+    await _authApi.logout();
   }
 
   @override
@@ -46,7 +47,7 @@ class AuthRepository implements AuthRepoInterface {
       password: password,
     );
 
-    UserManager.updateUser(user);
+    UserManager().updateUser(user);
 
     await FirebaseAnalysisSource().createUserAnalyticsBucket(user.uid);
 
@@ -65,7 +66,7 @@ class AuthRepository implements AuthRepoInterface {
 
     final User user = await fetchUser();
 
-    UserManager.updateUser(user);
+    UserManager().updateUser(user);
 
     return user;
   }

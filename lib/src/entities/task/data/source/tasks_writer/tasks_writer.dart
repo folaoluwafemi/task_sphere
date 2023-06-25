@@ -10,7 +10,7 @@ class TaskWriter with FirebaseErrorHandlerMixin implements TaskWriterInterface {
   })  : _buffer = buffer ?? TasksBuffer(),
         _tasks = FirebaseFirestore.instance
             .collection(Keys.user)
-            .doc(userId ?? UserManager.requireUser.uid)
+            .doc(userId ?? UserManager().requireUser.uid)
             .collection(Keys.tasks);
 
   @override

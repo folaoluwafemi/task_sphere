@@ -31,10 +31,10 @@ class _TopContents extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ValueListenableBuilder<User?>(
-                  valueListenable: UserManager.notifier,
+                  valueListenable: UserManager().notifier,
                   builder: (_, user, __) {
                     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-                      UserManager.user;
+                      UserManager().user;
                     });
                     if (user == null || user.firstname == null) {
                       return const SizedBox.shrink();

@@ -1,3 +1,4 @@
+import 'package:task_sphere/src/entities/entities_barrel.dart';
 import 'package:task_sphere/src/entities/productivity_history/data/source/network/network_productivity_source.dart';
 import 'package:task_sphere/src/entities/productivity_history/productivity_history_barrel.dart';
 import 'package:task_sphere/src/entities/task/task_barrel.dart';

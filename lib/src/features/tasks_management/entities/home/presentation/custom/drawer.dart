@@ -76,7 +76,7 @@ class _Drawer extends StatelessWidget {
           Align(
             alignment: Alignment.bottomLeft,
             child: Padding(
-              padding: EdgeInsets.only(left: 32.w,bottom: 66.h),
+              padding: EdgeInsets.only(left: 32.w, bottom: 66.h),
               child: SafeArea(
                 top: false,
                 child: RawMaterialButton(
@@ -98,10 +98,8 @@ class _Drawer extends StatelessWidget {
                       6.boxHeight,
                       Text(
                         'Log out',
-                        style:
-                            context.primaryTypography.paragraph.medium.copyWith(
-                          color: AppColors.red,
-                        ),
+                        style: context.primaryTypography.paragraph.medium
+                            .copyWith(color: AppColors.red),
                       ),
                     ],
                   ),
@@ -116,7 +114,7 @@ class _Drawer extends StatelessWidget {
 
   void logout() {
     AuthRepository().logout().then((value) {
-      UserManager.deleteUser();
+      UserManager().deleteUser();
       AppRouter.navigatorKey.currentContext?.goNamed(AppRoute.onboarding.name);
     });
   }

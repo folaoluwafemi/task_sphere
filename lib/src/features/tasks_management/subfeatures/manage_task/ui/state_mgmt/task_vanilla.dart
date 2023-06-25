@@ -129,7 +129,7 @@ class TaskVanilla extends VanillaNotifier<TaskState>
         todos: [...state.task.todos, todo],
       ),
     );
-    await ProductivityHistoryManager.instance.pushSnapshotFrom(state.task);
+    await ProductivityHistoryManager().pushSnapshotFrom(state.task);
     await _save();
   }
 

@@ -13,12 +13,17 @@ class AnalysisManager extends VanillaNotifier<Analysis>
   })  : _analyticsLocalBuffer = analyticsLocalBuffer,
         super(analyticsLocalBuffer.getAnalysis());
 
-  static final AnalysisManager instance = AnalysisManager._(
+  static AnalysisManager _instance = AnalysisManager._(
     analyticsSource: FirebaseAnalysisSource(),
     analyticsLocalBuffer: AnalysisLocalBuffer(),
   );
 
-  factory AnalysisManager.default_() => instance;
+  static void _reinitialize() {
+    _instance = AnalysisManager._(
+      analyticsSource: FirebaseAnalysisSource(),
+      analyticsLocalBuffer: AnalysisLocalBuffer(),
+    );
+  }
 
   Future<void> addAnalytics(Analytics analytics) => handleError(
         _addAnalytics(analytics),

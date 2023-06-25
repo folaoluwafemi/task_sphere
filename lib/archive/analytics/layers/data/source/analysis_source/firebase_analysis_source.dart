@@ -9,7 +9,7 @@ class FirebaseAnalysisSource
     String? userId,
   }) : _analysisCollection = FirebaseFirestore.instance
             .collection(Keys.user)
-            .doc(userId ?? UserManager.requireUser.uid)
+            .doc(userId ?? UserManager().requireUser.uid)
             .collection(Keys.analysis);
 
   @override

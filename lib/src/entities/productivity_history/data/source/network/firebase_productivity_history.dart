@@ -10,7 +10,7 @@ class FirebaseProductivityHistorySource
   }) : _history = history ??
             FirebaseFirestore.instance
                 .collection(Keys.user)
-                .doc(UserManager.requireUser.uid)
+                .doc(UserManager().requireUser.uid)
                 .collection(Keys.productivityHistory);
 
   @override

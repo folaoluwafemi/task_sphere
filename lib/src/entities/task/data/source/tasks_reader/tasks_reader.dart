@@ -11,16 +11,25 @@ class TasksReader extends VanillaNotifier<List<Task>>
     TasksBufferInterface? buffer,
   })  : _tasks = FirebaseFirestore.instance
             .collection(Keys.user)
-            .doc(userId ?? UserManager.requireUser.uid)
+            .doc(userId ?? UserManager().requireUser.uid)
             .collection(Keys.tasks),
         _buffer = buffer ?? TasksBuffer(),
-        super([]);
+        super([]) {
+    UserManager().notifier.addListener(_reInitialize);
+  }
 
-  static final TasksReader instance = TasksReader._(
-    userId: UserManager.requireUser.uid,
+  void _reInitialize() {
+    if (UserManager().user == null) return;
+    _instance = TasksReader._(
+      userId: UserManager().requireUser.uid,
+    );
+  }
+
+  static TasksReader _instance = TasksReader._(
+    userId: UserManager().requireUser.uid,
   );
 
-  factory TasksReader() => instance;
+  factory TasksReader() => _instance;
 
   @override
   List<Task> get tasks => List.from(state)..sort();

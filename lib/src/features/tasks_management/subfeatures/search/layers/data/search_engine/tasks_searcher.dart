@@ -6,7 +6,7 @@ class _TasksFetcher with FirebaseErrorHandlerMixin {
   _TasksFetcher()
       : _tasksRef = FirebaseFirestore.instance
             .collection(Keys.user)
-            .doc(UserManager.requireUser.uid)
+            .doc(UserManager().requireUser.uid)
             .collection(Keys.tasks);
 
   Future<List<Task>> fetchAllTasks() => handleError(_fetchAllTasks());

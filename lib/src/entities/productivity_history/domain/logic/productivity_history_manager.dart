@@ -7,12 +7,18 @@ class ProductivityHistoryManager extends VanillaNotifier<ProductivityHistory>
   ProductivityHistoryManager._({
     NetworkProductivityHistorySourceInterface? source,
   })  : _source = source ?? FirebaseProductivityHistorySource(),
-        super([]);
+        super([]) {
+    UserManager().notifier.addListener(_reInitialize);
+  }
 
-  static final ProductivityHistoryManager instance =
-      ProductivityHistoryManager._();
+  void _reInitialize() {
+    if (UserManager().user == null) return;
+    _instance = ProductivityHistoryManager._();
+  }
 
-  factory ProductivityHistoryManager() => instance;
+  static ProductivityHistoryManager _instance = ProductivityHistoryManager._();
+
+  factory ProductivityHistoryManager() => _instance;
 
   @override
   Future<void> fetchHistory() async {

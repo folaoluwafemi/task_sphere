@@ -31,9 +31,8 @@ class _HomeViewState extends State<_HomeView> {
           RefreshIndicator(
             color: context.palette.primary,
             onRefresh: () async {
-              await context.read<ProgressiveAnalyticsVanilla>().refresh();
-              if (!mounted) return;
-              await context.read<HomeVanilla>().refresh();
+              context.read<ProgressiveAnalyticsVanilla>().refresh();
+              context.read<HomeVanilla>().refresh();
             },
             child: CustomScrollView(
               physics: const BouncingScrollPhysics(

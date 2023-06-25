@@ -3,10 +3,18 @@ import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 part 'private.dart';
 
-abstract final class UserManager {
-  static final UserVanillaNotifier notifier = UserVanillaNotifier(null);
+final class UserManager {
+  UserManager._() {
+    FirebaseAuth.instance.authStateChanges().listen(_authStreamListener);
+  }
 
-  static User? get user {
+  static final UserManager _instance = UserManager._();
+
+  factory UserManager() => _instance;
+
+  final UserVanillaNotifier notifier = UserVanillaNotifier(null);
+
+  User? get user {
     if (notifier.readData != null) return notifier.readData!;
 
     if (FirebaseAuth.instance.currentUser != null) {
@@ -16,7 +24,7 @@ abstract final class UserManager {
     return notifier.readData;
   }
 
-  static User get requireUser {
+  User get requireUser {
     if (user != null) return user!;
 
     final User? currentUser = FirebaseAuth.instance.currentUser;
@@ -28,7 +36,16 @@ abstract final class UserManager {
     return currentUser;
   }
 
-  static void updateUser(User user) => notifier.createData(user);
+  void updateUser(User user) => notifier.createData(user);
 
-  static void deleteUser() => notifier.deleteData();
+  void deleteUser() => notifier.deleteData();
+
+  void _authStreamListener(User? user) {
+    print('stream updated');
+    if (user == null) {
+      deleteUser();
+    } else {
+      updateUser(user);
+    }
+  }
 }
