@@ -41,7 +41,6 @@ final class UserManager {
   void deleteUser() => notifier.deleteData();
 
   void _authStreamListener(User? user) {
-    print('stream updated');
     if (user == null) {
       deleteUser();
     } else {

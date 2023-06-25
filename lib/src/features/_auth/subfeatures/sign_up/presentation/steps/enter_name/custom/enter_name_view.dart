@@ -72,11 +72,7 @@ class _EnterNameViewState extends State<_EnterNameView> {
               },
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) {
-                if (value == null ||
-                    value.words.length != 2 ||
-                    value.words.any((element) {
-                      return element.trim().isEmpty;
-                    })) {
+                if (value == null || value.words.length < 2) {
                   changeFieldsValidated(false);
                   return null;
                 }
@@ -147,6 +143,8 @@ class _EnterNameViewState extends State<_EnterNameView> {
   }
 
   void onProceedToHomePagePressed() {
+    final String name = this.name.trim();
+
     FocusScope.of(context).unfocus();
     context.read<SignUpVanilla>().updateName(
           firstname: name.words.first,

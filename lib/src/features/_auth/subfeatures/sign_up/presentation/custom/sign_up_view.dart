@@ -63,7 +63,6 @@ class _SignUpViewState extends State<_SignUpView> {
               InputFormField(
                 hintText: 'Enter your email address',
                 textInputAction: TextInputAction.next,
-                onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
                 keyboardType: TextInputType.emailAddress,
                 onChanged: (value) {
                   email = value;

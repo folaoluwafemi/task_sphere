@@ -64,7 +64,6 @@ class _LoginViewState extends State<_LoginView> {
                 hintText: 'Enter your email address',
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.next,
-                onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
                 onChanged: (value) {
                   email = value;
                 },
