@@ -59,7 +59,8 @@ class _CalendarViewerState extends State<CalendarViewer> {
       ),
   };
 
-  final YearlySnapshots yearlySnapshots = {};
+  final YearlySnapshots rawYearlySnapshots = {};
+  final YearlySnapshots balancedOutYearlySnapshots = {};
 
   late final int maxValue = snapshots.fold(
     0,
@@ -90,7 +91,8 @@ class _CalendarViewerState extends State<CalendarViewer> {
       });
     }
     for (int year in years) {
-      yearlySnapshots[year] = getMonthsPartForYear(year);
+      rawYearlySnapshots[year] = getMonthsPartForYear(year);
+      balancedOutYearlySnapshots[year] = balancedOutWeeksInYear(year);
     }
   }
 
@@ -136,22 +138,6 @@ class _CalendarViewerState extends State<CalendarViewer> {
   }
 
   MonthlySnapshots balancedOutWeeksInYear(int year) {
-    final firstSnapshotInFirstMonth = snapshots.where((element) {
-      return element.dateTime.year == year;
-    }).first;
-
-    final int firstMonthInYear = firstSnapshotInFirstMonth.dateTime.month;
-
-    final lastSnapshotInLastMonth = snapshots.where((element) {
-      return element.dateTime.year == year;
-    }).last;
-
-    final int lastMonth = lastSnapshotInLastMonth.dateTime.month;
-
-    final List<int> monthsInYear = [
-      for (int i = firstMonthInYear; i <= lastMonth; i++) i
-    ];
-
     Year year_ = getWeeksForMonth(year: year);
     year_ = balanceIncompleteWeeks(year_);
 
@@ -187,11 +173,20 @@ class _CalendarViewerState extends State<CalendarViewer> {
   Year balanceIncompleteWeeks(Year year) {
     year = year.copy;
 
+    final Year newYear = [];
+
     for (int i = 0; i < year.length; i++) {
       final Month month = year[i];
-      if (month.first.length == 7) continue;
-      if (i <= 0) continue;
-      final Month previousMonth = year[i - 1];
+
+      if (month.first.length == 7) {
+        newYear.add(month);
+        continue;
+      }
+      if (i <= 0) {
+        newYear.add(month);
+        continue;
+      }
+      final Month previousMonth = newYear.last;
       final Week lastWeekOfPreviousMonth = previousMonth.last;
       final Week firstWeekOfCurrentMonth = month.first;
       final Week freshMergedWeek = [
@@ -203,18 +198,15 @@ class _CalendarViewerState extends State<CalendarViewer> {
         ...month.sublist(1),
       ];
 
-      // final Month oldMonth = previousMonth.copy..removeLast();
-
-      year.insert(i, newMonth);
-      year[i - 1].removeLast();
+      newYear.removeLast();
+      newYear.add(previousMonth.copy..removeLast());
+      newYear.add(newMonth);
     }
 
-    return year;
+    return newYear;
   }
 
-  Year getWeeksForMonth({
-    required int year,
-  }) {
+  Year getWeeksForMonth({required int year}) {
     final firstSnapshotInFirstMonth = snapshots.where((element) {
       return element.dateTime.year == year;
     }).first;
@@ -231,7 +223,7 @@ class _CalendarViewerState extends State<CalendarViewer> {
       for (int i = firstMonthInYear; i <= lastMonth; i++) i
     ];
 
-    final List<List<List<DateTime>>> items = [];
+    final Year items = [];
 
     for (final month in monthsInYear) {
       final List<List<DateTime>> item = UtilFunctions.weeksInMonth(
@@ -287,7 +279,7 @@ class _CalendarViewerState extends State<CalendarViewer> {
       slivers: [
         YearlySnapshotWidget(
           maxValue: maxValue,
-          yearlySnapshots: yearlySnapshots,
+          yearlySnapshots: balancedOutYearlySnapshots,
         ),
       ],
     );

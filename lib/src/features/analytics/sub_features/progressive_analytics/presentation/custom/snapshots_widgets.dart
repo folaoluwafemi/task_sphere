@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 import 'package:task_sphere/src/entities/productivity_history/domain/model/productivity_snapshot.dart';
 import 'package:task_sphere/src/features/analytics/analytics_barrel.dart';
+import 'package:task_sphere/src/utils/functions/extensions/extensions.dart';
 
 class DailySnapshotWidget extends StatelessWidget {
   final ProductivitySnapshot snapshot;
@@ -15,10 +16,13 @@ class DailySnapshotWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProductivityUnit.fromValue(
-      snapshot.value,
-      maxValue: maxValue,
-    ).widget;
+    return Padding(
+      padding: EdgeInsets.all(1.l),
+      child: ProductivityUnit.fromValue(
+        snapshot.value,
+        maxValue: maxValue,
+      ).widget,
+    );
   }
 }
 
@@ -36,23 +40,6 @@ class WeeklySnapshotWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final List<WeeklySnapshotsEntry> workingSnapshots =
-    //     snapshots.entries.toList();
-    //
-    // final List<Widget> widgets = [];
-
-    // for (int i = 0; i < workingSnapshots.length; i++) {
-    //   final entry = workingSnapshots[i];
-    //   final bool firstIsMonday =
-    //       entry.value.first.dateTime.weekday == DateTime.monday;
-    //   final bool lastIsSunday =
-    //       entry.value.last.dateTime.weekday == DateTime.sunday;
-    //
-    //   final WeeklySnapshotsEntry? nextEntry = workingSnapshots.elementAtOrNull(
-    //     i + 1,
-    //   );
-    // }
-
     return MultiSliver(
       children: [
         // for (int i = 0; i < workingSnapshots.length; i++) Container(),
@@ -64,16 +51,14 @@ class WeeklySnapshotWidget extends StatelessWidget {
                 entry.value.last.dateTime.weekday == DateTime.sunday;
 
             return Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                ...List.generate(
-                  7,
-                  (index) {
-                    return DailySnapshotWidget(
-                      maxValue: maxValue,
-                      snapshot: entry.value[index],
-                    );
-                  },
-                )
+                ...entry.value.map(
+                  (snapshot) => DailySnapshotWidget(
+                    maxValue: maxValue,
+                    snapshot: snapshot,
+                  ),
+                ),
               ],
             );
           },
