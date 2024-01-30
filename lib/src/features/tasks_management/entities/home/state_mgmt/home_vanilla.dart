@@ -9,7 +9,10 @@ class HomeVanilla extends VanillaNotifier<HomeState>
 
   HomeVanilla()
       : super(
-          const HomeState(allTasks: [], currentTasks: []),
+          const HomeState(
+            allTasks: [],
+            currentTasks: [],
+          ),
         );
 
   Future<void> initialize() => handleError(_initialize());

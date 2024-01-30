@@ -2,7 +2,8 @@ part of 'tasks_repo_interface.dart';
 
 class TasksRepository implements TasksRepoInterface {
   late final TasksReader _reader = TasksReader();
-  late final ProductivityHistoryManager _historyManager = ProductivityHistoryManager();
+  late final ProductivityHistoryManager _historyManager =
+      ProductivityHistoryManager();
   final TaskWriterInterface _tasksWriter;
   final TasksBufferInterface _buffer;
 
@@ -15,22 +16,26 @@ class TasksRepository implements TasksRepoInterface {
 
   @override
   Future<void> createTask(Task task) async {
-    await _tasksWriter.createTask(task);
+    await performFirestoreTask(() async {
+      _tasksWriter.createTask(task);
+
+      _historyManager.pushSnapshotFrom(task);
+    });
 
     await _buffer.addTask(task);
-
-    await _historyManager.pushSnapshotFrom(task);
 
     await _reader.fetch(aFresh: true);
   }
 
   @override
   Future<void> deleteTask(String taskId) async {
-    await _tasksWriter.deleteTask(taskId);
+    await performFirestoreTask(() async {
+      _tasksWriter.deleteTask(taskId);
+
+      _historyManager.deleteHistoryFor(taskId);
+    });
 
     await _buffer.removeTask(taskId);
-
-    await _historyManager.deleteHistoryFor(taskId);
 
     await _reader.fetch(aFresh: true);
   }
@@ -42,15 +47,17 @@ class TasksRepository implements TasksRepoInterface {
   }) async {
     final TodoSource source = TodoSource(taskId: task.id);
 
-    await source.deleteTodo(todo);
-
     if (task.todos.contains(todo)) {
       task = task.copyWith(
         todos: task.todos.copy..remove(todo),
       );
     }
 
-    await _historyManager.pushSnapshotFrom(task);
+    performFirestoreTask(() async {
+      source.deleteTodo(todo);
+
+      _historyManager.pushSnapshotFrom(task);
+    });
 
     await _buffer.updateTask(task);
   }
@@ -67,11 +74,13 @@ class TasksRepository implements TasksRepoInterface {
     Task task, {
     required bool shouldUpdateHistory,
   }) async {
-    await _tasksWriter.updateTask(task);
+    await performFirestoreTask(() async {
+      _tasksWriter.updateTask(task);
+
+      if (shouldUpdateHistory) _historyManager.pushSnapshotFrom(task);
+    });
 
     await _buffer.updateTask(task);
-
-    if (shouldUpdateHistory) await _historyManager.pushSnapshotFrom(task);
 
     await _reader.fetch(aFresh: true);
   }
@@ -84,15 +93,16 @@ class TasksRepository implements TasksRepoInterface {
   }) async {
     final TodoSource source = TodoSource(taskId: task.id);
 
-    await source.updateTodos(todos);
-
     task = task.copyWith(
       todos: task.todos.copy
         ..clear()
         ..addAll(todos),
     );
+    await performFirestoreTask(() async {
+      source.updateTodos(todos);
 
-    if (shouldUpdateHistory) await _historyManager.pushSnapshotFrom(task);
+      if (shouldUpdateHistory) _historyManager.pushSnapshotFrom(task);
+    });
 
     await _buffer.updateTask(task);
 
@@ -103,12 +113,19 @@ class TasksRepository implements TasksRepoInterface {
   Future<void> deleteAllTodos(String taskId) async {
     final TodoSource source = TodoSource(taskId: taskId);
 
-    await source.deleteAllTodos();
+    await performFirestoreTask(() async {
+      source.deleteAllTodos();
 
-    await _historyManager.deleteHistoryFor(taskId);
+      _historyManager.deleteHistoryFor(taskId);
+    });
 
     await _buffer.removeTask(taskId);
 
     await _reader.fetch(aFresh: true);
+  }
+
+  Future<void> performFirestoreTask(Future Function() computation) async {
+    computation();
+    await Future.delayed(const Duration(milliseconds: 800));
   }
 }

@@ -1,6 +1,8 @@
 part of 'extensions.dart';
 
 extension DateTimeExtension on DateTime {
+
+
   bool containsTimeWithinDay(DateTime time) => day == time.day;
 
   String formatSimpleDate() {

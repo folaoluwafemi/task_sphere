@@ -63,9 +63,9 @@ extension AppSizerDoubleExtension on num {
 
   String toOrdinal() {
     final int number = toInt();
-    final int mod = number % 100;
+    final int remainder = number % 100;
 
-    if (mod >= 11 && mod <= 13) {
+    if (remainder >= 11 && remainder <= 13) {
       return '${number}th';
     }
 

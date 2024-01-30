@@ -1,4 +1,4 @@
-abstract class Values {
+abstract final class Values {
   static const List<String> shortMonths = [
     'Jan',
     'Feb',

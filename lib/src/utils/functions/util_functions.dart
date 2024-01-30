@@ -23,6 +23,54 @@ abstract final class UtilFunctions {
     }
   }
 
+  static List<DateTime> daysInMonth(
+    int month, {
+    int? year,
+  }) {
+    year ??= DateTime.now().year;
+
+    final DateTime firstDayOfMonth = DateTime(year, month, 1);
+    final DateTime lastDayOfMonth = DateTime(year, month + 1, 0);
+
+    final List<DateTime> days = [];
+
+    for (int i = 0; i < lastDayOfMonth.day; i++) {
+      days.add(firstDayOfMonth.add(Duration(days: i)));
+    }
+
+    return days;
+  }
+
+  static List<List<DateTime>> weeksInMonth(
+    int month, {
+    int? year,
+  }) {
+    year ??= DateTime.now().year;
+
+    final List<DateTime> days = daysInMonth(month, year: year);
+
+    final List<List<DateTime>> weeks = [];
+
+    while (days.isNotEmpty) {
+      final List<DateTime> week = [];
+      final int indexOfLastDayOfCurrentWeek = days.indexWhere((element) {
+        return element.weekday == DateTime.sunday;
+      });
+
+      if (indexOfLastDayOfCurrentWeek == -1) {
+        weeks.add(days);
+        break;
+      }
+
+      week.addAll(days.sublist(0, indexOfLastDayOfCurrentWeek + 1));
+      days.removeRange(0, indexOfLastDayOfCurrentWeek + 1);
+
+      weeks.add(week);
+    }
+
+    return weeks;
+  }
+
   static String formatDateWithShortMonth(DateTime date) {
     final String month = Values.shortMonths[date.month];
     final String year = '${date.year}';
