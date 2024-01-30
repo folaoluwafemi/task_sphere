@@ -24,18 +24,6 @@ typedef ProductivitySnapshots = List<ProductivitySnapshot>;
 typedef SnapshotItem = MapEntry<DateTime, int>;
 typedef MapSnapshot = Map<DateTime, int>;
 
-extension on MapSnapshot {
-  List<ProductivitySnapshot> toList() {
-    return [
-      for (final entry in entries) (dateTime: entry.key, value: entry.value),
-    ];
-  }
-}
-
-extension on ProductivitySnapshot {
-  SnapshotItem toMapEntry() => MapEntry(dateTime, value);
-}
-
 class _CalendarViewerState extends State<CalendarViewer> {
   late final List<ProductivitySnapshot> snapshots = widget.snapshots
     ..sort(ProductivitySnapshotUtils.compare);

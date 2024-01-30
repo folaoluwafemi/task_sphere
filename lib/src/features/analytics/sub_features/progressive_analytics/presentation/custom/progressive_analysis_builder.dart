@@ -23,48 +23,16 @@ class ProgressiveAnalysisBuilder extends StatefulWidget {
 class _ProgressiveAnalysisBuilderState
     extends State<ProgressiveAnalysisBuilder> {
   late final List<ProductivitySnapshot> snapshots = widget.snapshots;
-  late final ScrollController scrollController1 = ScrollController();
-  late final ScrollController scrollController2 = ScrollController();
 
   final List<ProductivitySnapshot> completeSnapshots = [];
 
   @override
   void initState() {
     super.initState();
-    scrollController2.addListener(controller2Listener);
     completeSnapshotsWith(snapshots);
   }
 
-  double getInitialScrollPosition() {
-    double wholeRatio = snapshots.length / completeSnapshots.length;
-
-    wholeRatio = wholeRatio < (14 / 365) ? 0 : wholeRatio;
-
-    final double initialPositionValue =
-        scrollController2.position.maxScrollExtent * wholeRatio;
-
-    return initialPositionValue;
-  }
-
-  void controller2Listener() {
-    final double ratio2 =
-        scrollController2.offset / scrollController2.position.maxScrollExtent;
-
-    scrollController1.position.jumpTo(
-      ratio2 * scrollController1.position.maxScrollExtent,
-    );
-  }
-
-  @override
-  void dispose() {
-    scrollController1.dispose();
-    scrollController2.dispose();
-    super.dispose();
-  }
-
-  List<DateTime> getDaysInYearOf([
-    DateTime? dayOfLatestProductivitySnapshot,
-  ]) {
+  List<DateTime> getDaysInYearOf([DateTime? dayOfLatestProductivitySnapshot]) {
     final DateTime now = dayOfLatestProductivitySnapshot ?? DateTime.now();
     final DateTime firstDayOfYear = DateTime(now.year, 1, 1);
     final DateTime lastDayOfYear = DateTime(now.year, 12, 31);
@@ -111,20 +79,20 @@ class _ProgressiveAnalysisBuilderState
       feeder.last.dateTime,
     );
 
-    final earliestSnapshotForYear = getEarliestDayInLatestYear(feeder);
+    // final earliestSnapshotForYear = getEarliestDayInLatestYear(feeder);
 
     // adding one since DateTime.weekday starts from 1 [Monday] and we are ordering from sunday
-    final int earliestSnapshotDayOfWeek =
-        earliestSnapshotForYear.dateTime.weekday + 1;
-
-    for (int i = 1; i < earliestSnapshotDayOfWeek; i++) {
-      final dayOfNewSnapshot = feeder.first.dateTime.subtract(
-        Duration(days: i),
-      );
-      newSnapshots.add(
-        (dateTime: dayOfNewSnapshot, value: 0),
-      );
-    }
+    // final int earliestSnapshotDayOfWeek =
+    //     earliestSnapshotForYear.dateTime.weekday + 1;
+    //
+    // for (int i = 1; i < earliestSnapshotDayOfWeek; i++) {
+    //   final dayOfNewSnapshot = feeder.first.dateTime.subtract(
+    //     Duration(days: i),
+    //   );
+    //   newSnapshots.add(
+    //     (dateTime: dayOfNewSnapshot, value: 0),
+    //   );
+    // }
 
     final List<ProductivitySnapshot> snapshotsInCurrentYear =
         getAllSnapshotsInLatestYear(feeder);
@@ -203,50 +171,6 @@ class _ProgressiveAnalysisBuilderState
               child: CalendarViewer(snapshots: completeSnapshots),
             ),
           ),
-          // Expanded(
-          //   child: SizedBox(
-          //     height: (14.h * 7) + (6 * 3.h) + 24.h,
-          //     child: Column(
-          //       children: [
-          //         // SizedBox(
-          //         //   height: 24.h,
-          //         //   child: AbsorbPointer(
-          //         //     child: Builder(
-          //         //       builder: (context) => Balablu(
-          //         //         snapshots: completeSnapshots,
-          //         //         earliestYear: earliestYear,
-          //         //         earliestMonth: earliestMonth,
-          //         //         scrollController: scrollController1,
-          //         //       ),
-          //         //     ),
-          //         //   ),
-          //         // ),
-          //         // SizedBox(
-          //         //   height: (14.h * 7) + (6 * 3.h),
-          //         //   child: GridView.builder(
-          //         //     physics: const ClampingScrollPhysics(),
-          //         //     controller: scrollController2,
-          //         //     itemCount: values.length,
-          //         //     scrollDirection: Axis.horizontal,
-          //         //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          //         //       crossAxisCount: 7,
-          //         //       crossAxisSpacing: 3.h,
-          //         //       mainAxisSpacing: 3.w,
-          //         //       mainAxisExtent: 18.w,
-          //         //       childAspectRatio: 18.w / 14.h,
-          //         //     ),
-          //         //     itemBuilder: (context, index) {
-          //         //       return ProductivityUnit.fromValue(
-          //         //         values[index],
-          //         //         maxValue: maxValue,
-          //         //       ).widget;
-          //         //     },
-          //         //   ),
-          //         // ),
-          //       ],
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 import 'package:task_sphere/src/entities/productivity_history/domain/model/productivity_snapshot.dart';
 import 'package:task_sphere/src/features/analytics/analytics_barrel.dart';
@@ -42,26 +43,42 @@ class WeeklySnapshotWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiSliver(
       children: [
-        // for (int i = 0; i < workingSnapshots.length; i++) Container(),
-        ...snapshots.entries.map(
-          (entry) {
-            final bool firstIsMonday =
-                entry.value.first.dateTime.weekday == DateTime.monday;
-            final bool lastIsSunday =
-                entry.value.last.dateTime.weekday == DateTime.sunday;
-
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+        Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(
+              DateFormat.MMM().format(
+                (snapshots.entries.toList().elementAtOrNull(1) ??
+                        snapshots.entries.toList().elementAtOrNull(0))!
+                    .value
+                    .first
+                    .dateTime,
+              ),
+              style: context.secondaryTypography.footnote
+                  .withColor(context.neutralColors.$600),
+            ),
+            const Spacer(),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                ...entry.value.map(
-                  (snapshot) => DailySnapshotWidget(
-                    maxValue: maxValue,
-                    snapshot: snapshot,
-                  ),
+                ...snapshots.entries.map(
+                  (entry) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        ...entry.value.map(
+                          (snapshot) => DailySnapshotWidget(
+                            maxValue: maxValue,
+                            snapshot: snapshot,
+                          ),
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ],
-            );
-          },
+            ),
+          ],
         ),
       ],
     );

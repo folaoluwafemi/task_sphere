@@ -16,7 +16,7 @@ class ProgressiveAnalyticsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<ProductivitySnapshot> fakeProductivitySnapshots = List.generate(
-      220,
+      200,
       (index) => (
         dateTime: DateTime(2024, 1, 2).copyAdd(days: index),
         value: switch (index) {
