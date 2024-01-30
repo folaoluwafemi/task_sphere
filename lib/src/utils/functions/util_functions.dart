@@ -26,11 +26,15 @@ abstract final class UtilFunctions {
   static List<DateTime> daysInMonth(
     int month, {
     int? year,
+    int firstDayInMonth = 1,
+    int? lastDayInMonth,
   }) {
     year ??= DateTime.now().year;
 
-    final DateTime firstDayOfMonth = DateTime(year, month, 1);
-    final DateTime lastDayOfMonth = DateTime(year, month + 1, 0);
+    final DateTime firstDayOfMonth = DateTime(year, month, firstDayInMonth);
+    final DateTime lastDayOfMonth = lastDayInMonth != null
+        ? DateTime(year, month, lastDayInMonth)
+        : DateTime(year, month + 1, 0);
 
     final List<DateTime> days = [];
 
@@ -44,10 +48,17 @@ abstract final class UtilFunctions {
   static List<List<DateTime>> weeksInMonth(
     int month, {
     int? year,
+    int firstDayInMonth = 1,
+    int? lastDayInMonth,
   }) {
     year ??= DateTime.now().year;
 
-    final List<DateTime> days = daysInMonth(month, year: year);
+    final List<DateTime> days = daysInMonth(
+      month,
+      year: year,
+      firstDayInMonth: firstDayInMonth,
+      lastDayInMonth: lastDayInMonth,
+    );
 
     final List<List<DateTime>> weeks = [];
 

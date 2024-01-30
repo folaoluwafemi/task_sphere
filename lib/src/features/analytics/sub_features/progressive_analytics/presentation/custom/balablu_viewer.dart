@@ -14,6 +14,7 @@ class CalendarViewer extends StatefulWidget {
 
 typedef WeeklySnapshots = Map<int, List<ProductivitySnapshot>>;
 typedef MonthlySnapshots = Map<int, WeeklySnapshots>;
+typedef YearlySnapshots = Map<int, MonthlySnapshots>;
 typedef ProductivitySnapshots = List<ProductivitySnapshot>;
 
 typedef SnapshotItem = MapEntry<DateTime, int>;
@@ -54,60 +55,102 @@ class _CalendarViewerState extends State<CalendarViewer> {
       ),
   };
 
-  final MonthlySnapshots monthlySnapshots = {};
+  final YearlySnapshots yearlySnapshots = {};
+
+  late final int maxValue = snapshots.fold(
+    0,
+    (previousValue, element) {
+      return previousValue > element.value ? previousValue : element.value;
+    },
+  );
 
   static const int firstDayOfWeek = DateTime.monday;
   static const int lastDayOfWeek = DateTime.sunday;
 
+  @override
+  void initState() {
+    super.initState();
+    performMagic();
+  }
+
   void performMagic() {
-    final SnapshotItem firstSnapshot =
-        allSnapshots.entries.first.value.toMapEntry();
-    final SnapshotItem lastSnapshotInFirstWeek = allSnapshots.entries
-        .firstWhere((element) => element.key.weekday == lastDayOfWeek)
-        .value
-        .toMapEntry();
+    final ProductivitySnapshots workingSnapshots = snapshots.copy;
 
-    final List<ProductivitySnapshots> monthlySnapshots = [];
+    final List<int> years = [];
 
-    final int currentWeek = snapshots.first.dateTime.weekday;
-    final int currentMonth = snapshots.first.dateTime.month;
-    // for (DateTime i = snapshots.first.dateTime;
-    //     i.isBefore(snapshots.last.dateTime);
-    //     i.add(const Duration(days: 1))) {
-    //   // if (i.weekday)
-    // }
+    while (workingSnapshots.isNotEmpty) {
+      final int currentYear = workingSnapshots.first.dateTime.year;
+      years.add(currentYear);
+      workingSnapshots.removeWhere((element) {
+        return element.dateTime.year == currentYear;
+      });
+    }
+    for (int year in years) {
+      yearlySnapshots[year] = getMonthsPartForYear(year);
+    }
   }
 
   MonthlySnapshots getMonthsPartForYear(int year) {
-    final int firstMonthInYear = snapshots
-        .where((element) => element.dateTime.year == year)
-        .first
-        .dateTime
-        .month;
+    final firstSnapshotInFirstMonth = snapshots.where((element) {
+      return element.dateTime.year == year;
+    }).first;
+
+    final int firstMonthInYear = firstSnapshotInFirstMonth.dateTime.month;
+
+    final lastSnapshotInLastMonth = snapshots.where((element) {
+      return element.dateTime.year == year;
+    }).last;
+
+    final int lastMonth = lastSnapshotInLastMonth.dateTime.month;
 
     final List<int> monthsInYear = [
-      for (int i = firstMonthInYear; i <= DateTime.monthsPerYear; i++) i
+      for (int i = firstMonthInYear; i <= lastMonth; i++) i
     ];
     final List<MapEntry<int, WeeklySnapshots>> monthsSnapshots = [
-      for (final month in monthsInYear) getWeeksPartForMonth(month, year)
+      for (final month in monthsInYear)
+        getWeeksPartForMonth(
+          month: month,
+          year: year,
+          firstDayInMonth: firstSnapshotInFirstMonth.dateTime.day,
+          lastDayInMonth:
+              month == lastMonth ? lastSnapshotInLastMonth.dateTime.day : null,
+        )
     ];
 
     return Map<int, WeeklySnapshots>.fromEntries(monthsSnapshots);
   }
 
-  MapEntry<int, WeeklySnapshots> getWeeksPartForMonth(int month, int year) {
+  ProductivitySnapshot balablu(DateTime day) {
+    try {
+      return allSnapshots[day]!;
+    } catch (e) {
+      print('error day: $day');
+      rethrow;
+    }
+  }
+
+  MapEntry<int, WeeklySnapshots> getWeeksPartForMonth({
+    required int month,
+    required int year,
+    required int firstDayInMonth,
+    required int? lastDayInMonth,
+  }) {
     final List<DateTime> daysInMonth = UtilFunctions.daysInMonth(
       month,
       year: year,
+      firstDayInMonth: firstDayInMonth,
+      lastDayInMonth: lastDayInMonth,
     );
 
-    final Map<DateTime, ProductivitySnapshot> snapshotsInMonth = {
-      for (final day in daysInMonth) day: allSnapshots[day]!,
-    };
-
+    final Map<DateTime, ProductivitySnapshot> snapshotsInMonth = {};
+    for (final day in daysInMonth) {
+      snapshotsInMonth[day] = balablu(day);
+    }
     final List<List<DateTime>> weeksInMonth = UtilFunctions.weeksInMonth(
       month,
       year: year,
+      firstDayInMonth: firstDayInMonth,
+      lastDayInMonth: lastDayInMonth,
     );
 
     final WeeklySnapshots weeklySnapshots = {};
@@ -120,25 +163,16 @@ class _CalendarViewerState extends State<CalendarViewer> {
     return MapEntry<int, WeeklySnapshots>(month, weeklySnapshots);
   }
 
-  balablu() {
-    final DateTime normalizedDate = snapshots.last.dateTime.copyWith(
-      day: 0,
-      hour: 0,
-      minute: 0,
-      microsecond: 0,
-      millisecond: 0,
-      second: 0,
-    );
-
-    for (DateTime i = snapshots.first.dateTime;
-        i.millisecondsSinceEpoch < normalizedDate.millisecondsSinceEpoch;
-        i = i.copyAdd(months: 1)) {}
-  }
-
-  // MonthlySnapshots computeMonthSnapshotFrom()
-
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return CustomScrollView(
+      scrollDirection: Axis.horizontal,
+      slivers: [
+        YearlySnapshotWidget(
+          maxValue: maxValue,
+          yearlySnapshots: yearlySnapshots,
+        ),
+      ],
+    );
   }
 }

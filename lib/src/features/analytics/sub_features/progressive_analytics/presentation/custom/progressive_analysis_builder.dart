@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:task_sphere/src/entities/productivity_history/productivity_history_barrel.dart';
+import 'package:task_sphere/src/features/analytics/analytics_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
 part 'balablu_viewer.dart';
@@ -43,18 +44,6 @@ class _ProgressiveAnalysisBuilderState
         scrollController2.position.maxScrollExtent * wholeRatio;
 
     return initialPositionValue;
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    setControllerInitialOffset();
-  }
-
-  void setControllerInitialOffset() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      scrollController2.jumpTo(getInitialScrollPosition());
-    });
   }
 
   void controller2Listener() {
@@ -209,7 +198,10 @@ class _ProgressiveAnalysisBuilderState
           ),
           5.boxWidth,
           Expanded(
-            child: CalendarViewer(snapshots: completeSnapshots),
+            child: SizedBox(
+              height: (14.h * 7) + (6 * 3.h) + 24.h,
+              child: CalendarViewer(snapshots: completeSnapshots),
+            ),
           ),
           // Expanded(
           //   child: SizedBox(
