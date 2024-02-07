@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
+import 'package:vanilla_state/vanilla_state.dart';
 
 part 'private.dart';
 

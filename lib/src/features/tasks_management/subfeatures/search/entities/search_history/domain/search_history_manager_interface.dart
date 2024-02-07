@@ -1,5 +1,5 @@
 import 'package:task_sphere/src/features/tasks_management/subfeatures/search/entities/search_history/data/search_history_source_interface.dart';
-import 'package:task_sphere/src/utils/state_management/state_management_utils.dart';
+import 'package:vanilla_state/vanilla_state.dart';
 
 part 'search_history_manager.dart';
 

@@ -10,6 +10,7 @@ import 'package:task_sphere/src/entities/task/task_barrel.dart';
 import 'package:task_sphere/src/entities/todo/todo_barrel.dart';
 import 'package:task_sphere/src/features/tasks_management/subfeatures/manage_task/ui/state_mgmt/task_vanilla.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
+import 'package:vanilla_state/vanilla_state.dart';
 
 part 'custom/descriptor_modals.dart';
 
@@ -44,7 +45,7 @@ class TaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InheritedVanilla<TaskVanilla>(
-      createNotifier: () =>  TaskVanilla(task: task)..initialize(),
+      createNotifier: () => TaskVanilla(task: task)..initialize(),
       child: VanillaListener<TaskVanilla, TaskState>(
         listenWhen: (previous, current) => previous?.error != current.error,
         listener: (previous, current) {

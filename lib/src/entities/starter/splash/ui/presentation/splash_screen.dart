@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:task_sphere/src/entities/entities_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
+import 'package:vanilla_state/vanilla_state.dart';
 
 part 'custom/splash_view.dart';
 

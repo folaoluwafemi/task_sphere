@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:task_sphere/src/entities/entities_barrel.dart';
 import 'package:task_sphere/src/features/_auth/auth_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
+import 'package:vanilla_state/vanilla_state.dart';
 
 part 'custom/enter_name_view.dart';
 
@@ -21,7 +22,7 @@ class EnterNameScreen extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async => !redirect,
       child: InheritedVanilla<SignUpVanilla>(
-        createNotifier: () =>  SignUpVanilla(),
+        createNotifier: () => SignUpVanilla(),
         child: Scaffold(
           body: Stack(
             children: [

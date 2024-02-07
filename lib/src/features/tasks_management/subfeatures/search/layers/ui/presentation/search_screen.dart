@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:task_sphere/src/entities/entities_barrel.dart';
 import 'package:task_sphere/src/features/tasks_management/task_management_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
+import 'package:vanilla_state/vanilla_state.dart';
 
 part 'custom/search_by_date_button.dart';
 
@@ -23,7 +24,7 @@ class SearchScreen extends StatelessWidget {
     final EdgeInsets viewInsets = MediaQuery.of(context).viewInsets;
     final EdgeInsets viewPadding = MediaQuery.of(context).viewPadding;
     return InheritedVanilla<SearchVanilla>(
-      createNotifier: () =>  SearchVanilla()..initialize(),
+      createNotifier: () => SearchVanilla()..initialize(),
       child: VanillaListener<SearchVanilla, SearchState>(
         listenWhen: (previous, current) => previous?.error != current.error,
         listener: (previous, current) {

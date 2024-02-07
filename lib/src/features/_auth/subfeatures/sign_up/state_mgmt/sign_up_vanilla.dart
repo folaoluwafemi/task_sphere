@@ -1,5 +1,6 @@
 import 'package:task_sphere/src/features/_auth/auth_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
+import 'package:vanilla_state/vanilla_state.dart';
 
 part 'sign_up_state.dart';
 

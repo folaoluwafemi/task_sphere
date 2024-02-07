@@ -13,6 +13,7 @@ import 'package:task_sphere/src/features/_auth/auth_barrel.dart';
 import 'package:task_sphere/src/features/analytics/analytics_barrel.dart';
 import 'package:task_sphere/src/features/tasks_management/task_management_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
+import 'package:vanilla_state/vanilla_state.dart';
 import 'package:very_good_infinite_list/very_good_infinite_list.dart';
 
 part 'custom/add_task_floating_button.dart';
@@ -122,9 +123,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return InheritedVanilla<ProgressiveAnalyticsVanilla>(
-      createNotifier: () =>  ProgressiveAnalyticsVanilla()..initialize(),
+      createNotifier: () => ProgressiveAnalyticsVanilla()..initialize(),
       child: InheritedVanilla<HomeVanilla>(
-        createNotifier: () =>  HomeVanilla()..initialize(),
+        createNotifier: () => HomeVanilla()..initialize(),
         child: Scaffold(
           backgroundColor: context.bgColors.$100,
           body: GestureDetector(

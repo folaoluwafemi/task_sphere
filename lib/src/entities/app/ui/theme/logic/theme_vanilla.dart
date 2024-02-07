@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task_sphere/src/utils/state_management/vanilla/vanilla.dart';
+import 'package:vanilla_state/vanilla_state.dart';
 
 class ThemeVanilla extends VanillaNotifier<ThemeMode> {
   ThemeVanilla() : super(ThemeMode.system);

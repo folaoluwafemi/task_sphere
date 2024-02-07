@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_sphere/src/entities/app/app_barrel.dart';
-import 'package:task_sphere/src/entities/productivity_history/productivity_history_barrel.dart';
 import 'package:task_sphere/src/entities/task/task_barrel.dart';
 import 'package:task_sphere/src/entities/todo/todo_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';

@@ -75,7 +75,7 @@ class _LoginViewState extends State<_LoginView> {
                   },
                 ),
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                prefixIconBuilder: (_, color) =>  SvgDecorator.square(
+                prefixIconBuilder: (_, color) => SvgDecorator.square(
                   dimension: 24.l,
                   color: color,
                   child: SvgPicture.asset(

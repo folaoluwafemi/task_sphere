@@ -2,6 +2,7 @@ import 'package:task_sphere/archive/analytics/layers/data/analytics_data_barrel.
 import 'package:task_sphere/archive/analytics/layers/domain/analytics_domain_barrel.dart';
 import 'package:task_sphere/src/entities/entities_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
+import 'package:vanilla_state/vanilla_state.dart';
 
 class AnalysisManager extends VanillaNotifier<Analysis>
     with BasicErrorHandlerMixin {

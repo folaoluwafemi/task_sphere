@@ -1,4 +1,5 @@
 import 'package:task_sphere/src/utils/utils_barrel.dart';
+import 'package:vanilla_state/vanilla_state.dart';
 
 mixin VanillaUtilsMixin<State extends VanillaStateWithStatus>
     on VanillaNotifier<State> {

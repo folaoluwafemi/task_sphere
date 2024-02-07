@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:task_sphere/src/features/tasks_management/task_management_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
+import 'package:vanilla_state/vanilla_state.dart';
 
 part 'empty_history_view.dart';
 
@@ -27,7 +28,7 @@ class _HistoryViewState extends State<HistoryView> {
     FocusScope.of(context).unfocus();
     widget.controller.text = query;
     await context.read<SearchVanilla>().searchFor(query);
-    if(!mounted) return;
+    if (!mounted) return;
     FocusScope.of(context).unfocus();
   }
 

@@ -6,6 +6,7 @@ import 'package:sliver_tools/sliver_tools.dart';
 import 'package:task_sphere/src/entities/app/app_barrel.dart';
 import 'package:task_sphere/src/features/_auth/auth_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
+import 'package:vanilla_state/vanilla_state.dart';
 
 part 'custom/login_or_load_widget.dart';
 
@@ -30,7 +31,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return InheritedVanilla<SignUpVanilla>(
-      createNotifier: () =>  SignUpVanilla(),
+      createNotifier: () => SignUpVanilla(),
       child: Scaffold(
         backgroundColor: context.bgColors.$50,
         body: CustomScrollView(
