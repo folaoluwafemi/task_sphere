@@ -15,18 +15,6 @@ class ProgressiveAnalyticsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<ProductivitySnapshot> fakeProductivitySnapshots = List.generate(
-      200,
-      (index) => (
-        dateTime: DateTime(2024, 1, 2).copyAdd(days: index),
-        value: switch (index) {
-          int x when x % 5 == 0 => 20,
-          int x when x % 3 == 0 => 10,
-          int x when x % 2 == 0 => 5,
-          _ => 15,
-        },
-      ),
-    );
 
     return VanillaBuilder<ProgressiveAnalyticsVanilla,
         ProgressiveAnalysisState>(
@@ -53,8 +41,8 @@ class ProgressiveAnalyticsWidget extends StatelessWidget {
           children: [
             _PerformanceWidget(todosDoneToday: state.numberOfTodosDoneToday),
             ProgressiveAnalysisBuilder(
-              snapshots: fakeProductivitySnapshots,
-              key: ValueKey(fakeProductivitySnapshots),
+              snapshots: snapshots,
+              key: ValueKey(snapshots),
             ),
           ],
         );

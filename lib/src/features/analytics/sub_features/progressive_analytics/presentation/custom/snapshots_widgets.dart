@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 import 'package:task_sphere/src/entities/productivity_history/domain/model/productivity_snapshot.dart';
@@ -41,10 +42,12 @@ class WeeklySnapshotWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final element =
+        snapshots.entries.toList().elementAtOrNull(0)?.value.lastOrNull;
+
     return MultiSliver(
       children: [
         Column(
-          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Text(
               DateFormat.MMM().format(
@@ -59,20 +62,25 @@ class WeeklySnapshotWidget extends StatelessWidget {
             ),
             const Spacer(),
             Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 ...snapshots.entries.map(
                   (entry) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        ...entry.value.map(
-                          (snapshot) => DailySnapshotWidget(
-                            maxValue: maxValue,
-                            snapshot: snapshot,
+                    return SizedBox(
+                      height: (14.h * 7) + (2.h * 7),
+                      child: Column(
+                        mainAxisAlignment:
+                            (element != null && element.dateTime.weekday == 1)
+                                ? MainAxisAlignment.start
+                                : MainAxisAlignment.end,
+                        children: [
+                          ...entry.value.map(
+                            (snapshot) => DailySnapshotWidget(
+                              maxValue: maxValue,
+                              snapshot: snapshot,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     );
                   },
                 ),
@@ -124,6 +132,9 @@ class YearlySnapshotWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final int latestYear = yearlySnapshots.keys.last;
+
+    final MonthlySnapshots snapshots = yearlySnapshots[latestYear]!;
     return MultiSliver(
       children: [
         ...yearlySnapshots.entries.map(
@@ -132,6 +143,10 @@ class YearlySnapshotWidget extends StatelessWidget {
             maxValue: maxValue,
           ),
         ),
+        // MonthlySnapshotWidget(
+        //   monthlySnapshots: snapshots,
+        //   maxValue: maxValue,
+        // ),
       ],
     );
   }

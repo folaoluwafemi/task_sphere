@@ -230,6 +230,10 @@ extension ListExtension<T> on List<T> {
     return insert(0, element);
   }
 
+  void pushAllFront(Iterable<T> elements) {
+    return insertAll(0, elements);
+  }
+
   T get lastItem {
     if (isEmpty) throw StateError('List is Empty');
     return this[length - 1];

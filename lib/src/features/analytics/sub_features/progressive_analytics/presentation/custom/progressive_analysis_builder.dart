@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
 import 'package:task_sphere/src/entities/productivity_history/productivity_history_barrel.dart';
 import 'package:task_sphere/src/features/analytics/analytics_barrel.dart';
 import 'package:task_sphere/src/utils/utils_barrel.dart';
 
-part 'balablu_viewer.dart';
+part 'calendar_viewer.dart';
 
 class ProgressiveAnalysisBuilder extends StatefulWidget {
   final List<ProductivitySnapshot> snapshots;
@@ -68,9 +68,82 @@ class _ProgressiveAnalysisBuilderState
     return seed.sublist(indexOfLatestDay);
   }
 
+  List<ProductivitySnapshot> fillEmptyDayGaps(
+    List<ProductivitySnapshot> feeder,
+  ) {
+    feeder = feeder.copy..sort(ProductivitySnapshotUtils.compare);
+    final List<ProductivitySnapshot> temp = [];
+    for (int i = 0; i < feeder.length; i++) {
+      final ProductivitySnapshot? previousItem = feeder.elementAtOrNull(i - 1);
+      final currentItem = feeder[i];
+
+      if (previousItem == null ||
+
+          /// if current day is one day after the previous one
+          currentItem.dateTime.dateEquality(
+            previousItem.dateTime.copyAdd(days: 1),
+          )) {
+        temp.add(currentItem);
+        continue;
+      }
+
+      final DateTime currentDate = currentItem.dateTime;
+      final DateTime previousDate = previousItem.dateTime;
+
+      final Duration durationDifference = currentDate.difference(previousDate);
+      final List<ProductivitySnapshot> dates = [];
+
+      for (int i = 1; i <= durationDifference.inDays; i++) {
+        dates.add(
+          (dateTime: previousDate.copyAdd(days: i), value: 0),
+        );
+      }
+
+      temp.addAll([
+        previousItem,
+        ...dates,
+        currentItem,
+      ]);
+    }
+    return temp;
+  }
+
+  void padRightWith(List<ProductivitySnapshot> feeder) {
+    feeder = feeder.copy..sort(ProductivitySnapshotUtils.compare);
+
+    final List<ProductivitySnapshot> allDaysInYearEmpty = [];
+    for (int i = 1; i <= 12; i++) {
+      final DateTime now = feeder.firstOrNull?.dateTime ?? DateTime.now();
+      final month = List.generate(
+        now.copyWith(month: i + 1, day: 0).day,
+        (index) => (
+          dateTime: now.copyWith(month: i, day: index + 1),
+          value: 0,
+        ),
+      );
+      allDaysInYearEmpty.addAll(month);
+    }
+
+    if (feeder.isEmpty) {
+      completeSnapshots.pushAllFront(allDaysInYearEmpty);
+      return;
+    }
+    final DateTime earliestDay = feeder.first.dateTime;
+
+    final List validList = allDaysInYearEmpty.sublist(
+      0,
+      allDaysInYearEmpty.indexWhere((element) {
+        return element.dateTime.dateEquality(earliestDay);
+      }),
+    );
+    completeSnapshots.pushAllFront(allDaysInYearEmpty);
+  }
+
   /// Completes [feeder] with a list of empty [ProductivitySnapshot]s
   /// from next day to the end of the year
   void completeSnapshotsWith(List<ProductivitySnapshot> feeder) {
+    feeder = fillEmptyDayGaps(feeder);
+    padRightWith(feeder);
     feeder.sort(ProductivitySnapshotUtils.compare);
 
     final List<ProductivitySnapshot> newSnapshots = [];
@@ -79,29 +152,30 @@ class _ProgressiveAnalysisBuilderState
       feeder.last.dateTime,
     );
 
-    // final earliestSnapshotForYear = getEarliestDayInLatestYear(feeder);
+    final earliestSnapshotForYear = getEarliestDayInLatestYear(feeder);
+
+    print('earliest snapshot for year: ${earliestSnapshotForYear.dateTime}');
 
     // adding one since DateTime.weekday starts from 1 [Monday] and we are ordering from sunday
-    // final int earliestSnapshotDayOfWeek =
-    //     earliestSnapshotForYear.dateTime.weekday + 1;
-    //
-    // for (int i = 1; i < earliestSnapshotDayOfWeek; i++) {
-    //   final dayOfNewSnapshot = feeder.first.dateTime.subtract(
-    //     Duration(days: i),
-    //   );
-    //   newSnapshots.add(
-    //     (dateTime: dayOfNewSnapshot, value: 0),
-    //   );
-    // }
+    final int earliestSnapshotDayOfWeek =
+        earliestSnapshotForYear.dateTime.weekday;
 
-    final List<ProductivitySnapshot> snapshotsInCurrentYear =
-        getAllSnapshotsInLatestYear(feeder);
+    for (int i = 1; i < earliestSnapshotDayOfWeek; i++) {
+      final dayOfNewSnapshot = feeder.first.dateTime.subtract(
+        Duration(days: i),
+      );
+      newSnapshots.add(
+        (dateTime: dayOfNewSnapshot, value: 0),
+      );
+    }
+
+    final snapshotsInCurrentYear = getAllSnapshotsInLatestYear(feeder);
 
     completeSnapshots.addAll(newSnapshots);
     newSnapshots.clear();
 
-    final int numberOfSnapshotsToAdd = daysInCurrentYear.length -
-        (snapshotsInCurrentYear.length + completeSnapshots.length);
+    final int numberOfSnapshotsToAdd =
+        daysInCurrentYear.length - (snapshotsInCurrentYear.length);
 
     final DateTime dayOfLastSnapshot = feeder.last.dateTime;
 
@@ -155,11 +229,11 @@ class _ProgressiveAnalysisBuilderState
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Mon', style: weekDayStyle),
+                  Text('Tue', style: weekDayStyle),
                   26.boxHeight,
-                  Text('Wed', style: weekDayStyle),
+                  Text('Thur', style: weekDayStyle),
                   26.boxHeight,
-                  Text('Fri', style: weekDayStyle),
+                  Text('Sat', style: weekDayStyle),
                 ],
               ),
             ),
@@ -173,81 +247,6 @@ class _ProgressiveAnalysisBuilderState
           ),
         ],
       ),
-    );
-  }
-}
-
-class Balablu extends StatelessWidget {
-  final ScrollController scrollController;
-  final int earliestYear;
-  final int earliestMonth;
-  final List<ProductivitySnapshot> snapshots;
-
-  const Balablu({
-    required this.earliestYear,
-    required this.earliestMonth,
-    required this.snapshots,
-    required this.scrollController,
-    Key? key,
-  }) : super(key: key);
-
-  List<int> getSnapshotMonths() {
-    final List<int> result = [];
-
-    final DateTime normalizedDate = snapshots.last.dateTime.copyWith(
-      day: 0,
-      hour: 0,
-      minute: 0,
-      microsecond: 0,
-      millisecond: 0,
-      second: 0,
-    );
-    for (DateTime i = snapshots.first.dateTime;
-        i.millisecondsSinceEpoch < normalizedDate.millisecondsSinceEpoch;
-        i = i.copyAdd(months: 1)) {
-      result.add(i.month);
-    }
-
-    return result;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final int earliestDay = snapshots
-        .where((element) => element.dateTime.month == earliestMonth)
-        .map((e) => e.dateTime.day)
-        .reduce(
-          (value, element) => value < element ? value : element,
-        );
-
-    final int totalDaysInEarliestMonth = DateTime(
-      earliestYear,
-      earliestMonth + 1,
-      0,
-    ).day;
-
-    final List<int> months = getSnapshotMonths();
-
-    return ListView.separated(
-      controller: scrollController,
-      padding: EdgeInsets.symmetric(
-        horizontal: (1 + (earliestDay / totalDaysInEarliestMonth)) * 38.w,
-      ),
-      scrollDirection: Axis.horizontal,
-      itemCount: months.length,
-      separatorBuilder: (context, index) => SizedBox(
-        width: (1 + (earliestDay / totalDaysInEarliestMonth)) * 38.w * 2,
-      ),
-      itemBuilder: (context, index) {
-        final String text = DateFormat.MMM().format(
-          DateTime.now().copyWith(month: months[index]),
-        );
-        return Text(
-          text,
-          style: context.secondaryTypography.footnote
-              .withColor(context.neutralColors.$600),
-        );
-      },
     );
   }
 }

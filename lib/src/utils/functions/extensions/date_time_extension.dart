@@ -1,8 +1,6 @@
 part of 'extensions.dart';
 
 extension DateTimeExtension on DateTime {
-
-
   bool containsTimeWithinDay(DateTime time) => day == time.day;
 
   String formatSimpleDate() {
@@ -36,6 +34,10 @@ extension DateTimeExtension on DateTime {
     return DateTime.fromMillisecondsSinceEpoch(
       min + difference.half.round(),
     );
+  }
+
+  bool dateEquality(DateTime other) {
+    return day == other.day && month == other.month && year == other.year;
   }
 
   DateTime copySubtract({

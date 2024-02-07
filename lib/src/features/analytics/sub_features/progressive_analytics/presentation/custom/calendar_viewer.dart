@@ -121,7 +121,8 @@ class _CalendarViewerState extends State<CalendarViewer> {
       return allSnapshots[day]!;
     } catch (e) {
       print('error day: $day');
-      rethrow;
+      return (dateTime: day, value: 0);
+      // rethrow ;
     }
   }
 
@@ -260,9 +261,59 @@ class _CalendarViewerState extends State<CalendarViewer> {
     return MapEntry<int, WeeklySnapshots>(month, weeklySnapshots);
   }
 
+  final ScrollController scrollController = ScrollController();
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      computeScrollValue();
+    });
+  }
+
+  void computeScrollValue() {
+    final DateTime? latestDate = allSnapshots.values
+        .toList()
+        .lastWhereOrNull((element) => element.value > 0)
+        ?.dateTime;
+
+    if (latestDate == null) return;
+
+    print('latestDate: $latestDate');
+
+    final int yearDifference =
+        latestDate.year - allSnapshots.values.first.dateTime.year;
+    print('week value: $yearDifference');
+
+    final int controlValue = (12 * 4) + (12 * 4 * yearDifference);
+
+    final int weekValue = (latestDate.month * 4) + (12 * 4 * yearDifference);
+
+    final double normalizedValue = weekValue / controlValue;
+
+    print('normalized value: $normalizedValue');
+
+    if (normalizedValue == 0 ||
+        normalizedValue == double.infinity ||
+        normalizedValue == double.negativeInfinity) return;
+
+    final ScrollPosition position = scrollController.position;
+
+    scrollController.jumpTo(
+      position.maxScrollExtent * normalizedValue,
+    );
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      controller: scrollController,
       scrollDirection: Axis.horizontal,
       slivers: [
         YearlySnapshotWidget(
