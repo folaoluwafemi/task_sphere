@@ -14,6 +14,8 @@ abstract interface class AuthApi {
     required String password,
   });
 
+  Future<void> requestResetEmail(String email);
+
   Future<User> fetchUser();
 
   Future<void> logout();

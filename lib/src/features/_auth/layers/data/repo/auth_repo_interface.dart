@@ -22,6 +22,8 @@ abstract interface class AuthRepoInterface {
     required String lastname,
   });
 
+  Future<void> sendResetEmail(String email);
+
   Future<User> fetchUser();
 
   Future<void> logout();

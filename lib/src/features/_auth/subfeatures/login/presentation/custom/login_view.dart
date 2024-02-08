@@ -118,7 +118,23 @@ class _LoginViewState extends State<_LoginView> {
                   ),
                 ),
               ),
-              48.boxHeight,
+              8.boxHeight,
+              Align(
+                alignment: Alignment.centerRight,
+                child: RawMaterialButton(
+                  onPressed: () => context.pushNamed(
+                    AppRoute.forgotPassword.name,
+                  ),
+                  padding: EdgeInsets.symmetric(vertical: 4.h),
+                  constraints: const BoxConstraints.tightForFinite(),
+                  child: Text(
+                    'Forgot my password',
+                    style: context.secondaryTypography.paragraph.medium
+                        .withDecoration(TextDecoration.underline),
+                  ),
+                ),
+              ),
+              28.boxHeight,
               ValueListenableBuilder<bool>(
                 valueListenable: fieldsValidated,
                 builder: (_, validated, __) {

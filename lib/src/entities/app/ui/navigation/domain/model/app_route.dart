@@ -4,6 +4,7 @@ enum AppRoute {
   splash('/', '/'),
   onboarding('/onboarding', '/onboarding'),
   login('login', '/onboarding/login'),
+  forgotPassword('forgot-password', '/onboarding/forgot-password'),
 
   ///
   signUp('signUp', '/onboarding/signUp'),

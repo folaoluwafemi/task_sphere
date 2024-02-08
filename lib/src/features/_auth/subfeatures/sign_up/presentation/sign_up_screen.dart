@@ -70,8 +70,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         builder: (context, state) {
                           return BackButton(
                             filledColor: true,
-                            onPressed:
-                                state.loading ? null : () => context.pop(),
+                            onPressed: state.loading
+                                ? null
+                                : () { context.pop(); },
                           );
                         },
                       ),

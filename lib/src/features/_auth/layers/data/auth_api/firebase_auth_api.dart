@@ -19,6 +19,15 @@ final class FirebaseAuthApi with FirebaseErrorHandlerMixin implements AuthApi {
   }
 
   @override
+  Future<void> requestResetEmail(String email) => handleError(
+        _requestResetEmail(email),
+      );
+
+  Future<void> _requestResetEmail(String email) async {
+    await _auth.sendPasswordResetEmail(email: email);
+  }
+
+  @override
   Future<User> login({
     required String email,
     required String password,

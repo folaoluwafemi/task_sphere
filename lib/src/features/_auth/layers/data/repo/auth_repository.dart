@@ -70,4 +70,9 @@ class AuthRepository implements AuthRepoInterface {
 
     return user;
   }
+
+  @override
+  Future<void> sendResetEmail(String email) async {
+    await _authApi.requestResetEmail(email);
+  }
 }

@@ -16,7 +16,7 @@ class _OnboardingView extends StatelessWidget {
               Row(
                 children: [
                   SizedBox.square(
-                    dimension: 40.l,
+                    dimension: 39.l,
                     child: SvgPicture.asset(
                       VectorAssets.logo,
                     ),
@@ -32,31 +32,34 @@ class _OnboardingView extends StatelessWidget {
                 ],
               ),
               54.boxHeight,
-              Stack(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 2.h),
-                    child: Text(
-                      'Elevate your productivity with task management and productivity insights. Start now!',
-                      style: context.primaryTypography.title.large.asBold
-                          .withColor(
-                        context.palette.bg.$50,
+              SizedBox(
+                height: 148.h,
+                child: Stack(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 2.h),
+                      child: Text(
+                        'Elevate your productivity with task management and productivity insights. Start now!',
+                        style: context.primaryTypography.title.large.asBold
+                            .withColor(
+                          context.palette.bg.$50,
+                        ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 2.w),
-                    child: Text(
-                      'Elevate your productivity with task management and productivity insights. Start now!',
-                      style: context.primaryTypography.title.large.asBold,
+                    Padding(
+                      padding: EdgeInsets.only(left: 2.w),
+                      child: Text(
+                        'Elevate your productivity with task management and productivity insights. Start now!',
+                        style: context.primaryTypography.title.large.asBold,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              21.boxHeight,
             ],
           ),
         ),
+        21.boxHeight,
         Padding(
           padding: EdgeInsets.only(left: 37.w),
           child: SizedBox.square(
@@ -106,7 +109,8 @@ class _OnboardingView extends StatelessWidget {
                   style: context.primaryTypography.paragraph.medium.asMedium,
                 ),
                 8.boxWidth,
-                SizedBox.square(
+                SvgDecorator.square(
+                  color: context.palette.neutrals.$800.withOpacity(0.4),
                   dimension: 24.l,
                   child: SvgPicture.asset(
                     VectorAssets.arrowsRight,
@@ -115,7 +119,7 @@ class _OnboardingView extends StatelessWidget {
               ],
             ),
           ),
-        )
+        ),
       ],
     );
   }
